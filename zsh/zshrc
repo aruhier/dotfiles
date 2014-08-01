@@ -4,9 +4,32 @@
 
 
 # Functions
-# ####################
+####################
 function mkdir_cd {
     mkdir $1 && cd $1;
+}
+
+function clean_cache {
+    sync
+    su -c "echo 3 > /proc/sys/vm/drop_caches"
+}
+
+function compile_options {
+    compilator=$1
+    binary=$2
+    shift; shift
+    src=$*
+    $compilator -O2 -Wall -Werror -Wextra -ansi -pedantic -D_POSIX_SOURCE \
+        -pthread -o $binary $src
+}
+
+function compile_options_debug {
+    compilator=$1
+    binary=$2
+    shift; shift
+    src=$*
+    $compilator -g -Wall -Wextra -Werror -ansi -pedantic -D_POSIX_SOURCE \
+        -pthread -o $binary $src
 }
 
 
@@ -14,17 +37,49 @@ function mkdir_cd {
 ####################
 
 # One-key aliases
+alias b='vim ~/blocnote'
 alias e='exit'
+alias g='git'
+alias n='newurxvt'
 alias v='vim'
 
 alias ls='ls --color=auto'
 alias ll='ls -alh'
 alias cp='cp -R'
 alias mkcd=mkdir_cd $1
-alias maj='sudo yaourt -Syua'
+alias maj='sudo yaourt -Syua && sudo pacman -Su && sudo cnf-sync'
+alias hibernate='systemctl hibernate'
+alias gitlog='git log --color'
 alias free='free -h'
 alias grep='grep --color'
 alias sudo='sudo ' # Make aliases work with sudo
+
+# Firefox
+alias firefox-beta='firefox-beta-bin -p beta -no-remote'
+alias firefox-aurora='firefox-aurora -p beta -no-remote'
+alias firefox-clean='firefox -p clean -no-remote'
+
+# Compile
+alias gcco='compile_options gcc $*'
+alias gccod='compile_options_debug g++ $*'
+alias clango='compile_options clang $*'
+alias clangod='compile_options_debug clang $*'
+alias clang++o='compile_options clang++ $*'
+alias clang++od='compile_options_debug clang++ $*'
+alias g++o='compile_options g++ $*'
+alias g++od='compile_options_debug g++ $*'
+
+# SSH
+alias ssh-aruhier='ssh -x anthony@aruhier.fr'
+
+# urxvt
+alias newurxvt='urxvt&; disown %urxvt'
+
+
+# XModMap
+####################
+
+#xmodmap /home/anthony/.xmodmap.conf
 
 
 # HISTORIQUE
@@ -40,6 +95,10 @@ setopt sharehistory
 ####################
 
 export PS1="%n@%U%m%u> "
+
+# Compatibilité avec gnome-terminal
+export PS1='%{$(__vte_ps1)%}'$PS1
+. /etc/profile.d/vte.sh
 
 export TERM=xterm-256color
 export EDITOR=vim
