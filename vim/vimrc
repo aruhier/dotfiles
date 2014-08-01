@@ -20,11 +20,41 @@ Bundle 'gmarik/vundle'
 Bundle 'Tagbar'
 Bundle 'ctrlp.vim'
 Bundle 'auto-pairs'
+"" Print syntax errors
+Bundle 'Syntastic'
+"""" C/C++
+Bundle 'clang-complete'
+Bundle 'xolox/vim-easytags'
+""""
+"""" LaTeX
+Bundle 'LaTeX-Box'
+Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+Bundle 'gvim-pdfsync'
+""""
+"""" Python
+Bundle 'davidhalter/jedi-vim'
+""""
+"""" Autocomplete code tricks
+Bundle 'Shougo/neosnippet'
+""""
 "" Multiple cursors, with ctrl+n
 Bundle 'terryma/vim-multiple-cursors'
+"" Autocomplete
+Bundle 'Shougo/neocomplete'
+Bundle 'SuperTab'
 Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 "" Airline
 Bundle 'bling/vim-airline'
+"""" Git support
+Bundle 'airblade/vim-gitgutter'
+Bundle 'tpope/vim-fugitive'
+""""
+"""" Depends
+Bundle 'vim-addon-mw-utils'
+Bundle 'tlib'
+Bundle 'Shougo/neosnippet-snippets'
+Bundle 'xolox/vim-misc'
+""""
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -161,3 +191,126 @@ autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
 """"""""""
 "" Need to install ttf-powerline-fonts-git in AUR
 let g:airline_powerline_fonts = 1
+
+
+" Eclim
+""""""""
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+
+" Eclim
+""""""""
+let g:EclimCompletionMethod = 'omnifunc'
+
+
+" LatexSuite
+"""""""""""""
+let g:tex_flavor = "latex"
+let g:Tex_DefaultTargetFormat = "pdf"
+let g:Tex_SmartKeyQuote = 0
+let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 -interaction=nonstopmode $*'
+"let g:tex_conceal = ""
+""""" Latexsuite, french caracters (éàè, etc...)
+""""" CREATE OR EDIT THE FILE ~/.vim/bundle/vim-latex/ftplugin/tex.vim, and
+""""" add :
+"" imap <C-b> <Plug>Tex_MathBF
+"" imap <C-c> <Plug>Tex_MathCal
+"" imap <C-l> <Plug>Tex_LeftRight
+"" imap <buffer> <leader>it <Plug>Tex_InsertItemOnThisLine
+
+
+" Neocomplete
+""""""""""""""
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+let g:neocomplete#enable_auto_close_preview = 1
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+let g:neocomplete#disable_auto_complete = 1
+" Disable popup menu when navigating in insert mode
+let g:neocomplete#enable_insert_char_pre = 1
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplete#close_popup()
+inoremap <expr><C-e>  neocomplete#cancel_popup()
+
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.php =
+    \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.c =
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.cpp =
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
+"""" Compatibility with jedi-vim
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#popup_on_dot = 0
+let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
+""""
+"""" Compatibility with Clang
+if !exists('g:neocomplete#force_omni_input_patterns')
+    let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#force_omni_input_patterns.c =
+\ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.cpp =
+\ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.objc =
+\ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:neocomplete#force_omni_input_patterns.objcpp =
+\ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+let g:clang_use_library = 1
+
+autocmd BufEnter {*.c,*.cpp,*.html,*.js,*.java,*.php,*.py,*.sh,*.tex}
+            \ let g:neocomplete#disable_auto_complete = 0
+
+
+" Neosnippet
+"""""""""""""
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+"For snippet_complete marker.
+" if has('conceal')
+"   set conceallevel=2 concealcursor=i
+" endif
+
+
+" Syntastic
+""""""""""""
+let g:syntastic_check_on_open = 1
+let g:syntastic_c_compiler = 'gcc'
+let g:syntastic_cpp_compiler = 'gcc'
+let g:syntastic_c_compiler_options = ' -Wall -Wextra -Werror -pedantic'
+let g:syntastic_cpp_compiler_options = ' -Wall -Wextra -Werror'
+noremap <F7> :Errors<CR>
+
+
+" Tagbar
+"""""""""
+let g:tagbar_left = 1
