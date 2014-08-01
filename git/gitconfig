@@ -1,0 +1,9 @@
+[user]
+	email = anthony.ruhier@gmail.com
+	name = Anthony Ruhier
+[push]
+	default = simple
+[core]
+	editor = vim
+[alias]
+    pl = pull --rebase
