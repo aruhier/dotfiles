@@ -95,6 +95,9 @@ noremap ty :tabnext<CR>
 noremap Mse :set spell spelllang=en<CR>
 noremap Msf :set spell spelllang=fr<CR>
 
+" Command alias
+cnoreabbrev t tabnew
+
 " Syntax
 syntax on
 syntax sync fromstart
