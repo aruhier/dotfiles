@@ -3,6 +3,5 @@
 
 "" No need with my Pentadactyl fork
 "set showstatuslinks=command
-set guioptions=bCrT
-set passkeys+=9gag.com:jkplhrce
 "set guioptions=bCrTB
+set passkeys+=9gag.com:jkplhrce
