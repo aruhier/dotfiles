@@ -9,6 +9,13 @@
 import logging
 import os
 import shutil
+import subprocess
+
+
+def update_git_submodule():
+    stdout = subprocess.check_output(["git", "submodule", "update"])
+    if stdout:
+        print(stdout)
 
 
 def create_symlink(path):
@@ -36,7 +43,8 @@ def create_symlink(path):
 
 
 # Enable the debug mode
-logging.basicConfig(level=logging.DEBUG)
+# logging.basicConfig(level=logging.DEBUG)
+update_git_submodule()
 dirs = [child for child in os.listdir() if os.path.isdir(child)]
 for path in dirs:
     try:
