@@ -39,6 +39,8 @@ def create_symlink(path):
             elif os.path.islink(dest_old):
                 os.remove(dest_old)
             shutil.move(dest, dest + ".old")
+        if not os.path.isdir(os.path.dirname(dest)):
+            os.mkdir(os.path.dirname(dest))
         os.symlink(src_path, dest)
 
 
