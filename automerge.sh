@@ -11,10 +11,19 @@ function checkout_and_rebase()
 }
 
 # Merge master and desktop in desktop
+<<<<<<< master
 checkout_and_rebase "desktop" "master"
 
 # Merge tour-anthony and desktop in tour-anthony
 checkout_and_rebase "tour-anthony" "desktop"
+=======
+git checkout desktop
+git rebase -m master
+
+# Merge tour-anthony and desktop in tour-anthony
+git checkout tour-anthony
+git rebase -m desktop
+>>>>>>> HEAD~9
 
 if [ -f favorite ]
     then git checkout $(cat favorite) || exit 1
