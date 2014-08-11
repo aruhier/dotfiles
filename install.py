@@ -13,6 +13,9 @@ import subprocess
 
 
 def update_git_submodule():
+    stdout = subprocess.check_output(["git", "submodule", "init"])
+    if stdout:
+        print(stdout)
     stdout = subprocess.check_output(["git", "submodule", "update"])
     if stdout:
         print(stdout)
