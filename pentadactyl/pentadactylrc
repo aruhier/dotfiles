@@ -5,3 +5,4 @@
 "set showstatuslinks=command
 set guioptions=bCrT
 set passkeys+=9gag.com:jkplhrce
+"set guioptions=bCrTB
