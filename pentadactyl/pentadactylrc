@@ -2,6 +2,6 @@
 """"""""""""""""""""""
 
 "" No need with my Pentadactyl fork
-"set guioptions=bCrTB
 "set showstatuslinks=command
 set passkeys+=9gag.com:jkpl
+set guioptions=bCrT
