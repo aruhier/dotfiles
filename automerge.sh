@@ -16,6 +16,9 @@ checkout_and_rebase "desktop" "master"
 # Merge tour-anthony and desktop in tour-anthony
 checkout_and_rebase "tour-anthony" "desktop"
 
+# Merge pc-trinaps and desktop in pc-trinaps
+checkout_and_rebase "pc-trinaps" "desktop"
+
 if [ -f favorite ]
     then git checkout $(cat favorite) || exit 1
 fi
