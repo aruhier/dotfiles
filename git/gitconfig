@@ -7,3 +7,5 @@
 	editor = vim
 [alias]
     pl = pull --rebase
+[rerere]
+    enabled = 1
