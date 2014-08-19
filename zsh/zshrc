@@ -15,6 +15,7 @@ function mkdir_cd {
 
 # One-key aliases
 alias e='exit'
+alias p='ping'
 alias v='vim'
 
 alias ls='ls --color=auto'
