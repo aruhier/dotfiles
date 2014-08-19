@@ -8,7 +8,7 @@ function checkout_and_rebase()
 {
     git checkout "$1" || exit 1
     git pull --rebase || exit 1
-    git rebase -m "$2" || exit 1
+    git merge "$2" || exit 1
 }
 
 # Merge master and desktop in desktop
