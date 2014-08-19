@@ -41,6 +41,7 @@ alias b='vim ~/blocnote'
 alias e='exit'
 alias g='git'
 alias n='newurxvt'
+alias p='ping'
 alias v='vim'
 
 alias ls='ls --color=auto'
