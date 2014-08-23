@@ -1,3 +1,0 @@
-[
-    ("Xresources", "~/.Xresources"),
-]
