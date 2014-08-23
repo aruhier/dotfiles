@@ -20,7 +20,7 @@ alias v='vim'
 
 alias ls='ls --color=auto'
 alias ll='ls -alh'
-alias cp='cp -R'
+alias cp='cp -r --reflink=auto'
 alias mkcd=mkdir_cd $1
 alias maj='sudo yaourt -Syua'
 alias free='free -h'
