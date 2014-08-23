@@ -1,4 +1,0 @@
-[
-    ("zkbd", "~/.zkbd"),
-    ("zshrc", "~/.zshrc"),
-]

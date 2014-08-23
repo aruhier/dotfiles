@@ -1,3 +1,0 @@
-[
-    ("dircolors", "~/.dir_colors/dircolors"),
-]
