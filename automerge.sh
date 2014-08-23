@@ -22,7 +22,7 @@ function pre_checkout_and_rebase()
 
     stopped_merge="$(cat .current_merge)"
     if [ "$1" == "$stopped_merge" ]
-        then checkout_and_rebase $1 $2
+        then rm .current_merge
     else
         return
     fi
