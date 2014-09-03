@@ -39,6 +39,7 @@ function compile_options_debug {
 # One-key aliases
 alias b='vim ~/blocnote'
 alias e='exit'
+alias g='git'
 alias l='ls'
 alias n='newurxvt'
 alias p='ping'
