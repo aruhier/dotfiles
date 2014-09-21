@@ -68,9 +68,6 @@ promptinit
 # This will set the default prompt to the walters theme
 prompt walters
 
-# Fix de ^M bug when typing "enter" sometimes
-stty icrnl
-
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -126,3 +123,6 @@ bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
+
+# Fix de ^M bug when typing "enter" sometimes
+stty icrnl
