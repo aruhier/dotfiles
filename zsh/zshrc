@@ -32,6 +32,12 @@ function compile_options_debug {
         -pthread -o $binary $src
 }
 
+function reptyr_authorization {
+    ORIG_VALUE=`cat /proc/sys/kernel/yama/ptrace_scope`
+    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
+    reptyr $*
+    echo "$ORIG_VALUE" | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
+}
 
 # Alias
 ####################
@@ -55,6 +61,7 @@ alias gitlog='git log --color'
 alias free='free -h'
 alias grep='grep --color'
 alias sudo='sudo ' # Make aliases work with sudo
+alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
 
 # Firefox
 alias firefox-beta='firefox-beta-bin -p beta -no-remote'
