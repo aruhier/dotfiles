@@ -9,6 +9,17 @@ function mkdir_cd {
     mkdir $1 && cd $1;
 }
 
+function clean_cache {
+    sync
+    su -c "echo 3 > /proc/sys/vm/drop_caches"
+}
+
+function reptyr_authorization {
+    ORIG_VALUE=`cat /proc/sys/kernel/yama/ptrace_scope`
+    echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
+    reptyr $*
+    echo "$ORIG_VALUE" | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
+}
 
 # Alias
 ####################
@@ -27,6 +38,7 @@ alias maj='sudo yaourt -Syua'
 alias free='free -h'
 alias grep='grep --color'
 alias sudo='sudo ' # Make aliases work with sudo
+alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
 
 
 # HISTORIQUE
