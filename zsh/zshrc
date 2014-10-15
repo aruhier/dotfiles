@@ -28,6 +28,7 @@ function reptyr_authorization {
 alias e='exit'
 alias l='ls'
 alias p='ping'
+alias pg='ping google.fr'
 alias v='vim'
 
 alias ls='ls --color=auto'
