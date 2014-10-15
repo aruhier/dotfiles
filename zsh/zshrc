@@ -49,6 +49,7 @@ alias g='git'
 alias l='ls'
 alias n='newurxvt'
 alias p='ping'
+alias pg='ping google.fr'
 alias v='vim'
 
 alias ls='ls --color=auto'
