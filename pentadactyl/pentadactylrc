@@ -1,7 +1,7 @@
 " Redefine interface
 """"""""""""""""""""""
 
-"" No need with my Pentadactyl fork
-"set showstatuslinks=command
-"set guioptions=bCrTB
+set showstatuslinks=status
+set guioptions=bCrTBs
 set passkeys+=9gag.com:jkplhrce
+set passkeys+=reddit.com:/.hkjpxclazsrifn
