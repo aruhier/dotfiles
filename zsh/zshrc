@@ -31,15 +31,15 @@ alias p='ping'
 alias pg='ping google.fr'
 alias v='vim'
 
-alias ls='ls --color=auto'
-alias ll='ls -alh'
 alias cp='cp -r --reflink=auto'
-alias mkcd=mkdir_cd $1
-alias maj='sudo yaourt -Syua'
 alias free='free -h'
 alias grep='grep --color'
-alias sudo='sudo ' # Make aliases work with sudo
+alias ll='ls -alh'
+alias ls='ls --color=auto'
+alias maj='sudo yaourt -Syua'
+alias mkcd=mkdir_cd $1
 alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
+alias sudo='sudo ' # Make aliases work with sudo
 
 
 # HISTORIQUE
