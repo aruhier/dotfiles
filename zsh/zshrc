@@ -52,17 +52,18 @@ alias p='ping'
 alias pg='ping google.fr'
 alias v='vim'
 
-alias ls='ls --color=auto'
-alias ll='ls -alh'
 alias cp='cp -r --reflink=auto'
-alias mkcd=mkdir_cd $1
-alias maj='sudo yaourt -Syua && sudo pacman -Su && sudo cnf-sync'
-alias hibernate='systemctl hibernate'
-alias gitlog='git log --color'
 alias free='free -h'
+alias gitlog='git log --color'
 alias grep='grep --color'
-alias sudo='sudo ' # Make aliases work with sudo
+alias hibernate='systemctl hibernate'
+alias ll='ls -alh'
+alias ls='ls --color=auto'
+alias maj='sudo yaourt -Syua && sudo pacman -Su && sudo cnf-sync'
+alias mkcd=mkdir_cd $1
 alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
+alias suspend_disk='sudo hdparm -y /dev/sdb'
+alias sudo='sudo ' # Make aliases work with sudo
 
 # Firefox
 alias firefox-beta='firefox-beta-bin -p beta -no-remote'
