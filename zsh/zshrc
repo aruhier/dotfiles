@@ -77,7 +77,7 @@ alias clangod='compile_options_debug clang $*'
 alias g++o='compile_options g++ $*'
 alias g++od='compile_options_debug g++ $*'
 alias gcco='compile_options gcc $*'
-alias gccod='compile_options_debug g++ $*'
+alias gccod='compile_options_debug gcc $*'
 
 # SSH
 alias ssh-aruhier='ssh -x anthony@aruhier.fr'
