@@ -19,7 +19,7 @@ function compile_options {
     binary=$2
     shift; shift
     src=$*
-    $compilator -O2 -Wall -Werror -Wextra -ansi -pedantic -D_POSIX_SOURCE \
+    $compilator -O2 -Wall -Werror -Wextra -std=c11 -pedantic -D_POSIX_SOURCE \
         -pthread -o $binary $src
 }
 
@@ -28,7 +28,7 @@ function compile_options_debug {
     binary=$2
     shift; shift
     src=$*
-    $compilator -g -Wall -Wextra -Werror -ansi -pedantic -D_POSIX_SOURCE \
+    $compilator -g -Wall -Wextra -Werror -std=c11 -pedantic -D_POSIX_SOURCE \
         -pthread -o $binary $src
 }
 
