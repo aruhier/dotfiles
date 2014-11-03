@@ -37,6 +37,9 @@ pre_checkout_and_rebase "tour-anthony" "desktop"
 # Merge pc-trinaps and desktop in pc-trinaps
 pre_checkout_and_rebase "pc-trinaps" "desktop"
 
+# Merge pc-trinaps and desktop in pc-trinaps
+pre_checkout_and_rebase "laptop-anthony" "tour-anthony"
+
 if [ -f favorite ]
     then git checkout $(cat favorite) || exit 1
 fi

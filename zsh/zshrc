@@ -62,8 +62,8 @@ alias ls='ls --color=auto'
 alias maj='sudo yaourt -Syua && sudo pacman -Su && sudo cnf-sync'
 alias mkcd=mkdir_cd $1
 alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
-alias suspend_disk='sudo hdparm -y /dev/sdb'
 alias sudo='sudo ' # Make aliases work with sudo
+alias suspend_disk='sudo hdparm -y /dev/sdb'
 
 # Firefox
 alias firefox-beta='firefox-beta-bin -p beta -no-remote'
@@ -71,14 +71,14 @@ alias firefox-aurora='firefox-aurora -p beta -no-remote'
 alias firefox-clean='firefox -p clean -no-remote'
 
 # Compile
-alias gcco='compile_options gcc $*'
-alias gccod='compile_options_debug gcc $*'
-alias clango='compile_options clang $*'
-alias clangod='compile_options_debug clang $*'
 alias clang++o='compile_options clang++ $*'
 alias clang++od='compile_options_debug clang++ $*'
+alias clango='compile_options clang $*'
+alias clangod='compile_options_debug clang $*'
 alias g++o='compile_options g++ $*'
 alias g++od='compile_options_debug g++ $*'
+alias gcco='compile_options gcc $*'
+alias gccod='compile_options_debug gcc $*'
 
 # SSH
 alias ssh-aruhier='ssh -x anthony@aruhier.fr'
