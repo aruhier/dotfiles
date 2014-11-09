@@ -68,6 +68,7 @@ alias sudo='sudo ' # Make aliases work with sudo
 alias firefox-beta='firefox-beta-bin -p beta -no-remote'
 alias firefox-aurora='firefox-aurora -p beta -no-remote'
 alias firefox-clean='firefox -p clean -no-remote'
+alias firefox-dirty='firefox -p dirty -no-remote'
 
 # Compile
 alias clang++o='compile_options clang++ $*'
