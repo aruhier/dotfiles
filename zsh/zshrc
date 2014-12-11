@@ -56,7 +56,7 @@ setopt sharehistory
 
 export PS1="%n@%U%m%u> "
 
-export TERM=xterm-256color
+export TERM=xterm
 export EDITOR=vim
 if [ -f ~/.dir_colors/dircolors ]
     then eval `dircolors ~/.dir_colors/dircolors`
