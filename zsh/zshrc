@@ -57,8 +57,9 @@ setopt sharehistory
 
 export PS1="%n@%U%m%u> "
 
-# Let the terminal set the TERM value
-# export TERM=xterm
+# Let the terminal set the TERM value, if it doesn't, set to xterm-256color
+[[ $TMUX = ""  ]] && export TERM="xterm-256color"
+
 export EDITOR=vim
 if [ -f ~/.dir_colors/dircolors ]
     then eval `dircolors ~/.dir_colors/dircolors`
