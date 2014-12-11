@@ -26,9 +26,10 @@ function reptyr_authorization {
 
 # One-key aliases
 alias e='exit'
+alias g='git'
 alias l='ls'
 alias p='ping'
-alias pg='ping google.fr'
+alias pg='ping 8.8.8.8'
 alias v='vim'
 
 alias cp='cp -r --reflink=auto'
