@@ -9,3 +9,5 @@
     pl = pull --rebase
 [rerere]
     enabled = 1
+[http]
+	sslVerify = true
