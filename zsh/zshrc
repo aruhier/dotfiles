@@ -105,19 +105,12 @@ setopt sharehistory
 # Other
 ####################
 
-export PS1="%n@%U%m%u> "
+autoload -U colors && colors
 
+export PS1="%n@%U%m%u> "
 # Compatibilité avec gnome-terminal
 export PS1='%{$(__vte_ps1)%}'$PS1
 . /etc/profile.d/vte.sh
-
-# Let the terminal set the TERM value, if it doesn't, set to xterm-256color
-[[ $TMUX = ""  ]] && export TERM="xterm-256color"
-
-export EDITOR=vim
-if [ -f ~/.dir_colors/dircolors ]
-    then eval `dircolors ~/.dir_colors/dircolors`
-fi
 
 # The following lines were added by compinstall
 zstyle ":completion:*:commands" rehash 1 menu select
@@ -135,8 +128,18 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 
-# This will set the default prompt to the walters theme
-prompt walters
+# Walter theme modified: username is green if normal user, red if root
+# prompt walter
+PROMPT="%B%(?..[%?] )%b%{%(#~$fg[red]~$fg[blue])%}%n%{$reset_color%}%{$fg[green]%}@%U%m%u> "
+
+# Let the terminal set the TERM value, if it doesn't, set to xterm-256color
+[[ $TMUX = ""  ]] && export TERM="xterm-256color"
+
+export EDITOR=vim
+if [ -f ~/.dir_colors/dircolors ]
+    then eval `dircolors ~/.dir_colors/dircolors`
+fi
+
 
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
