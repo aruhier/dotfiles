@@ -59,7 +59,7 @@ alias grep='grep --color'
 alias hibernate='systemctl hibernate'
 alias ll='ls -alh'
 alias ls='ls --color=auto'
-alias maj='sudo yaourt -Syua && sudo pacman -Su && sudo cnf-sync'
+alias maj='yaourt -Syua && sudo pacman -Su && sudo cnf-sync'
 alias mkcd=mkdir_cd $1
 alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
 alias sudo='sudo ' # Make aliases work with sudo
