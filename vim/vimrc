@@ -116,6 +116,7 @@ set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set t_Co=256		" 256 colors mode
 set colorcolumn=80
+set textwidth=0
 autocmd BufEnter {*.c,*.cpp,*.java,*.py,*.sh,*.tex} set textwidth=79
 set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
