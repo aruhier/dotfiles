@@ -78,6 +78,7 @@ promptinit
 # Walter theme modified: username is green if normal user, red if root
 # prompt walter
 PROMPT="%B%(?..[%?] )%b%{%(#~$fg[red]~$fg[cyan])%}%n%{$reset_color%}%{$fg[green]%}@%U%m%u> %{$reset_color%}"
+RPROMPT="%F{green}%~%f"
 
 # Let the terminal set the TERM value, if it doesn't, set to xterm-256color
 [[ $TMUX = ""  ]] && export TERM="xterm-256color"
