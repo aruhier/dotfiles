@@ -14,12 +14,10 @@ import subprocess
 
 
 def update_git_submodule():
-    stdout = subprocess.check_output(["git", "submodule", "init"])
-    if stdout:
-        print(stdout)
-    stdout = subprocess.check_output(["git", "submodule", "update"])
-    if stdout:
-        print(stdout)
+    for opt in ("init", "update"):
+        stdout = subprocess.check_output(["git", "submodule", opt])
+        if stdout:
+            print(stdout)
 
 
 def clean_conf_line(line):
