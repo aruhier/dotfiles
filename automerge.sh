@@ -31,14 +31,18 @@ function pre_checkout_and_rebase()
 # Merge master and desktop in desktop
 pre_checkout_and_rebase "desktop" "master"
 
-# Merge tour-anthony and desktop in tour-anthony
-pre_checkout_and_rebase "tour-anthony" "desktop"
+### DESKTOP CHILDS ###
 
-# Merge pc-trinaps and desktop in pc-trinaps
-pre_checkout_and_rebase "pc-trinaps" "desktop"
+    pre_checkout_and_rebase "pc-trinaps" "desktop"
+    pre_checkout_and_rebase "tour-anthony" "desktop"
 
-# Merge pc-trinaps and desktop in pc-trinaps
-pre_checkout_and_rebase "laptop-anthony" "tour-anthony"
+    ### TOUR-ANTHONY CHILDS ###
+
+        pre_checkout_and_rebase "laptop-anthony" "tour-anthony"
+
+    ### END TOUR-ANTHONY CHILDS ###
+
+### END DESKTOP CHILDS ###
 
 if [ -f favorite ]
     then git checkout $(cat favorite) || exit 1
