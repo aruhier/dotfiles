@@ -6,7 +6,13 @@
 [core]
 	editor = vim
 [alias]
+	b = branch
+	c = commit
+	co = checkout
+    r = rebase
+	st = status
     pl = pull --rebase
+    ps = push
 [rerere]
     enabled = 1
 [http]

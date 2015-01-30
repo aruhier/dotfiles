@@ -106,17 +106,8 @@ setopt sharehistory
 
 autoload -U colors && colors
 
-export PS1="%n@%U%m%u> "
-# Compatibilité avec gnome-terminal
-export PS1='%{$(__vte_ps1)%}'$PS1
-. /etc/profile.d/vte.sh
-
-# The following lines were added by compinstall
 zstyle ":completion:*:commands" rehash 1 menu select
 zstyle :compinstall filename '/home/anthony/.zshrc'
-
-#setopt completealiases
-#setopt correctall
 
 # Syntax highlighting
 if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]
