@@ -312,6 +312,7 @@ let g:syntastic_c_compiler = 'gcc'
 let g:syntastic_cpp_compiler = 'gcc'
 let g:syntastic_c_compiler_options = ' -Wall -Wextra -Werror -pedantic -std=c11'
 let g:syntastic_cpp_compiler_options = ' -Wall -Wextra -Werror'
+let g:syntastic_rst_checkers = ['rstcheck']
 noremap <F7> :Errors<CR>
 
 
