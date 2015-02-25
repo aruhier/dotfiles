@@ -1,0 +1,61 @@
+
+"" Vimperator ""
+""""""""""""""""
+
+" Disable the auto insertmode
+set nofocuscontent
+set focuscontent=false
+
+" Ignore keys on specific websites
+ignorekeys add -except=jkplhrce 9gag.com
+ignorekeys add -except=/.hkjpxclazsrifn reddit.com
+
+
+" Hide the statusline "
+"""""""""""""""""""""""
+
+noremap <silent> <F8> :js toggle_bottombar()<CR>
+noremap : :js toggle_bottombar('on')<CR>:
+noremap b :js toggle_bottombar('on')<CR>b
+noremap B :js toggle_bottombar('on')<CR>B
+noremap o :js toggle_bottombar('on')<CR>o
+noremap O :js toggle_bottombar('on')<CR>O
+noremap t :js toggle_bottombar('on')<CR>t
+noremap T :js toggle_bottombar('on')<CR>t
+noremap / :js toggle_bottombar('on')<CR>/
+cnoremap <CR> <CR>:js toggle_bottombar('off')<CR>
+cnoremap <Esc> <Esc>:js toggle_bottombar('off')<CR>
+
+:js << EOF
+var hl = highlight.get('ContentSeparator');
+var cs_current = hl.value;
+
+function toggle_bottombar(p) {
+    var bb = document.getElementById('liberator-bottombar');
+    if (!bb)
+        return;
+    if (p == 'on'){
+        show_bottombar(bb);
+        return;
+    }
+    if (p == 'off'){
+        hide_bottombar(bb)
+        return;
+    }
+    bb.style.height == '' ? hide_bottombar(bb) : show_bottombar(bb);
+}
+
+function show_bottombar(bb) {
+    bb.style.height = '';
+    bb.style.overflow = '';
+    liberator.execute('highlight ContentSeparator ' + cs_current);
+}
+
+function hide_bottombar(bb) {
+    bb.style.height = '0px';
+    bb.style.overflow = 'hidden';
+    liberator.execute('highlight ContentSeparator display: none;');
+}
+
+toggle_bottombar();
+EOF
