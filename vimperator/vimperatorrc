@@ -18,6 +18,8 @@ noremap <silent> <F8> :js toggle_bottombar()<CR>
 noremap : :js toggle_bottombar('on')<CR>:
 noremap b :js toggle_bottombar('on')<CR>b
 noremap B :js toggle_bottombar('on')<CR>B
+noremap f :js toggle_bottombar('on')<CR>f
+noremap F :js toggle_bottombar('on')<CR>F
 noremap o :js toggle_bottombar('on')<CR>o
 noremap O :js toggle_bottombar('on')<CR>O
 noremap t :js toggle_bottombar('on')<CR>t
