@@ -132,6 +132,8 @@ if [ -f ~/.dir_colors/dircolors ]
     then eval `dircolors ~/.dir_colors/dircolors`
 fi
 
+# Enable vim-mode
+bindkey -v
 
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
