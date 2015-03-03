@@ -4,7 +4,7 @@
 
 " Disable the auto insertmode
 set nofocuscontent
-set focuscontent=enable
+set focuscontent=true
 
 " Ignore keys on specific websites
 ignorekeys add -except=jkplhrce 9gag.com
