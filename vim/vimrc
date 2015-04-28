@@ -13,7 +13,7 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set nocompatible
-filetype on
+filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
 Bundle 'gmarik/vundle'
