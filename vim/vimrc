@@ -34,6 +34,9 @@ Bundle 'gvim-pdfsync'
 """" Python
 Bundle 'davidhalter/jedi-vim'
 """"
+"""" Rust
+Bundle 'rust-lang/rust.vim'
+""""
 """" XML
 Bundle 'xmledit'
 """"
