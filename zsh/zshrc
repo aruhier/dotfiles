@@ -39,6 +39,7 @@ alias ll='ls -alh'
 alias ls='ls --color=auto'
 alias maj='yaourt -Syua'
 alias mkcd=mkdir_cd $1
+alias private=' unset HISTFILE'
 alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
 alias sudo='sudo ' # Make aliases work with sudo
 
