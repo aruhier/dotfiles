@@ -74,7 +74,7 @@ alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
 alias sudo='sudo ' # Make aliases work with sudo
 
 # Firefox
-alias firefox-beta='firefox-beta-bin -p beta -no-remote'
+alias firefox-beta='firefox-beta -p beta -no-remote'
 alias firefox-aurora='firefox-aurora -p beta -no-remote'
 alias firefox-clean='firefox -p clean -no-remote'
 
