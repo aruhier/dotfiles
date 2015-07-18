@@ -40,6 +40,7 @@ URxvt.perl-ext-common:      default,tabbed,clipboard,url-select
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: /usr/bin/xdg-open
 URxvt.url-select.underline: true
+URxvt.matcher.button: 1
 
 ! Tabs
 URxvt.tabbed.tabbar-fg: 2
