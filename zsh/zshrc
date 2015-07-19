@@ -39,6 +39,13 @@ function reptyr_authorization {
     echo "$ORIG_VALUE" | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
 }
 
+function search_note {
+    python2 .vim/bundle/vim-notes/misc/notes/search-notes.py \
+        -n ~/.vim/bundle/vim-notes/misc/notes/user/ \
+        -d ~/.vim/bundle/vim-notes/misc/notes/index.pickle \
+        -i $*
+}
+
 # Alias
 ####################
 
