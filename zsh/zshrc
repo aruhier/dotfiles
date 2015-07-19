@@ -51,6 +51,7 @@ alias n='newurxvt'
 alias p='ping'
 alias pg='ping 8.8.8.8'
 alias v='vim'
+alias vn='vim note:notepad'
 
 alias cp='cp -r --reflink=auto'
 alias free='free -h'

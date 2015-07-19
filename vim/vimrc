@@ -55,11 +55,13 @@ Bundle 'bling/vim-airline'
 Bundle 'airblade/vim-gitgutter'
 Bundle 'tpope/vim-fugitive'
 """"
+"" For notes management
+Bundle 'xolox/vim-notes'
 """" Depends
+Bundle 'xolox/vim-misc'
 Bundle 'vim-addon-mw-utils'
 Bundle 'tlib'
 Bundle 'Shougo/neosnippet-snippets'
-Bundle 'xolox/vim-misc'
 """"
 
 
