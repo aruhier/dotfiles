@@ -25,6 +25,11 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 "" Airline
 Bundle 'bling/vim-airline'
+"" For notes management
+Bundle 'xolox/vim-notes'
+"""" Depends
+Bundle 'xolox/vim-misc'
+""""
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
