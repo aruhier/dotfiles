@@ -202,3 +202,8 @@ bindkey '^N' history-search-forward
 
 # Fix de ^M bug when typing "enter" sometimes
 stty icrnl
+
+# Source local options if any
+if [ -f ~/.zshrc.local ]
+    then source ~/.zshrc.local
+fi
