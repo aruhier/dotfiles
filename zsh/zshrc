@@ -75,7 +75,7 @@ alias sudo='sudo ' # Make aliases work with sudo
 alias suspend_disk='sudo hdparm -y /dev/sdb'
 
 # Firefox
-alias firefox-beta='firefox-beta-bin -p beta -no-remote'
+alias firefox-beta='firefox-beta -p beta -no-remote'
 alias firefox-aurora='firefox-aurora -p beta -no-remote'
 alias firefox-clean='firefox -p clean -no-remote'
 
