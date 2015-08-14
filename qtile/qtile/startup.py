@@ -22,12 +22,13 @@ def startup():
         subprocess.call(["pkill", "-f", "ibus"])
         execute_once(["nm-applet"])
         execute_once(["pa-applet"])
-        execute_once(["owncloud"])
         execute_once(["redshift-gtk"])
         execute_once(["xset", "-dpms"])
         execute_once(["xset", "s", "off"])
         execute_once(["xcalib", "-d", ":0",
                       expanduser("~/.icc/n55sf.icc")])
+        sleep(1)
+        execute_once(["owncloud"])
 
     Thread(target=blocking).start()
 

@@ -92,10 +92,11 @@ keys = [
     Key([alt], "x", lazy.spawn("thunderbird")),
 ]
 
-groups = [Group(i) for i in "qsdfui"] + [
-    Group("o", matches=[Match(wm_class=["Thunderbird", "Pidgin"])]),
-    Group("p"),
-]
+groups = (
+    [Group(i) for i in "qs"] +
+    [Group("d", matches=[Match(wm_class=["Thunderbird", "Pidgin"])])] +
+    [Group(i) for i in "fuiop"]
+)
 
 for i in groups:
     # mod + letter of group = switch to group
@@ -107,7 +108,7 @@ for i in groups:
     keys.append(Key([mod, "shift"], i.name, lazy.window.togroup(i.name)))
 
 layouts = [
-    layout.MonadTall(ratio=0.5, margin=5, border_normal="ffffffff"),
+    layout.MonadTall(ratio=0.5, margin=3, border_normal="ffffffff"),
     layout.Max(margin=2),
     layout.RatioTile(
         border_width=2,
@@ -136,6 +137,12 @@ screens = [
                 widget.Spacer(15),
                 widget.Sep(),
                 widget.Spacer(15),
+                widget.Backlight(
+                    backlight_name="intel_backlight",
+                    brightness_file="actual_brightness",
+                    update_interval=0.5
+                ),
+                widget.Battery(),
                 widget.Clock(format='%a %d %B %H:%M')
             ],
             27,
