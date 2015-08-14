@@ -74,10 +74,16 @@ keys = [
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
-    Key([mod], "a", lazy.to_screen(0)),
-    Key([mod], "z", lazy.to_screen(1)),
-    Key([mod], "e", lazy.to_screen(2)),
+    Key([mod], "a", lazy.to_screen(2)),
+    Key([mod], "z", lazy.to_screen(0)),
+    Key([mod], "e", lazy.to_screen(1)),
     Key([mod, "control"], "l", lazy.spawn("dm-tool lock")),
+
+    # pulseaudio
+    Key([mod], "F1", lazy.spawn("pulseaudio-ctl mute")),
+    Key([mod], "F2", lazy.spawn("pulseaudio-ctl down")),
+    Key([mod], "F3", lazy.spawn("pulseaudio-ctl up")),
+    Key([mod], "F3", lazy.spawn("pulseaudio-ctl up")),
 
 
     # Applications shortcuts
@@ -111,7 +117,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='DejaVu',
+    font='DejaVu Sans',
     fontsize=14,
     padding=3,
 )
@@ -124,12 +130,25 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Notify(),
+                # widget.Mpd(host="127.0.0.1", port=6600, reconnect=True),
                 widget.Spacer(30),
                 widget.Systray(padding=15),
                 widget.Spacer(15),
                 widget.Sep(),
                 widget.Spacer(15),
                 widget.Clock(format='%a %d %B %H:%M')
+            ],
+            27,
+            opacity=0.95,
+        ),
+    ),
+    Screen(
+        top=bar.Bar(
+            [
+                widget.GroupBox(),
+                widget.Prompt(),
+                widget.WindowName(),
+                widget.Notify(),
             ],
             27,
             opacity=0.95,
@@ -169,7 +188,7 @@ follow_mouse_focus = False
 bring_front_click = True
 cursor_warp = False
 floating_layout = layout.Floating()
-auto_fullscreen = False
+auto_fullscreen = True
 
 wmname = "LG3D"
 subprocess.call(["xset", "-b"])

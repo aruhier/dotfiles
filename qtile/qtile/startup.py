@@ -22,7 +22,9 @@ def startup():
         subprocess.call(["pkill", "-f", "ibus"])
         execute_once(["nm-applet"])
         execute_once(["pa-applet"])
-        execute_once(["pidgin"])
+        execute_once(["redshift-gtk"])
+        execute_once(["xset", "-dpms"])
+        execute_once(["xset", "s", "off"])
 
     Thread(target=blocking).start()
 
