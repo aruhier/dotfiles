@@ -22,10 +22,10 @@ URxvt*metaSendsEscape: true
 
 ! Fonts
 URxvt.allow_bold:           true
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=14.5,xft:DejaVu Sans Mono for Powerline:pixelsize=14.5
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=14,xft:DejaVu Sans Mono for Powerline:pixelsize=14
 
 ! Fix font space
-!URxvt*letterSpace: -1
+URxvt*letterSpace: -1
 
 ! Scrollbar
 URxvt.scrollstyle:          rxvt
@@ -114,3 +114,11 @@ URxvt.color14: #93a1a1
 !! white dark/light
 URxvt.color7: #eee8d5
 URxvt.color15: #fdf6e3
+
+
+!!!!! Xresources global config !!!!!
+Xft.autohint: 1
+Xft.hintstyle:  hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
