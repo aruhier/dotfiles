@@ -22,6 +22,7 @@ def startup():
         subprocess.call(["pkill", "-f", "ibus"])
         execute_once(["nm-applet"])
         execute_once(["pa-applet"])
+        execute_once(["owncloud"])
         execute_once(["redshift-gtk"])
         execute_once(["xset", "-dpms"])
         execute_once(["xset", "s", "off"])

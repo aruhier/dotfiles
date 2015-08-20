@@ -108,7 +108,8 @@ for i in groups:
 
 layouts = [
     layout.MonadTall(ratio=0.5, margin=5, border_normal="ffffffff"),
-    layout.Max(margin=2),
+    layout.Max(),
+    layout.VerticalTile(fair=True),
     layout.RatioTile(
         border_width=2,
         margin=5, ratio_increment=0.1, ratio=2, fancy=False
