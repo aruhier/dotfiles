@@ -77,13 +77,16 @@ keys = [
     Key([mod], "a", lazy.to_screen(2)),
     Key([mod], "z", lazy.to_screen(0)),
     Key([mod], "e", lazy.to_screen(1)),
-    Key([mod, "control"], "l", lazy.spawn("dm-tool lock")),
+    Key([mod, "control"], "l",
+        lazy.spawn("light-locker-command -l")),
 
     # pulseaudio
     Key([mod], "F1", lazy.spawn("pulseaudio-ctl mute")),
+    Key([], "XF86AudioMute", lazy.spawn("pulseaudio-ctl mute")),
     Key([mod], "F2", lazy.spawn("pulseaudio-ctl down")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pulseaudio-ctl down")),
     Key([mod], "F3", lazy.spawn("pulseaudio-ctl up")),
-    Key([mod], "F3", lazy.spawn("pulseaudio-ctl up")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pulseaudio-ctl up")),
 
 
     # Applications shortcuts
