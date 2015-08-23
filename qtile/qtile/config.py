@@ -77,7 +77,7 @@ keys = [
     Key([mod], "a", lazy.to_screen(2)),
     Key([mod], "z", lazy.to_screen(0)),
     Key([mod], "e", lazy.to_screen(1)),
-    Key([mod, "control"], "l", lazy.spawn("dm-tool lock")),
+    Key([mod, "control"], "l", lazy.spawn("light-locker-command -l")),
 
     # pulseaudio
     Key([mod], "F1", lazy.spawn("pulseaudio-ctl mute")),
@@ -91,20 +91,6 @@ keys = [
     Key([alt], "w", lazy.spawn("firefox")),
     Key([alt], "x", lazy.spawn("thunderbird")),
 ]
-
-groups = [Group(i) for i in "qsdfui"] + [
-    Group("o", matches=[Match(wm_class=["Thunderbird", "Pidgin"])]),
-    Group("p"),
-]
-
-for i in groups:
-    # mod + letter of group = switch to group
-    keys.append(
-        Key([mod], i.name, lazy.group[i.name].toscreen())
-    )
-
-    # mod + shift + letter of group = switch to & move focused window to group
-    keys.append(Key([mod, "shift"], i.name, lazy.window.togroup(i.name)))
 
 layouts = [
     layout.MonadTall(ratio=0.5, margin=5, border_normal="ffffffff"),
@@ -168,6 +154,25 @@ screens = [
         ),
     ),
 ]
+
+groups = (
+    [
+        Group("q", screen_affinity=0, position=0),
+        Group("d", screen_affinity=1, position=2),
+        Group("s", screen_affinity=2, position=1,
+              matches=[Match(wm_class=["Thunderbird", "Ario"])]),
+    ] + [Group(i) for i in "fuiop"]
+)
+
+for i in groups:
+    # mod + letter of group = switch to group
+    keys.append(
+        Key([mod], i.name, lazy.group[i.name].toscreen())
+    )
+
+    # mod + shift + letter of group = switch to & move focused window to group
+    keys.append(Key([mod, "shift"], i.name, lazy.window.togroup(i.name)))
+
 
 # Drag floating layouts.
 mouse = [
