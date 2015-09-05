@@ -130,6 +130,7 @@ set guioptions-=T   " Remove toolbar in gvim
 " Remapping
 noremap tt :tabprevious<CR>
 noremap ty :tabnext<CR>
+imap jk <Esc>
 """ M for Macros
 noremap Mse :set spell spelllang=en<CR>
 noremap Msf :set spell spelllang=fr<CR>
