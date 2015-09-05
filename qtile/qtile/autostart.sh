@@ -11,3 +11,4 @@ redshift-gtk &
 clipit &
 owncloud &
 pasystray &
+rofi -key-run mod4+r &
