@@ -73,7 +73,7 @@ keys = [
 
     Key([mod, "control"], "r", lazy.restart()),
     Key([mod, "control"], "q", lazy.shutdown()),
-    Key([mod], "r", lazy.spawncmd()),
+    Key([mod, "shift"], "r", lazy.spawncmd()),
     Key([mod], "a", lazy.to_screen(2)),
     Key([mod], "z", lazy.to_screen(0)),
     Key([mod], "e", lazy.to_screen(1)),
@@ -84,6 +84,10 @@ keys = [
     Key([mod], "F2", lazy.spawn("pulseaudio-ctl down")),
     Key([mod], "F3", lazy.spawn("pulseaudio-ctl up")),
     Key([mod], "F3", lazy.spawn("pulseaudio-ctl up")),
+    Key([mod], "F4", lazy.spawn("mpc toggle")),
+    Key([mod], "F5", lazy.spawn("mpc prev")),
+    Key([mod], "F6", lazy.spawn("mpc next")),
+    Key([mod, "control"], "p", lazy.spawn("clerk --queue show")),
 
 
     # Applications shortcuts
@@ -93,12 +97,12 @@ keys = [
 ]
 
 layouts = [
-    layout.MonadTall(ratio=0.5, margin=5, border_normal="ffffffff"),
+    layout.MonadTall(ratio=0.5, margin=3, border_normal="ffffffff"),
     layout.Max(),
     layout.VerticalTile(fair=True),
     layout.RatioTile(
         border_width=2,
-        margin=5, ratio_increment=0.1, ratio=2, fancy=False
+        margin=3, ratio_increment=0.1, ratio=2, fancy=False
     ),
     layout.Matrix(columns=2, margin=5),
 ]
@@ -157,10 +161,10 @@ screens = [
 
 groups = (
     [
-        Group("q", screen_affinity=0, position=0),
-        Group("d", screen_affinity=1, position=2),
-        Group("s", screen_affinity=2, position=1,
+        Group("q", screen_affinity=0),
+        Group("s", screen_affinity=2,
               matches=[Match(wm_class=["Thunderbird", "Ario"])]),
+        Group("d", screen_affinity=1),
     ] + [Group(i) for i in "fuiop"]
 )
 
