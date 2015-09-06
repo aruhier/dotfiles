@@ -18,8 +18,8 @@ noremap <silent> <F8> :js toggle_bottombar()<CR>
 noremap : :js toggle_bottombar('on')<CR>:
 noremap b :js toggle_bottombar('on')<CR>b
 noremap B :js toggle_bottombar('on')<CR>B
-noremap f :js toggle_bottombar('on')<CR>f
-noremap F :js toggle_bottombar('on')<CR>F
+noremap f :js follow_hint()<CR>
+noremap F :js follow_hint_bg()<CR>
 noremap o :js toggle_bottombar('on')<CR>o
 noremap O :js toggle_bottombar('on')<CR>O
 noremap t :js toggle_bottombar('on')<CR>t
@@ -31,34 +31,36 @@ cnoremap <CR> <CR>:js toggle_bottombar('off')<CR>
 cnoremap <Esc> <Esc>:js toggle_bottombar('off')<CR>
 
 :js << EOF
-var hl = highlight.get('ContentSeparator');
-var cs_current = hl.value;
-
 function toggle_bottombar(p) {
     var bb = document.getElementById('liberator-bottombar');
     if (!bb)
         return;
     if (p == 'on'){
-        show_bottombar(bb);
+        bb.style.height = '';
+        bb.style.overflow = '';
         return;
     }
     if (p == 'off'){
-        hide_bottombar(bb)
+        bb.style.height = '0px';
+        bb.style.overflow = 'hidden';
         return;
     }
-    bb.style.height == '' ? hide_bottombar(bb) : show_bottombar(bb);
+    bb.style.height = (bb.style.height == '') ? '0px' : '';
+    bb.style.overflow = (bb.style.height == '') ? '' : 'hidden';
 }
 
-function show_bottombar(bb) {
-    bb.style.height = '';
-    bb.style.overflow = '';
-    liberator.execute('highlight ContentSeparator ' + cs_current);
+function follow_hint() {
+    toggle_bottombar('on');
+    window.setTimeout(function() { hints.show("o"); }, 10);
 }
 
-function hide_bottombar(bb) {
-    bb.style.height = '0px';
-    bb.style.overflow = 'hidden';
-    liberator.execute('highlight ContentSeparator display: none;');
+function follow_hint_bg() {
+    toggle_bottombar('on');
+    window.setTimeout(function() {
+        hints.show(
+            options.getPref("browser.tabs.loadInBackground") ? "b" : "t"
+        );
+    }, 10);
 }
 
 toggle_bottombar();
