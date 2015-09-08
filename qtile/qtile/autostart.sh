@@ -4,7 +4,7 @@ light-locker --no-lock-on-suspend &
 xset -dpms &
 xset s off &
 
-compton -cG --backend glx &
+compton -cG --backend glx --unredir-if-possible &
 feh --bg-fill ~/.config/qtile/wallpaper.jpg &
 sleep 1
 nm-applet &
