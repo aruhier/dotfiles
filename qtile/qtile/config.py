@@ -89,7 +89,9 @@ keys = [
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pulseaudio-ctl up")),
     Key([mod], "F4", lazy.spawn("mpc toggle")),
     Key([mod], "F5", lazy.spawn("mpc prev")),
+    Key([mod, "shift"], "F5", lazy.spawn("mpc seek -5")),
     Key([mod], "F6", lazy.spawn("mpc next")),
+    Key([mod, "shift"], "F6", lazy.spawn("mpc seek +5")),
     Key([mod, "control"], "p", lazy.spawn("clerk --queue show")),
 
 
