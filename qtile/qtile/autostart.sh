@@ -2,7 +2,6 @@
 
 light-locker --lock-on-suspend --lock-after-screensaver=3  &
 
-nvidia-settings --load-config-only &
 compton -cG --backend glx --unredir-if-possible &
 feh --bg-fill ~/.config/qtile/wallpaper.jpg &
 sleep 1
