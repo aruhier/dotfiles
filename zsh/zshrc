@@ -37,6 +37,7 @@ alias g='git'
 alias l='ls'
 alias p='ping'
 alias pg='ping 8.8.8.8'
+alias pg6='ping6 2001:4860:4860::8888'
 alias v='vim'
 alias vn='vim note:notepad'
 
@@ -153,3 +154,8 @@ bindkey '^N' history-search-forward
 
 # Fix de ^M bug when typing "enter" sometimes
 stty icrnl
+
+# Source local options if any
+if [ -f ~/.zshrc.local ]
+    then source ~/.zshrc.local
+fi
