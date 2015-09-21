@@ -62,7 +62,9 @@ def create_symlink(path):
         logging.debug("src: " + src_path)
         logging.debug("dest: " + dest)
         dest = os.path.expanduser(os.path.expandvars(dest))
-        if os.path.lexists(dest):
+        if os.path.abspath(dest) == src_path:
+            continue
+        elif os.path.lexists(dest):
             file_already_exists(dest)
         if not os.path.isdir(os.path.dirname(dest)):
             os.mkdir(os.path.dirname(dest))
