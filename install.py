@@ -73,6 +73,7 @@ def create_symlink(path):
 
 # Enable the debug mode
 # logging.basicConfig(level=logging.DEBUG)
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 update_git_submodule()
 dirs = [child for child in os.listdir() if os.path.isdir(child)]
 excluded_dirs = (".git",)
