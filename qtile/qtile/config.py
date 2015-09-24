@@ -119,7 +119,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(),
+                widget.GroupBox(font="Sans Bold"),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Notify(),
@@ -138,7 +138,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(),
+                widget.GroupBox(font="Sans Bold"),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Notify(),
@@ -150,7 +150,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(),
+                widget.GroupBox(font="Sans Bold"),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Notify(),
