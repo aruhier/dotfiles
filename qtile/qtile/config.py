@@ -88,10 +88,15 @@ keys = [
     Key([mod], "F3", lazy.spawn("pulseaudio-ctl up")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("pulseaudio-ctl up")),
     Key([mod], "F4", lazy.spawn("mpc toggle")),
+    Key([], "XF86AudioPlay", lazy.spawn("mpc toggle")),
     Key([mod], "F5", lazy.spawn("mpc prev")),
+    Key([], "XF86AudioPrev", lazy.spawn("mpc prev")),
     Key([mod, "shift"], "F5", lazy.spawn("mpc seek -5")),
+    Key(["shift"], "XF86AudioPrev", lazy.spawn("mpc seek -5")),
     Key([mod], "F6", lazy.spawn("mpc next")),
+    Key([], "XF86AudioNext", lazy.spawn("mpc next")),
     Key([mod, "shift"], "F6", lazy.spawn("mpc seek +5")),
+    Key(["shift"], "XF86AudioNext", lazy.spawn("mpc seek +5")),
     Key([mod, "control"], "p", lazy.spawn("clerk --queue show")),
 
 
@@ -137,7 +142,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.GroupBox(),
+                widget.GroupBox(font="Sans Bold"),
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Notify(),
