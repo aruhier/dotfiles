@@ -36,7 +36,7 @@ URxvt*scrollTtyKeypress: true
 URxvt*scrollBar_right: true
 
 ! Perl extensions
-URxvt.perl-ext-common:      default,tabbed,clipboard,url-select
+URxvt.perl-ext-common:      default,clipboard,url-select
 
 ! Keyboard url opener
 URxvt.keysym.M-u: perl:url-select:select_next
@@ -49,6 +49,14 @@ URxvt.tabbed.tabbar-fg: 2
 URxvt.tabbed.tabbar-bg: 0
 URxvt.tabbed.tab-fg:    3
 URxvt.tabbed.tab-bg:    0
+URxvt.tabbed.no-tabbedex-keys: true
+URxvt.tabbed.autohide: true
+URxvt.keysym.Control-t: perl:tabbedex:new_tab
+URxvt.keysym.Control-Tab: perl:tabbedex:next_tab
+URxvt.keysym.Control-Shift-Tab: perl:tabbedex:prev_tab
+URxvt.keysym.Control-Shift-Left: perl:tabbedex:move_tab_left
+URxvt.keysym.Control-Shift-Right: perl:tabbedex:move_tab_right
+URxvt.keysym.Control-Shift-R: perl:tabbedex:rename_tab
 
 ! Allow copy paste
 URxvt.keysym.C-C: perl:clipboard:copy
