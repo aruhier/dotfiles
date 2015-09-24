@@ -62,7 +62,9 @@ def create_symlink(path):
         logging.debug("src: " + src_path)
         logging.debug("dest: " + dest)
         dest = os.path.expanduser(os.path.expandvars(dest))
-        if os.path.lexists(dest):
+        if os.path.abspath(dest) == src_path:
+            continue
+        elif os.path.lexists(dest):
             file_already_exists(dest)
         if not os.path.isdir(os.path.dirname(dest)):
             os.mkdir(os.path.dirname(dest))
@@ -71,6 +73,7 @@ def create_symlink(path):
 
 # Enable the debug mode
 # logging.basicConfig(level=logging.DEBUG)
+os.chdir(os.path.dirname(os.path.realpath(__file__)))
 update_git_submodule()
 dirs = [child for child in os.listdir() if os.path.isdir(child)]
 excluded_dirs = (".git",)
