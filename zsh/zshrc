@@ -116,6 +116,8 @@ setopt sharehistory
 ####################
 
 autoload -U colors && colors
+# Allow extended regex
+setopt extendedglob
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ":completion:*:commands" rehash 1 menu select
@@ -146,13 +148,10 @@ fi
 # Enable vim-mode
 bindkey -v
 
-# End of lines added by compinstall
-# Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt hist_ignore_space
-# End of lines configured by zsh-newuser-install
 
 
 # Special keys solution
