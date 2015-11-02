@@ -69,7 +69,7 @@ alias grep='grep --color'
 alias hibernate='systemctl hibernate'
 alias ll='ls -alh'
 alias ls='ls --color=auto'
-alias maj='http_proxy=repo.aruhier.fr:3128 yaourt -Syua && sudo pacman -Su && sudo cnf-sync'
+alias maj='yaourt -Syua && sudo pacman -Su && sudo cnf-sync'
 alias mkcd=mkdir_cd $1
 alias private=' unset HISTFILE'
 alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
