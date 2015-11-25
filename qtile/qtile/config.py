@@ -109,6 +109,7 @@ layouts = [
     layout.MonadTall(ratio=0.5, margin=3, border_normal="ffffffff"),
     layout.Max(),
     layout.VerticalTile(ratio=0.6),
+    layout.Stack(autosplit=True),
     layout.RatioTile(
         border_width=2,
         margin=3, ratio_increment=0.1, ratio=2, fancy=False
@@ -184,6 +185,18 @@ for i in groups:
     # mod + shift + letter of group = switch to & move focused window to group
     keys.append(Key([mod, "shift"], i.name, lazy.window.togroup(i.name)))
 
+spec_groups = [Group(i) for i in "7890)"]
+spec_groups_keys = ["egrave", "underscore", "ccedilla", "agrave", "parenright"]
+groups += spec_groups
+for k, i in zip(spec_groups_keys, spec_groups):
+    pass
+    # mod + letter of group = switch to group
+    keys.append(
+        Key([mod], k, lazy.group[i.name].toscreen())
+    )
+
+    # mod + shift + letter of group = switch to & move focused window to group
+    keys.append(Key([mod, "shift"], k, lazy.window.togroup(i.name)))
 
 # Drag floating layouts.
 mouse = [
