@@ -8,6 +8,7 @@ mpd_port = 6600
 # mpd_music_dir = "~/Musique"
 
 media_library_primary_tag = album_artist
+ignore_leading_the = yes
 
 # song format
 song_list_format = "{$3%d %n $9}|{$3  %n $9}{$4%a - $9}$8{%t}|{%f}$9$R{$4%b    $9}$3{(%l)}$9"
