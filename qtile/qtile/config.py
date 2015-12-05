@@ -27,6 +27,7 @@
 from libqtile.config import Key, Screen, Group, Drag, Click, Match
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
+import custom_widgets
 import subprocess
 import startup
 
@@ -131,7 +132,9 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Notify(),
-                # widget.Mpd(host="127.0.0.1", port=6600, reconnect=True),
+                custom_widgets.Mpd(
+                    host="127.0.0.1", port=6600, reconnect=True
+                ),
                 widget.Spacer(30),
                 widget.Systray(padding=15),
                 widget.Spacer(15),
