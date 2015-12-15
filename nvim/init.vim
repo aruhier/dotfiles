@@ -14,55 +14,53 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
 
 set nocompatible
 filetype on
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
-Bundle 'gmarik/vundle'
-Bundle 'Tagbar'
-Bundle 'ctrlp.vim'
-Bundle 'auto-pairs'
+call plug#begin('~/.vim/plugged')
+Plug 'Tagbar'
+Plug 'ctrlp.vim'
+Plug 'auto-pairs'
 "" Print syntax errors
-Bundle 'Syntastic'
+Plug 'Syntastic'
 """" C/C++
-Bundle 'clang-complete'
-Bundle 'xolox/vim-easytags'
+Plug 'clang-complete'
+Plug 'xolox/vim-easytags'
 """"
 """" LaTeX
-Bundle 'LaTeX-Box'
-Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
-Bundle 'gvim-pdfsync'
+Plug 'LaTeX-Box'
+Plug 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+Plug 'gvim-pdfsync'
 """"
 """" Python
-Bundle 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim'
 """"
 """" Rust
-Bundle 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
 """"
 """" XML
-Bundle 'xmledit'
+Plug 'xmledit'
 """"
 """" Autocomplete code tricks
-Bundle 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet'
 """"
 "" Multiple cursors, with ctrl+n
-Bundle 'terryma/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
 "" Autocomplete
-Bundle 'Shougo/deoplete.nvim'
-Bundle 'git://github.com/altercation/vim-colors-solarized.git'
+Plug 'Shougo/deoplete.nvim'
+Plug 'git://github.com/altercation/vim-colors-solarized.git'
 "" Airline
-Bundle 'bling/vim-airline'
+Plug 'bling/vim-airline'
 """" Git support
-Bundle 'airblade/vim-gitgutter'
-Bundle 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 """"
 "" For notes management
-Bundle 'xolox/vim-notes'
+Plug 'xolox/vim-notes'
 """" Depends
-Bundle 'xolox/vim-misc'
-Bundle 'vim-addon-mw-utils'
-Bundle 'tlib'
-Bundle 'Shougo/neosnippet-snippets'
+Plug 'xolox/vim-misc'
+Plug 'vim-addon-mw-utils'
+Plug 'tlib'
+Plug 'Shougo/neosnippet-snippets'
 """"
-
+call plug#end()
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     """""""""""""""""""" GENERAL CONFIGURATION """""""""""""""""""""
