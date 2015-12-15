@@ -206,9 +206,14 @@ autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
 let g:airline_powerline_fonts = 1
 
 
+" Jedi
+""""""
+"" Disable popup on dot with deoplete
+let g:jedi#popup_on_dot = 0
+
+
 " Deoplete
 """"""""""
-let g:acp_enableAtStartup = 0
 let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
