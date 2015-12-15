@@ -179,6 +179,11 @@ autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
 let g:airline_powerline_fonts = 1
 
 
+" Easytags
+""""""""""
+let g:easytags_async = 1
+
+
 " Jedi
 """"""
 "" Disable popup on dot with deoplete
