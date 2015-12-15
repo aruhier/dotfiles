@@ -24,8 +24,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'git://github.com/altercation/vim-colors-solarized.git'
 "" Airline
 Plug 'bling/vim-airline'
-"" For notes management
-Plug 'xolox/vim-notes'
 """" Depends
 Plug 'xolox/vim-misc'
 """"

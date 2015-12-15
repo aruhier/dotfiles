@@ -1,3 +1,3 @@
 #!/bin/bash
 
-nvim "+PlugUpgrade|PlugUpdate|qall" > /dev/null
+nvim --headless "+PlugUpgrade|PlugUpdate|qall" > /dev/null
