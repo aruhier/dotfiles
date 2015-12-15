@@ -9,16 +9,16 @@
 set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/after
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    """""""""""""""""""""""""""" VUNDLE """"""""""""""""""""""""""""
+    """"""""""""""""""""""""""" VIM-PLUG """""""""""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-set nocompatible
 filetype on
 call plug#begin('~/.vim/plugged')
 """"
 Plug 'Tagbar'
 Plug 'ctrlp.vim'
 Plug 'auto-pairs'
+Plug 'altercation/vim-colors-solarized'
 "" Print syntax errors
 Plug 'Syntastic'
 """" C/C++
@@ -46,7 +46,6 @@ Plug 'Shougo/neosnippet'
 Plug 'terryma/vim-multiple-cursors'
 "" Autocomplete
 Plug 'Shougo/deoplete.nvim'
-Plug 'git://github.com/altercation/vim-colors-solarized.git'
 "" Airline
 Plug 'bling/vim-airline'
 """" Git support
@@ -70,16 +69,7 @@ call plug#end()
 
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages.
-runtime! archlinux.vim
-
-" If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
-" Or better yet, read /usr/share/vim/vim72/vimrc_example.vim or the vim manual
-" and configure vim to your own liking!
-
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
+runtime! archlinux.vim debian.vim
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
@@ -88,6 +78,7 @@ syntax on
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
+colorscheme solarized
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -95,15 +86,11 @@ set background=dark
 "  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "endif
 
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-"set showcmd		" Show (partial) command in status line.
-"set showmatch		" Show matching brackets.
-"set incsearch		" Incremental search
 "set autowrite		" Automatically save before commands like :next and :make
-"set hidden             " Hide buffers when they are abandoned
-set mouse=a		" Enable mouse usage (all modes)
-set nu			" Line numbers
+"set hidden         " Hide buffers when they are abandoned
+set mouse=a	    	" Enable mouse usage (all modes)
+set showmatch		" Show matching brackets.
+set nu		    	" Line numbers
 set laststatus=2	" Enable status
 set statusline=%<%f%h%m%r%=%l,%c\ %P
 set noerrorbells	" No beep
@@ -129,12 +116,12 @@ set guioptions-=T   " Remove toolbar in gvim
 " Remapping
 noremap tt :tabprevious<CR>
 noremap ty :tabnext<CR>
-" Avoid <Esc>
+"" Avoid <Esc>
 inoremap jk <Esc>
 cnoremap jk <C-c>
 onoremap jk <Esc>
 vnoremap ii <Esc>
-""" M for Macros
+"" M for Macros
 noremap Mse :set spell spelllang=en<CR>
 noremap Msf :set spell spelllang=fr<CR>
 
@@ -142,15 +129,13 @@ noremap Msf :set spell spelllang=fr<CR>
 cnoreabbrev t tabnew
 
 " Syntax
+"" automatic recognition of filetype
+filetype plugin indent on
+filetype plugin on
 syntax on
 syntax sync fromstart
 
-" Color
-":colorscheme xoria256
-":colorscheme zenburn
-:colorscheme solarized
-
-"AUTOCOMPLETION
+" Autocompletion
 set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.pyc,*.o,*.aux,*.toc,*.dvi    " ignored on autocomplete
@@ -165,16 +150,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
-"SYNTAX/LAYOUT
-filetype plugin indent on       " automatic recognition of filetype
-filetype plugin on
-""set nowrap                      " no wrap
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
-
 " Python
 autocmd BufRead *.py nmap <F5> :!python %<CR>
 
@@ -182,11 +157,9 @@ autocmd BufRead *.py nmap <F5> :!python %<CR>
 "" Autgen skeleton from header
 noremap \PP :! stubgen -n %<CR>
 
-
 " Makefile
-"Make vim turn *off* expandtab for files named Makefile or makefile
-"We need the tab literal
-"
+"" Make vim turn *off* expandtab for files named Makefile or makefile
+"" We need the tab literal
 autocmd BufNewFile,BufRead [Mm]akefile* set noexpandtab
 
 " Spell Check
@@ -291,3 +264,13 @@ noremap <F7> :Errors<CR>
 " Tagbar
 """""""""
 let g:tagbar_left = 1
+
+
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """"""""""""""""""""" SOURCE SYSTEM CONFIG """""""""""""""""""""
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Source a global configuration file if available
+if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
