@@ -67,7 +67,7 @@ def create_symlink(path):
         elif os.path.lexists(dest):
             file_already_exists(dest)
         if not os.path.isdir(os.path.dirname(dest)):
-            os.mkdir(os.path.dirname(dest))
+            os.makedirs(os.path.dirname(dest))
         os.symlink(src_path, dest)
     # launch post_install.sh if any
     post_install = os.path.join(path, "post_install.sh")
