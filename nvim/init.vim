@@ -200,11 +200,17 @@ let g:deoplete#omni#input_patterns.cpp =
     \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+function! s:check_back_space() "{{{
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
 inoremap <silent><expr> <Tab>
 		\ pumvisible() ? "\<C-n>" :
+        \ <SID>check_back_space() ? "\<TAB>" :
 		\ deoplete#mappings#manual_complete()
 inoremap <silent><expr> <S-Tab>
 		\ pumvisible() ? "\<C-p>" :
+        \ <SID>check_back_space() ? "\<S-TAB>" :
 		\ deoplete#mappings#manual_complete()
 
 autocmd BufEnter {*.c,*.cpp,*.html,*.js,*.java,*.php,*.py,*.rs,*.sh,*.tex}
