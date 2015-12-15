@@ -15,6 +15,7 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
 set nocompatible
 filetype on
 call plug#begin('~/.vim/plugged')
+""""
 Plug 'Tagbar'
 Plug 'ctrlp.vim'
 Plug 'auto-pairs'
@@ -61,6 +62,7 @@ Plug 'tlib'
 Plug 'Shougo/neosnippet-snippets'
 """"
 call plug#end()
+
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     """""""""""""""""""" GENERAL CONFIGURATION """""""""""""""""""""
@@ -204,8 +206,8 @@ autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
 let g:airline_powerline_fonts = 1
 
 
-" Deplote
-"""""""""
+" Deoplete
+""""""""""
 let g:acp_enableAtStartup = 0
 let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_at_startup = 1
@@ -228,7 +230,7 @@ autocmd BufEnter {*.c,*.cpp,*.html,*.js,*.java,*.php,*.py,*.rs,*.sh,*.tex}
             \ let g:deoplete#disable_auto_complete = 0
 
 
-" Eclim
+" CtrlP
 """"""""
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
