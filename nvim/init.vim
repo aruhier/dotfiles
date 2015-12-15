@@ -225,6 +225,9 @@ inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 inoremap <silent><expr> <Tab>
 		\ pumvisible() ? "\<C-n>" :
 		\ deoplete#mappings#manual_complete()
+inoremap <silent><expr> <S-Tab>
+		\ pumvisible() ? "\<C-p>" :
+		\ deoplete#mappings#manual_complete()
 
 autocmd BufEnter {*.c,*.cpp,*.html,*.js,*.java,*.php,*.py,*.rs,*.sh,*.tex}
             \ let g:deoplete#disable_auto_complete = 0
