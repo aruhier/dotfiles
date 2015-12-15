@@ -140,7 +140,7 @@ RPROMPT="%F{green}%~%f"
 # Let the terminal set the TERM value, if it doesn't, set to xterm-256color
 [[ $TMUX = ""  ]] && export TERM="xterm-256color"
 
-export EDITOR=vim
+export EDITOR=nvim
 if [ -f ~/.dir_colors/dircolors ]
     then eval `dircolors ~/.dir_colors/dircolors`
 fi
