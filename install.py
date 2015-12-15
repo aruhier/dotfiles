@@ -69,6 +69,12 @@ def create_symlink(path):
         if not os.path.isdir(os.path.dirname(dest)):
             os.mkdir(os.path.dirname(dest))
         os.symlink(src_path, dest)
+    # launch post_install.sh if any
+    post_install = os.path.join(path, "post_install.sh")
+    if os.path.exists(post_install):
+        stdout = subprocess.check_output(["bash", post_install])
+        if stdout:
+            print(stdout)
 
 
 # Enable the debug mode
