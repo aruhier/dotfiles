@@ -132,6 +132,7 @@ screens = [
                 widget.Prompt(),
                 widget.WindowName(),
                 widget.Notify(),
+                widget.Spacer(30),
                 custom_widgets.Mpd(
                     host="127.0.0.1", port=6600, reconnect=True
                 ),
