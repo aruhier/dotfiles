@@ -89,7 +89,7 @@ colorscheme solarized
 "set autowrite		" Automatically save before commands like :next and :make
 "set hidden         " Hide buffers when they are abandoned
 set mouse=a	    	" Enable mouse usage (all modes)
-set showmatch		" Show matching brackets.
+"set showmatch		" Show matching brackets.
 set nu		    	" Line numbers
 set laststatus=2	" Enable status
 set statusline=%<%f%h%m%r%=%l,%c\ %P
