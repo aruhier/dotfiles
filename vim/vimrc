@@ -16,7 +16,6 @@ set nocompatible
 filetype off
 call plug#begin('~/.vim/plugged')
 """"
-Plug 'gmarik/vundle'
 Plug 'Tagbar'
 Plug 'ctrlp.vim'
 Plug 'auto-pairs'
