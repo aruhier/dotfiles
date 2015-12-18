@@ -29,7 +29,11 @@ function search_note {
 }
 
 function nvim_or_vim {
-    where nvim > /dev/null && nvim $* || vim $*
+    if $(where nvim > /dev/null)
+        then nvim $*
+    else
+        vim $*
+    fi
 }
 
 # Alias
