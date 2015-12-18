@@ -28,6 +28,10 @@ function search_note {
         -i $*
 }
 
+function nvim_or_vim {
+    where nvim > /dev/null && nvim $* || vim $*
+}
+
 # Alias
 ####################
 
@@ -38,8 +42,8 @@ alias l='ls'
 alias p='ping'
 alias pg='ping 8.8.8.8'
 alias pg6='ping6 2001:4860:4860::8888'
-alias v='nvim'
-alias vn='nvim note:notepad'
+alias v='nvim_or_vim $*'
+alias vn='nvim_or_vim note:notepad'
 
 alias cp='cp -r --reflink=auto'
 alias free='free -h'
