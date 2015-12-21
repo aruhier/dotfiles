@@ -275,6 +275,7 @@ noremap <F7> :Errors<CR>
 " Tagbar
 """""""""
 let g:tagbar_left = 1
+cnoreabbrev tb Tagbar
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
