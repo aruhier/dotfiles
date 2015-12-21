@@ -92,6 +92,7 @@ alias pg='ping 8.8.8.8'
 alias pg6='ping6 2001:4860:4860::8888'
 alias v='nvim_or_vim $*'
 alias vn='nvim_or_vim note:notepad'
+alias vim='nvim_or_vim $*'
 
 alias cp='cp -r --reflink=auto'
 alias free='free -h'
