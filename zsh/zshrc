@@ -70,8 +70,9 @@ alias l='ls'
 alias p='ping'
 alias pg='ping 8.8.8.8'
 alias pg6='ping6 2001:4860:4860::8888'
-alias v='nvim_or_vim $*'
+alias v='nvim_or_vim '
 alias vn='nvim_or_vim note:notepad'
+alias vim='nvim_or_vim '
 
 alias cp='cp -r --reflink=auto'
 alias free='free -h'
@@ -81,8 +82,8 @@ alias ls='ls --color=auto'
 alias maj='yaourt -Syua'
 alias mkcd=mkdir_cd $1
 alias private=' unset HISTFILE'
-alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
-alias sudo='custom_sudo $*' # Make aliases work with sudo
+alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
+alias sudo='custom_sudo ' # Make aliases work with sudo
 
 
 # HISTORIQUE
