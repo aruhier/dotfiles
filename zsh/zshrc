@@ -35,7 +35,7 @@ function compile_options_debug {
 function reptyr_authorization {
     ORIG_VALUE=`cat /proc/sys/kernel/yama/ptrace_scope`
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
-    reptyr $*
+    reptyr $@
     echo "$ORIG_VALUE" | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
 }
 
@@ -43,7 +43,7 @@ function search_note {
     python2 .vim/bundle/vim-notes/misc/notes/search-notes.py \
         -n ~/.vim/bundle/vim-notes/misc/notes/user/ \
         -d ~/.vim/bundle/vim-notes/misc/notes/index.pickle \
-        -i $*
+        -i $@
 }
 
 function custom_sudo {
@@ -52,28 +52,29 @@ function custom_sudo {
     if [ -n "$IS_ALIAS" ]
     then EXPAND_CMD=`whence "$1" | awk '{print $1;}'`
             IS_FUNCTION=`whence -w "$EXPAND_CMD" | grep ": function$"`
+            shift
             if [ -n "$IS_FUNCTION" ]
-                then sudo $(ECHOONLY=true eval $EXPAND_CMD ${2:#})
+                then sudo $(ECHOONLY=true eval $EXPAND_CMD $@)
             else
-                sudo $EXPAND_CMD ${2:#}
+                sudo $EXPAND_CMD $@
             fi
     else
-        sudo $*
+        sudo $@
     fi
 }
 
 function nvim_or_vim {
     if $(where nvim > /dev/null)
         then if [ "$ECHOONLY" ]
-            then echo "nvim $*"
+            then echo "nvim $@"
         else
-            nvim $*
+            nvim $@
         fi
     else
         if [ "$ECHOONLY" ]
-            then echo "vim $*"
+            then echo "vim $@"
         else
-            vim $*
+            vim $@
         fi
     fi
 }
@@ -105,7 +106,7 @@ alias maj='http_proxy=repo.aruhier.fr:3128 yaourt -Syua && sudo pacman -Su && su
 alias mkcd='mkdir_cd '
 alias private=' unset HISTFILE'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
-alias sudo='custom_sudo ' # Make aliases work with sudo
+alias sudo='custom_sudo' # Make aliases work with sudo
 alias suspend_disk='sudo hdparm -y /dev/sdb'
 
 # Firefox
