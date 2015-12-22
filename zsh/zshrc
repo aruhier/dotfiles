@@ -90,9 +90,9 @@ alias o='xdg-open'
 alias p='ping'
 alias pg='ping 8.8.8.8'
 alias pg6='ping6 2001:4860:4860::8888'
-alias v='nvim_or_vim $*'
+alias v='nvim_or_vim '
 alias vn='nvim_or_vim note:notepad'
-alias vim='nvim_or_vim $*'
+alias vim='nvim_or_vim '
 
 alias cp='cp -r --reflink=auto'
 alias free='free -h'
@@ -104,8 +104,8 @@ alias ls='ls --color=auto'
 alias maj='http_proxy=repo.aruhier.fr:3128 yaourt -Syua && sudo pacman -Su && sudo cnf-sync'
 alias mkcd=mkdir_cd $1
 alias private=' unset HISTFILE'
-alias reptyr=reptyr_authorization $* # Set the kernel to authorize ptracing
-alias sudo='custom_sudo $*' # Make aliases work with sudo
+alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
+alias sudo='custom_sudo ' # Make aliases work with sudo
 
 # Firefox
 alias firefox-beta='firefox-beta -p beta -no-remote'
@@ -113,14 +113,14 @@ alias firefox-aurora='firefox-aurora -p beta -no-remote'
 alias firefox-clean='firefox -p clean -no-remote'
 
 # Compile
-alias clang++o='compile_options clang++ $*'
-alias clang++od='compile_options_debug clang++ $*'
-alias clango='compile_options clang $*'
-alias clangod='compile_options_debug clang $*'
-alias g++o='compile_options g++ $*'
-alias g++od='compile_options_debug g++ $*'
-alias gcco='compile_options gcc $*'
-alias gccod='compile_options_debug gcc $*'
+alias clang++o='compile_options clang++ '
+alias clang++od='compile_options_debug clang++ '
+alias clango='compile_options clang '
+alias clangod='compile_options_debug clang '
+alias g++o='compile_options g++ '
+alias g++od='compile_options_debug g++ '
+alias gcco='compile_options gcc '
+alias gccod='compile_options_debug gcc '
 
 # SSH
 alias ssh-aruhier='ssh -x anthony@aruhier.fr'
