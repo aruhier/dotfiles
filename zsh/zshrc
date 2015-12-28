@@ -28,38 +28,6 @@ function search_note {
         -i $@
 }
 
-function custom_sudo {
-    # Handles aliases and functions
-    IS_ALIAS=`whence -w "$1" | grep ": alias$"`
-    if [ -n "$IS_ALIAS" ]
-    then EXPAND_CMD=`whence "$1" | awk '{print $1;}'`
-            IS_FUNCTION=`whence -w "$EXPAND_CMD" | grep ": function$"`
-            shift
-            if [ -n "$IS_FUNCTION" ]
-                then sudo $(ECHOONLY=true eval $EXPAND_CMD $@)
-            else
-                sudo $EXPAND_CMD $@
-            fi
-    else
-        sudo $@
-    fi
-}
-
-function nvim_or_vim {
-    if $(where nvim > /dev/null)
-        then if [ "$ECHOONLY" ]
-            then echo "nvim $@"
-        else
-            nvim $@
-        fi
-    else
-        if [ "$ECHOONLY" ]
-            then echo "vim $@"
-        else
-            vim $@
-        fi
-    fi
-}
 
 # Alias
 ####################
@@ -71,9 +39,8 @@ alias l='ls'
 alias p='ping'
 alias pg='ping 8.8.8.8'
 alias pg6='ping6 2001:4860:4860::8888'
-alias v='nvim_or_vim '
-alias vn='nvim_or_vim note:notepad'
-alias vim='nvim_or_vim '
+alias v='nvim '
+alias vn='nvim note:notepad'
 
 alias cp='cp -r --reflink=auto'
 alias free='free -h'
@@ -84,7 +51,8 @@ alias maj='yaourt -Syua'
 alias mkcd=mkdir_cd $1
 alias private=' unset HISTFILE'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
-alias sudo='custom_sudo' # Make aliases work with sudo
+alias sudo='sudo ' # Make aliases work with sudo
+alias vim='nvim '
 
 
 # HISTORIQUE
