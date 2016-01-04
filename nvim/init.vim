@@ -19,7 +19,6 @@ Plug 'Tagbar'
 Plug 'ctrlp.vim'
 Plug 'auto-pairs'
 Plug 'altercation/vim-colors-solarized'
-Plug 'vim-scripts/LanguageTool'
 "" Print syntax errors
 Plug 'Syntastic'
 """" C/C++
