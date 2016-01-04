@@ -61,7 +61,6 @@ alias pg='ping 8.8.8.8'
 alias pg6='ping6 2001:4860:4860::8888'
 alias v='nvim '
 alias vn='nvim note:notepad'
-alias vim='nvim '
 
 alias cp='cp -r --reflink=auto'
 alias free='free -h'
@@ -75,6 +74,7 @@ alias mkcd='mkdir_cd '
 alias private=' unset HISTFILE'
 alias reptyr='reptyr_authorization $*' # Set the kernel to authorize ptracing
 alias sudo='sudo ' # Make aliases work with sudo
+alias vim='nvim '
 
 # Firefox
 alias firefox-beta='firefox-beta -p beta -no-remote'
