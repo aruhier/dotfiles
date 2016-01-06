@@ -1,19 +1,19 @@
 [user]
-	email = anthony.ruhier@gmail.com
-	name = Anthony Ruhier
+    email = anthony.ruhier@gmail.com
+    name = Anthony Ruhier
 [push]
-	default = simple
+    default = simple
 [core]
-	editor = vim
+    editor = vim
 [alias]
-	b = branch
-	c = commit
-	co = checkout
+    b = branch
+    c = commit
+    co = checkout
     r = rebase
-	st = status
+    st = status
     pl = pull --rebase
     ps = push
 [rerere]
     enabled = 1
 [http]
-	sslVerify = true
+    sslVerify = true
