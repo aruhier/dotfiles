@@ -14,53 +14,23 @@ ignorekeys add -except=/.hkjpxclazsrifn reddit.com
 " Hide the statusline "
 """""""""""""""""""""""
 
-noremap <silent> <F8> :js toggle_bottombar()<CR>
-noremap : :js toggle_bottombar('on')<CR>:
-noremap b :js toggle_bottombar('on')<CR>b
-noremap B :js toggle_bottombar('on')<CR>B
-noremap f :js follow_hint()<CR>
-noremap F :js follow_hint_bg()<CR>
-noremap o :js toggle_bottombar('on')<CR>o
-noremap O :js toggle_bottombar('on')<CR>O
-noremap t :js toggle_bottombar('on')<CR>t
-noremap T :js toggle_bottombar('on')<CR>T
-noremap w :js toggle_bottombar('on')<CR>w
-noremap W :js toggle_bottombar('on')<CR>W
-noremap / :js toggle_bottombar('on')<CR>/
-cnoremap <CR> <CR>:js toggle_bottombar('off')<CR>
-cnoremap <Esc> <Esc>:js toggle_bottombar('off')<CR>
+noremap <silent> <F8> :js statusline.setVisibility(statusline.setVisibility.TOGGLE)<CR>
+noremap : :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>:
+noremap b :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>b
+noremap B :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>B
+" noremap f :js follow_hint()<CR>
+" noremap F :js follow_hint_bg()<CR>
+noremap o :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>o
+noremap O :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>O
+noremap t :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>t
+noremap T :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>T
+noremap w :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>w
+noremap W :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>W
+noremap / :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>/
+cnoremap <CR> <CR>:js statusline.setVisibility(statusline.setVisibility.MODE_OFF)<CR>
+cnoremap <Esc> <Esc>:js statusline.setVisibility(statusline.setVisibility.MODE_OFF)<CR>
 
 :js << EOF
-var hl = highlight.get('ContentSeparator');
-var cs_current = hl.value;
-
-function toggle_bottombar(p) {
-    var bb = document.getElementById('liberator-bottombar');
-    if (!bb)
-        return;
-    if (p == 'on'){
-        show_bottombar(bb);
-        return;
-    }
-    if (p == 'off'){
-        hide_bottombar(bb)
-        return;
-    }
-    bb.style.height == '' ? hide_bottombar(bb) : show_bottombar(bb);
-}
-
-function show_bottombar(bb) {
-    bb.style.height = '';
-    bb.style.overflow = '';
-    liberator.execute('highlight ContentSeparator ' + cs_current);
-}
-
-function hide_bottombar(bb) {
-    bb.style.height = '0px';
-    bb.style.overflow = 'hidden';
-    liberator.execute('highlight ContentSeparator display: none;');
-}
-
 function follow_hint() {
     toggle_bottombar('on');
     window.setTimeout(function() { hints.show("o"); }, 10);
@@ -75,5 +45,5 @@ function follow_hint_bg() {
     }, 10);
 }
 
-toggle_bottombar();
+statusline.setVisibility(statusline.setVisibility.TOGGLE);
 EOF
