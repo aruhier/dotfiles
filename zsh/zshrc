@@ -93,6 +93,7 @@ RPROMPT="%F{green}%~%f"
 [[ $TMUX = ""  ]] && export TERM="xterm-256color"
 
 export EDITOR=nvim
+export GIT_EDITOR=$EDITOR
 if [ -f ~/.dir_colors/dircolors ]
     then eval `dircolors ~/.dir_colors/dircolors`
 fi
