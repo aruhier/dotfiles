@@ -47,7 +47,8 @@ Plug 'terryma/vim-multiple-cursors'
 "" Autocomplete
 Plug 'Shougo/deoplete.nvim'
 "" Airline
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 """" Git support
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
