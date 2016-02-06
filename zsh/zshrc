@@ -135,6 +135,7 @@ bindkey '^R' history-incremental-search-backward
 bindkey '^S' history-incremental-search-forward
 bindkey '^P' history-search-backward
 bindkey '^N' history-search-forward
+bindkey -M viins 'jk' vi-cmd-mode
 
 # Fix de ^M bug when typing "enter" sometimes
 stty icrnl
