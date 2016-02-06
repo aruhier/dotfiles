@@ -182,6 +182,17 @@ screens = [
             opacity=0.95,
         ),
     ),
+    Screen(
+        top=bar.Bar(
+            [
+                widget.GroupBox(font="Sans Bold"),
+                widget.WindowName(),
+                widget.Clock(format='%a %d %B %H:%M')
+            ],
+            27,
+            opacity=0.95,
+        ),
+    ),
 ]
 
 # Drag floating layouts.
