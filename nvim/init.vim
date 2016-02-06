@@ -22,7 +22,8 @@ Plug 'altercation/vim-colors-solarized'
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
 "" Airline
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 """" Depends
 Plug 'xolox/vim-misc'
 """"
