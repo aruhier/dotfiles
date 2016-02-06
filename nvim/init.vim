@@ -15,7 +15,6 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
 filetype on
 call plug#begin('~/.vim/plugged')
 """"
-Plug 'Tagbar'
 Plug 'ctrlp.vim'
 Plug 'auto-pairs'
 Plug 'altercation/vim-colors-solarized'
