@@ -21,6 +21,9 @@ Plug 'auto-pairs'
 Plug 'altercation/vim-colors-solarized'
 "" Print syntax errors
 Plug 'Syntastic'
+"" Unit tests
+Plug 'janko-m/vim-test'
+Plug 'alfredodeza/coveragepy.vim'
 """" C/C++
 Plug 'clang-complete'
 Plug 'xolox/vim-easytags'
@@ -277,6 +280,11 @@ noremap <F7> :Errors<CR>
 """""""""
 let g:tagbar_left = 1
 cnoreabbrev tb Tagbar
+
+
+" Test
+"""""""
+let test#strategy = "neovim"
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
