@@ -15,16 +15,14 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
 filetype on
 call plug#begin('~/.vim/plugged')
 """"
-Plug 'Tagbar'
 Plug 'ctrlp.vim'
 Plug 'auto-pairs'
 Plug 'altercation/vim-colors-solarized'
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
 "" Airline
-Plug 'bling/vim-airline'
-"""" Depends
-Plug 'xolox/vim-misc'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 """"
 call plug#end()
 

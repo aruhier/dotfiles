@@ -93,6 +93,7 @@ RPROMPT="%F{green}%~%f"
 [[ $TMUX = ""  ]] && export TERM="xterm-256color"
 
 export EDITOR=nvim
+export GIT_EDITOR=$EDITOR
 if [ -f ~/.dir_colors/dircolors ]
     then eval `dircolors ~/.dir_colors/dircolors`
 fi
@@ -108,6 +109,9 @@ setopt hist_ignore_space
 
 # Special keys solution
 ####################
+
+# Change this value if the timeout is too short (default to 40, for 0.4s)
+KEYTIMEOUT=20
 
 # setup key accordingly
 [[ -n "${key[Home]}"    ]]  && bindkey  "${key[Home]}"    beginning-of-line
