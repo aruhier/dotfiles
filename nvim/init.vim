@@ -38,6 +38,7 @@ Plug 'davidhalter/jedi-vim'
 """"
 """" Rust
 Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 """"
 """" XML
 Plug 'xmledit'
@@ -117,6 +118,8 @@ set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
 set guioptions-=T   " Remove toolbar in gvim
 
+" Should be by default
+map ; :
 " Remapping
 noremap tt :tabprevious<CR>
 noremap ty :tabnext<CR>
