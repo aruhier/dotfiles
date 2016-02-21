@@ -34,7 +34,7 @@ Plug 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 Plug 'gvim-pdfsync'
 """"
 """" Python
-Plug 'davidhalter/jedi-vim'
+Plug 'zchee/deoplete-jedi'
 """"
 """" Rust
 Plug 'rust-lang/rust.vim'
@@ -144,6 +144,11 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.pyc,*.o,*.aux,*.toc,*.dvi    " ignored on autocomplete
 set completeopt=longest,menu,menuone,preview    " cool completion view
+
+""""""" TEMPORARY FIX UNTIL NVIM IS NOT PATCHED (21/02/2016) """"""
+set completeopt-=preview
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set complete=.,w,b,u,U,t,i      " mega tab completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -186,12 +191,6 @@ let g:airline_powerline_fonts = 1
 " Easytags
 """"""""""
 let g:easytags_async = 1
-
-
-" Jedi
-""""""
-"" Disable popup on dot with deoplete
-let g:jedi#popup_on_dot = 0
 
 
 " Deoplete
