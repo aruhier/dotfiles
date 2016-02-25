@@ -91,9 +91,6 @@ alias g++od='compile_options_debug g++ '
 alias gcco='compile_options gcc '
 alias gccod='compile_options_debug gcc '
 
-# SSH
-alias ssh-aruhier='ssh -x anthony@aruhier.fr'
-
 # urxvt
 alias newurxvt='urxvt&; disown %urxvt'
 

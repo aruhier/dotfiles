@@ -38,6 +38,7 @@ Plug 'zchee/deoplete-jedi'
 """"
 """" Rust
 Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 """"
 """" XML
 Plug 'xmledit'
@@ -117,6 +118,8 @@ set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
 set guioptions-=T   " Remove toolbar in gvim
 
+" Should be by default
+map ; :
 " Remapping
 noremap tt :tabprevious<CR>
 noremap ty :tabnext<CR>
@@ -145,9 +148,9 @@ set wildmode=list:longest,full
 set wildignore+=*.pyc,*.o,*.aux,*.toc,*.dvi    " ignored on autocomplete
 set completeopt=longest,menu,menuone,preview    " cool completion view
 
-""""""" TEMPORARY FIX UNTIL NVIM IS NOT PATCHED (21/02/2016) """"""
+""""""" TEMPORARY FIX UNTIL NVIM NOT PATCHED (22/02/2016) """"""
 set completeopt-=preview
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set complete=.,w,b,u,U,t,i      " mega tab completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
