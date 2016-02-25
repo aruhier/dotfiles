@@ -1,0 +1,178 @@
+#
+# bspwm hotkeys
+#
+
+super + ctrl + q
+	pkill panel; bspc quit
+
+super + z
+	bspc window -c
+
+# max
+super + t
+	bspc desktop -l next
+
+# balance
+super + b
+	bspc desktop -B
+
+# float/fullscreen
+super + {ctrl+f,ctrl+shift+f}
+	bspc window -t {floating,fullscreen}
+
+# Jump to last in history
+super + {_, shift+}Tab
+	bspc {window,desktop} -f last
+
+# switch with last
+super +  apostrophe
+	bspc window -s last
+
+# move to manual
+super +  y
+	bspc window -w last.manual
+
+# swap with biggest
+super + semicolon
+	bspc window -s biggest
+
+# move around
+super + {_,shift + }{h,j,k,l}
+	bspc window -{f,s} {left,down,up,right}.local
+
+# move in cycle
+alt + {_,shift + }Tab
+	bspc window -f {next,prev}
+
+# swap in cycle
+super + {_,shift + }m
+	bspc desktop -C {forward,backward}
+
+# rotate the desktop
+super + {_,shift + }comma
+	bspc desktop -R {90,270}
+
+# prev/nex desktop
+super + ctrl + {o,i}
+	bspc desktop -f {prev,next}
+
+# preselection
+super + ctrl + {h,j,k,l}
+	bspc window -p {left,down,up,right}
+
+# cancel preselection
+super + ctrl + {_,shift + }space
+	bspc {window -p cancel,desktop -c}
+
+# resize
+alt + super + {h,j,k,l}
+	bspc window -e {left -20, up +20, up -20, left +20}
+
+# resize
+alt + super + shift + {h,j,k,l}
+	bspc window -e {right -20, down +20, down -20, right +20}
+
+# set ratio  FIND NEW
+super + ctrl + {1-9}
+	bspc window -r 0.{1-9}
+
+# move to desktop
+super + {a,s,d,f,u,i,o,p,7,8,9,0,"minus"}
+    Dt={a,s,d,f,u,i,o,p,7,8,9,0,")"}; \
+    Mc=$(bspc query -M -m); \
+    Dc=$(bspc query -D -d); \
+    Mt=$(bspc query -M -d $Dt); \
+    Dft=$(bspc query -d "$Mt":focused -D); \
+    if [ "$M" != "$Mc" ]; \
+        then if [ "$Dft" = "$Dt" ]; \
+            then bspc desktop "$Dt" -s "$Dc"; \
+        else; \
+            bspc desktop "$Dt" -m "$Mc"; \
+            bspc desktop -f "$Dt"; \
+        fi; \
+    else; \
+        bspc desktop -f "$Dt"; \
+    fi
+
+# move window to desktop
+super + shift + {a,s,d,f,u,i,o,p,7,8,9,0,"minus"}
+	bspc window -d {a,s,d,f,u,i,o,p,7,8,9,0,")"}
+
+# move to screen
+super + {q,w,e}
+    bspc monitor -f {^1,^2,^3}
+
+# move window to screen
+super + shift + {q,z,e}
+    bspc window -m {^1,^2,^3}
+
+~button1
+	bspc pointer -g focus
+
+super + button{1-3}
+	bspc pointer -g {move,resize_side,resize_corner}
+
+super + !button{1-3}
+	bspc pointer -t %i %i
+
+super + @button{1-3}
+	bspc pointer -u
+
+# Volume Keys
+XF86AudioMute
+	pamixer -t
+super + F1
+	pamixer -t
+XF86AudioRaiseVolume
+	pamixer -i 5
+super + F3
+	pamixer -i 5
+XF86AudioLowerVolume
+	pamixer -d 5
+super + F2
+	pamixer -d 5
+XF86AudioRaiseVolume + shift
+	pamixer -i 1
+super + shift + F3
+	pamixer -i 1
+XF86AudioLowerVolume + shift
+	pamixer -d 1
+super + shift + F2
+	pamixer -d 1
+
+# Media Keys
+XF86AudioPrev
+	mpc prev
+super + F5
+	mpc prev
+XF86AudioPlay
+	mpc toggle
+super + F4
+	mpc toggle
+XF86AudioNext
+	mpc next
+super + F6
+	mpc next
+
+#
+# wm independent hotkeys
+#
+
+super + Return
+	urxvt
+
+super + r
+	rofi -show run
+
+super + ctrl + shift + l
+	light-locker-command -l
+
+# make sxhkd reload its configuration files:
+super + shift + ctrl + Escape
+	pkill -USR1 -x sxhkd
+
+alt + z
+    firefox
+
+alt + x
+    thunderbird
