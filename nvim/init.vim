@@ -267,6 +267,16 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " endif
 
 
+" Racer
+""""""""
+let g:racer_cmd = "/usr/bin/racer"
+" Workaround to avoid error with the plugin
+if !exists("$RUST_SRC_PATH")
+    let $RUST_SRC_PATH="/usr/src/"
+endif
+
+
+
 " Syntastic
 """"""""""""
 let g:syntastic_check_on_open = 1
