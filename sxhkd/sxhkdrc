@@ -77,7 +77,7 @@ super + ctrl + {1-9}
 	bspc window -r 0.{1-9}
 
 # move to desktop
-super + {a,s,d,f,u,i,o,p,7,8,9,0,"minus"}
+super + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
     Dt={a,s,d,f,u,i,o,p,7,8,9,0,")"}; \
     Mc=$(bspc query -M -m); \
     Dc=$(bspc query -D -d); \
@@ -95,7 +95,7 @@ super + {a,s,d,f,u,i,o,p,7,8,9,0,"minus"}
     fi
 
 # move window to desktop
-super + shift + {a,s,d,f,u,i,o,p,7,8,9,0,"minus"}
+super + shift + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
 	bspc window -d {a,s,d,f,u,i,o,p,7,8,9,0,")"}
 
 # move to screen
