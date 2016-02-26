@@ -38,7 +38,8 @@ Plug 'zchee/deoplete-jedi'
 """"
 """" Rust
 Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
+" Enable it if you have racer installed
+" Plug 'racer-rust/vim-racer'
 """"
 """" XML
 Plug 'xmledit'
@@ -265,16 +266,6 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " if has('conceal')
 "   set conceallevel=2 concealcursor=i
 " endif
-
-
-" Racer
-""""""""
-let g:racer_cmd = "/usr/bin/racer"
-" Workaround to avoid error with the plugin
-if !exists("$RUST_SRC_PATH")
-    let $RUST_SRC_PATH="/usr/src/"
-endif
-
 
 
 " Syntastic
