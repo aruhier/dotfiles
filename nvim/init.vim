@@ -46,6 +46,7 @@ Plug 'xmledit'
 """"
 """" Autocomplete code tricks
 Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
 """"
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
