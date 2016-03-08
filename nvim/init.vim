@@ -18,6 +18,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'Tagbar'
 Plug 'ctrlp.vim'
 Plug 'auto-pairs'
+Plug 'tpope/vim-surround'
 Plug 'altercation/vim-colors-solarized'
 "" Print syntax errors
 Plug 'Syntastic'
@@ -94,7 +95,7 @@ colorscheme solarized
 "endif
 
 "set autowrite		" Automatically save before commands like :next and :make
-"set hidden         " Hide buffers when they are abandoned
+set hidden         " Hide buffers when they are abandoned
 set mouse=a	    	" Enable mouse usage (all modes)
 "set showmatch		" Show matching brackets.
 set nu		    	" Line numbers
@@ -120,8 +121,6 @@ set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
 set guioptions-=T   " Remove toolbar in gvim
 
-" Should be by default
-map ; :
 " Remapping
 noremap tt :tabprevious<CR>
 noremap ty :tabnext<CR>
@@ -288,7 +287,7 @@ cnoreabbrev tb Tagbar
 
 " Test
 """""""
-let test#strategy = "neovim"
+let g:test#strategy = "neovim"
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
