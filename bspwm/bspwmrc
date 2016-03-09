@@ -19,6 +19,11 @@ bspc monitor -a d f u i o p 7 8 9 0 ")"
 bspc monitor HDMI-0 -s DVI-D-0
 bspc config top_padding 18
 
+### Rules ###
+D_MSGING=i
+bspc rule -a Thunderbird desktop=$D_MSGING split_ratio=0.3
+bspc rule -a Pidgin desktop=$D_MSGING split_ratio=0.7
+
 sleep 1
 xsetroot -cursor_name left_ptr &
 nvidia-settings --load-config-only &

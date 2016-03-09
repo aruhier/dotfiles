@@ -30,7 +30,7 @@ super +  apostrophe
 
 # move to manual
 super +  y
-	bspc node -n last.manual
+	bspc node -n 'last.!automatic'
 
 # swap with biggest
 super + semicolon
@@ -46,11 +46,11 @@ alt + {_,shift + }Tab
 
 # swap in cycle
 super + {_,shift + }m
-	bspc desktop -C {forward,backward}
+	bspc node @/ -C {forward,backward}
 
 # rotate the desktop
 super + {_,shift + }comma
-	bspc desktop -R {90,270}
+	bspc node @/ -R {90,270}
 
 # prev/nex desktop
 super + ctrl + {o,i}
@@ -66,11 +66,11 @@ super + ctrl + {_,shift + }space
 
 # resize
 alt + super + {h,j,k,l}
-	bspc node {west -r -20, north -r +20, north -r -20, west -r +20}
+	bspc node {@west -r -20, @north -r +20, @north -r -20, @west -r +20}
 
 # resize
 alt + super + shift + {h,j,k,l}
-	bspc node {east -r -20, south -r +20, south -r -20, east -r +20}
+	bspc node {@east -r -20, @south -r +20, @south -r -20, @east -r +20}
 
 # set ratio  FIND NEW
 super + ctrl + {1-9}
