@@ -4,7 +4,6 @@
 
 " Disable the auto insertmode
 set nofocuscontent
-set focuscontent=true
 
 " Ignore keys on specific websites
 ignorekeys add -except=jkplhrce 9gag.com
@@ -15,35 +14,7 @@ ignorekeys add -except=/.hkjpxclazsrifn reddit.com
 """""""""""""""""""""""
 
 noremap <silent> <F8> :js statusline.setVisibility(statusline.setVisibility.TOGGLE)<CR>
-noremap : :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>:
-noremap b :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>b
-noremap B :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>B
-" noremap f :js follow_hint()<CR>
-" noremap F :js follow_hint_bg()<CR>
-noremap o :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>o
-noremap O :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>O
-noremap t :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>t
-noremap T :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>T
-noremap w :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>w
-noremap W :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>W
-noremap / :js statusline.setVisibility(statusline.setVisibility.MODE_ON)<CR>/
-cnoremap <CR> <CR>:js statusline.setVisibility(statusline.setVisibility.MODE_OFF)<CR>
-cnoremap <Esc> <Esc>:js statusline.setVisibility(statusline.setVisibility.MODE_OFF)<CR>
 
 :js << EOF
-function follow_hint() {
-    toggle_bottombar('on');
-    window.setTimeout(function() { hints.show("o"); }, 10);
-}
-
-function follow_hint_bg() {
-    toggle_bottombar('on');
-    window.setTimeout(function() {
-        hints.show(
-            options.getPref("browser.tabs.loadInBackground") ? "b" : "t"
-        );
-    }, 10);
-}
-
-statusline.setVisibility(statusline.setVisibility.TOGGLE);
+statusline.setVisibility(statusline.setVisibility.HIDE);
 EOF
