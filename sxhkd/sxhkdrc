@@ -18,7 +18,7 @@ super + b
 
 # float/fullscreen
 super + {ctrl+f,ctrl+shift+f}
-	bspc node -t {floating,fullscreen}
+	bspc node -t "~"{floating,fullscreen}
 
 # Jump to last in history
 super + {_, shift+}Tab
