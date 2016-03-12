@@ -12,8 +12,9 @@ bspc config ignore_ewmh_focus   true
 bspc config remove_disabled_monitors false
 bspc config remove_unplugged_monitors false
 
-bspc monitor LVDS1 -d a s d f u i o p 7 8 9 0
+bspc monitor LVDS1 -d a
 bspc monitor VGA1 -d ")"
+bspc monitor -a  s d f u i o p 7 8 9 0
 
 sleep 1
 xsetroot -cursor_name left_ptr &
@@ -33,3 +34,4 @@ nm-applet &
 redshift-gtk &
 clipit &
 owncloud &
+sxhkd&
