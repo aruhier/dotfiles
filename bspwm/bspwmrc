@@ -12,27 +12,24 @@ bspc config ignore_ewmh_focus   true
 bspc config remove_disabled_monitors false
 bspc config remove_unplugged_monitors false
 
-bspc monitor HDMI-0 -d s
-bspc monitor DVI-D-0 -d a f u i o p 7 8 9 0 ")"
-bspc monitor DVI-I-0 -d d
-bspc monitor HDMI-0 -s DVI-D-0
+bspc monitor LVDS1 -d a s d f u i o p 7 8 9 0
+bspc monitor VGA1 -d ")"
 
 sleep 1
 xsetroot -cursor_name left_ptr &
-nvidia-settings --load-config-only &
 feh --bg-fill ~/.config/qtile/wallpaper.jpg &
-# ~/.config/bspwm/panel &
 bspc config top_padding 18
 ~/git/github/barython/test.py &
-light-locker --no-lock-on-suspend &
-xset -dpms &
-xset s off &
+light-locker --lock-on-suspend --lock-after-screensaver=3  &
+xset dpms 180 180 180 &
+xset s 180 &
+xcalib -d :0 ~/.icc/n55sf.icc
 setxkbmap -layout us -option compose:ralt &
 compton -cG --backend glx --unredir-if-possible &
 
 sleep 1
+trayer --edge top --align right --expand false --margin 300 --widthtype request --height 18 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true --iconspacing 5 &
 nm-applet &
-pa-applet &
 redshift-gtk &
 clipit &
 owncloud &
