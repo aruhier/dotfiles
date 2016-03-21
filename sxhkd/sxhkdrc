@@ -6,7 +6,7 @@ super + ctrl + q
 	pkill panel; bspc quit
 
 super + z
-	bspc window -c
+	bspc node -c
 
 # max
 super + t
@@ -18,39 +18,39 @@ super + b
 
 # float/fullscreen
 super + {ctrl+f,ctrl+shift+f}
-	bspc window -t {floating,fullscreen}
+	bspc node -t "~"{floating,fullscreen}
 
 # Jump to last in history
 super + {_, shift+}Tab
-	bspc {window,desktop} -f last
+	bspc {node,desktop} -f last
 
 # switch with last
 super +  apostrophe
-	bspc window -s last
+	bspc node -s last
 
 # move to manual
 super +  y
-	bspc window -w last.manual
+	bspc node -n 'last.!automatic'
 
 # swap with biggest
 super + semicolon
-	bspc window -s biggest
+	bspc node -s biggest
 
 # move around
 super + {_,shift + }{h,j,k,l}
-	bspc window -{f,s} {left,down,up,right}.local
+	bspc node -{f,s} {west,south,north,east}.local
 
 # move in cycle
 alt + {_,shift + }Tab
-	bspc window -f {next,prev}
+	bspc node -f {next,prev}
 
 # swap in cycle
 super + {_,shift + }m
-	bspc desktop -C {forward,backward}
+	bspc node @/ -C {forward,backward}
 
 # rotate the desktop
 super + {_,shift + }comma
-	bspc desktop -R {90,270}
+	bspc node @/ -R {90,270}
 
 # prev/nex desktop
 super + ctrl + {o,i}
@@ -58,23 +58,23 @@ super + ctrl + {o,i}
 
 # preselection
 super + ctrl + {h,j,k,l}
-	bspc window -p {left,down,up,right}
+	bspc node -p {west,south,north,east}
 
 # cancel preselection
 super + ctrl + {_,shift + }space
-	bspc {window -p cancel,desktop -c}
+	bspc {node -p cancel,desktop -c}
 
 # resize
 alt + super + {h,j,k,l}
-	bspc window -e {left -20, up +20, up -20, left +20}
+	bspc node {@west -r -20, @north -r +20, @north -r -20, @west -r +20}
 
 # resize
 alt + super + shift + {h,j,k,l}
-	bspc window -e {right -20, down +20, down -20, right +20}
+	bspc node {@east -r -20, @south -r +20, @south -r -20, @east -r +20}
 
 # set ratio  FIND NEW
 super + ctrl + {1-9}
-	bspc window -r 0.{1-9}
+	bspc node -o 0.{1-9}
 
 # move to desktop
 super + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
@@ -96,7 +96,7 @@ super + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
 
 # move window to desktop
 super + shift + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
-	bspc window -d {a,s,d,f,u,i,o,p,7,8,9,0,")"}
+	bspc node -d {a,s,d,f,u,i,o,p,7,8,9,0,")"}
 
 # move to screen
 super + {q,w,e}
@@ -104,7 +104,7 @@ super + {q,w,e}
 
 # move window to screen
 super + shift + {q,z,e}
-    bspc window -m {^1,^2,^3}
+    bspc node -m {^1,^2,^3}
 
 ~button1
 	bspc pointer -g focus
