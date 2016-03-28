@@ -78,13 +78,13 @@ super + ctrl + {1-9}
 
 # move to desktop
 super + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
-    Dt={a,s,d,f,u,i,o,p,7,8,9,0,")"}; \
+    Dt={a,s,d,f,u,i,o,p,7,8,9,0,')'}; \
     Mc=$(bspc query -M -m); \
-    Dc=$(bspc query -D -d); \
-    Mt=$(bspc query -M -d $Dt); \
-    Dft=$(bspc query -d "$Mt":focused -D); \
+    Mt=$(bspc query -M -d "$Dt"); \
     if [ "$M" != "$Mc" ]; \
-        then if [ "$Dft" = "$Dt" ]; \
+        then Dc=$(bspc query -D -d); \
+        Dft=$(bspc query -d "$Mt":focused -D); \
+        if [ "$Dft" = "$Dt" ]; \
             then bspc desktop "$Dt" -s "$Dc"; \
         else; \
             bspc desktop "$Dt" -m "$Mc"; \
@@ -163,6 +163,9 @@ super + Return
 
 super + r
 	rofi -show run
+
+super + ctrl + p
+	clerk --queue show
 
 super + ctrl + shift + l
 	light-locker-command -l
