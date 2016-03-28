@@ -162,8 +162,13 @@ URxvt*color15:                 S_base3
 !!! Rofi !!!
 !!!!!!!!!!!!
 
-rofi.foreground: S_base0
-rofi.background: S_base03
+rofi.color-enabled: true
+rofi.color-window: S_base03, S_base03, S_base0
+
+rofi.color-normal: S_base03, S_base0, S_base03, S_base02, S_base0
+rofi.color-active: S_base03, S_blue, S_base03, S_base02, S_blue
+rofi.color-urgent: S_base03, #da4281, S_base03, S_base02, #da4281
+
 rofi.highlightfg: S_base03
 rofi.highlightbg: S_yellow
 rofi.bordercolor: S_base02
