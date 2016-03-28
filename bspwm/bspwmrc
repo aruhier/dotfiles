@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 bspc config wm_name             LG3D
 bspc config border_width        1
@@ -13,25 +13,28 @@ bspc config remove_disabled_monitors false
 bspc config remove_unplugged_monitors false
 
 bspc monitor LVDS1 -d a
-bspc monitor VGA1 -d ")"
-bspc monitor -a  s d f u i o p 7 8 9 0
+bspc monitor VGA1 -d "="
+bspc monitor -a  s d f u i o p 7 8 9 0 ")"
+bspc config top_padding 18
 
 sleep 1
 xsetroot -cursor_name left_ptr &
 feh --bg-fill ~/.config/qtile/wallpaper.jpg &
-bspc config top_padding 18
 ~/git/github/barython/test.py &
 light-locker --lock-on-suspend --lock-after-screensaver=3  &
 xset dpms 180 180 180 &
+xset -b &
 xset s 180 &
 xcalib -d :0 ~/.icc/n55sf.icc
 setxkbmap -layout us -option compose:ralt &
 compton -cG --backend glx --unredir-if-possible &
 
 sleep 1
-trayer --edge top --align right --expand false --margin 300 --widthtype request --height 18 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true --iconspacing 5 &
 nm-applet &
 redshift-gtk &
 clipit &
 owncloud &
 sxhkd &
+
+sleep 2
+trayer --edge top --align right --expand false --margin 300 --widthtype request --height 18 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true --SetPartialStrut false --iconspacing 5 &
