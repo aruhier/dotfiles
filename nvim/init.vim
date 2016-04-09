@@ -148,11 +148,6 @@ set wildmenu
 set wildmode=list:longest,full
 set wildignore+=*.pyc,*.o,*.aux,*.toc,*.dvi    " ignored on autocomplete
 set completeopt=longest,menu,menuone,preview    " cool completion view
-
-""""""" TEMPORARY FIX UNTIL NVIM NOT PATCHED (22/02/2016) """"""
-set completeopt-=preview
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 set complete=.,w,b,u,U,t,i      " mega tab completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
