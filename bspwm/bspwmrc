@@ -20,7 +20,7 @@ bspc config top_padding 18
 sleep 1
 xsetroot -cursor_name left_ptr &
 feh --bg-fill ~/.config/qtile/wallpaper.jpg &
-~/git/github/barython/test.py &
+~/git/github/barython/laptop.py &
 light-locker --lock-on-suspend --lock-after-screensaver=3  &
 xset dpms 180 180 180 &
 xset -b &
