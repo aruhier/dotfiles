@@ -26,7 +26,7 @@ Plug 'Syntastic'
 Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim'
 """" C/C++
-Plug 'clang-complete'
+Plug 'Rip-Rip/clang_complete'
 Plug 'xolox/vim-easytags'
 """"
 """" LaTeX
@@ -201,10 +201,6 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
 let g:deoplete#omni#input_patterns.php =
     \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-let g:deoplete#omni#input_patterns.c =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-let g:deoplete#omni#input_patterns.cpp =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 function! s:check_back_space() "{{{
