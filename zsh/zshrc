@@ -14,22 +14,36 @@ function clean_cache {
     su -c "echo 3 > /proc/sys/vm/drop_caches"
 }
 
+function _compile_global_opt {
+    echo -O2 -Wall -Werror -Wextra -pedantic -D_POSIX_SOURCE -pthread
+}
+
+function compile_c++_options {
+    compilator=$1
+    binary=$2
+    shift; shift
+    $compilator -std=c++11 `_compile_global_opt` -o $binary $*
+}
+
+function compile_c++_options_debug {
+    compilator=$1
+    binary=$2
+    shift; shift
+    $compilator -g -std=c++11 `_compile_global_opt` -o $binary $*
+}
+
 function compile_options {
     compilator=$1
     binary=$2
     shift; shift
-    src=$*
-    $compilator -O2 -Wall -Werror -Wextra -std=c11 -pedantic -D_POSIX_SOURCE \
-        -pthread -o $binary $src
+    $compilator -std=c11 `_compile_global_opt` -o $binary $*
 }
 
 function compile_options_debug {
     compilator=$1
     binary=$2
     shift; shift
-    src=$*
-    $compilator -g -Wall -Wextra -Werror -std=c11 -pedantic -D_POSIX_SOURCE \
-        -pthread -o $binary $src
+    $compilator -g -std=c11 `_compile_global_opt` -o $binary $*
 }
 
 function reptyr_authorization {
@@ -82,12 +96,12 @@ alias firefox-aurora='firefox-aurora -p beta -no-remote'
 alias firefox-clean='firefox -p clean -no-remote'
 
 # Compile
-alias clang++o='compile_options clang++ '
-alias clang++od='compile_options_debug clang++ '
+alias clang++o='compile_c++_options clang++ '
+alias clang++od='compile_c++_options_debug clang++ '
 alias clango='compile_options clang '
 alias clangod='compile_options_debug clang '
-alias g++o='compile_options g++ '
-alias g++od='compile_options_debug g++ '
+alias g++o='compile_c++_options g++ '
+alias g++od='compile_c++_options_debug g++ '
 alias gcco='compile_options gcc '
 alias gccod='compile_options_debug gcc '
 
