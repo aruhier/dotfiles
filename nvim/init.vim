@@ -226,6 +226,12 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 
+" Clang_Complete
+""""""""""""""""
+" Already done with syntastic
+let g:clang_hl_errors = 0
+
+
 " Eclim
 """"""""
 let g:EclimCompletionMethod = 'omnifunc'
@@ -262,10 +268,10 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " Syntastic
 """"""""""""
 let g:syntastic_check_on_open = 1
-let g:syntastic_c_compiler = 'gcc'
-let g:syntastic_cpp_compiler = 'gcc'
+let g:syntastic_c_compiler = 'clang'
+let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_c_compiler_options = ' -Wall -Wextra -Werror -pedantic -std=c11'
-let g:syntastic_cpp_compiler_options = ' -Wall -Wextra -Werror'
+let g:syntastic_cpp_compiler_options = ' -Wall -Wextra -Werror -pedantic -std=c++11'
 let g:syntastic_rst_checkers = ['rstcheck']
 noremap <F7> :Errors<CR>
 
