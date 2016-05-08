@@ -143,6 +143,11 @@ autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
 let g:airline_powerline_fonts = 1
 
 
+" Solarized
+""""""""""""
+call togglebg#map("<F10>")
+
+
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     """"""""""""""""""""" SOURCE SYSTEM CONFIG """""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
