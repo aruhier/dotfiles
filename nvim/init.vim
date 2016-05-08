@@ -309,6 +309,11 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " endif
 
 
+" Solarized
+""""""""""""
+call togglebg#map("<F10>")
+
+
 " Syntastic
 """"""""""""
 let g:syntastic_check_on_open = 1
