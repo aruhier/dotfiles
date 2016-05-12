@@ -22,10 +22,10 @@ URxvt*metaSendsEscape: true
 
 ! Fonts
 URxvt.allow_bold:           true
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=14.5,xft:DejaVu Sans Mono for Powerline:pixelsize=14.5
+URxvt*font: xft:Hack:pixelsize=14,xft:DejaVu Sans Mono:pixelsize=14
 
 ! Fix font space
-!URxvt*letterSpace: -1
+URxvt*letterSpace: -1
 
 ! Scrollbar
 URxvt.scrollstyle:          rxvt
