@@ -156,30 +156,22 @@ URxvt*color13:                 S_violet
 URxvt*color14:                 S_base1
 URxvt*color15:                 S_base3
 
+
 !!!!!!!!!!!!
 !!! Rofi !!!
 !!!!!!!!!!!!
 
-rofi.color-enabled: true
-rofi.color-window: S_base03, S_base03, S_base0
-
-rofi.color-normal: S_base03, S_base0, S_base03, S_base02, S_base0
-rofi.color-active: S_base03, S_blue, S_base03, S_base02, S_blue
-rofi.color-urgent: S_base03, #da4281, S_base03, S_base02, #da4281
-
-rofi.highlightfg: S_base03
-rofi.highlightbg: S_yellow
-rofi.bordercolor: S_base02
-rofi.padding: 1
-rofi.lines: 10
-rofi.borderwidth: 1
-rofi.opacity: 95
-rofi.location: 2
-rofi.yoffset: 30
-rofi.xoffset: 0
-rofi.width: 60
-rofi.fixed_num_lines: 1
-rofi.hmode: false
+rofi.width: 50
+rofi.padding: 300
+rofi.fullscreen: true
+rofi.fixed-num-lines: true
+rofi.bw: 0
+rofi.location: 0
 rofi.terminal: urxvt
-rofi.ssh-set-title: false
+rofi.lines: 10
+rofi.eh: 1
+rofi.color-window: argb:ef263238, argb:aa263238, S_cyan
+rofi.color-normal: argb:0263238, #cccfd1, argb:0263238, S_base02, S_yellow
+rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3
+rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
 rofi.rkey: mod4+r
