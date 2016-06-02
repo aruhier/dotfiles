@@ -29,6 +29,9 @@ Plug 'alfredodeza/coveragepy.vim'
 Plug 'Rip-Rip/clang_complete'
 Plug 'xolox/vim-easytags'
 """"
+"""" Java
+Plug 'artur-shaik/vim-javacomplete2'
+""""
 """" LaTeX
 Plug 'LaTeX-Box'
 Plug 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
@@ -190,6 +193,7 @@ let g:airline_powerline_fonts = 1
 " Easytags
 """"""""""
 let g:easytags_async = 1
+let g:easytags_include_members = 1
 
 
 " Deoplete
