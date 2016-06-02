@@ -12,7 +12,6 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
     """"""""""""""""""""""""""" VIM-PLUG """""""""""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype on
 call plug#begin('~/.vim/plugged')
 """"
 " Plug 'Tagbar'
@@ -28,6 +27,9 @@ Plug 'alfredodeza/coveragepy.vim'
 """" C/C++
 Plug 'Rip-Rip/clang_complete'
 Plug 'xolox/vim-easytags'
+""""
+"""" Java
+Plug 'artur-shaik/vim-javacomplete2'
 """"
 """" LaTeX
 Plug 'LaTeX-Box'
@@ -70,6 +72,7 @@ Plug 'tlib'
 Plug 'Shougo/neosnippet-snippets'
 """"
 call plug#end()
+filetype on
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -191,6 +194,7 @@ let g:airline_powerline_fonts = 1
 " Easytags
 """"""""""
 let g:easytags_async = 1
+let g:easytags_include_members = 1
 
 
 " Deoplete
