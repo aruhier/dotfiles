@@ -12,7 +12,6 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
     """"""""""""""""""""""""""" VIM-PLUG """""""""""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype on
 call plug#begin('~/.vim/plugged')
 """"
 Plug 'ctrlp.vim'
@@ -25,6 +24,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 """"
 call plug#end()
+filetype on
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
