@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bspc config wm_name             LG3D
+wmname LG3D
 bspc config border_width        1
 bspc config window_gap          3
 
