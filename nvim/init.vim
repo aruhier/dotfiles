@@ -12,7 +12,6 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
     """"""""""""""""""""""""""" VIM-PLUG """""""""""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-filetype on
 call plug#begin('~/.vim/plugged')
 """"
 Plug 'Tagbar'
@@ -72,6 +71,7 @@ Plug 'tlib'
 Plug 'Shougo/neosnippet-snippets'
 """"
 call plug#end()
+filetype on
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
