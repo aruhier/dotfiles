@@ -17,6 +17,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'ctrlp.vim'
 Plug 'auto-pairs'
 Plug 'altercation/vim-colors-solarized'
+Plug 'chaoren/vim-wordmotion'
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
 "" Airline
