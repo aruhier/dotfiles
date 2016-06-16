@@ -19,6 +19,7 @@ Plug 'ctrlp.vim'
 Plug 'auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'altercation/vim-colors-solarized'
+Plug 'chaoren/vim-wordmotion'
 "" Print syntax errors
 Plug 'Syntastic'
 "" Unit tests
