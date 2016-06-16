@@ -14,7 +14,7 @@ super + t
 
 # balance
 super + b
-	bspc desktop -B
+	bspc node @/ -B
 
 # float/fullscreen
 super + {ctrl+f,ctrl+shift+f}
