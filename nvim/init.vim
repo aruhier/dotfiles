@@ -34,7 +34,7 @@ Plug 'artur-shaik/vim-javacomplete2'
 """"
 """" LaTeX
 Plug 'LaTeX-Box'
-Plug 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+Plug 'vim-latex/vim-latex'
 Plug 'gvim-pdfsync'
 """"
 """" Python
