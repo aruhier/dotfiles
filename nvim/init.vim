@@ -113,7 +113,7 @@ set expandtab
 set autoindent		" Text indenting
 set softtabstop=4
 set scrolloff=10	" 10 lines before and after the cursor position
-set hlsearch		" Highlight of results
+set nohlsearch		" Disable highlight of results
 set incsearch		" Incremental search
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
@@ -128,6 +128,7 @@ set guioptions-=T   " Remove toolbar in gvim
 " Remapping
 noremap tt :tabprevious<CR>
 noremap ty :tabnext<CR>
+noremap <F4> :set hlsearch! hlsearch?<CR>
 "" Avoid <Esc>
 inoremap jk <Esc>
 cnoremap jk <C-c>
