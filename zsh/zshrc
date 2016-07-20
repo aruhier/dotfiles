@@ -28,6 +28,11 @@ function search_note {
         -i $@
 }
 
+function _sshag {
+    [[ "$SSH_AGENT_PID" ]] || eval $(ssh-agent -t 3600);
+    ssh-add ~/.ssh/id_rsa
+}
+
 
 # Alias
 ####################
@@ -51,6 +56,7 @@ alias maj='yaourt -Syua'
 alias mkcd=mkdir_cd $1
 alias private=' unset HISTFILE'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
+alias sshag='_sshag'
 alias sudo='sudo ' # Make aliases work with sudo
 alias vim='nvim '
 
