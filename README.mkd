@@ -1,0 +1,36 @@
+Dotfiles
+========
+
+Repository containing my dotfiles of all my systems. There are dispatched in
+branches, and some inherits configurations from groups.
+
+I use the `automerge.sh` script to hierarchically merge all my branches between
+each other. When a conflict happens, fix it and relaunch the automerge script,
+what will continue from where it failed.
+
+To install the dotfiles, use `install.py`.
+
+
+Hierarchy
+---------
+
+  * master: "light" version of my dotfiles, installed on all my servers
+    * desktop: desktop oriented dotfiles. vim/nvim is configured for a dev
+               usage.
+      * tour-anthony: desktop @home
+        * laptop-anthony: personnal laptop, inherits a lot of dotfiles from
+                          tour-anthony
+      * pc-trinaps: desktop @work
+
+
+Requires
+--------
+
+  * python3
+  * python-git or python3-git (depending on distributions)
+
+
+License
+-------
+
+Configurations under the BSD license.
