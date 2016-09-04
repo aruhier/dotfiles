@@ -56,6 +56,7 @@ alias ll='ls -alh'
 alias ls='ls --color=auto'
 alias maj='yaourt -Syua'
 alias mkcd=mkdir_cd $1
+alias mtr='mtr -o "LSR NABWV"'
 alias private=' unset HISTFILE'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
 alias sshag='_sshag'
