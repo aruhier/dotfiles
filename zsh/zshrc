@@ -91,6 +91,7 @@ alias hibernate='systemctl hibernate'
 alias ll='ls -alh'
 alias ls='ls --color=auto'
 alias maj='http_proxy=repo.aruhier.fr:3128 pacaur -Syu && sudo cnf-sync'
+alias mtr='mtr -o "LSR NABWV"'
 alias mkcd='mkdir_cd '
 alias private=' unset HISTFILE'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
