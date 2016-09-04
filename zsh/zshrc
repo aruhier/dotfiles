@@ -73,6 +73,8 @@ function _sshag {
 alias e='exit'
 alias g='git'
 alias l='ls'
+alias mtrg='mtr 8.8.8.8'
+alias mtrg6='mtr 2001:4860:4860::8888'
 alias n='newurxvt'
 alias o='xdg-open'
 alias p='ping'
