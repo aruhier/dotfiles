@@ -9,6 +9,11 @@
     b = branch
     c = commit
     co = checkout
+    # a "long story short" mode for git log, with one commit per line
+    loglst = log \
+        --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' \
+        --abbrev-commit \
+        --no-merges
     r = rebase
     st = status
     pl = pull --rebase
