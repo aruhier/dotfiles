@@ -33,11 +33,10 @@ compton -cG --backend glx --unredir-if-possible &
 
 sleep 1
 nm-applet &
-pa-applet &
 redshift-gtk &
 clipit &
 owncloud &
 sxhkd &
 
 sleep 2
-trayer --edge top --align right --expand false --margin 300 --widthtype request --height 18 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true --SetPartialStrut false --iconspacing 5 &
+trayer --edge top --align right --expand false --margin 300 --widthtype request --height 18 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true  --iconspacing 5 &
