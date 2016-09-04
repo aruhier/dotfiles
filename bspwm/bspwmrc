@@ -12,8 +12,8 @@ bspc config ignore_ewmh_focus   true
 bspc config remove_disabled_monitors false
 bspc config remove_unplugged_monitors false
 
-bspc monitor LVDS1 -d a
-bspc monitor VGA1 -d "="
+bspc monitor LVDS-1 -d a
+bspc monitor VGA-1 -d "="
 bspc monitor -a  s d f u i o p 7 8 9 0 ")"
 bspc config top_padding 18
 
@@ -37,4 +37,4 @@ owncloud &
 sxhkd &
 
 sleep 2
-trayer --edge top --align right --expand false --margin 380 --widthtype request --height 18 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true --SetPartialStrut false --iconspacing 5 &
+trayer --edge top --align right --expand false --margin 410 --widthtype request --height 18 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true --SetPartialStrut false --iconspacing 5 &
