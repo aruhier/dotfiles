@@ -26,19 +26,19 @@ Plug 'Syntastic'
 Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim'
 """" C/C++
-Plug 'Rip-Rip/clang_complete'
+Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
 Plug 'xolox/vim-easytags'
 """"
 """" Java
-Plug 'artur-shaik/vim-javacomplete2'
+Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 """"
 """" LaTeX
-Plug 'LaTeX-Box'
-Plug 'vim-latex/vim-latex'
-Plug 'gvim-pdfsync'
+Plug 'LaTeX-Box', { 'for': 'tex' }
+Plug 'vim-latex/vim-latex', { 'for': 'tex' }
+Plug 'gvim-pdfsync', { 'for': 'tex' }
 """"
 """" Python
-Plug 'zchee/deoplete-jedi'
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 """"
 """" Rust
 Plug 'rust-lang/rust.vim'
@@ -46,7 +46,7 @@ Plug 'rust-lang/rust.vim'
 " Plug 'racer-rust/vim-racer'
 """"
 """" XML
-Plug 'xmledit'
+Plug 'xmledit', { 'for': 'xml' }
 """"
 """" Autocomplete code tricks
 Plug 'Shougo/neosnippet'
@@ -55,7 +55,7 @@ Plug 'Shougo/neosnippet-snippets'
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
 "" Autocomplete
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'

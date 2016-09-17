@@ -26,23 +26,23 @@ Plug 'Syntastic'
 Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim'
 """" C/C++
-Plug 'clang-complete'
+Plug 'clang-complete', { 'for': ['c', 'cpp'] }
 Plug 'xolox/vim-easytags'
 """"
 """" LaTeX
-Plug 'LaTeX-Box'
-Plug 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
-Plug 'gvim-pdfsync'
+Plug 'LaTeX-Box', { 'for': 'tex' }
+Plug 'vim-latex/vim-latex', { 'for': 'tex' }
+Plug 'gvim-pdfsync', { 'for': 'tex' }
 """"
 """" Python
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 """"
 """" Rust
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 """"
 """" XML
-Plug 'xmledit'
+Plug 'xmledit', { 'for': 'xml' }
 """"
 """" Autocomplete code tricks
 Plug 'Shougo/neosnippet'
