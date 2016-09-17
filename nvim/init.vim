@@ -43,7 +43,7 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 """" Rust
 Plug 'rust-lang/rust.vim'
 " Enable it if you have racer installed
-Plug 'racer-rust/vim-racer'
+Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 """"
 """" XML
 Plug 'xmledit', { 'for': 'xml' }
