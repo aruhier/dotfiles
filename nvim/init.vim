@@ -20,6 +20,7 @@ Plug 'auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chaoren/vim-wordmotion'
+Plug 'dhruvasagar/vim-table-mode'
 "" Print syntax errors
 Plug 'Syntastic'
 "" Unit tests
