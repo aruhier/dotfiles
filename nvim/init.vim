@@ -40,6 +40,8 @@ Plug 'gvim-pdfsync', { 'for': 'tex' }
 """"
 """" Python
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+" Requires python rope
+Plug 'python-rope/ropevim', { 'for': 'python' }
 """"
 """" Rust
 Plug 'rust-lang/rust.vim'
@@ -314,6 +316,12 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " if has('conceal')
 "   set conceallevel=2 concealcursor=i
 " endif
+
+
+" Ropevim
+""""""""""""
+" Add ropevim in path
+let $PYTHONPATH .= ':'.$HOME.'/.vim/plugged/ropevim'
 
 
 " Solarized
