@@ -61,8 +61,12 @@ super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 # cancel preselection
-super + ctrl + {_,shift + }space
-	bspc {node -p cancel,desktop -c}
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel all preselections in the desktop
+super + ctrl + shift + space
+    bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 # resize
 alt + super + {h,j,k,l}
@@ -78,10 +82,10 @@ super + ctrl + {1-9}
 
 # move to desktop
 super + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
-    Dt={a,s,d,f,u,i,o,p,7,8,9,0,')'}; \
+    Dt=$(bspc query -D -d {a,s,d,f,u,i,o,p,7,8,9,0,')'}); \
     Mc=$(bspc query -M -m); \
     Mt=$(bspc query -M -d "$Dt"); \
-    if [ "$M" != "$Mc" ]; \
+    if [ "$Mt" != "$Mc" ]; \
         then Dc=$(bspc query -D -d); \
         Dft=$(bspc query -d "$Mt":focused -D); \
         if [ "$Dft" = "$Dt" ]; \
@@ -105,18 +109,6 @@ super + {q,w,e}
 # move window to screen
 super + shift + {q,z,e}
     bspc node -m {^1,^2,^3}
-
-~button1
-	bspc pointer -g focus
-
-super + button{1-3}
-	bspc pointer -g {move,resize_side,resize_corner}
-
-super + !button{1-3}
-	bspc pointer -t %i %i
-
-super + @button{1-3}
-	bspc pointer -u
 
 # Volume Keys
 XF86AudioMute
