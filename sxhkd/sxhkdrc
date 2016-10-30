@@ -64,6 +64,10 @@ super + ctrl + {h,j,k,l}
 super + ctrl + space
 	bspc node -p cancel
 
+# preselect an entier desktop
+super + ctrl + alt + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
+    bspc rule -a \* -o desktop={a,s,d,f,u,i,o,p,7,8,9,0,')'}
+
 # cancel all preselections in the desktop
 super + ctrl + shift + space
     bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
