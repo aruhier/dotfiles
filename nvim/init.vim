@@ -21,6 +21,7 @@ Plug 'tpope/vim-surround'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chaoren/vim-wordmotion'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'ciaranm/detectindent'
 "" Print syntax errors
 Plug 'Syntastic'
 "" Unit tests
@@ -237,6 +238,18 @@ let g:ctrlp_cmd = 'CtrlP'
 """"""""""""""""
 " Already done with syntastic
 let g:clang_hl_errors = 0
+
+
+" DetectIndent
+""""""""""""""""
+let g:detectindent_preferred_expandtab = 1
+let g:detectindent_preferred_indent = 4
+
+" Makefile
+"" Make vim turn *off* expandtab for files named Makefile or makefile
+"" We need the tab literal
+autocmd BufNewFile,BufRead [Mm]akefile*
+    \ let g:detectindent_preferred_expandtab = 1
 
 
 " Eclim
