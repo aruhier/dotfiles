@@ -21,6 +21,7 @@ Plug 'tpope/vim-surround'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chaoren/vim-wordmotion'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'ciaranm/detectindent'
 "" Print syntax errors
 Plug 'Syntastic'
 "" Unit tests
@@ -111,7 +112,7 @@ set laststatus=2	" Enable status
 set statusline=%<%f%h%m%r%=%l,%c\ %P
 set noerrorbells	" No beep
 autocmd BufWritePre * :%s/\s\+$//e	" Delete whitespace at the endline
-set tabstop=4		" Ident of 4 whitespaces
+set tabstop=4          " Ident of 4 whitespaces
 set shiftwidth=4
 set expandtab
 set autoindent		" Text indenting
@@ -218,16 +219,16 @@ function! s:check_back_space() "{{{
   return !col || getline('.')[col - 1]  =~ '\s'
 endfunction"}}}
 inoremap <silent><expr> <Tab>
-		\ pumvisible() ? "\<C-n>" :
-        \ <SID>check_back_space() ? "\<TAB>" :
-		\ deoplete#mappings#manual_complete()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<TAB>" :
+    \ deoplete#mappings#manual_complete()
 inoremap <silent><expr> <S-Tab>
-		\ pumvisible() ? "\<C-p>" :
-        \ <SID>check_back_space() ? "\<S-TAB>" :
-		\ deoplete#mappings#manual_complete()
+    \ pumvisible() ? "\<C-p>" :
+    \ <SID>check_back_space() ? "\<S-TAB>" :
+    \ deoplete#mappings#manual_complete()
 
 autocmd BufEnter {*.c,*.cpp,*.html,*.js,*.java,*.php,*.py,*.rs,*.sh,*.tex}
-            \ let g:deoplete#disable_auto_complete = 0
+    \ let g:deoplete#disable_auto_complete = 0
 
 
 " CtrlP
@@ -284,6 +285,18 @@ function! s:ImplementDefinition()
   " Fix indentation
   exe 'normal =4j^'
 endfunction
+
+" DetectIndent
+""""""""""""""""
+let g:detectindent_preferred_expandtab = 1
+let g:detectindent_preferred_indent = 4
+
+" Makefile
+"" Make vim turn *off* expandtab for files named Makefile or makefile
+"" We need the tab literal
+autocmd BufNewFile,BufRead [Mm]akefile*
+    \ let g:detectindent_preferred_expandtab = 1
+
 
 " Eclim
 """"""""
