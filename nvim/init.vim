@@ -18,6 +18,7 @@ Plug 'ctrlp.vim'
 Plug 'auto-pairs'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chaoren/vim-wordmotion'
+Plug 'ciaranm/detectindent'
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
 "" Airline
@@ -143,6 +144,18 @@ autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
 """"""""""
 "" Need to install ttf-powerline-fonts-git in AUR
 let g:airline_powerline_fonts = 1
+
+
+" DetectIndent
+""""""""""""""""
+let g:detectindent_preferred_expandtab = 1
+let g:detectindent_preferred_indent = 4
+
+" Makefile
+"" Make vim turn *off* expandtab for files named Makefile or makefile
+"" We need the tab literal
+autocmd BufNewFile,BufRead [Mm]akefile*
+    \ let g:detectindent_preferred_expandtab = 1
 
 
 " Solarized
