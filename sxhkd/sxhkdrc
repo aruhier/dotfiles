@@ -42,7 +42,7 @@ super + {_,shift + }{h,j,k,l}
 
 # move in cycle
 alt + {_,shift + }Tab
-	bspc node -f {next,prev}
+	bspc node -f {next,prev}.local
 
 # swap in cycle
 super + {_,shift + }m

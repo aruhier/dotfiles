@@ -27,7 +27,7 @@ xset -b &
 xset s 180 &
 xcalib -d :0 ~/.icc/n55sf.icc
 setxkbmap -layout us -option compose:ralt &
-compton -cG --backend glx --unredir-if-possible &
+compton &
 
 sleep 1
 nm-applet &
