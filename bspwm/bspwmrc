@@ -22,7 +22,6 @@ bspc config top_padding 18
 
 sleep 1
 xsetroot -cursor_name left_ptr &
-nvidia-settings --load-config-only &
 feh --bg-fill ~/.config/qtile/wallpaper.jpg &
 python ~/git/github/barython/test.py &
 light-locker --no-lock-on-suspend &
@@ -30,7 +29,7 @@ xset -dpms &
 xset s off &
 xset -b &
 setxkbmap -layout us -option compose:ralt &
-compton -cG --backend glx --unredir-if-possible &
+compton &
 
 sleep 1
 nm-applet &
@@ -41,3 +40,4 @@ sxhkd &
 
 sleep 2
 trayer --edge top --align right --expand false --margin 300 --widthtype request --height 18 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true  --iconspacing 5 &
+nvidia-settings --load-config-only &
