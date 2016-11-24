@@ -3,8 +3,7 @@
 #
 
 super + ctrl + q
-    bspc quit; \
-	pkill -f test.py
+	pkill -f -9 test.py *> /dev/null; bspc quit
 
 super + z
 	bspc node -c
