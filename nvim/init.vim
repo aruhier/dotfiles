@@ -23,7 +23,7 @@ Plug 'chaoren/vim-wordmotion'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'ciaranm/detectindent'
 "" Print syntax errors
-Plug 'Syntastic'
+Plug 'w0rp/ale'
 "" Unit tests
 Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim'
@@ -194,6 +194,12 @@ autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
 let g:airline_powerline_fonts = 1
 
 
+" ALE (Asynchronous Lint Engine)
+""""""""""""""""""""""""""""""""
+nmap <silent> <F7> <Plug>(ale_previous)
+nmap <silent> <F8> <Plug>(ale_next)
+
+
 " Easytags
 """"""""""
 let g:easytags_async = 1
@@ -288,17 +294,6 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 " Solarized
 """"""""""""
 call togglebg#map("<F10>")
-
-
-" Syntastic
-""""""""""""
-let g:syntastic_check_on_open = 1
-let g:syntastic_c_compiler = 'clang'
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_c_compiler_options = ' -Wall -Wextra -Werror -pedantic -std=c11'
-let g:syntastic_cpp_compiler_options = ' -Wall -Wextra -Werror -pedantic -std=c++11'
-let g:syntastic_rst_checkers = ['rstcheck']
-noremap <F7> :Errors<CR>
 
 
 " Tagbar
