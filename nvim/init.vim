@@ -43,7 +43,7 @@ Plug 'gvim-pdfsync', { 'for': 'tex' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 """"
 """" Rust
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Enable it if you have racer installed
 " Plug 'racer-rust/vim-racer'
 """"
@@ -69,9 +69,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-notes'
 """" Depends
 Plug 'xolox/vim-misc'
-Plug 'vim-addon-mw-utils'
-Plug 'tlib'
-Plug 'Shougo/neosnippet-snippets'
 """"
 call plug#end()
 filetype on
