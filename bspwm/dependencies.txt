@@ -8,4 +8,4 @@ owncloud
 redshift
 sxhkd
 trayer
-twmnd
+xfce4-notifyd
