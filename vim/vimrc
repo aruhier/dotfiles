@@ -63,9 +63,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'xolox/vim-notes'
 """" Depends
 Plug 'xolox/vim-misc'
-Plug 'vim-addon-mw-utils'
-Plug 'tlib'
-Plug 'Shougo/neosnippet-snippets'
 """"
 call plug#end()
 

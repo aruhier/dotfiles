@@ -1,0 +1,11 @@
+bspwm
+compton
+feh
+light-locker
+network-manager
+nvidia-settings
+owncloud
+redshift
+sxhkd
+trayer
+xfce4-notifyd
