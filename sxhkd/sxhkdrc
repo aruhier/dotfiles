@@ -111,7 +111,7 @@ super + {q,w,e}
     bspc monitor -f {^1,^2,^3}
 
 # move window to screen
-super + shift + {q,z,e}
+super + shift + {q,w,e}
     bspc node -m {^1,^2,^3}
 
 # Volume Keys
