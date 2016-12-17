@@ -9,3 +9,4 @@ redshift
 sxhkd
 trayer
 xfce4-notifyd
+xfce4-polkit
