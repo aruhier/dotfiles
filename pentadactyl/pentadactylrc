@@ -1,7 +1,0 @@
-" Redefine interface
-""""""""""""""""""""""
-
-set showstatuslinks=status
-set guioptions=bCrTBs
-set passkeys+=9gag.com:jkplhrce
-set passkeys+=reddit.com:/.hkjpxclazsrifn
