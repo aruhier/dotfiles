@@ -34,7 +34,7 @@ super +  y
 
 # swap with biggest
 super + semicolon
-	bspc node -s biggest
+	bspc node -s biggest.local
 
 # move around
 super + {_,shift + }{h,j,k,l}
