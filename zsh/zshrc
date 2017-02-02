@@ -101,8 +101,8 @@ if hash nvim 2>/dev/null; then
     alias vn='nvim note:notepad'
     alias vim='nvim '
 else
-    alias v='nvim '
-    alias vn='nvim note:notepad'
+    alias v='vim '
+    alias vn='vim note:notepad'
 fi
 
 # Firefox
