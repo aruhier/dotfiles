@@ -80,8 +80,6 @@ alias o='xdg-open'
 alias p='ping'
 alias pg='ping 8.8.8.8'
 alias pg6='ping 2001:4860:4860::8888'
-alias v='nvim '
-alias vn='nvim note:notepad'
 
 alias cp='cp -r --reflink=auto'
 alias free='free -h'
@@ -97,7 +95,15 @@ alias private=' unset HISTFILE'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
 alias sshag='_sshag'
 alias sudo='sudo ' # Make aliases work with sudo
-alias vim='nvim '
+
+if hash nvim 2>/dev/null; then
+    alias v='nvim '
+    alias vn='nvim note:notepad'
+    alias vim='nvim '
+else
+    alias v='nvim '
+    alias vn='nvim note:notepad'
+fi
 
 # Firefox
 alias firefox='firefox-beta '
@@ -161,7 +167,12 @@ RPROMPT="%F{green}%~%f"
 # Let the terminal set the TERM value, if it doesn't, set to xterm-256color
 [[ $TMUX = ""  ]] && export TERM="xterm-256color"
 
-export EDITOR=nvim
+if hash nvim 2>/dev/null; then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
+
 export GIT_EDITOR=$EDITOR
 if [ -f ~/.dir_colors/dircolors ]
     then eval `dircolors ~/.dir_colors/dircolors`
