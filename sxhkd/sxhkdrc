@@ -3,66 +3,66 @@
 #
 
 super + ctrl + q
-	pkill -f -9 test.py *> /dev/null; bspc quit
+    pkill -f -9 test.py *> /dev/null; bspc quit
 
 super + z
-	bspc node -c
+    bspc node -c
 
 # max
 super + t
-	bspc desktop -l next
+    bspc desktop -l next
 
 # balance
 super + b
-	bspc node @/ -B
+    bspc node @/ -B
 
 # float/fullscreen
 super + {ctrl+f,ctrl+shift+f}
-	bspc node -t "~"{floating,fullscreen}
+    bspc node -t "~"{floating,fullscreen}
 
 # Jump to last in history
 super + {_, shift+}Tab
-	bspc {node,desktop} -f last
+    bspc {node,desktop} -f last
 
 # switch with last
 super +  apostrophe
-	bspc node -s last
+    bspc node -s last
 
 # move to manual
 super +  y
-	bspc node -n 'last.!automatic'
+    bspc node -n 'last.!automatic'
 
 # swap with biggest
 super + semicolon
-	bspc node -s biggest.local
+    bspc node -s biggest
 
 # move around
 super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}.local
+    bspc node -{f,s} {west,south,north,east}.local
 
 # move in cycle
 alt + {_,shift + }Tab
-	bspc node -f {next,prev}.local
+    bspc node -f {next,prev}.local
 
 # swap in cycle
 super + {_,shift + }m
-	bspc node @/ -C {forward,backward}
+    bspc node @/ -C {forward,backward}
 
 # rotate the desktop
 super + {_,shift + }comma
-	bspc node @/ -R {90,270}
+    bspc node @/ -R {90,270}
 
 # prev/nex desktop
 super + ctrl + {o,i}
-	bspc desktop -f {prev,next}
+    bspc desktop -f {prev,next}
 
 # preselection
 super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+    bspc node -p {west,south,north,east}
 
 # cancel preselection
 super + ctrl + space
-	bspc node -p cancel
+    bspc node -p cancel
 
 # preselect an entier desktop
 super + ctrl + alt + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
@@ -74,15 +74,15 @@ super + ctrl + shift + space
 
 # resize
 alt + super + {h,j,k,l}
-	bspc node {@west -r -20, @north -r +20, @north -r -20, @west -r +20}
+    bspc node {@west -r -20, @north -r +20, @north -r -20, @west -r +20}
 
 # resize
 alt + super + shift + {h,j,k,l}
-	bspc node {@east -r -20, @south -r +20, @south -r -20, @east -r +20}
+    bspc node {@east -r -20, @south -r +20, @south -r -20, @east -r +20}
 
 # set ratio  FIND NEW
 super + ctrl + {1-9}
-	bspc node -o 0.{1-9}
+    bspc node -o 0.{1-9}
 
 # move to desktop
 super + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
@@ -104,7 +104,7 @@ super + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
 
 # move window to desktop
 super + shift + {a,s,d,f,u,i,o,p,7,8,9,0,minus}
-	bspc node -d {a,s,d,f,u,i,o,p,7,8,9,0,")"}
+    bspc node -d {a,s,d,f,u,i,o,p,7,8,9,0,")"}
 
 # move to screen
 super + {q,w,e}
@@ -116,59 +116,59 @@ super + shift + {q,w,e}
 
 # Volume Keys
 XF86AudioMute
-	pamixer -t
+    pamixer -t
 super + F1
-	pamixer -t
+    pamixer -t
 XF86AudioRaiseVolume
-	pamixer -i 5
+    pamixer -i 5
 super + F3
-	pamixer -i 5
+    pamixer -i 5
 XF86AudioLowerVolume
-	pamixer -d 5
+    pamixer -d 5
 super + F2
-	pamixer -d 5
+    pamixer -d 5
 XF86AudioRaiseVolume + shift
-	pamixer -i 1
+    pamixer -i 1
 super + shift + F3
-	pamixer -i 1
+    pamixer -i 1
 XF86AudioLowerVolume + shift
-	pamixer -d 1
+    pamixer -d 1
 super + shift + F2
-	pamixer -d 1
+    pamixer -d 1
 
 # Media Keys
 XF86AudioPrev
-	mpc prev
+    mpc prev
 super + F5
-	mpc prev
+    mpc prev
 XF86AudioPlay
-	mpc toggle
+    mpc toggle
 super + F4
-	mpc toggle
+    mpc toggle
 XF86AudioNext
-	mpc next
+    mpc next
 super + F6
-	mpc next
+    mpc next
 
 #
 # wm independent hotkeys
 #
 
 super + Return
-	urxvt
+    urxvt
 
 super + r
-	rofi -show run
+    rofi -show run
 
 super + ctrl + p
-	clerk --queue show
+    clerk --queue show
 
 super + ctrl + shift + l
-	light-locker-command -l
+    light-locker-command -l
 
 # make sxhkd reload its configuration files:
 super + shift + ctrl + Escape
-	pkill -USR1 -x sxhkd
+    pkill -USR1 -x sxhkd
 
 alt + z
     firefox-beta
