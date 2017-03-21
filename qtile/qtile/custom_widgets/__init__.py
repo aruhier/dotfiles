@@ -1,1 +1,0 @@
-from .mpdwidget import Mpd
