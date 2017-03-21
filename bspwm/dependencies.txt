@@ -1,6 +1,7 @@
 bspwm
 compton
 feh
+light-git
 light-locker
 network-manager
 nvidia-settings

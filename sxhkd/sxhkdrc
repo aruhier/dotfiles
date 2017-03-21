@@ -136,6 +136,12 @@ XF86AudioLowerVolume + shift
 super + shift + F2
     pamixer -d 1
 
+# Backlight
+XF86MonBrightnessUp
+    light -A 10
+XF86MonBrightnessDown
+    light -U 10
+
 # Media Keys
 XF86AudioPrev
     mpc prev

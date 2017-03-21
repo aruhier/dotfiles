@@ -12,8 +12,8 @@ bspc config click_to_focus      true
 bspc config remove_disabled_monitors false
 bspc config remove_unplugged_monitors false
 
-bspc monitor LVDS-1 -d a
-bspc monitor VGA-1 -d "="
+bspc monitor eDP-1 -d a
+bspc monitor HDMI-1 -d "="
 bspc monitor -a  s d f u i o p 7 8 9 0 ")"
 bspc config top_padding 18
 
@@ -27,6 +27,8 @@ xset -b &
 xset s 180 &
 xcalib -d :0 ~/.icc/n55sf.icc
 setxkbmap -layout us -option compose:ralt &
+# Set the minimum brightness to 1 (avoid black screen)
+light -S -c 1 &
 compton &
 
 sleep 1
