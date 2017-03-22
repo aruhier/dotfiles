@@ -27,6 +27,7 @@ xset -b &
 xset s 180 &
 xcalib -d :0 ~/.icc/n55sf.icc
 setxkbmap -layout us -option compose:ralt &
+xinput set-prop 12 "libinput Tapping Enabled" 1
 # Set the minimum brightness to 1 (avoid black screen)
 light -S -c 1 &
 compton &
