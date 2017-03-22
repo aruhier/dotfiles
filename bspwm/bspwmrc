@@ -1,6 +1,6 @@
 #!/bin/bash
 
-xrandr --dpi 115
+xrandr --dpi 120
 wmname LG3D
 bspc config border_width        1
 bspc config window_gap          4
