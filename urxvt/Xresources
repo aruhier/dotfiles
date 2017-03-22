@@ -22,7 +22,7 @@ URxvt*metaSendsEscape: true
 
 ! Fonts
 URxvt.allow_bold:           true
-URxvt*font: xft:Hack:size=10.5,xft:DejaVu Sans Mono:size=10.5
+URxvt*font: xft:Hack:size=10,xft:DejaVu Sans Mono:size=10
 
 ! Fix font space
 URxvt*letterSpace: -1
