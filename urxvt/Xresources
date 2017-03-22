@@ -87,6 +87,7 @@ URxvt.iconFile:    /usr/share/icons/gnome/256x256/apps/gnome-terminal.png
 
 !!!!! Xresources global config !!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+Xft*dpi: 115
 Xft.autohint: 1
 Xft.hintstyle:  hintslight
 Xft.hinting: 1
@@ -166,6 +167,7 @@ URxvt*color15:                 S_base3
 !!! Rofi !!!
 !!!!!!!!!!!!
 
+rofi.dpi: 115
 rofi.width: 50
 rofi.padding: 300
 rofi.fullscreen: true
