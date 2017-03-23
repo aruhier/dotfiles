@@ -4,7 +4,7 @@
 
 # Files and directories #######################################################
 #
-music_directory		"/media/data/Musiques/"
+music_directory		"~/Musique/"
 playlist_directory		"~/.mpd/playlists"
 
 db_file			"~/.mpd/database"
