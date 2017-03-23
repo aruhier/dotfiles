@@ -39,6 +39,7 @@ pre_checkout_and_rebase "desktop" "master"
     ### TOUR-ANTHONY CHILDS ###
 
         pre_checkout_and_rebase "laptop-anthony" "tour-anthony"
+        pre_checkout_and_rebase "laptop-n55sf" "tour-anthony"
 
     ### END TOUR-ANTHONY CHILDS ###
 
