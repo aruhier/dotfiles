@@ -26,7 +26,7 @@ light-locker --lock-on-suspend --lock-after-screensaver=3  &
 xset dpms 180 180 180 &
 xset -b &
 xset s 180 &
-xcalib -d :0 ~/.config/bspwm/screen_calib.icc
+xcalib -s eDP-1 ~/.config/bspwm/screen_calib.icc
 setxkbmap -layout us -option compose:ralt &
 xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 # Set the minimum brightness to 1 (avoid black screen)
