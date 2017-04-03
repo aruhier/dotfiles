@@ -19,7 +19,7 @@ runtime! archlinux.vim debian.vim
 
 call plug#begin('~/.vim/plugged')
 """"
-" Plug 'Tagbar'
+Plug 'Tagbar'
 Plug 'ctrlp.vim'
 Plug 'auto-pairs'
 Plug 'tpope/vim-surround'
