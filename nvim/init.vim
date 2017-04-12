@@ -24,6 +24,7 @@ Plug 'auto-pairs'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chaoren/vim-wordmotion'
 Plug 'ciaranm/detectindent'
+Plug 'tpope/vim-eunuch'
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
 "" Airline
