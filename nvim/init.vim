@@ -28,6 +28,7 @@ Plug 'chaoren/vim-wordmotion'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'ciaranm/detectindent'
 Plug 'rhysd/vim-grammarous'
+Plug 'tpope/vim-eunuch'
 "" Print syntax errors
 Plug 'w0rp/ale'
 "" Unit tests
