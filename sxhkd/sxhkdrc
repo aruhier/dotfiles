@@ -164,7 +164,7 @@ super + Return
     urxvt
 
 super + r
-    rofi -show run
+    rofi -modi run,drun -show drun
 
 super + ctrl + p
     clerk --queue show
