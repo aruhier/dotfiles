@@ -35,7 +35,7 @@ sleep 1
 nm-applet &
 redshift-gtk &
 clipit &
-owncloud &
+nextcloud &
 sxhkd &
 
 sleep 2
