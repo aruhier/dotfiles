@@ -33,7 +33,6 @@ pre_checkout_and_rebase "desktop" "master"
 
 ### DESKTOP CHILDS ###
 
-    pre_checkout_and_rebase "pc-trinaps" "desktop"
     pre_checkout_and_rebase "tour-anthony" "desktop"
 
     ### TOUR-ANTHONY CHILDS ###
@@ -41,6 +40,12 @@ pre_checkout_and_rebase "desktop" "master"
         pre_checkout_and_rebase "laptop-anthony" "tour-anthony"
 
     ### END TOUR-ANTHONY CHILDS ###
+
+    ### LAPTOP-ANTHONY CHILDS ###
+
+        pre_checkout_and_rebase "laptop-anthony-trinaps" "laptop-anthony"
+
+    ### END LAPTOP-ANTHONY CHILDS ###
 
 ### END DESKTOP CHILDS ###
 
