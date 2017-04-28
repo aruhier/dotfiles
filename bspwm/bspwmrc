@@ -18,6 +18,8 @@ bspc monitor HDMI-1 -d "="
 bspc monitor -a  s d f u i o p 7 8 9 0 ")"
 bspc config top_padding 22
 
+bspc rule -a '*:libreoffice' state=tiled
+
 sleep 1
 xsetroot -cursor_name left_ptr &
 feh --bg-fill ~/.config/bspwm/wallpaper &
