@@ -3,7 +3,7 @@
 #
 
 super + ctrl + q
-    pkill -f -9 laptop.py *> /dev/null; bspc quit
+    pkill -f laptop.py *> /dev/null; bspc quit
 
 super + z
     bspc node -c
