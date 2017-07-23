@@ -38,6 +38,8 @@ Plug 'alfredodeza/coveragepy.vim'
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
 Plug 'xolox/vim-easytags'
 """"
+"""" Go
+Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
 """" Java
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 """"
@@ -232,6 +234,12 @@ inoremap <silent><expr> <S-Tab>
 
 autocmd BufEnter {*.c,*.cpp,*.html,*.js,*.java,*.php,*.py,*.rs,*.sh,*.tex}
     \ let g:deoplete#disable_auto_complete = 0
+
+
+" Deoplete-Go
+""""""""""
+let g:deoplete#sources#go#gocode_binary = '/usr/bin/gocode'
+let g:deoplete#sources#go#package_dot = 1
 
 
 " CtrlP
