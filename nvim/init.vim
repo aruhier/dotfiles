@@ -232,8 +232,9 @@ inoremap <silent><expr> <S-Tab>
     \ <SID>check_back_space() ? "\<S-TAB>" :
     \ deoplete#mappings#manual_complete()
 
-autocmd BufEnter {*.c,*.cpp,*.html,*.js,*.java,*.php,*.py,*.rs,*.sh,*.tex}
-    \ let g:deoplete#disable_auto_complete = 0
+autocmd FileType {
+    \c,cpp,go,html,javascript,java,php,python,rust,sh,tex
+\} let g:deoplete#disable_auto_complete = 0
 
 
 " Deoplete-Go
