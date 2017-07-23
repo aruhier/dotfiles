@@ -38,6 +38,8 @@ Plug 'alfredodeza/coveragepy.vim'
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
 Plug 'xolox/vim-easytags'
 """"
+"""" Go
+Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
 """" Java
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 """"
@@ -125,7 +127,7 @@ set smartcase		" Do smart case matching
 set t_Co=256		" 256 colors mode
 set colorcolumn=80
 set textwidth=0
-autocmd BufEnter {*.c,*.cpp,*.java,*.py,*.rs,*.sh,*.tex} set textwidth=79
+autocmd FileType {c,cpp,go,java,python,rust,sh,tex} set textwidth=79
 set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
 set guioptions-=T   " Remove toolbar in gvim
@@ -169,7 +171,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 " Python
-autocmd BufRead *.py nmap <F5> :!python %<CR>
+autocmd FileType python nmap <F5> :!python %<CR>
 
 " Cpp
 "" Autgen skeleton from header
@@ -178,12 +180,12 @@ noremap \PP :! stubgen -n %<CR>
 " Makefile
 "" Make vim turn *off* expandtab for files named Makefile or makefile
 "" We need the tab literal
-autocmd BufNewFile,BufRead [Mm]akefile* set noexpandtab
+autocmd FileType make set noexpandtab
 
 " Spell Check
 set spelllang=fr
 " Spell Check for *.txt and *.tex :
-autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
+autocmd FileType {text,tex} set spell spelllang=fr
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -233,8 +235,15 @@ inoremap <silent><expr> <S-Tab>
     \ <SID>check_back_space() ? "\<S-TAB>" :
     \ deoplete#mappings#manual_complete()
 
-autocmd BufEnter {*.c,*.cpp,*.html,*.js,*.java,*.php,*.py,*.rs,*.sh,*.tex}
-    \ let g:deoplete#disable_auto_complete = 0
+autocmd FileType {
+    \c,cpp,go,html,javascript,java,php,python,rust,sh,tex
+\} let g:deoplete#disable_auto_complete = 0
+
+
+" Deoplete-Go
+""""""""""
+let g:deoplete#sources#go#gocode_binary = '/usr/bin/gocode'
+let g:deoplete#sources#go#package_dot = 1
 
 
 " CtrlP
@@ -300,8 +309,7 @@ let g:detectindent_preferred_indent = 4
 " Makefile
 "" Make vim turn *off* expandtab for files named Makefile or makefile
 "" We need the tab literal
-autocmd BufNewFile,BufRead [Mm]akefile*
-    \ let g:detectindent_preferred_expandtab = 1
+autocmd FileType make let g:detectindent_preferred_expandtab = 1
 
 
 " Eclim
