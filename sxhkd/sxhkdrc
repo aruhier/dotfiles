@@ -139,8 +139,12 @@ super + shift + F2
 # Backlight
 XF86MonBrightnessUp
     light -A 10
+shift + XF86MonBrightnessUp
+    light -A 1
 XF86MonBrightnessDown
     light -U 10
+shift + XF86MonBrightnessDown
+    light -U 1
 
 # Media Keys
 XF86AudioPrev
