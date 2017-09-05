@@ -147,11 +147,9 @@ bindkey '^?' backward-delete-char
 
 # Ctrl + right
 bindkey "^[[1;5C" forward-word
-bindkey "^[OC" forward-word
 
 # Ctrl + left
 bindkey "^[[1;5D" backward-word
-bindkey "^[OD" backward-word
 
 # Shift + Tab
 bindkey "^[[Z" reverse-menu-complete
