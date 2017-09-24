@@ -19,8 +19,8 @@ runtime! archlinux.vim debian.vim
 
 call plug#begin('~/.vim/plugged')
 """"
-Plug 'ctrlp.vim'
-Plug 'auto-pairs'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chaoren/vim-wordmotion'
 Plug 'ciaranm/detectindent'

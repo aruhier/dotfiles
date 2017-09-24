@@ -21,8 +21,8 @@ set nocompatible
 filetype off
 call plug#begin('~/.vim/plugged')
 """"
-Plug 'ctrlp.vim'
-Plug 'auto-pairs'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'altercation/vim-colors-solarized'
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
