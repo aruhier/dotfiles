@@ -21,9 +21,9 @@ set nocompatible
 filetype on
 call plug#begin('~/.vim/plugged')
 """"
-Plug 'Tagbar'
-Plug 'ctrlp.vim'
-Plug 'auto-pairs'
+Plug 'majutsushi/tagbar'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'altercation/vim-colors-solarized'
 "" Print syntax errors
 Plug 'w0rp/ale'
@@ -31,13 +31,12 @@ Plug 'w0rp/ale'
 Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim'
 """" C/C++
-Plug 'clang-complete', { 'for': ['c', 'cpp'] }
+Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
 Plug 'xolox/vim-easytags'
 """"
 """" LaTeX
-Plug 'LaTeX-Box', { 'for': 'tex' }
+Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
-Plug 'gvim-pdfsync', { 'for': 'tex' }
 """"
 """" Python
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
@@ -47,7 +46,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 """"
 """" XML
-Plug 'xmledit', { 'for': 'xml' }
+Plug 'sukima/xmledit', { 'for': 'xml' }
 """"
 """" Autocomplete code tricks
 Plug 'Shougo/neosnippet'
@@ -56,7 +55,7 @@ Plug 'Shougo/neosnippet'
 Plug 'terryma/vim-multiple-cursors'
 "" Autocomplete
 Plug 'Shougo/neocomplete'
-Plug 'SuperTab'
+Plug 'ervandew/supertab'
 "" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
