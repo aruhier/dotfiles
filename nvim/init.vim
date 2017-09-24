@@ -19,9 +19,9 @@ runtime! archlinux.vim debian.vim
 
 call plug#begin('~/.vim/plugged')
 """"
-Plug 'Tagbar'
-Plug 'ctrlp.vim'
-Plug 'auto-pairs'
+Plug 'majutsushi/tagbar'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chaoren/vim-wordmotion'
@@ -44,9 +44,8 @@ Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 """"
 """" LaTeX
-Plug 'LaTeX-Box', { 'for': 'tex' }
+Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
 Plug 'vim-latex/vim-latex', { 'for': 'tex' }
-Plug 'gvim-pdfsync', { 'for': 'tex' }
 """"
 """" Python
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
@@ -57,7 +56,7 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Plug 'racer-rust/vim-racer'
 """"
 """" XML
-Plug 'xmledit', { 'for': 'xml' }
+Plug 'sukima/xmledit', { 'for': 'xml' }
 """"
 """" Autocomplete code tricks
 Plug 'Shougo/neosnippet'
