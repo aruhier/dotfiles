@@ -165,15 +165,15 @@ input {
 #
 # An example of an ALSA output:
 #
-#audio_output {
-#	type		"alsa"
-#	name		"My ALSA Device"
+audio_output {
+	type		"alsa"
+	name		"My ALSA Device"
 ##	device		"hw:2,0"	# optional
 ##	mixer_type      "hardware"	# optional
 ##	mixer_device	"default"	# optional
 ##	mixer_control	"PCM"		# optional
 ##	mixer_index	"0"		# optional
-#}
+}
 #
 # An example of an OSS output:
 #
@@ -237,13 +237,12 @@ input {
 #
 # An example of a pulseaudio output (streaming to a remote pulseaudio server)
 #
-audio_output {
-	type		"pulse"
-	name		"MPV Pulse
-	mixer_type	"none"
+# audio_output {
+# 	type		"pulse"
+# 	name		"MPV Pulse"
 #	server		"remote_server"		# optional
 #	sink		"remote_server_sink"	# optional
-}
+#}
 
 # An example of a winmm output (Windows multimedia API).
 #
