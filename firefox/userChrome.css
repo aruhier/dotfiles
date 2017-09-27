@@ -1,3 +1,18 @@
 #TabsToolbar {
-  visibility: collapse;
+    visibility: collapse;
+}
+
+#PersonalToolbar
+{
+    opacity:0 !important;
+    margin-top: -23px !important;
+    transition: all 0.3s ease 0s !important;
+}
+
+#navigator-toolbox:hover > #PersonalToolbar
+{
+    visibility: visible !important;
+    margin-top: 0px !important;
+    transition: all 0.3s ease 0s !important;
+    opacity: 1 !important;
 }
