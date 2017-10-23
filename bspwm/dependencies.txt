@@ -1,6 +1,7 @@
 bspwm
 compton
 feh
+kdeconnect
 light-locker
 network-manager
 nvidia-settings
