@@ -158,23 +158,3 @@ URxvt*color12:                 S_base0
 URxvt*color13:                 S_violet
 URxvt*color14:                 S_base1
 URxvt*color15:                 S_base3
-
-
-!!!!!!!!!!!!
-!!! Rofi !!!
-!!!!!!!!!!!!
-
-rofi.width: 50
-rofi.padding: 300
-rofi.fullscreen: true
-rofi.fixed-num-lines: true
-rofi.bw: 0
-rofi.location: 0
-rofi.terminal: urxvt
-rofi.lines: 10
-rofi.eh: 1
-rofi.color-window: argb:ef263238, argb:aa263238, S_cyan
-rofi.color-normal: argb:00263238, #cccfd1, argb:00263238, S_base02, S_yellow
-rofi.color-active: #fdf6e3, #268bd2, #eee8d5, #268bd2, #fdf6e3
-rofi.color-urgent: #fdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3
-rofi.rkey: mod4+r
