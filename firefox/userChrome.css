@@ -2,6 +2,10 @@
     visibility: collapse;
 }
 
+#nav-bar {
+  z-index: 10
+}
+
 #nav-bar ~ #PersonalToolbar:not([customizing]) {
   position: fixed !important;
   padding: 3px 2px 2px !important;
