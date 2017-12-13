@@ -31,6 +31,7 @@ xset s 180 &
 xcalib -s eDP-1 ~/.config/bspwm/screen_calib.icc
 setxkbmap -layout us -option compose:ralt &
 xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
+bluetooth off
 # Set the minimum brightness to 1 (avoid black screen)
 light -S -c 1 &
 compton &
