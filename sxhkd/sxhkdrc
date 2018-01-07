@@ -161,7 +161,7 @@ super + r
     rofi -modi run,drun -show drun
 
 super + ctrl + p
-    clerk --queue show
+    clerk -t
 
 super + ctrl + shift + l
     light-locker-command -l
