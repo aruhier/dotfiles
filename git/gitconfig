@@ -1,7 +1,7 @@
 [user]
     email = anthony.ruhier@gmail.com
     name = Anthony Ruhier
-	signingkey = 08D231D9
+	signingkey = F4A378DD8D494AE48EBA554CB00FBC7D08D231D9
 [push]
     default = simple
 [core]
