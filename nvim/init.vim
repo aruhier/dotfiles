@@ -44,8 +44,7 @@ Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
 Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 """"
 """" LaTeX
-Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
-Plug 'vim-latex/vim-latex', { 'for': 'tex' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
 """"
 """" Python
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
@@ -268,22 +267,6 @@ autocmd FileType make let g:detectindent_preferred_expandtab = 1
 " Eclim
 """"""""
 let g:EclimCompletionMethod = 'omnifunc'
-
-
-" LatexSuite
-"""""""""""""
-let g:tex_flavor = "latex"
-let g:Tex_DefaultTargetFormat = "pdf"
-let g:Tex_SmartKeyQuote = 0
-let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 -interaction=nonstopmode $*'
-"let g:tex_conceal = ""
-""""" Latexsuite, french caracters (éàè, etc...)
-""""" CREATE OR EDIT THE FILE ~/.vim/bundle/vim-latex/ftplugin/tex.vim, and
-""""" add :
-"" imap <C-b> <Plug>Tex_MathBF
-"" imap <C-c> <Plug>Tex_MathCal
-"" imap <C-l> <Plug>Tex_LeftRight
-"" imap <buffer> <leader>it <Plug>Tex_InsertItemOnThisLine
 
 
 " Neosnippet
