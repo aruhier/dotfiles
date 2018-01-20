@@ -14,7 +14,6 @@ URxvt.urgentOnBell:         true
 URxvt.loginShell:           true
 URxvt.saveLines:            10000
 URxvt.internalBorder:       3
-URxvt.lineSpace:            1
 ! Avoid the iso box when doing Shift+Ctrl
 URxvt.iso14755 : false
 ! Some keybinds (containing alt) doesn t work without
