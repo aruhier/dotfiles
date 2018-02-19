@@ -1,0 +1,38 @@
+SHELL_ADDITIONS='''
+tmuxrc() {
+    local TMUXDIR=/tmp/.tmux.aruhiertmux
+
+    if ! [ -d $TMUXDIR ]; then
+        rm -rf $TMUXDIR
+        mkdir -p $TMUXDIR
+    fi
+    rm -rf $TMUXDIR/.sshrc.d
+    cp -r $SSHHOME/.sshrc $SSHHOME/bashsshrc $SSHHOME/sshrc $SSHHOME/.sshrc.d $TMUXDIR
+
+    # -S Share a socket in a fixed directory so that sessions for me are retained and reused
+    local TMUX_COMMAND="/usr/bin/tmux -f $SSHHOME/.sshrc.d/.tmux.conf -S $TMUXDIR/tmuxserver"
+    SSHHOME=$TMUXDIR SHELL=$TMUXDIR/bashsshrc /usr/bin/tmux -S $TMUXDIR/tmuxserver -f $SSHHOME/.sshrc.d/.tmux.conf $@
+}
+alias tmux="tmuxrc"
+export VIMINIT="source \$SSHHOME/.sshrc.d/.vimrc"
+# if [[ `which vim` ]]; then
+#     vim -s "+PlugInstall vim-colors-solarized" "+qall" 2> /dev/null
+# fi
+'''
+
+
+export ZDOTDIR=$SSHHOME/.sshrc.d
+
+sed -ie "s?~/.vim/plugged?$SSHHOME/.sshrc.d/plugged?g" $SSHHOME/.sshrc.d/.vimrc
+echo """
+if filereadable(\"$SSHHOME/.sshrc.d/plugged/plug.vim\")
+  source $SSHHOME/.sshrc.d/plugged/plug.vim
+endif
+""" | cat - $SSHHOME/.sshrc.d/.vimrc > $SSHHOME/.sshrc.d/.vimrc.new && \
+    mv $SSHHOME/.sshrc.d/.vimrc{.new,}
+
+if [[ `which zsh` ]]; then
+    echo "$SHELL_ADDITIONS" >> $SSHHOME/.sshrc.d/.zshrc
+    SHELL=`which zsh`
+    exec -l $SHELL
+fi
