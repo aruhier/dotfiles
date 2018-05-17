@@ -43,7 +43,7 @@ pre_checkout_and_rebase "desktop" "master"
 
     ### LAPTOP-ANTHONY CHILDS ###
 
-        pre_checkout_and_rebase "laptop-anthony-trinaps" "laptop-anthony"
+        pre_checkout_and_rebase "laptop-work" "laptop-anthony"
 
     ### END LAPTOP-ANTHONY CHILDS ###
 
