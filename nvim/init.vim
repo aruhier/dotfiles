@@ -48,6 +48,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 """"
 """" Python
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 """"
 """" Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -267,6 +268,12 @@ autocmd FileType make let g:detectindent_preferred_expandtab = 1
 " Eclim
 """"""""
 let g:EclimCompletionMethod = 'omnifunc'
+
+
+" Jedi
+""""""""
+" Not needed with deoplete-jedi
+let g:jedi#completions_enabled = 0
 
 
 " Neosnippet
