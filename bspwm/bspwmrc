@@ -23,6 +23,7 @@ bspc rule -a '*:libreoffice' state=tiled
 xiccd&
 sleep 1
 xsetroot -cursor_name left_ptr &
+autorandr -c
 feh --bg-fill ~/.config/bspwm/wallpaper &
 ~/git/github/barython/laptop.py &
 light-locker --lock-on-suspend --lock-after-screensaver=3  &
@@ -32,7 +33,6 @@ xset s 180 &
 xcalib -s eDP-1 ~/.config/bspwm/screen_calib.icc
 setxkbmap -layout us -option compose:ralt &
 xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
-bluetooth off
 # Set the minimum brightness to 1 (avoid black screen)
 light -S -c 1 &
 compton &
@@ -51,3 +51,4 @@ trayer --edge top --align right --expand false --margin 492 --widthtype request 
 
 sleep 1
 xdo above -t $(xwininfo -root -children  | egrep -o "^ +.x[^ ]+" | tail -1 | tr -d " ") $(xdo id -a panel) $(xdo id -a bar)
+bluetooth off
