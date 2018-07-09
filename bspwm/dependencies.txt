@@ -1,3 +1,4 @@
+argyllcms
 bspwm
 compton
 feh
@@ -12,3 +13,4 @@ sxhkd
 trayer
 xfce4-notifyd
 xfce4-polkit
+xiccd
