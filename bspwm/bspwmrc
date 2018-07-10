@@ -20,7 +20,6 @@ bspc config top_padding 22
 
 bspc rule -a '*:libreoffice' state=tiled
 
-xiccd&
 sleep 1
 xsetroot -cursor_name left_ptr &
 autorandr -c
@@ -30,12 +29,14 @@ light-locker --lock-on-suspend --lock-after-screensaver=3  &
 xset dpms 180 180 180 &
 xset -b &
 xset s 180 &
-xcalib -s eDP-1 ~/.config/bspwm/screen_calib.icc
 setxkbmap -layout us -option compose:ralt &
 xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 # Set the minimum brightness to 1 (avoid black screen)
 light -S -c 1 &
 compton &
+
+DISPWIN_HELP=`dispwin -h 2>&1`
+dispwin -d `echo "$DISPWIN_HELP" | grep eDP-1 | awk '{print $1}'` ~/.config/bspwm/screen_calib.icc
 
 sleep 1
 nm-applet &
