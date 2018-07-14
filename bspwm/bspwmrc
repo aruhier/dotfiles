@@ -1,6 +1,7 @@
 #!/bin/bash
 
 autorandr -c -f
+xrandr --dpi 96
 
 bspc config wm_name             LG3D
 bspc config border_width        1
@@ -16,7 +17,7 @@ bspc config remove_disabled_monitors false
 bspc config remove_unplugged_monitors false
 
 bspc monitor HDMI-0 -d s
-bspc monitor DP-0 -d a
+bspc monitor %DP-0.8 -d a
 bspc monitor DVI-D-0 -d d
 bspc monitor -a f u i o p 7 8 9 0 ")"
 # bspc monitor HDMI-0 -s DVI-D-0
@@ -38,7 +39,7 @@ compton &
 DISPWIN_HELP=`dispwin -h 2>&1`
 dispwin -d `echo "$DISPWIN_HELP" | grep HDMI-0 | awk '{print $1}'` ~/.config/bspwm/lg_ips236.icc
 dispwin -d `echo "$DISPWIN_HELP" | grep DVI-D-0 | awk '{print $1}'` ~/.config/bspwm/hyundai_hdw220d.icc
-dispwin -d `echo "$DISPWIN_HELP" | grep DP-0 | awk '{print $1}'` ~/.config/bspwm/dell_u2715h.icc
+dispwin -d `echo "$DISPWIN_HELP" | grep 'DP-0.8' | awk '{print $1}'` ~/.config/bspwm/dell_u2715h.icc
 
 sleep 1
 nm-applet &
