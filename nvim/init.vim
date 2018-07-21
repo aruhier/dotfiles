@@ -216,7 +216,7 @@ let g:deoplete#disable_auto_complete = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
-let g:deoplete#omni#input_patterns = get(g:,'deoplete#omni#input_patterns',{})
+let g:deoplete#omni#input_patterns = {}
 let g:deoplete#omni#input_patterns.php =
     \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
@@ -320,6 +320,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 """"""""
 " Not needed with deoplete-jedi
 let g:jedi#completions_enabled = 0
+let g:deoplete#sources#jedi#show_docstring = 1
 
 
 " Neosnippet
