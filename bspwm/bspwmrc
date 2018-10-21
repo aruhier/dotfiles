@@ -35,6 +35,7 @@ xset s off &
 xset -b &
 setxkbmap -layout us -option compose:ralt &
 compton &
+/usr/lib/geoclue-2.0/demos/agent &
 
 DISPWIN_HELP=`dispwin -h 2>&1`
 dispwin -d `echo "$DISPWIN_HELP" | grep HDMI-A-1 | awk '{print $1}'` ~/.config/bspwm/lg_ips236.icc
