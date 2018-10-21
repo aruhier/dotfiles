@@ -10,8 +10,9 @@ bspc config borderless_monocle  true
 bspc config gapless_monocle     false
 bspc config ignore_ewmh_focus   true
 bspc config click_to_focus      button1
-bspc config remove_disabled_monitors false
-bspc config remove_unplugged_monitors false
+bspc config merge_overlapping_monitors true
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
 
 bspc monitor eDP-1 -d a
 bspc monitor HDMI-1 -d "="
@@ -34,6 +35,7 @@ xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 # Set the minimum brightness to 1 (avoid black screen)
 light -S -c 1 &
 compton &
+/usr/lib/geoclue-2.0/demos/agent &
 
 DISPWIN_HELP=`dispwin -h 2>&1`
 dispwin -d `echo "$DISPWIN_HELP" | grep eDP-1 | awk '{print $1}'` ~/.config/bspwm/screen_calib.icc
