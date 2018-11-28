@@ -313,6 +313,7 @@ let g:EclimCompletionMethod = 'omnifunc'
 " Gen-tags
 """"""""
 let g:gen_tags#ctags_auto_gen = 1
+let g:loaded_gentags#gtags = 1
 
 
 " Jedi
