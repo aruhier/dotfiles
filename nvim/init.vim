@@ -36,7 +36,7 @@ Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim'
 """" C/C++
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
-Plug 'xolox/vim-easytags'
+Plug 'jsfaint/gen_tags.vim'
 """"
 """" Go
 Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
@@ -204,12 +204,6 @@ nmap <silent> <F7> <Plug>(ale_previous)
 nmap <silent> <F8> <Plug>(ale_next)
 
 
-" Easytags
-""""""""""
-let g:easytags_async = 1
-let g:easytags_include_members = 1
-
-
 " Deoplete
 """"""""""
 let g:deoplete#disable_auto_complete = 1
@@ -314,6 +308,11 @@ autocmd FileType make let g:detectindent_preferred_expandtab = 1
 " Eclim
 """"""""
 let g:EclimCompletionMethod = 'omnifunc'
+
+
+" Gen-tags
+""""""""
+let g:gen_tags#ctags_auto_gen = 1
 
 
 " Jedi
