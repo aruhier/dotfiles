@@ -34,7 +34,7 @@ setxkbmap -layout us -option compose:ralt &
 xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 # Set the minimum brightness to 1 (avoid black screen)
 light -S -c 1 &
-compton &
+compton --vsync-use-glfinish  &
 /usr/lib/geoclue-2.0/demos/agent &
 
 DISPWIN_HELP=`dispwin -h 2>&1`
