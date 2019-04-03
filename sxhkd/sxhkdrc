@@ -165,7 +165,7 @@ super + F6
 #
 
 super + Return
-    urxvt
+    WINIT_HIDPI_FACTOR=1 alacritty
 
 super + r
     rofi -modi run,drun -show drun
