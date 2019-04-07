@@ -11,9 +11,6 @@
   # check the local terminfo database and use `alacritty` if it is
   # available, otherwise `xterm-256color` is used.
   #TERM: xterm-256color
-dpi:
-  x: 96
-  y: 96
 
 window:
   # Window dimensions (changes require restart)
