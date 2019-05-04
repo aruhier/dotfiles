@@ -14,7 +14,7 @@ import subprocess
 
 
 def update_git_submodule():
-    for opt in ("init", "update"):
+    for opt in ("init", "sync", "update"):
         stdout = subprocess.check_output(["git", "submodule", opt])
         if stdout:
             print(stdout)
