@@ -5,8 +5,8 @@
 ! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
 !-------------------------------------------------------------------------------
 
-URxvt*termName:             xterm-256color
-URxvt.depth:                32
+URxvt*termName:             rxvt-unicode
+URxvt*.depth:               32
 URxvt.transparent:          false
 URxvt.fading:               0
 URxvt.urgentOnBell:         true
