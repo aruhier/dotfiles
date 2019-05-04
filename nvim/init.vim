@@ -23,7 +23,7 @@ Plug 'majutsushi/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'chaoren/vim-wordmotion'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'ciaranm/detectindent'
@@ -93,7 +93,8 @@ syntax on
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
-colorscheme solarized
+colorscheme solarized8
+set termguicolors
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -120,7 +121,6 @@ set nohlsearch		" Disable highlight of results
 set incsearch		" Incremental search
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
-set t_Co=256		" 256 colors mode
 set colorcolumn=80
 set textwidth=0
 autocmd FileType {c,cpp,go,java,python,rust,sh,tex} set textwidth=79
@@ -290,7 +290,7 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " Solarized
 """"""""""""
-call togglebg#map("<F10>")
+map <F10> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
 
 " Tagbar
