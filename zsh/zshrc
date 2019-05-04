@@ -104,8 +104,8 @@ promptinit
 PROMPT="%B%(?..[%?] )%b%{%(#~$fg[red]~$fg[cyan])%}%n%{$reset_color%}%{$fg[green]%}@%U%m%u> %{$reset_color%}"
 RPROMPT="%F{green}%~%f"
 
-# Let the terminal set the TERM value, if it doesn't, set to rxvt-256color
-[[ $TMUX = "" && $TERM = "" ]] && export TERM="rxvt-256color"
+# If no terminfo is defined, default to xterm-256color
+[[ ! `infocmp -U $TERM 2> /dev/null` ]] && export TERM="xterm-256color"
 
 if hash nvim 2>/dev/null; then
     export EDITOR=nvim

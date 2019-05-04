@@ -21,7 +21,7 @@ call plug#begin('~/.vim/plugged')
 """"
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'chaoren/vim-wordmotion'
 Plug 'ciaranm/detectindent'
 Plug 'tpope/vim-eunuch'
@@ -46,7 +46,8 @@ syntax on
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
-colorscheme solarized
+colorscheme solarized8
+set termguicolors
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -73,7 +74,6 @@ set nohlsearch		" Disable highlight of results
 set incsearch		" Incremental search
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
-set t_Co=256		" 256 colors mode
 set colorcolumn=80
 set textwidth=0
 autocmd FileType {c,cpp,go,java,python,rust,sh,tex} set textwidth=79
@@ -161,7 +161,7 @@ autocmd FileType make let g:detectindent_preferred_expandtab = 1
 
 " Solarized
 """"""""""""
-call togglebg#map("<F10>")
+map <F10> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
