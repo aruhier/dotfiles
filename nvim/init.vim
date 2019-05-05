@@ -95,6 +95,7 @@ syntax on
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
+let g:solarized_statusline = 'flat'
 set background=dark
 colorscheme solarized8
 set termguicolors
@@ -202,6 +203,8 @@ let g:airline_powerline_fonts = 1
 """"""""""""""""""""""""""""""""
 nmap <silent> <F7> <Plug>(ale_previous)
 nmap <silent> <F8> <Plug>(ale_next)
+let g:ale_python_flake8_options = '--ignore=C0111'
+let g:ale_python_pylint_options = '--disable=C0111'
 
 
 " Deoplete
