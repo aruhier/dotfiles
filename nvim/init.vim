@@ -45,6 +45,7 @@ syntax on
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
+let g:solarized_statusline = 'flat'
 set background=dark
 colorscheme solarized8
 set termguicolors
