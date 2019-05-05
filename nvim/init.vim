@@ -33,7 +33,7 @@ Plug 'tpope/vim-eunuch'
 Plug 'w0rp/ale'
 "" Unit tests
 Plug 'janko-m/vim-test'
-Plug 'alfredodeza/coveragepy.vim'
+Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
 """" C/C++
 Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
 Plug 'jsfaint/gen_tags.vim'
@@ -47,7 +47,7 @@ Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 """"
 """" Python
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 " Requires python rope
 Plug 'python-rope/ropevim', { 'for': 'python' }
@@ -75,6 +75,7 @@ Plug 'vim-airline/vim-airline-themes'
 """" Git support
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
+Plug 'rhysd/git-messenger.vim'
 """"
 "" For notes management
 Plug 'xolox/vim-notes'
