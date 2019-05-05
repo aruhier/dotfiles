@@ -199,6 +199,8 @@ let g:airline_powerline_fonts = 1
 """"""""""""""""""""""""""""""""
 nmap <silent> <F7> <Plug>(ale_previous)
 nmap <silent> <F8> <Plug>(ale_next)
+let g:ale_python_flake8_options = '--ignore=C0111'
+let g:ale_python_pylint_options = '--disable=C0111'
 
 
 " Deoplete
