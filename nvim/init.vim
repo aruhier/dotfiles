@@ -63,7 +63,6 @@ Plug 'sukima/xmledit', { 'for': 'xml' }
 """" Autocomplete code tricks
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'honza/vim-snippets'
 """"
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
