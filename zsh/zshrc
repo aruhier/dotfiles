@@ -155,6 +155,11 @@ if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.z
     then source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# Autojump
+if [ -f /etc/profile.d/autojump.sh ]
+    then source /etc/profile.d/autojump.sh
+fi
+
 autoload -Uz compinit promptinit
 compinit
 promptinit
