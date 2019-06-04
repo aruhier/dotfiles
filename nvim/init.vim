@@ -29,26 +29,19 @@ Plug 'dhruvasagar/vim-table-mode'
 Plug 'ciaranm/detectindent'
 Plug 'rhysd/vim-grammarous'
 Plug 'tpope/vim-eunuch'
+Plug 'Shougo/echodoc.vim'
 "" Print syntax errors
 Plug 'w0rp/ale'
 "" Unit tests
 Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
 """" C/C++
-Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
 Plug 'jsfaint/gen_tags.vim'
-""""
-"""" Go
-Plug 'zchee/deoplete-go', { 'for': 'go', 'do': 'make' }
-"""" Java
-Plug 'artur-shaik/vim-javacomplete2', { 'for': 'java' }
 """"
 """" LaTeX
 Plug 'lervag/vimtex', { 'for': 'tex' }
 """"
 """" Python
-Plug 'deoplete-plugins/deoplete-jedi', { 'for': 'python' }
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 " Requires python rope
 Plug 'python-rope/ropevim', { 'for': 'python' }
 """"
@@ -67,7 +60,10 @@ Plug 'Shougo/neosnippet-snippets'
 "" Multiple cursors, with ctrl+n
 Plug 'terryma/vim-multiple-cursors'
 "" Autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 "" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -131,6 +127,7 @@ autocmd FileType {c,cpp,go,java,python,rust,sh,tex} set textwidth=79
 set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
 set guioptions-=T   " Remove toolbar in gvim
+set shell=sh
 
 " Remapping
 noremap tt :tabprevious<CR>
@@ -164,7 +161,6 @@ set complete=.,w,b,u,U,t,i      " mega tab completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=python3complete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " automatically open and close the popup menu / preview window
@@ -207,39 +203,105 @@ let g:ale_python_flake8_options = '--ignore=C0111'
 let g:ale_python_pylint_options = '--disable=C0111'
 
 
-" Deoplete
-""""""""""
-let g:deoplete#disable_auto_complete = 1
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_ignore_case = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#omni#input_patterns = {}
-let g:deoplete#omni#input_patterns.php =
-    \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-inoremap <expr><C-h> deoplete#mappings#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
-function! s:check_back_space() "{{{
+" COC
+"""""
+
+" Smaller updatetime for CursorHold & CursorHoldI
+set updatetime=300
+
+" Prefer getting them from vim plug when possible
+let g:coc_global_extensions = ["coc-neosnippet", ]
+
+" Use tab for trigger completion with characters ahead and navigate.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
   let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-inoremap <silent><expr> <Tab>
-    \ pumvisible() ? "\<C-n>" :
-    \ <SID>check_back_space() ? "\<TAB>" :
-    \ deoplete#mappings#manual_complete()
-inoremap <silent><expr> <S-Tab>
-    \ pumvisible() ? "\<C-p>" :
-    \ <SID>check_back_space() ? "\<S-TAB>" :
-    \ deoplete#mappings#manual_complete()
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-autocmd FileType {
-    \c,cpp,go,html,javascript,java,php,python,rust,sh,tex
-\} let g:deoplete#disable_auto_complete = 0
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
 
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Deoplete-Go
-""""""""""
-let g:deoplete#sources#go#gocode_binary = '/usr/bin/gocode'
-let g:deoplete#sources#go#package_dot = 1
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 
 " CtrlP
@@ -247,55 +309,6 @@ let g:deoplete#sources#go#package_dot = 1
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
-
-" Clang_Complete
-""""""""""""""""
-" Already done with syntastic
-let g:clang_hl_errors = 0
-nmap <F5> :CopyDefinition<CR>
-nmap <F6> :ImplementDefinition<CR>
-command! CopyDefinition :call s:GetDefinitionInfo()
-command! ImplementDefinition :call s:ImplementDefinition()
-function! s:GetDefinitionInfo()
-  exe 'normal ma'
-  " Get class
-  call search('^\s*\<class\>', 'b')
-  exe 'normal ^w"ayw'
-  let s:class = @a
-  let l:ns = search('^\s*\<namespace\>', 'b')
-  " Get namespace
-  if l:ns != 0
-    exe 'normal ^w"ayw'
-    let s:namespace = @a
-  else
-    let s:namespace = ''
-  endif
-  " Go back to definition
-  exe 'normal `a'
-  exe 'normal "aY'
-  let s:defline = substitute(@a, ';\n', '', '')
-endfunction
-
-function! s:ImplementDefinition()
-  call append('.', s:defline)
-  exe 'normal j'
-  " Remove keywords
-  s/\<virtual\>\s*//e
-  s/\<static\>\s*//e
-  if s:namespace == ''
-    let l:classString = s:class . "::"
-  else
-    let l:classString = s:namespace . "::" . s:class . "::"
-  endif
-  " Remove default parameters
-  s/\s\{-}=\s\{-}[^,)]\{1,}//e
-  " Add class qualifier
-  exe 'normal ^f(bi' . l:classString
-  " Add brackets
-  exe "normal $o{\<CR>\<TAB>\<CR>}\<CR>\<ESC>kkkk"
-  " Fix indentation
-  exe 'normal =4j^'
-endfunction
 
 " DetectIndent
 """"""""""""""""
@@ -308,9 +321,10 @@ let g:detectindent_preferred_indent = 4
 autocmd FileType make let g:detectindent_preferred_expandtab = 1
 
 
-" Eclim
-""""""""
-let g:EclimCompletionMethod = 'omnifunc'
+" EchoDoc
+"""""""""
+set noshowmode
+let g:echodoc#enable_at_startup = 1
 
 
 " Gen-tags
@@ -319,23 +333,11 @@ let g:gen_tags#ctags_auto_gen = 1
 let g:loaded_gentags#gtags = 1
 
 
-" Jedi
-""""""""
-" Not needed with deoplete-jedi
-let g:jedi#completions_enabled = 0
-let g:deoplete#sources#jedi#show_docstring = 1
-
-
 " Neosnippet
 """""""""""""
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-"For snippet_complete marker.
-" if has('conceal')
-"   set conceallevel=2 concealcursor=i
-" endif
 
 
 " Ropevim
