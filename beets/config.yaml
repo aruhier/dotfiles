@@ -1,0 +1,40 @@
+plugins:
+    duplicates
+    embedart
+    fetchart
+    info
+    inline
+    lastgenre
+    scrub
+
+directory: /mnt/nas/public/Musique
+library: ~/.config/beets/library.db
+
+format_item: "[$artist] $album - $title"
+format_album: "[$albumartist] $album"
+
+threaded: yes
+original_date: yes
+
+ui:
+    color: yes
+
+fetchart:
+    cautious: true
+    cover_names: cover
+
+import:
+    write: yes
+    move: no
+    resume: ask
+    incremental: no
+    quiet_fallback: asis
+    none_rec_action: ask
+    detail: yes
+
+paths:
+    default: $albumartist/$original_year - $album/$disc_and_track - $title
+
+pathfields:
+    disc_and_track: u'%01i%02i' % (disc, track) if
+                    disctotal > 1 else u'%02i' % (track)
