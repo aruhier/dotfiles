@@ -47,8 +47,6 @@ Plug 'python-rope/ropevim', { 'for': 'python' }
 """"
 """" Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-" Enable it if you have racer installed
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
 """"
 """" XML
 Plug 'sukima/xmledit', { 'for': 'xml' }
@@ -64,6 +62,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
 "" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -123,7 +122,8 @@ set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
 set colorcolumn=80
 set textwidth=0
-autocmd FileType {c,cpp,go,java,python,rust,sh,tex} set textwidth=79
+autocmd FileType {c,cpp,go,java,python,sh,tex} set textwidth=79
+autocmd FileType {go,rust} set textwidth=119 colorcolumn=120
 set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
 set guioptions-=T   " Remove toolbar in gvim
@@ -344,6 +344,11 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 """"""""""""
 " Add ropevim in path
 let $PYTHONPATH .= ':'.$HOME.'/.vim/plugged/ropevim'
+
+
+" Rust
+""""""
+let g:rustfmt_autosave = 1
 
 
 " Solarized
