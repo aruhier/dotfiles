@@ -20,8 +20,7 @@ Hierarchy
       * tour-anthony: desktop @home
         * laptop-anthony: personnal laptop, inherits a lot of dotfiles from
                           tour-anthony
-      * pc-trinaps: desktop @work
-
+            * laptop-work: laptop for work
 
 Requires
 --------
