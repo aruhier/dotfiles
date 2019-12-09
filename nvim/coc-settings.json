@@ -1,5 +1,6 @@
 {
     "coc.preferences.hoverTarget": "echo", // Until neovim implements float previews in stable
+    "coc.preferences.jumpCommand": "tab drop",
     "suggest.echodocSupport": true,
     "suggest.enablePreview": true,
     "diagnostic.displayByAle": true,
