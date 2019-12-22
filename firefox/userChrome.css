@@ -2,38 +2,91 @@
     visibility: collapse;
 }
 
-#nav-bar {
-    z-index: 10;
+/**********************/
+/* Hide bookmarks bar */
+/**********************/
+
+:root {
+    --toolbar-offset-height: 40px;
 }
 
-#nav-bar ~ #PersonalToolbar:not([customizing]) {
+#PersonalToolbar:not([customizing]) {
     position: fixed !important;
-    padding: 3px 2px 2px !important;
+    margin-top: -33px !important;
+    padding-top: 4px !important;
+    padding-bottom: 5px !important;
     height: auto !important;
-    border-top: 0px solid transparent!important;
-    border-right: 1px solid transparent !important;
-    border-bottom: 1px solid rgba(0,0,0,0.3) !important;
-    border-left: 1px solid transparent !important;
-    box-shadow: 0 0px 2px rgba(0,0,0,0);
-    width: 100%;
-    transform: translateY(-100%);
-    transition: transform 0.3s !important;
-    opacity: 0.97;
+    width: 100% !important;
+
+    border: none !important;
+    box-shadow: 0 1px 0 0 rgba(0,0,0,0.3);
+
+    transform: scaleY(0.8);
+    transform-origin: center bottom;
+    transition: transform cubic-bezier(.22,.61,.36,1) 0.15s !important;
+    z-index: 2;
 }
 
-#navigator-toolbox:hover >
-#nav-bar ~ #PersonalToolbar:not([customizing]) {
-    transform: translateY(0);
+#PersonalToolbar:not([customizing]) #personal-bookmarks {
+    opacity: 0;
+    transition: opacity 0.15s;
 }
 
-#toolbar-menubar:not([inactive="true"]) ~
-#nav-bar ~ #PersonalToolbar:not([customizing]) {
-    transform: translateY(0);
+#nav-bar {
+    z-index: 3 !important;
 }
+
+.tabbrowser-tab[selected="true"] {
+    z-index: 4 !important;
+}
+#navigator-toolbox:hover #nav-bar:not([customizing]) {
+}
+
+#navigator-toolbox:hover > #PersonalToolbar:not([customizing]) {
+    position: fixed !important;
+    transform: translateY(100%) scaleY(1);
+}
+
+#navigator-toolbox:hover > #PersonalToolbar:not([customizing]) #personal-bookmarks {
+    opacity: 1;
+}
+
+/* Hide 1px border-bottom */
+#navigator-toolbox:after {
+    display: none !important;
+}
+
+/* compact theme */
+:root[lwtheme="true"] #PersonalToolbar:not([customizing]) {
+    margin-top: -30px;
+    top: var(--toolbar-offset-height) !important;
+}
+
+/* compact + titlebar active */
+:root[lwtheme="true"]:not([tabsintitlebar="true"])
+#nav-bar ~ #PersonalToolbar:not([customizing]) {
+    top: calc(var(--toolbar-offset-height) + 19px) !important;
+}
+
+/* default theme */
+:root:not([lwtheme="true"]) #PersonalToolbar:not([customizing]) {
+    top: calc(var(--toolbar-offset-height) + 17px) !important;
+}
+
+/* default + titlebar active */
+:root:not([lwtheme="true"]):not([tabsintitlebar="true"])
+#nav-bar ~ #PersonalToolbar:not([customizing]) {
+    top: calc(var(--toolbar-offset-height) + 8px) !important;
+}
+
+
+/***********************/
+/* Hide sidebar header */
+/***********************/
 
 /* Minimize sidebar header to a light blue stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
 #sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"])
-  #sidebar-header:not(:hover) {
+#sidebar-header:not(:hover) {
     max-height: 5px !important;
     min-height: 5px !important;
     padding: 0 !important;
@@ -41,6 +94,6 @@
     /* opacity: 0.5 !important; */
 }
 #sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"])
-  #sidebar-header:not(:hover) #sidebar-switcher-target {
+#sidebar-header:not(:hover) #sidebar-switcher-target {
     opacity: 0 !important;
 }
