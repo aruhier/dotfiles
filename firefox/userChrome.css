@@ -3,32 +3,32 @@
 }
 
 #nav-bar {
-  z-index: 10
+    z-index: 10;
 }
 
 #nav-bar ~ #PersonalToolbar:not([customizing]) {
-  position: fixed !important;
-  padding: 3px 2px 2px !important;
-  height: auto !important;
-  border-top: 0px solid transparent!important;
-  border-right: 1px solid transparent !important;
-  border-bottom: 1px solid rgba(0,0,0,0.3) !important;
-  border-left: 1px solid transparent !important;
-  box-shadow: 0 0px 2px rgba(0,0,0,0);
-  width: 100%;
-  transform: translateY(-100%);
-  transition: transform 0.3s !important;
-  opacity: 0.97;
+    position: fixed !important;
+    padding: 3px 2px 2px !important;
+    height: auto !important;
+    border-top: 0px solid transparent!important;
+    border-right: 1px solid transparent !important;
+    border-bottom: 1px solid rgba(0,0,0,0.3) !important;
+    border-left: 1px solid transparent !important;
+    box-shadow: 0 0px 2px rgba(0,0,0,0);
+    width: 100%;
+    transform: translateY(-100%);
+    transition: transform 0.3s !important;
+    opacity: 0.97;
 }
 
 #navigator-toolbox:hover >
 #nav-bar ~ #PersonalToolbar:not([customizing]) {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
 #toolbar-menubar:not([inactive="true"]) ~
 #nav-bar ~ #PersonalToolbar:not([customizing]) {
-  transform: translateY(0);
+    transform: translateY(0);
 }
 
 /* Minimize sidebar header to a light blue stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
