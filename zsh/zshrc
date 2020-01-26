@@ -138,7 +138,6 @@ SAVEHIST=1000
 setopt hist_ignore_all_dups
 setopt sharehistory
 
-
 # Other
 ####################
 
@@ -237,4 +236,9 @@ stty icrnl
 # Source local options if any
 if [ -f ~/.zshrc.local ]
     then source ~/.zshrc.local
+fi
+
+# FZF
+if [ -f /usr/share/fzf/key-bindings.zsh ]
+    then source /usr/share/fzf/key-bindings.zsh
 fi
