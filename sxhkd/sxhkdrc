@@ -155,7 +155,7 @@ super + F6
 #
 
 super + Return
-    WINIT_HIDPI_FACTOR=1 alacritty
+    WINIT_HIDPI_FACTOR=1 WINIT_X11_SCALE_FACTOR=1 alacritty
 
 super + r
     rofi -modi run,drun -show drun
