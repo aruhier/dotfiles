@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# enable aco
+export RADV_PERFTEST=aco
+
 autorandr -c -f
 xrandr --dpi 96
 
