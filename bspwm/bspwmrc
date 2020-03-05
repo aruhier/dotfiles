@@ -31,6 +31,7 @@ xset dpms 180 180 180 &
 xset -b &
 xset s 180 &
 setxkbmap -layout us -option compose:ralt &
+xset r rate 333 35
 xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 # Set the minimum brightness to 1 (avoid black screen)
 light -S -c 1 &
