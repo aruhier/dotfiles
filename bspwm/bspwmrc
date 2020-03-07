@@ -1,7 +1,7 @@
 #!/bin/bash
 
 xrandr --dpi 115
-wmname LG3D
+bspc config wm_name             LG3D
 bspc config border_width        1
 bspc config window_gap          4
 
@@ -35,7 +35,6 @@ xset r rate 333 35
 xinput set-prop "DLL07BE:01 06CB:7A13 Touchpad" "libinput Tapping Enabled" 1
 # Set the minimum brightness to 1 (avoid black screen)
 light -S -c 1 &
-compton --vsync-use-glfinish  &
 compton --experimental-backends --vsync-use-glfinish  &
 /usr/lib/geoclue-2.0/demos/agent &
 
