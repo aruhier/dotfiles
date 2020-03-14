@@ -1,5 +1,6 @@
 #!/bin/bash
 
+export MESA_LOADER_DRIVER_OVERRIDE=iris
 xrandr --dpi 115
 bspc config wm_name             LG3D
 bspc config border_width        1
