@@ -44,7 +44,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 """" Python
 " Requires python rope
 Plug 'python-rope/ropevim', { 'for': 'python' }
-Plug 'psf/black'
+Plug 'psf/black', { 'tag': 'stable' }
 """"
 """" Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
@@ -64,6 +64,7 @@ Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
+Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
 "" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
