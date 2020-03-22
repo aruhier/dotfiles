@@ -44,7 +44,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 """" Python
 " Requires python rope
 Plug 'python-rope/ropevim', { 'for': 'python' }
-Plug 'psf/black', { 'tag': 'stable' }
+Plug 'psf/black', { 'for': 'python', 'tag': 'stable' }
 """"
 """" Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
