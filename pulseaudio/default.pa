@@ -31,7 +31,7 @@ load-module module-augment-properties
 
 ### Should be after module-*-restore but before module-*-detect
 load-module module-switch-on-port-available
-load-module module-switch-on-connect
+# load-module module-switch-on-connect
 
 ### Load audio drivers statically
 ### (it's probably better to not load these drivers manually, but instead
@@ -68,6 +68,7 @@ load-module module-bluetooth-discover
 .endif
 
 ### Load several protocols
+load-module module-dbus-protocol
 .ifexists module-esound-protocol-unix.so
 load-module module-esound-protocol-unix
 .endif
@@ -89,9 +90,9 @@ load-module module-native-protocol-unix
 ### Load additional modules from GConf settings. This can be configured with the paprefs tool.
 ### Please keep in mind that the modules configured by paprefs might conflict with manually
 ### loaded modules.
-.ifexists module-gconf.so
+.ifexists module-gsettings.so
 .nofail
-load-module module-gconf
+load-module module-gsettings
 .fail
 .endif
 
