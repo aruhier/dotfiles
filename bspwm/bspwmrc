@@ -39,7 +39,7 @@ xset s off &
 xset -b &
 setxkbmap -layout us -option compose:ralt &
 xset r rate 333 35
-compton --experimental-backends --vsync-use-glfinish  &
+picom --experimental-backends  &
 /usr/lib/geoclue-2.0/demos/agent &
 
 DISPWIN_HELP=`dispwin -h 2>&1`
