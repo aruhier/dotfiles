@@ -122,11 +122,10 @@ set nohlsearch		" Disable highlight of results
 set incsearch		" Incremental search
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
-set colorcolumn=120
-set textwidth=0
-autocmd FileType {c,sh} set textwidth=79
-autocmd FileType python set textwidth=88 colorcolumn=89
-autocmd FileType {go,rust} set textwidth=119 colorcolumn=120
+set colorcolumn=120 textwidth=119 fo-=t  " Disable autowrapping
+autocmd FileType {c,sh} set textwidth=79 colorcolumn=80 fo+=t
+autocmd FileType python set textwidth=88 colorcolumn=89 fo+=t
+autocmd FileType {go,rust} set textwidth=119 colorcolumn=120 fo+=t
 set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
 set guioptions-=T   " Remove toolbar in gvim
