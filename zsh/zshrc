@@ -52,6 +52,7 @@ alias free='free -h'
 alias grep='grep --color'
 alias ll='ls -alh'
 alias ls='ls --color=auto'
+alias makepkgless='makepkg --config /etc/makepkg_less.conf'
 alias maj='pacaur -Syu'
 alias mkcd=mkdir_cd $1
 alias mtr='mtr -o "LSR NABWV"'
