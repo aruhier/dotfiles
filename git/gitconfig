@@ -3,6 +3,8 @@
     name = Anthony Ruhier
 [push]
     default = simple
+[pull]
+    rebase = false
 [core]
     editor = vim
 [alias]
