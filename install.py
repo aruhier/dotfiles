@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
 #
 # "Install" all the dotfiles, by making loading the install.conf file in each
 # folder and by creating simbolic link at the destination path, targetting the
@@ -29,14 +28,14 @@ def clean_conf_line(line):
                           new symlink path
     :rtype: tuple
     """
-    map_path = line.strip().split(':')
+    map_path = line.strip().split(":")
     # Remove space or '' or "" around the path
     for i, item in enumerate(map_path):
-        map_path[i] = re.sub("^ ?[\"\']|[\"\'] ?$", "", item)
+        map_path[i] = re.sub(r"(^\s*[\"'])|([\"']\s*$)", "", item)
     return map_path
 
 
-def file_already_exists(dest):
+def move_existing_dest(dest):
     """
     If file already exists, move it as dest.old
     """
@@ -52,23 +51,26 @@ def file_already_exists(dest):
 def create_symlink(path):
     install_conf_path = os.path.join(path, "install.conf")
     if not os.path.isfile(install_conf_path):
-        logging.debug("No install.conf for " + path)
+        logging.debug("No install.conf for %s", path)
         return
     with open(install_conf_path, "r") as install_conf:
         read_data = install_conf.readlines()
     for line in read_data:
         src, dest = clean_conf_line(line)
         src_path = os.path.abspath(os.path.join(path, src))
-        logging.debug("src: " + src_path)
-        logging.debug("dest: " + dest)
+        logging.debug("src: %s", src_path)
+        logging.debug("dest: %s", dest)
+
         dest = os.path.expanduser(os.path.expandvars(dest))
         if os.path.abspath(dest) == src_path:
             continue
-        elif os.path.lexists(dest):
-            file_already_exists(dest)
+        if os.path.lexists(dest):
+            move_existing_dest(dest)
+
         if not os.path.isdir(os.path.dirname(dest)):
             os.makedirs(os.path.dirname(dest))
         os.symlink(src_path, dest)
+
     # launch post_install.sh if any
     post_install = os.path.join(path, "post_install.sh")
     if os.path.exists(post_install):
@@ -86,9 +88,9 @@ excluded_dirs = (".git",)
 for path in dirs:
     try:
         if path in excluded_dirs:
-            logging.debug(path + " is in excluded_dirs. Ignoring it...")
+            logging.debug("%s is in excluded_dirs. Ignoring it...", path)
             continue
         create_symlink(path)
     except Exception as e:
-        print("Error during the dotfiles copy in the directory: " + path)
-        print(e)
+        logging.error("Error during the dotfiles copy in the directory: %s", path)
+        logging.exception(e)
