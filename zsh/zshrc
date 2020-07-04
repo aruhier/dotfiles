@@ -251,7 +251,7 @@ if hash zoxide 2>/dev/null; then
     eval "$(zoxide init zsh)"
 
     zoxide-query-widget () {
-        FZF_DEFAULT_OPTS="--height 40%" z -i
+        FZF_DEFAULT_OPTS="--height 40%" zi
         local ret=$?
         zle reset-prompt
         return $ret
