@@ -185,3 +185,6 @@ alt + z
 
 alt + x
     thunderbird
+
+alt + s
+    /home/anthony/git/github/tdrop/tdrop -a -m -w '86%' -h '86%' -y 21 -x '7%' --class signal -n signal flatpak run org.signal.Signal

@@ -5,6 +5,7 @@ feh
 light-git
 kdeconnect
 light-locker
+lxqt-policykit
 network-manager
 nvidia-settings
 owncloud
@@ -12,5 +13,4 @@ redshift
 sxhkd
 trayer
 xfce4-notifyd
-xfce4-polkit
 xiccd

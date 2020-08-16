@@ -57,7 +57,7 @@ fcitx&
 
 sleep 2
 trayer --edge top --align right --expand false --margin 492 --widthtype request --height 22 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true --SetPartialStrut false --iconspacing 5 &
-/usr/lib/xfce-polkit/xfce-polkit &
+lxqt-policykit-agent&
 
 sleep 1
 xdo above -t $(xwininfo -root -children  | egrep -o "^ +.x[^ ]+" | tail -1 | tr -d " ") $(xdo id -a panel) $(xdo id -a bar)
