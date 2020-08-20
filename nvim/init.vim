@@ -35,15 +35,12 @@ Plug 'w0rp/ale'
 "" Unit tests
 Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
-"""" C/C++
-Plug 'jsfaint/gen_tags.vim'
 """"
 """" LaTeX
 Plug 'lervag/vimtex', { 'for': 'tex' }
 """"
 """" Python
 " Requires python rope
-Plug 'python-rope/ropevim', { 'for': 'python' }
 Plug 'psf/black', { 'for': 'python', 'tag': 'stable' }
 """"
 """" Rust
@@ -334,23 +331,11 @@ set noshowmode
 let g:echodoc#enable_at_startup = 1
 
 
-" Gen-tags
-""""""""
-let g:gen_tags#ctags_auto_gen = 1
-let g:loaded_gentags#gtags = 1
-
-
 " Neosnippet
 """""""""""""
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-
-" Ropevim
-""""""""""""
-" Add ropevim in path
-let $PYTHONPATH .= ':'.$HOME.'/.vim/plugged/ropevim'
 
 
 " Rust
