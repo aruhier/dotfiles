@@ -240,7 +240,7 @@ input {
 audio_output {
 	type		"pulse"
 	name		"MPV Pulse"
-	mixer_type	"none"
+#   mixer_type	"none"
 #	server		"remote_server"		# optional
 #	sink		"remote_server_sink"	# optional
 }
