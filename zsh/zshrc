@@ -97,9 +97,11 @@ alias hibernate='systemctl hibernate'
 alias ll='ls -alh'
 alias ls='ls --color=auto'
 alias makepkgless='makepkg --config /etc/makepkg_less.conf'
-alias maj='http_proxy=repo.aruhier.fr:3128 pacaur -Syu && sudo cnf-sync'
+alias maj='sudo emerge -uDU --ask --keep-going --newrepo --with-bdeps=y -j 3 --load-average=15 @world && sudo emerge --depclean && sudo eclean-dist -d --deep'
 alias mkcd='mkdir_cd '
 alias mtr='mtr -o "LSR NABWV"'
+alias obsolete_pkg='eix-test-obsolete'
+alias clean_obsolete_pkg='portpeek'
 alias private=' unset HISTFILE; _zoxide_hook(){}'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
 alias sshag='_sshag'
@@ -182,6 +184,7 @@ RPROMPT="%F{green}%~%f"
 
 if hash nvim 2>/dev/null; then
     export EDITOR=nvim
+    export DIFFPROG="nvim -d"
 else
     export EDITOR=vim
 fi
@@ -242,9 +245,16 @@ bindkey -M viins 'jk' vi-cmd-mode
 # Fix de ^M bug when typing "enter" sometimes
 stty icrnl
 
+export PATH=~/.local/bin:$PATH
+
 # Source local options if any
 if [ -f ~/.zshrc.local ]
     then source ~/.zshrc.local
+fi
+
+# Cargo
+if [ -f ~/.cargo/env ]; then
+    source ~/.cargo/env
 fi
 
 # FZF

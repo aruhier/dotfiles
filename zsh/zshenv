@@ -1,1 +1,3 @@
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export GPG_TTY=$(tty)
+if [ -e /home/anthony/.nix-profile/etc/profile.d/nix.sh ]; then . /home/anthony/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
