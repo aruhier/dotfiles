@@ -19,9 +19,9 @@ bspc config merge_overlapping_monitors true
 bspc config remove_disabled_monitors true
 bspc config remove_unplugged_monitors true
 
-bspc monitor HDMI-A-0 -d d
-bspc monitor DisplayPort-0 -d a
-bspc monitor HDMI-A-1 -d s
+bspc monitor DisplayPort-2 -d d
+bspc monitor DisplayPort-1 -d a
+bspc monitor HDMI-A-0 -d s
 bspc monitor -a f u i o p 7 8 9 0 ")"
 # bspc monitor HDMI-0 -s DVI-D-0
 bspc config top_padding 18
@@ -39,6 +39,8 @@ xset -b &
 setxkbmap -layout us -option compose:ralt &
 xset r rate 333 35
 picom --experimental-backends  &
+
+sleep 1
 if [ -e /usr/lib/geoclue-2.0/demos/agent ]; then
     /usr/lib/geoclue-2.0/demos/agent &
 elif [ -e /usr/libexec/geoclue-2.0/demos/agent ]; then
@@ -47,20 +49,17 @@ fi
 
 if hash dispwin 2>/dev/null; then
     DISPWIN_HELP=`dispwin -h 2>&1`
-    dispwin -d `echo "$DISPWIN_HELP" | grep HDMI-A-0 | awk '{print $1}'` ~/.config/bspwm/lg_ips236.icc
-    dispwin -d `echo "$DISPWIN_HELP" | grep HDMI-A-1 | awk '{print $1}'` ~/.config/bspwm/dell_u2715h.icc
-    dispwin -d `echo "$DISPWIN_HELP" | grep DisplayPort-0 | awk '{print $1}'` ~/.config/bspwm/lg_27gl850.icm
+    dispwin -d `echo "$DISPWIN_HELP" | grep DisplayPort-2 | awk '{print $1}'` ~/.config/bspwm/lg_ips236.icc
+    dispwin -d `echo "$DISPWIN_HELP" | grep HDMI-A-0 | awk '{print $1}'` ~/.config/bspwm/dell_u2715h.icc
+    dispwin -d `echo "$DISPWIN_HELP" | grep DisplayPort-1 | awk '{print $1}'` ~/.config/bspwm/lg_27gl850.icm
 elif hash argyll-dispwin 2>/dev/null; then
     DISPWIN_HELP=`argyll-dispwin -h 2>&1`
-    argyll-dispwin -d `echo "$DISPWIN_HELP" | grep HDMI-A-0 | awk '{print $1}'` ~/.config/bspwm/lg_ips236.icc
-    argyll-dispwin -d `echo "$DISPWIN_HELP" | grep HDMI-A-1 | awk '{print $1}'` ~/.config/bspwm/dell_u2715h.icc
-    argyll-dispwin -d `echo "$DISPWIN_HELP" | grep DisplayPort-0 | awk '{print $1}'` ~/.config/bspwm/lg_27gl850.icm
+    argyll-dispwin -d `echo "$DISPWIN_HELP" | grep DisplayPort-2 | awk '{print $1}'` ~/.config/bspwm/lg_ips236.icc
+    argyll-dispwin -d `echo "$DISPWIN_HELP" | grep HDMI-A-0 | awk '{print $1}'` ~/.config/bspwm/dell_u2715h.icc
+    argyll-dispwin -d `echo "$DISPWIN_HELP" | grep DisplayPort-1 | awk '{print $1}'` ~/.config/bspwm/lg_27gl850.icm
 fi
-
-sleep 1
 /usr/lib64/xfce4/notifyd/xfce4-notifyd&
 nm-applet &
-redshift-gtk &
 clipit &
 nextcloud &
 sxhkd &
@@ -68,6 +67,7 @@ kdeconnect-indicator&
 fcitx&
 
 sleep 2
+redshift-gtk &
 if hash trayer 2>/dev/null; then
     trayer --edge top --align right --expand false --margin 300 --widthtype request --height 18 --alpha 0 --transparent true --tint 0xFF2d2d2d --monitor "primary" --SetDockType true  --iconspacing 5 &
 elif hash trayer-srg 2>/dev/null; then
