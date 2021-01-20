@@ -61,9 +61,9 @@ function reptyr_authorization {
 }
 
 function search_note {
-    python2 .vim/bundle/vim-notes/misc/notes/search-notes.py \
-        -n ~/.vim/bundle/vim-notes/misc/notes/user/ \
-        -d ~/.vim/bundle/vim-notes/misc/notes/index.pickle \
+    python ~/.vim/plugged/vim-notes/misc/notes/search-notes.py \
+        -n ~/.vim/plugged/vim-notes/misc/notes/user/ \
+        -d ~/.vim/plugged/vim-notes/misc/notes/index.pickle \
         -i $@
 }
 
@@ -97,7 +97,7 @@ alias hibernate='systemctl hibernate'
 alias ll='ls -alh'
 alias ls='ls --color=auto'
 alias makepkgless='makepkg --config /etc/makepkg_less.conf'
-alias maj='sudo emerge -uDU --ask --keep-going --newrepo --with-bdeps=y -j 3 --load-average=15 @world && sudo emerge --depclean && sudo eclean-dist -d --deep'
+alias maj='sudo emerge -uDU --ask --keep-going --newrepo --with-bdeps=y -j 5 --load-average=20 @world && sudo emerge --depclean && sudo eclean-dist -d --deep'
 alias mkcd='mkdir_cd '
 alias mtr='mtr -o "LSR NABWV"'
 alias obsolete_pkg='eix-test-obsolete'
@@ -117,8 +117,6 @@ else
 fi
 
 # Firefox
-alias firefox='firefox-beta '
-alias firefox-aurora='firefox-aurora -p beta -no-remote'
 alias firefox-clean='firefox -p clean -no-remote'
 
 # Compile
