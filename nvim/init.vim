@@ -58,7 +58,7 @@ Plug 'terryma/vim-multiple-cursors'
 "" Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
 Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
@@ -100,10 +100,6 @@ set termguicolors
 "  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "endif
 
-"set autowrite		" Automatically save before commands like :next and :make
-set hidden         " Hide buffers when they are abandoned
-set mouse=a	    	" Enable mouse usage (all modes)
-"set showmatch		" Show matching brackets.
 set nu		    	" Line numbers
 set laststatus=2	" Enable status
 set statusline=%<%f%h%m%r%=%l,%c\ %P
