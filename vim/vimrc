@@ -21,52 +21,12 @@ set nocompatible
 filetype on
 call plug#begin('~/.vim/plugged')
 """"
-Plug 'majutsushi/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'altercation/vim-colors-solarized'
-"" Print syntax errors
-Plug 'w0rp/ale'
-"" Unit tests
-Plug 'janko-m/vim-test'
-Plug 'alfredodeza/coveragepy.vim'
-"""" C/C++
-Plug 'Rip-Rip/clang_complete', { 'for': ['c', 'cpp'] }
-Plug 'xolox/vim-easytags'
-""""
-"""" LaTeX
-Plug 'lervag/vimtex', { 'for': 'tex' }
-""""
-"""" Python
-Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-""""
-"""" Rust
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer', { 'for': 'rust' }
-""""
-"""" XML
-Plug 'sukima/xmledit', { 'for': 'xml' }
-""""
-"""" Autocomplete code tricks
-Plug 'Shougo/neosnippet'
-""""
-"" Multiple cursors, with ctrl+n
-Plug 'terryma/vim-multiple-cursors'
-"" Autocomplete
-Plug 'Shougo/neocomplete'
-Plug 'ervandew/supertab'
 "" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"""" Git support
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-""""
-"" For notes management
-Plug 'xolox/vim-notes'
-"""" Depends
-Plug 'xolox/vim-misc'
-""""
 call plug#end()
 
 
@@ -89,32 +49,29 @@ colorscheme solarized
 "  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "endif
 
-"set autowrite		" Automatically save before commands like :next and :make
-"set hidden         " Hide buffers when they are abandoned
-set mouse=a	    	" Enable mouse usage (all modes)
-"set showmatch		" Show matching brackets.
 set nu		    	" Line numbers
 set laststatus=2	" Enable status
 set statusline=%<%f%h%m%r%=%l,%c\ %P
 set noerrorbells	" No beep
 autocmd BufWritePre * :%s/\s\+$//e	" Delete whitespace at the endline
-set tabstop=4		" Ident of 4 whitespaces
+set tabstop=4          " Ident of 4 whitespaces
 set shiftwidth=4
 set expandtab
 set autoindent		" Text indenting
 set softtabstop=4
 set scrolloff=10	" 10 lines before and after the cursor position
-set nohlsearch      " Disable highlight of results
+set nohlsearch		" Disable highlight of results
 set incsearch		" Incremental search
 set ignorecase		" Do case insensitive matching
 set smartcase		" Do smart case matching
-set t_Co=256		" 256 colors mode
-set colorcolumn=80
-set textwidth=0
-autocmd BufEnter {*.c,*.cpp,*.java,*.py,*.rs,*.sh,*.tex} set textwidth=79
+set colorcolumn=120 textwidth=119 fo-=t  " Disable autowrapping
+autocmd FileType {c,sh} set textwidth=79 colorcolumn=80 fo+=t
+autocmd FileType python set textwidth=88 colorcolumn=89 fo+=t
+autocmd FileType {go,rust} set textwidth=119 colorcolumn=120 fo+=t
 set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
 set guioptions-=T   " Remove toolbar in gvim
+set shell=sh
 
 " Remapping
 noremap tt :tabprevious<CR>
@@ -148,14 +105,13 @@ set complete=.,w,b,u,U,t,i      " mega tab completion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 " Python
-autocmd BufRead *.py nmap <F5> :!python %<CR>
+autocmd FileType python nmap <F5> :!python %<CR>
 
 " Cpp
 "" Autgen skeleton from header
@@ -164,12 +120,12 @@ noremap \PP :! stubgen -n %<CR>
 " Makefile
 "" Make vim turn *off* expandtab for files named Makefile or makefile
 "" We need the tab literal
-autocmd BufNewFile,BufRead [Mm]akefile* set noexpandtab
+autocmd FileType make set noexpandtab
 
 " Spell Check
 set spelllang=fr
 " Spell Check for *.txt and *.tex :
-autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
+autocmd FileType {text,tex} set spell spelllang=fr
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -183,118 +139,9 @@ autocmd BufEnter {*.txt,*.tex} set spell spelllang=fr
 let g:airline_powerline_fonts = 1
 
 
-" ALE (Asynchronous Lint Engine)
-""""""""""""""""""""""""""""""""
-nmap <silent> <F7> <Plug>(ale_previous)
-nmap <silent> <F8> <Plug>(ale_next)
-
-
-" Eclim
-""""""""
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-
-
-" Eclim
-""""""""
-let g:EclimCompletionMethod = 'omnifunc'
-
-
-" Neocomplete
-""""""""""""""
-let g:acp_enableAtStartup = 0
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#enable_auto_close_preview = 1
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-let g:neocomplete#disable_auto_complete = 1
-" Disable popup menu when navigating in insert mode
-let g:neocomplete#enable_insert_char_pre = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-
-if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-endif
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php =
-    \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-let g:neocomplete#sources#omni#input_patterns.c =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-let g:neocomplete#sources#omni#input_patterns.cpp =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-
-"""" Compatibility with jedi-vim
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#popup_on_dot = 0
-let g:neocomplete#force_omni_input_patterns.python = '[^. \t]\.\w*'
-""""
-"""" Compatibility with Clang
-if !exists('g:neocomplete#force_omni_input_patterns')
-    let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#force_omni_input_patterns.c =
-\ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.cpp =
-\ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:neocomplete#force_omni_input_patterns.objc =
-\ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.objcpp =
-\ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:clang_complete_auto = 0
-let g:clang_auto_select = 0
-let g:clang_use_library = 1
-
-autocmd BufEnter {*.c,*.cpp,*.html,*.js,*.java,*.php,*.py,*.rs,*.sh,*.tex}
-            \ let g:neocomplete#disable_auto_complete = 0
-
-
-" Neosnippet
-"""""""""""""
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-"For snippet_complete marker.
-" if has('conceal')
-"   set conceallevel=2 concealcursor=i
-" endif
-
-
 " Solarized
 """"""""""""
 call togglebg#map("<F10>")
-
-
-" Tagbar
-"""""""""
-let g:tagbar_left = 1
-cnoreabbrev tb Tagbar
-
-
-" Test
-"""""""
-let test#strategy = "basic"
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

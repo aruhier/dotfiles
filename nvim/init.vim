@@ -17,7 +17,7 @@ runtime! archlinux.vim debian.vim
     """"""""""""""""""""""""""" VIM-PLUG """""""""""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 """"
 Plug 'majutsushi/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
