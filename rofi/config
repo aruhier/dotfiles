@@ -5,6 +5,7 @@ rofi.fullscreen: true
 rofi.fixed-num-lines: true
 rofi.bw: 0
 rofi.location: 0
+rofi.monitor: -1
 rofi.terminal: urxvt
 rofi.lines: 10
 rofi.eh: 1
