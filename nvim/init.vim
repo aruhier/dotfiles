@@ -40,7 +40,6 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 """"
 """" Python
-" Requires python rope
 Plug 'psf/black', { 'for': 'python', 'tag': 'stable' }
 """"
 """" Rust
