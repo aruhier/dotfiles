@@ -12,7 +12,7 @@
 
 #PersonalToolbar:not([customizing]) {
     position: fixed !important;
-    margin-top: -33px !important;
+    margin-top: -35px !important;
     padding-top: 4px !important;
     padding-bottom: 5px !important;
     height: auto !important;
