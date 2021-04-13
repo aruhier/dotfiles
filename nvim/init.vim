@@ -17,7 +17,7 @@ runtime! archlinux.vim debian.vim
     """"""""""""""""""""""""""" VIM-PLUG """""""""""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call plug#begin('~/.vim/plugged')
+call plug#begin(stdpath('data') . '/plugged')
 """"
 Plug 'majutsushi/tagbar'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -35,16 +35,15 @@ Plug 'w0rp/ale'
 "" Unit tests
 Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
-"""" C/C++
-Plug 'jsfaint/gen_tags.vim'
 """"
 """" LaTeX
 Plug 'lervag/vimtex', { 'for': 'tex' }
 """"
+"""" Python
+Plug 'psf/black', { 'for': 'python', 'tag': 'stable' }
+""""
 """" Rust
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-" Enable it if you have racer installed
-" Plug 'racer-rust/vim-racer'
 """"
 """" XML
 Plug 'sukima/xmledit', { 'for': 'xml' }
@@ -58,8 +57,10 @@ Plug 'terryma/vim-multiple-cursors'
 "" Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
+Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
 Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
+Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
 "" Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -360,12 +361,6 @@ autocmd FileType make let g:detectindent_preferred_expandtab = 1
 """""""""
 set noshowmode
 let g:echodoc#enable_at_startup = 1
-
-
-" Gen-tags
-""""""""
-let g:gen_tags#ctags_auto_gen = 1
-let g:loaded_gentags#gtags = 1
 
 
 " Neosnippet
