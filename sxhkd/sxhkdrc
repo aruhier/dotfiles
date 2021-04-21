@@ -181,7 +181,7 @@ super + shift + ctrl + Escape
     pkill -USR1 -x sxhkd
 
 alt + z
-    firefox
+    firefox-beta
 
 alt + x
     thunderbird
