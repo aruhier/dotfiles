@@ -827,7 +827,7 @@
 <Multi_key> <KP_Divide> <o>      	: "ø"   oslash # LATIN SMALL LETTER O WITH STROKE
 <dead_grave> <u>                 	: "ù"   ugrave # LATIN SMALL LETTER U WITH GRAVE
 <Multi_key> <grave> <u>          	: "ù"   ugrave # LATIN SMALL LETTER U WITH GRAVE
-<Multi_key> <backslash> <u>          	: "ù"   ugrave # LATIN SMALL LETTER U WITH GRAVE
+<Multi_key> <backslash> <u>  		: "ù"   ugrave # LATIN SMALL LETTER U WITH GRAVE
 <Multi_key> <u> <grave> 		: "ù"   ugrave # LATIN SMALL LETTER U WITH GRAVE
 <Multi_key> <u> <backslash> 		: "ù"   ugrave # LATIN SMALL LETTER U WITH GRAVE
 <dead_acute> <u>                 	: "ú"   uacute # LATIN SMALL LETTER U WITH ACUTE
