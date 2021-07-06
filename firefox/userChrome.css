@@ -84,16 +84,22 @@
 /* Hide sidebar header */
 /***********************/
 
-/* Minimize sidebar header to a light blue stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
+/* Minimize sidebar header to a light black stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
+/*
 #sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"])
 #sidebar-header:not(:hover) {
     max-height: 5px !important;
     min-height: 5px !important;
     padding: 0 !important;
     background-color: #000 !important;
-    /* opacity: 0.5 !important; */
 }
 #sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"])
 #sidebar-header:not(:hover) #sidebar-switcher-target {
     opacity: 0 !important;
+}
+*/
+
+/* Hide the sidebar head for Tree Style Tab */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header {
+  display: none;
 }
