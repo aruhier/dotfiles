@@ -180,4 +180,4 @@ alt + s
     /home/anthony/git/github/tdrop/tdrop -a -m -w '86%' -h '86%' -y 21 -x '7%' --class signal -n signal flatpak run org.signal.Signal
 
 alt + d
-    /home/anthony/git/github/tdrop/tdrop -a -m -w '86%' -h '86%' -y 21 -x '7%' --class TelegramDesktop -n telegram flatpak run org.telegram.desktop
+    /home/anthony/git/github/tdrop/tdrop -a -m -w '86%' -h '86%' -y 21 -x '7%' --class "telegram-desktop" -n telegram flatpak run org.telegram.desktop
