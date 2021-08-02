@@ -1,18 +1,25 @@
-#TabsToolbar {
-    visibility: collapse;
+/*************/
+/* Hide tabs */
+/*************/
+
+#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
+    opacity: 0;
+    pointer-events: none;
+}
+#main-window:not([tabsintitlebar="true"]) #TabsToolbar {
+    visibility: collapse !important;
+}
+#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar .titlebar-spacer {
+    border-inline-end: none;
 }
 
 /**********************/
 /* Hide bookmarks bar */
 /**********************/
 
-:root {
-    --toolbar-offset-height: 40px;
-}
-
 #PersonalToolbar:not([customizing]) {
     position: fixed !important;
-    margin-top: -35px !important;
+    margin-top: -37px !important;
     padding-top: 4px !important;
     padding-bottom: 5px !important;
     height: auto !important;
