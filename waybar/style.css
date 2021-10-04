@@ -124,6 +124,10 @@ label:focus {
     -gtk-icon-effect: highlight;
 }
 
+#mpd.disconnected {
+    padding: 0;
+}
+
 #custom-left-arrow, #custom-right-arrow {
 	color: #424242;
 	background: #2d2d2d;

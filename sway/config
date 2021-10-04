@@ -32,6 +32,7 @@ set $menu "wofi -S drun --allow-images"
 client.focused #000000 #817f7f #ffffff #f4d775
 client.focused_inactive #000000 #474645 #ffffff #474645
 client.unfocused #000000 #30302f #ffffff #30302f
+smart_gaps on
 gaps inner 2
 default_border pixel 1
 default_floating_border pixel 1
@@ -44,7 +45,13 @@ mouse_warping none
 ### Output configuration
 #
 output * bg ~/.config/sway/wallpaper fill
-output DP-2 adaptive_sync on
+
+exec swayidle -w \
+    timeout 300 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    idlehint 303 \
+    lock '~/.config/sway/lock.sh' \
+    before-sleep '~/.config/sway/lock.sh'
 
 input type:touchpad {
     dwt enabled
@@ -71,8 +78,8 @@ input type:keyboard {
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Control+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-    bindsym alt+z exec firefox
-    bindsym alt+x exec thunderbird-wayland
+    bindsym alt+z exec firefox-beta
+    bindsym alt+x exec thunderbird
 
     # tabbed mod
     bindsym $mod+t layout tabbed
@@ -107,14 +114,6 @@ input type:keyboard {
     # move in cycle
     bindsym Alt+Tab focus next
     bindsym Alt+Shift+Tab focus prev
-
-    # move to screen
-    bindsym $mod+q focus output HDMI-A-1
-    bindsym $mod+Shift+q move output HDMI-A-1
-    bindsym $mod+w focus output DP-2
-    bindsym $mod+Shift+w move output DP-2
-    bindsym $mod+e focus output DP-3
-    bindsym $mod+Shift+e move output DP-3
 
     # close focused window
     bindsym $mod+z kill
