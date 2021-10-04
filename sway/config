@@ -1,0 +1,280 @@
+#
+#
+# sway does not set DISPLAY/WAYLAND_DISPLAY in the systemd user environment
+# See FS#63021
+# Adapted from xorg's 50-systemd-user.sh, which achieves a similar goal.
+
+exec export XDG_CURRENT_DESKTOP=sway
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_TYPE=wayland
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway XDG_SESSION_TYPE=wayland
+
+# Set global gtk theme.
+exec gsettings set org.gnome.desktop.interface gtk-theme Adwaita
+
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+# Your preferred application launcher
+# Note: pass the final command to swaymsg so that the resulting window can be opened
+# on the original workspace that the command was run on.
+set $menu "wofi -S drun --allow-images"
+
+# Only the 2nd and 4th values are useful, the rest is for the titlebar, which is hidden.
+client.focused #000000 #817f7f #ffffff #f4d775
+client.focused_inactive #000000 #474645 #ffffff #474645
+client.unfocused #000000 #30302f #ffffff #30302f
+gaps inner 2
+default_border pixel 1
+default_floating_border pixel 1
+
+focus_follows_mouse no
+focus_wrapping no
+workspace_auto_back_and_forth no
+mouse_warping none
+
+### Output configuration
+#
+output * bg ~/.config/sway/wallpaper fill
+output DP-2 adaptive_sync on
+
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    middle_emulation enabled
+    scroll_factor 0.5
+}
+
+input type:keyboard {
+    xkb_layout us
+    xkb_options compose:ralt
+    repeat_delay 333
+    repeat_rate 35
+}
+#
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+### Key bindings
+#
+# Sway bindings:
+#
+
+    # exit sway (logs you out of your Wayland session)
+    bindsym $mod+Control+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+
+    bindsym alt+z exec firefox
+    bindsym alt+x exec thunderbird-wayland
+
+    # tabbed mod
+    bindsym $mod+t layout tabbed
+
+    # balance
+    # TODO: find an alternative
+
+    # float
+    bindsym $mod+Control+f floating toggle
+
+    # fullscreen
+    bindsym $mod+Shift+Control+f fullscreen toggle
+
+    # jump to last in history
+    # TODO: see https://github.com/i3/i3/issues/838
+
+    # swap with last
+    # TODO: figure out an alternative
+
+    # move to split
+    # TODO: figure out how to do that
+
+    # swap with biggest
+    # TODO: figure out how to do that
+
+    # move around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+
+    # move in cycle
+    bindsym Alt+Tab focus next
+    bindsym Alt+Shift+Tab focus prev
+
+    # move to screen
+    bindsym $mod+q focus output HDMI-A-1
+    bindsym $mod+Shift+q move output HDMI-A-1
+    bindsym $mod+w focus output DP-2
+    bindsym $mod+Shift+w move output DP-2
+    bindsym $mod+e focus output DP-3
+    bindsym $mod+Shift+e move output DP-3
+
+    # close focused window
+    bindsym $mod+z kill
+
+    # Start your launcher
+    bindsym $mod+r exec $menu
+    bindsym $mod+Return exec $term
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    bindsym $mod+Control+l exec loginctl lock-session
+
+# Volume Keys
+    bindsym XF86AudioMute exec pamixer -t
+    bindsym $mod+F1 exec pamixer -t
+    bindsym XF86AudioRaiseVolume exec pamixer -i 5
+    bindsym $mod+F3 exec pamixer -i 5
+    bindsym XF86AudioLowerVolume exec pamixer -d 5
+    bindsym $mod+F2 exec pamixer -d 5
+    bindsym XF86AudioRaiseVolume+Shift exec pamixer -i 1
+    bindsym $mod+Shift+F3 exec pamixer -i 1
+    bindsym XF86AudioLowerVolume+Shift exec pamixer -d 1
+    bindsym $mod+Shift+F2 exec pamixer -d 1
+
+# Media Keys
+    bindsym XF86AudioPrev exec mpc prev
+    bindsym $mod+F5 exec mpc prev
+    bindsym XF86AudioPlay exec mpc toggle
+    bindsym $mod+F4 exec mpc toggle
+    bindsym XF86AudioNext exec mpc next
+    bindsym $mod+F6 exec mpc next
+
+    bindsym XF86MonBrightnessUp exec light -A 10
+    bindsym Shift+XF86MonBrightnessUp exec light -A 1
+    bindsym XF86MonBrightnessDown exec light -U 10
+    bindsym Shift+XF86MonBrightnessDown exec light -U 1
+#
+# Moving around:
+#
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    set $ws1 "1: a"
+    set $ws2 "2: s"
+    set $ws3 "3: d"
+    set $ws4 "4: f"
+    set $ws5 "5: u"
+    set $ws6 "6: i"
+    set $ws7 "7: o"
+    set $ws8 "8: p"
+    set $ws9 "9: 7"
+    set $ws10 "10: 8"
+    set $ws11 "11: 9"
+    set $ws12 "12: 10"
+    bindsym $mod+a [workspace=$ws1] move workspace to output current; workspace $ws1
+    bindsym $mod+s [workspace=$ws2] move workspace to output current; workspace $ws2
+    bindsym $mod+d [workspace=$ws3] move workspace to output current; workspace $ws3
+    bindsym $mod+f [workspace=$ws4] move workspace to output current; workspace $ws4
+    bindsym $mod+u [workspace=$ws5] move workspace to output current; workspace $ws5
+    bindsym $mod+i [workspace=$ws6] move workspace to output current; workspace $ws6
+    bindsym $mod+o [workspace=$ws7] move workspace to output current; workspace $ws7
+    bindsym $mod+p [workspace=$ws8] move workspace to output current; workspace $ws8
+    bindsym $mod+7 [workspace=$ws9] move workspace to output current; workspace $ws9
+    bindsym $mod+8 [workspace=$ws10] move workspace to output current; workspace $ws10
+    bindsym $mod+9 [workspace=$ws11] move workspace to output current; workspace $ws11
+    bindsym $mod+0 [workspace=$ws12] move workspace to output current; workspace $ws12
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+a move container to workspace $ws1
+    bindsym $mod+Shift+s move container to workspace $ws2
+    bindsym $mod+Shift+d move container to workspace $ws3
+    bindsym $mod+Shift+f move container to workspace $ws4
+    bindsym $mod+Shift+u move container to workspace $ws5
+    bindsym $mod+Shift+i move container to workspace $ws6
+    bindsym $mod+Shift+o move container to workspace $ws7
+    bindsym $mod+Shift+p move container to workspace $ws8
+    bindsym $mod+Shift+7 move container to workspace $ws9
+    bindsym $mod+Shift+8 move container to workspace $ws10
+    bindsym $mod+Shift+9 move container to workspace $ws11
+    bindsym $mod+Shift+0 move container to workspace $ws12
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+    bindsym $mod+control+space split none
+
+    # Switch the current container between different layout styles
+    bindsym $mod+comma layout stacking
+    #bindsym $mod+. layout tabbed
+    #bindsym $mod+/ layout toggle split
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+alt+p focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+
+    bindsym Alt+s exec ~/.config/sway/scratchpad.sh 'flatpak run org.signal.Signal' --filters '[instance="signal"]' --width '86ppt' --height '86ppt' -x '7ppt' -y 0
+    bindsym Alt+d exec ~/.config/sway/scratchpad.sh 'flatpak run org.telegram.desktop' --filters '[app_id="org.telegram.desktop"]' --width '86ppt' --height '86ppt' -x '7ppt' -y 0
+#
+# Resizing containers:
+#
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+Shift+r mode "resize"
+
+
+include /etc/sway/config.d/*
+
+exec_always pgrep kanshi || kanshi
+exec ~/.config/sway/start.sh
