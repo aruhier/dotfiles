@@ -1,0 +1,81 @@
+{
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}",
+        "persistent_workspaces": {
+            "1: a": [], "2: s": [], "3: d": [], "4: f": [], "5: u": [], "6: i": [], "7: o": [],
+            "8: p": [],
+        }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+    "mpd": {
+        "format": "<span font='10'>{stateIcon}</span> {artist} - {title}",
+        "format-disconnected": "",
+        "format-stopped": "<span font='11'>󰓛</span>",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "state-icons": {
+            "paused": "󰏤",
+            "playing": "󰐊",
+            "stopped": "󰓛"
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)",
+        "artist-len": 30,
+        "title-len": 40
+    },
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
+    },
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "<span font='10'>󰃭</span> {:%a %d %b  %H:%M}",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "battery#bat2": {
+        "bat": "BAT2"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "<span font='10'>{icon}</span> {volume}%",
+        "format-muted": "󰝟",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "on-click": "pavucontrol"
+    },
+    "custom/right-arrow": {
+        "format": "<span font='11'></span>",
+        "tooltip": false
+    },
+    "custom/left-arrow": {
+        "format": "<span font='11'></span>",
+        "tooltip": false
+    }
+}
