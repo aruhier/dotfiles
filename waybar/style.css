@@ -49,7 +49,7 @@ window#waybar.solo {
     color: #BF0905;
 }
 
-#workspaces button.focused.current_output {
+#workspaces button.visible.current_output {
     box-shadow: inset 0 -1px #BF0905;
 }
 
