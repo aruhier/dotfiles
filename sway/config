@@ -72,7 +72,7 @@ input type:keyboard {
     bindsym $mod+Control+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
     bindsym alt+z exec firefox
-    bindsym alt+x exec thunderbird-wayland
+    bindsym alt+x exec thunderbird
 
     # tabbed mod
     bindsym $mod+t layout tabbed
