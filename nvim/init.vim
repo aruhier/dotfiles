@@ -12,6 +12,15 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
 " properly set to work with the Vim-related packages.
 runtime! archlinux.vim debian.vim
 
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """"""""""""""""""""" SOURCE SYSTEM CONFIG """""""""""""""""""""
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Source a global configuration file if available
+if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
+
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     """"""""""""""""""""""""""" VIM-PLUG """""""""""""""""""""""""""
@@ -20,35 +29,25 @@ runtime! archlinux.vim debian.vim
 call plug#begin(stdpath('data') . '/plugged')
 """"
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'lifepillar/vim-solarized8'
+Plug 'windwp/nvim-autopairs'
+Plug 'ishan9299/nvim-solarized-lua'
 Plug 'chaoren/vim-wordmotion'
-Plug 'ciaranm/detectindent'
-Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-sleuth'
 "" Multiple cursors, with ctrl+n
-Plug 'terryma/vim-multiple-cursors'
-"" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
+"" Status line
+Plug 'nvim-lualine/lualine.nvim'
+" Dependency of lualine.nvim
+Plug 'kyazdani42/nvim-web-devicons'
 """"
 call plug#end()
-filetype on
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     """""""""""""""""""" GENERAL CONFIGURATION """""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
 syntax on
-
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-let g:solarized_statusline = 'flat'
-set background=dark
-colorscheme solarized8
-set termguicolors
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -94,34 +93,8 @@ noremap Msf :set spell spelllang=fr<CR>
 " Command alias
 cnoreabbrev t tabnew
 
-" Syntax
-"" automatic recognition of filetype
-filetype plugin indent on
-filetype plugin on
-syntax on
-syntax sync fromstart
-
 " Autocompletion
-set wildmenu
-set wildmode=list:longest,full
-set wildignore+=*.pyc,*.o,*.aux,*.toc,*.dvi    " ignored on autocomplete
-set completeopt=longest,menu,menuone,preview    " cool completion view
-set complete=.,w,b,u,U,t,i      " mega tab completion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=python3complete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-
-" Python
-autocmd FileType python nmap <F5> :!python %<CR>
-
-" Cpp
-"" Autgen skeleton from header
-noremap \PP :! stubgen -n %<CR>
+set completeopt=menu,menuone,noselect
 
 " Makefile
 "" Make vim turn *off* expandtab for files named Makefile or makefile
@@ -139,16 +112,58 @@ autocmd FileType {text,tex} set spell spelllang=fr
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" Airline
-""""""""""
-"" Need to install ttf-powerline-fonts-git in AUR
-let g:airline_powerline_fonts = 1
+" Solarized
+""""""""""""
+set termguicolors
+map <F10> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+set background=dark
+colorscheme solarized
 
 
-" DetectIndent
-""""""""""""""""
-let g:detectindent_preferred_expandtab = 1
-let g:detectindent_preferred_indent = 4
+" Status line
+"""""""""""""
+lua << END
+solarized_dark = require'lualine.themes.solarized_dark'
+solarized_dark.normal.b.bg = '#808e8e'
+solarized_dark.inactive.b.bg = '#808e8e'
+solarized_dark.insert.a.bg = '#b58900'
+solarized_light = require'lualine.themes.solarized_light'
+solarized_light.insert.a.bg = '#b58900'
+
+require'lualine'.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {
+      'branch',
+      { 'diff', colored=false},
+      {'diagnostics', sources={'nvim_lsp'}, colored=false, icons_enabled=false}
+    },
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', {'fileformat' , icons_enabled=false}, {'filetype', icons_enabled=false}},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+END
+
 
 " Makefile
 "" Make vim turn *off* expandtab for files named Makefile or makefile
@@ -156,16 +171,7 @@ let g:detectindent_preferred_indent = 4
 autocmd FileType make let g:detectindent_preferred_expandtab = 1
 
 
-" Solarized
-""""""""""""
-map <F10> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
-
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    """"""""""""""""""""" SOURCE SYSTEM CONFIG """""""""""""""""""""
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
+" CtrlP
+""""""""
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
