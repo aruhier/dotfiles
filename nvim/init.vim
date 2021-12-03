@@ -12,6 +12,15 @@ set runtimepath=~/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,~/.vim/afte
 " properly set to work with the Vim-related packages.
 runtime! archlinux.vim debian.vim
 
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+    """"""""""""""""""""" SOURCE SYSTEM CONFIG """""""""""""""""""""
+    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Source a global configuration file if available
+if filereadable("/etc/vim/vimrc.local")
+  source /etc/vim/vimrc.local
+endif
+
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     """"""""""""""""""""""""""" VIM-PLUG """""""""""""""""""""""""""
@@ -19,19 +28,14 @@ runtime! archlinux.vim debian.vim
 
 call plug#begin(stdpath('data') . '/plugged')
 """"
-Plug 'majutsushi/tagbar'
+Plug 'liuchengxu/vista.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tpope/vim-surround'
-Plug 'lifepillar/vim-solarized8'
+Plug 'windwp/nvim-autopairs'
+Plug 'sainnhe/everforest'
 Plug 'chaoren/vim-wordmotion'
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'ciaranm/detectindent'
+Plug 'tpope/vim-sleuth'
 Plug 'rhysd/vim-grammarous'
-Plug 'tpope/vim-eunuch'
-Plug 'Shougo/echodoc.vim'
-"" Print syntax errors
-Plug 'w0rp/ale'
 "" Unit tests
 Plug 'janko-m/vim-test'
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
@@ -49,20 +53,26 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'sukima/xmledit', { 'for': 'xml' }
 """"
 "" Multiple cursors, with ctrl+n
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 "" Autocomplete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-Plug 'fannheyward/coc-pyright', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
-"" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'williamboman/nvim-lsp-installer'
+"" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+"" Code diagnostic
+Plug 'folke/trouble.nvim'
+"" Status line
+Plug 'nvim-lualine/lualine.nvim'
 """" Git support
-Plug 'airblade/vim-gitgutter'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'rhysd/git-messenger.vim'
 """"
@@ -70,25 +80,17 @@ Plug 'rhysd/git-messenger.vim'
 Plug 'xolox/vim-notes'
 """" Depends
 Plug 'xolox/vim-misc'
+" Dependency of trouble.nvim and lualine.nvim
+Plug 'kyazdani42/nvim-web-devicons'
 """"
 call plug#end()
-filetype on
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     """""""""""""""""""" GENERAL CONFIGURATION """""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
 syntax on
-
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-let g:solarized_statusline = 'flat'
-set background=dark
-colorscheme solarized8
-set termguicolors
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -118,7 +120,6 @@ autocmd FileType {go,rust} set textwidth=119 colorcolumn=120 fo+=t
 set encoding=utf-8
 set guioptions-=m   " Remove menubar in gvim
 set guioptions-=T   " Remove toolbar in gvim
-set shell=sh
 
 " Remapping
 noremap tt :tabprevious<CR>
@@ -136,33 +137,8 @@ noremap Msf :set spell spelllang=fr<CR>
 " Command alias
 cnoreabbrev t tabnew
 
-" Syntax
-"" automatic recognition of filetype
-filetype plugin indent on
-filetype plugin on
-syntax on
-syntax sync fromstart
-
 " Autocompletion
-set wildmenu
-set wildmode=list:longest,full
-set wildignore+=*.pyc,*.o,*.aux,*.toc,*.dvi    " ignored on autocomplete
-set completeopt=longest,menu,menuone,preview    " cool completion view
-set complete=.,w,b,u,U,t,i      " mega tab completion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-" automatically open and close the popup menu / preview window
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-
-" Python
-autocmd FileType python nmap <F5> :!python %<CR>
-
-" Cpp
-"" Autgen skeleton from header
-noremap \PP :! stubgen -n %<CR>
+set completeopt=menu,menuone,noselect
 
 " Makefile
 "" Make vim turn *off* expandtab for files named Makefile or makefile
@@ -180,178 +156,223 @@ autocmd FileType {text,tex} set spell spelllang=fr
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-" Airline
+" Solarized
+""""""""""""
+set termguicolors
+map <F10> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+set background=dark
+let g:everforest_background = 'medium'
+let g:everforest_ui_contrast = 'high'
+let g:everforest_better_performance = 1
+colorscheme everforest
+
+
+" Status line
+"""""""""""""
+lua << END
+solarized_dark = require'lualine.themes.solarized_dark'
+solarized_dark.normal.b.bg = '#808e8e'
+solarized_dark.inactive.b.bg = '#808e8e'
+solarized_dark.insert.a.bg = '#b58900'
+solarized_light = require'lualine.themes.solarized_light'
+solarized_light.insert.a.bg = '#b58900'
+
+require'lualine'.setup {
+  options = {
+    icons_enabled = true,
+    theme = 'auto',
+    component_separators = { left = '', right = ''},
+    section_separators = { left = '', right = ''},
+    disabled_filetypes = {},
+    always_divide_middle = true,
+  },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {
+      'branch',
+      { 'diff', colored=false},
+      {'diagnostics', sources={'nvim_lsp'}, colored=false, icons_enabled=false}
+    },
+    lualine_c = {'filename'},
+    lualine_x = {'encoding', {'fileformat' , icons_enabled=false}, {'filetype', icons_enabled=false}},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = {'filename'},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {},
+  extensions = {}
+}
+END
+
+
+" nvim-lsp
 """"""""""
-"" Need to install ttf-powerline-fonts-git in AUR
-let g:airline_powerline_fonts = 1
+
+lua << EOF
+vim.diagnostic.config({virtual_text = false})
+
+-- Print LSP diagnostic in the message bar.
+function PrintDiagnostics(opts, bufnr, line_nr, client_id)
+  local warning_hlgroup = 'WarningMsg'
+  local error_hlgroup = 'ErrorMsg'
+
+  opts = opts or {}
+
+  bufnr = bufnr or 0
+  line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
+
+  local line_diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, line_nr, opts, client_id)
+  if vim.tbl_isempty(line_diagnostics) then return end
+
+  local chunks = {}
+  for i, diagnostic in ipairs(line_diagnostics) do
+    local kind = 'warning'
+    local hlgroup = warning_hlgroup
+
+    if diagnostic.severity == vim.lsp.protocol.DiagnosticSeverity.Error then
+      kind = 'error'
+      hlgroup = error_hlgroup
+    end
+
+    local diagnostic_message = diagnostic.message
+    if i ~= #line_diagnostics then
+      diagnostic_message = diagnostic_message .. "\n"
+    end
+
+    table.insert(chunks, { kind .. ':', hlgroup })
+    table.insert(chunks, { ' ' .. diagnostic_message })
+    print(chunks)
+  end
+  vim.api.nvim_echo(chunks, false, {})
+end
+
+vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
+EOF
 
 
-" ALE (Asynchronous Lint Engine)
-""""""""""""""""""""""""""""""""
-nmap <silent> <F7> <Plug>(ale_previous)
-nmap <silent> <F8> <Plug>(ale_next)
-let g:ale_python_flake8_options = '--ignore=C0111,E501'
-let g:ale_python_pylint_options = '--disable=C0111,E501'
+" nvim-cmp
+""""""""""
+
+set updatetime=300
+lua <<EOF
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  local cmp = require'cmp'
+  cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      }),
+      ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' },
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+EOF
+
+
+" nvim-lsp-installer
+""""""""""""""""""""
+
+lua <<EOF
+  local on_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+    -- Enable completion triggered by <c-x><c-o>
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- Mappings.
+    local opts = { noremap=true, silent=true }
+
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  end
+
+  local lsp_installer = require("nvim-lsp-installer")
+
+  local servers = {"rust_analyzer", "clangd", "gopls", "pyright"}
+
+  for _, s in ipairs(servers) do
+    local ok, server = lsp_installer.get_server(s)
+    if ok then
+      if not server:is_installed() then
+        server:install()
+      end
+    end
+  end
+
+  lsp_installer.on_server_ready(function(server)
+      local opts = {on_attach=on_attach}
+      server:setup(opts)
+  end)
+EOF
 
 
 " Black
 """""""
 nnoremap <F9> :Black<CR>
-
-
-" COC
-"""""
-
-" Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
-
-" Prefer getting them from vim plug when possible
-let g:coc_global_extensions = []
-
-" Make tab used for trigger completion, completion confirm, snippet expand and jump like VSCode.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<tab>'
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-nmap <leader>rnf :CocCommand workspace.renameCurrentFile<CR>
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-" coc-snippet
-" Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-" Use <leader>x for convert visual selected code to snippet
-xmap <leader>x  <Plug>(coc-convert-snippet)
 
 
 " CtrlP
@@ -360,21 +381,12 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 
-" DetectIndent
-""""""""""""""""
-let g:detectindent_preferred_expandtab = 1
-let g:detectindent_preferred_indent = 4
+" Gitsigns
+""""""""""
 
-" Makefile
-"" Make vim turn *off* expandtab for files named Makefile or makefile
-"" We need the tab literal
-autocmd FileType make let g:detectindent_preferred_expandtab = 1
-
-
-" EchoDoc
-"""""""""
-set noshowmode
-let g:echodoc#enable_at_startup = 1
+lua << EOF
+require('gitsigns').setup()
+EOF
 
 
 " Rust
@@ -382,27 +394,44 @@ let g:echodoc#enable_at_startup = 1
 let g:rustfmt_autosave = 1
 
 
-" Solarized
+" Treesitter
 """"""""""""
-map <F10> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  ignore_install = {},
+  highlight = {
+    enable = true,
+    disable = {},
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
 
 
-" Tagbar
+" Trouble
 """""""""
-let g:tagbar_left = 1
-cnoreabbrev tb Tagbar
+
+lua << EOF
+  require("trouble").setup {}
+EOF
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle lsp_document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+
+
+" Vista
+"""""""
+
+" Ensure you have installed some decent font to show these pretty symbols, then you can enable icon for the kind.
+let g:vista#renderer#enable_icon = 0
+let g:vista_sidebar_position = 'vertical topleft'
+let g:vista_sidebar_width = 60
 
 
 " Test
 """""""
 let g:test#strategy = "neovim"
-
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    """"""""""""""""""""" SOURCE SYSTEM CONFIG """""""""""""""""""""
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Source a global configuration file if available
-if filereadable("/etc/vim/vimrc.local")
-  source /etc/vim/vimrc.local
-endif
