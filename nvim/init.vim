@@ -31,7 +31,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'liuchengxu/vista.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'windwp/nvim-autopairs'
-Plug 'ishan9299/nvim-solarized-lua'
+Plug 'sainnhe/everforest'
 Plug 'chaoren/vim-wordmotion'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'tpope/vim-sleuth'
@@ -161,7 +161,10 @@ autocmd FileType {text,tex} set spell spelllang=fr
 set termguicolors
 map <F10> :let &background = ( &background == "dark"? "light" : "dark" )<CR>
 set background=dark
-colorscheme solarized
+let g:everforest_background = 'medium'
+let g:everforest_ui_contrast = 'high'
+let g:everforest_better_performance = 1
+colorscheme everforest
 
 
 " Status line
