@@ -219,6 +219,7 @@ lua << EOF
 vim.diagnostic.config({virtual_text = false})
 
 -- Print LSP diagnostic in the message bar.
+-- Only prints the first error, and adds […] to indicate that more are present.
 function PrintDiagnostics(opts, bufnr, line_nr, client_id)
   local warning_hlgroup = 'WarningMsg'
   local error_hlgroup = 'ErrorMsg'
@@ -231,25 +232,22 @@ function PrintDiagnostics(opts, bufnr, line_nr, client_id)
   local line_diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, line_nr, opts, client_id)
   if vim.tbl_isempty(line_diagnostics) then return end
 
-  local chunks = {}
-  for i, diagnostic in ipairs(line_diagnostics) do
-    local kind = 'warning'
-    local hlgroup = warning_hlgroup
+  local diagnostic = line_diagnostics[1]
+  local kind = 'warning'
+  local hlgroup = warning_hlgroup
 
-    if diagnostic.severity == vim.lsp.protocol.DiagnosticSeverity.Error then
-      kind = 'error'
-      hlgroup = error_hlgroup
-    end
-
-    local diagnostic_message = diagnostic.message
-    if i ~= #line_diagnostics then
-      diagnostic_message = diagnostic_message .. "\n"
-    end
-
-    table.insert(chunks, { kind .. ':', hlgroup })
-    table.insert(chunks, { ' ' .. diagnostic_message })
-    print(chunks)
+  if diagnostic.severity == vim.lsp.protocol.DiagnosticSeverity.Error then
+    kind = 'error'
+    hlgroup = error_hlgroup
   end
+
+  local diagnostic_message = diagnostic.message
+  if table.getn(line_diagnostics) > 1 then
+    diagnostic_message = diagnostic_message .. " […]"
+  end
+
+  local chunks = {{ kind .. ':', hlgroup }, { ' ' .. diagnostic_message }}
+  print(chunks)
   vim.api.nvim_echo(chunks, false, {})
 end
 
