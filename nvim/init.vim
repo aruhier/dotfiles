@@ -31,6 +31,7 @@ call plug#begin(stdpath('data') . '/plugged')
 Plug 'liuchengxu/vista.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'windwp/nvim-autopairs'
+Plug 'tpope/vim-surround'
 Plug 'sainnhe/everforest'
 Plug 'chaoren/vim-wordmotion'
 Plug 'dhruvasagar/vim-table-mode'
@@ -191,7 +192,7 @@ require'lualine'.setup {
     lualine_b = {
       'branch',
       { 'diff', colored=false},
-      {'diagnostics', sources={'nvim_lsp'}, colored=false, icons_enabled=false}
+      {'diagnostics', sources={'nvim_diagnostic'}, colored=false, icons_enabled=false}
     },
     lualine_c = {'filename'},
     lualine_x = {'encoding', {'fileformat' , icons_enabled=false}, {'filetype', icons_enabled=false}},
