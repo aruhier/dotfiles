@@ -186,7 +186,16 @@ local function setupLualine()
       lualine_b = {
         'branch',
         { 'diff', colored=false},
-        {'diagnostics', sources={'nvim_diagnostic'}, colored=false, icons_enabled=false}
+        {
+          'diagnostics',
+          sources={function()
+            if vim.fn.has('nvim-0.5') == 1 then
+              return 'nvim-lsp'
+            end
+            return 'nvim-diagnostic'
+          end},
+          colored=false, icons_enabled=false
+        }
       },
       lualine_c = {'filename'},
       lualine_x = {'encoding', {'fileformat' , icons_enabled=false}, {'filetype', icons_enabled=false}},
