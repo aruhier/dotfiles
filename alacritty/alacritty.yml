@@ -46,8 +46,6 @@ window:
   # When true, alacritty starts maximized.
   startup_mode: Windowed
 
-  disable_vsync: true
-
   opacity: 0.98
 
 scrolling:

@@ -14,23 +14,6 @@ runtime! archlinux.vim debian.vim
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    """""""""""""""""""""""""""" VUNDLE """"""""""""""""""""""""""""
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-set nocompatible
-filetype on
-call plug#begin('~/.vim/plugged')
-""""
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'altercation/vim-colors-solarized'
-"" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-call plug#end()
-
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
     """""""""""""""""""" GENERAL CONFIGURATION """""""""""""""""""""
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -41,7 +24,6 @@ syntax on
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
-colorscheme solarized
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -49,6 +31,7 @@ colorscheme solarized
 "  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "endif
 
+filetype on
 set nu		    	" Line numbers
 set laststatus=2	" Enable status
 set statusline=%<%f%h%m%r%=%l,%c\ %P
@@ -123,25 +106,10 @@ noremap \PP :! stubgen -n %<CR>
 autocmd FileType make set noexpandtab
 
 " Spell Check
-set spelllang=fr
+set spelllang=en
 " Spell Check for *.txt and *.tex :
-autocmd FileType {text,tex} set spell spelllang=fr
-
-
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-    """""""""""""""""""""""""" EXTENSIONS """"""""""""""""""""""""""
-    """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-" Airline
-""""""""""
-"" Need to install ttf-powerline-fonts-git in AUR
-let g:airline_powerline_fonts = 1
-
-
-" Solarized
-""""""""""""
-call togglebg#map("<F10>")
+autocmd FileType {text,tex} set spell spelllang=en
+autocmd BufEnter {*.txt,*.tex} set spell spelllang=en
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
