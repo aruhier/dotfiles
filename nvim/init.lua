@@ -16,66 +16,60 @@ vim.cmd [[ runtime! archlinux.vim debian.vim ]]
   --------------------------- VIM-PLUG ---------------------------
   ----------------------------------------------------------------
 
-local Plug = vim.fn['plug#']
-vim.call('plug#begin', vim.fn.stdpath('data')..'/plugged')
+require('packer').startup(function()
+  use 'wbthomason/packer.nvim'
 
-Plug 'liuchengxu/vista.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'windwp/nvim-autopairs'
-Plug 'tpope/vim-surround'
-Plug 'sainnhe/everforest'
-Plug 'chaoren/vim-wordmotion'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'tpope/vim-sleuth'
-Plug 'rhysd/vim-grammarous'
--- Multiple cursors, with ctrl+n
-Plug('mg979/vim-visual-multi', {branch = 'master'})
----- Autocomplete
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'williamboman/nvim-lsp-installer'
----- Treesitter
-Plug('nvim-treesitter/nvim-treesitter', {['do'] = ':TSUpdate'})
----- Code diagnostic
-Plug 'folke/trouble.nvim'
----- Status line
-Plug 'nvim-lualine/lualine.nvim'
----- Unit tests
-Plug 'janko-m/vim-test'
-Plug('alfredodeza/coveragepy.vim', {['for'] = 'python'})
-----
----- LaTeX
-Plug('lervag/vimtex', {['for'] = 'tex'})
-----
----- Python
-Plug('psf/black', {['for'] = 'python', tag = 'stable'})
-----
----- Rust
-Plug('rust-lang/rust.vim', {['for'] = 'rust'})
-----
----- XML
-Plug('sukima/xmledit', {['for'] = 'xml'})
-----
----- Git support
-Plug 'nvim-lua/plenary.nvim'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'tpope/vim-fugitive'
-Plug 'rhysd/git-messenger.vim'
----
----- For notes management
-Plug 'xolox/vim-notes'
----- Depends
-Plug 'xolox/vim-misc'
--- Dependency of trouble.nvim and lualine.nvim
-Plug 'kyazdani42/nvim-web-devicons'
+  use 'liuchengxu/vista.vim'
+  use 'ctrlpvim/ctrlp.vim'
+  use 'windwp/nvim-autopairs'
+  use 'tpope/vim-surround'
+  use 'sainnhe/everforest'
+  use 'chaoren/vim-wordmotion'
+  use 'dhruvasagar/vim-table-mode'
+  use 'tpope/vim-sleuth'
+  use 'rhysd/vim-grammarous'
 
-vim.call('plug#end')
+  -- Multiple cursors, with ctrl+n
+  use {'mg979/vim-visual-multi', branch = 'master'}
+
+  ---- Autocomplete
+  use 'neovim/nvim-lspconfig'
+  use {'hrsh7th/nvim-cmp', requires={
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/cmp-vsnip',
+    'hrsh7th/vim-vsnip',
+  }}
+  use {'williamboman/nvim-lsp-installer', requires={'neovim/nvim-lspconfig'}}
+
+  ---- Treesitter
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  ---- Code diagnostic
+  use {'folke/trouble.nvim', requires={'kyazdani42/nvim-web-devicons'}}
+  ---- Status line
+  use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons'}}
+  ---- Unit tests
+  use 'janko-m/vim-test'
+  use {'alfredodeza/coveragepy.vim', ft = {'python'}}
+  ---- LaTeX
+  use {'lervag/vimtex', ft = {'tex'}}
+  ---- Python
+  use {'psf/black', ft = {'python'}}
+  ---- Rust
+  use {'rust-lang/rust.vim', ft = {'rust'}}
+  ---- XML
+  use {'sukima/xmledit', ft = {'xml'}}
+
+  ---- Git support
+  use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }}
+  use 'tpope/vim-fugitive'
+  use 'rhysd/git-messenger.vim'
+
+  ---- For notes management
+  use {'xolox/vim-notes', requires={'xolox/vim-misc'}}
+end)
 
   ----------------------------------------------------------------
   -------------------- GENERAL CONFIGURATION ---------------------
@@ -318,7 +312,7 @@ setupNvimCMP()
 -- nvim-lsp-installer
 ----------------------
 
-local function setupNvimLSPInstaller()
+local function setupLSPInstaller()
   local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -351,6 +345,11 @@ local function setupNvimLSPInstaller()
 
   local lsp_installer = require("nvim-lsp-installer")
 
+  lsp_installer.on_server_ready(function(server)
+      local opts = {on_attach=on_attach}
+      server:setup(opts)
+  end)
+
   local servers = {"rust_analyzer", "clangd", "gopls", "pyright"}
 
   for _, s in ipairs(servers) do
@@ -361,12 +360,8 @@ local function setupNvimLSPInstaller()
       end
     end
   end
-
-  lsp_installer.on_server_ready(function(server)
-      local opts = {on_attach=on_attach}
-      server:setup(opts)
-  end)
 end
+setupLSPInstaller()
 
 
 -- Black
@@ -411,7 +406,7 @@ require'nvim-treesitter.configs'.setup {
 -- Trouble
 -----------
 
-require("trouble").setup {}
+require("trouble").setup()
 map("n", "<leader>xx", "<cmd>Trouble<cr>", {silent = true, noremap = true})
 map("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true})
 map("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", {silent = true, noremap = true})
