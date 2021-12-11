@@ -24,7 +24,6 @@ syntax on
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
 set background=dark
-colorscheme solarized
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
@@ -107,9 +106,10 @@ noremap \PP :! stubgen -n %<CR>
 autocmd FileType make set noexpandtab
 
 " Spell Check
-set spelllang=fr
+set spelllang=en
 " Spell Check for *.txt and *.tex :
-autocmd FileType {text,tex} set spell spelllang=fr
+autocmd FileType {text,tex} set spell spelllang=en
+autocmd BufEnter {*.txt,*.tex} set spell spelllang=en
 
 
     """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
