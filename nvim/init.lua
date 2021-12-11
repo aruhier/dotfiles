@@ -82,8 +82,8 @@ vim.opt.syntax = 'on'
 -- Uncomment the following to have Vim jump to the last position when
 -- reopening a file
 -- vim.cmd [[
---  if has("autocmd")
---    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+--  if has('autocmd')
+--    au BufReadPost * if line('"\"') > 1 && line('"\"') <= line('$') | exe 'normal! g"\"' | endif
 --  endif
 --]]
 
@@ -238,7 +238,7 @@ function PrintDiagnostics(opts, bufnr, line_nr, client_id)
 
   local diagnostic_message = diagnostic.message
   if table.getn(line_diagnostics) > 1 then
-    diagnostic_message = diagnostic_message .. " […]"
+    diagnostic_message = diagnostic_message .. ' […]'
   end
 
   local chunks = {{ kind .. ':', hlgroup }, { ' ' .. diagnostic_message }}
@@ -261,7 +261,7 @@ local function setupNvimCMP()
   cmp.setup({
     snippet = {
       expand = function(args)
-        vim.fn["vsnip#anonymous"](args.body)
+        vim.fn['vsnip#anonymous'](args.body)
       end,
     },
     mapping = {
@@ -343,14 +343,14 @@ local function setupLSPInstaller()
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
 
-  local lsp_installer = require("nvim-lsp-installer")
+  local lsp_installer = require('nvim-lsp-installer')
 
   lsp_installer.on_server_ready(function(server)
       local opts = {on_attach=on_attach}
       server:setup(opts)
   end)
 
-  local servers = {"rust_analyzer", "clangd", "gopls", "pyright"}
+  local servers = {'rust_analyzer', 'clangd', 'gopls', 'pyright'}
 
   for _, s in ipairs(servers) do
     local ok, server = lsp_installer.get_server(s)
@@ -406,13 +406,13 @@ require'nvim-treesitter.configs'.setup {
 -- Trouble
 -----------
 
-require("trouble").setup()
-map("n", "<leader>xx", "<cmd>Trouble<cr>", {silent = true, noremap = true})
-map("n", "<leader>xw", "<cmd>Trouble workspace_diagnostics<cr>", {silent = true, noremap = true})
-map("n", "<leader>xd", "<cmd>Trouble document_diagnostics<cr>", {silent = true, noremap = true})
-map("n", "<leader>xl", "<cmd>Trouble loclist<cr>", {silent = true, noremap = true})
-map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", {silent = true, noremap = true})
-map("n", "gR", "<cmd>Trouble lsp_references<cr>", {silent = true, noremap = true})
+require('trouble').setup()
+map('n', '<leader>xx', '<cmd>Trouble<cr>', {silent = true, noremap = true})
+map('n', '<leader>xw', '<cmd>Trouble workspace_diagnostics<cr>', {silent = true, noremap = true})
+map('n', '<leader>xd', '<cmd>Trouble document_diagnostics<cr>', {silent = true, noremap = true})
+map('n', '<leader>xl', '<cmd>Trouble loclist<cr>', {silent = true, noremap = true})
+map('n', '<leader>xq', '<cmd>Trouble quickfix<cr>', {silent = true, noremap = true})
+map('n', 'gR', '<cmd>Trouble lsp_references<cr>', {silent = true, noremap = true})
 
 
 -- Vista
@@ -426,4 +426,4 @@ vim.g['vista_sidebar_width'] = 60
 -- Test
 --------
 
-vim.g['test#strategy'] = "neovim"
+vim.g['test#strategy'] = 'neovim'
