@@ -83,7 +83,7 @@ vim.opt.syntax = 'on'
 -- reopening a file
 -- vim.cmd [[
 --  if has('autocmd')
---    au BufReadPost * if line(''\'') > 1 && line(''\'') <= line('$') | exe 'normal! g'\'' | endif
+--    au BufReadPost * if line('"\"') > 1 && line('"\"') <= line('$') | exe 'normal! g"\"' | endif
 --  endif
 --]]
 
