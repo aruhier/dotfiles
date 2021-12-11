@@ -16,23 +16,22 @@ vim.cmd [[ runtime! archlinux.vim debian.vim ]]
   --------------------------- VIM-PLUG ---------------------------
   ----------------------------------------------------------------
 
-local Plug = vim.fn['plug#']
-vim.call('plug#begin', vim.fn.stdpath('data')..'/plugged')
+require('packer').startup(function()
+  use 'wbthomason/packer.nvim'
 
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'windwp/nvim-autopairs'
-Plug 'tpope/vim-surround'
-Plug 'sainnhe/everforest'
-Plug 'chaoren/vim-wordmotion'
-Plug 'tpope/vim-sleuth'
--- Multiple cursors, with ctrl+n
-Plug('mg979/vim-visual-multi', {branch = 'master'})
--- Status line
-Plug 'nvim-lualine/lualine.nvim'
--- Dependency of lualine.nvim
-Plug 'kyazdani42/nvim-web-devicons'
+  use 'ctrlpvim/ctrlp.vim'
+  use 'windwp/nvim-autopairs'
+  use 'tpope/vim-surround'
+  use 'sainnhe/everforest'
+  use 'chaoren/vim-wordmotion'
+  use 'tpope/vim-sleuth'
 
-vim.call('plug#end')
+  ---- Status line
+  use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons'}}
+
+  -- Multiple cursors, with ctrl+n
+  use {'mg979/vim-visual-multi', branch = 'master'}
+end)
 
   ----------------------------------------------------------------
   -------------------- GENERAL CONFIGURATION ---------------------
