@@ -19,18 +19,56 @@ vim.cmd [[ runtime! archlinux.vim debian.vim ]]
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
+  use 'liuchengxu/vista.vim'
   use 'ctrlpvim/ctrlp.vim'
   use 'windwp/nvim-autopairs'
   use 'tpope/vim-surround'
   use 'sainnhe/everforest'
   use 'chaoren/vim-wordmotion'
+  use 'dhruvasagar/vim-table-mode'
   use 'tpope/vim-sleuth'
-
-  ---- Status line
-  use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons'}}
+  use 'rhysd/vim-grammarous'
 
   -- Multiple cursors, with ctrl+n
   use {'mg979/vim-visual-multi', branch = 'master'}
+
+  ---- Autocomplete
+  use 'neovim/nvim-lspconfig'
+  use {'hrsh7th/nvim-cmp', requires={
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
+    'hrsh7th/cmp-vsnip',
+    'hrsh7th/vim-vsnip',
+  }}
+  use {'williamboman/nvim-lsp-installer', requires={'neovim/nvim-lspconfig'}}
+
+  ---- Treesitter
+  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  ---- Code diagnostic
+  use {'folke/trouble.nvim', requires={'kyazdani42/nvim-web-devicons'}}
+  ---- Status line
+  use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons'}}
+  ---- Unit tests
+  use 'janko-m/vim-test'
+  use {'alfredodeza/coveragepy.vim', ft = {'python'}}
+  ---- LaTeX
+  use {'lervag/vimtex', ft = {'tex'}}
+  ---- Python
+  use {'psf/black', ft = {'python'}}
+  ---- Rust
+  use {'rust-lang/rust.vim', ft = {'rust'}}
+  ---- XML
+  use {'sukima/xmledit', ft = {'xml'}}
+
+  ---- Git support
+  use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }}
+  use 'tpope/vim-fugitive'
+  use 'rhysd/git-messenger.vim'
+
+  ---- For notes management
+  use {'xolox/vim-notes', requires={'xolox/vim-misc'}}
 end)
 
   ----------------------------------------------------------------
@@ -44,8 +82,8 @@ vim.opt.syntax = 'on'
 -- Uncomment the following to have Vim jump to the last position when
 -- reopening a file
 -- vim.cmd [[
---  if has("autocmd")
---    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+--  if has('autocmd')
+--    au BufReadPost * if line(''\'') > 1 && line(''\'') <= line('$') | exe 'normal! g'\'' | endif
 --  endif
 --]]
 
@@ -170,8 +208,222 @@ end
 setupLualine()
 
 
+-- nvim-lsp
+------------
+
+vim.diagnostic.config({virtual_text = false})
+
+-- Print LSP diagnostic in the message bar.
+-- Only prints the first error, and adds […] to indicate that more are present.
+function PrintDiagnostics(opts, bufnr, line_nr, client_id)
+  local warning_hlgroup = 'WarningMsg'
+  local error_hlgroup = 'ErrorMsg'
+
+  opts = opts or {}
+
+  bufnr = bufnr or 0
+  line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
+
+  local line_diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, line_nr, opts, client_id)
+  if vim.tbl_isempty(line_diagnostics) then return end
+
+  local diagnostic = line_diagnostics[1]
+  local kind = 'warning'
+  local hlgroup = warning_hlgroup
+
+  if diagnostic.severity == vim.lsp.protocol.DiagnosticSeverity.Error then
+    kind = 'error'
+    hlgroup = error_hlgroup
+  end
+
+  local diagnostic_message = diagnostic.message
+  if table.getn(line_diagnostics) > 1 then
+    diagnostic_message = diagnostic_message .. ' […]'
+  end
+
+  local chunks = {{ kind .. ':', hlgroup }, { ' ' .. diagnostic_message }}
+  print(chunks)
+  vim.api.nvim_echo(chunks, false, {})
+end
+vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
+
+
+-- nvim-cmp
+------------
+
+local function setupNvimCMP()
+  vim.opt.updatetime = 300
+
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  local cmp = require'cmp'
+  cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        vim.fn['vsnip#anonymous'](args.body)
+      end,
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      }),
+      ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' },
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+end
+setupNvimCMP()
+
+
+-- nvim-lsp-installer
+----------------------
+
+local function setupLSPInstaller()
+  local on_attach = function(client, bufnr)
+    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+    -- Enable completion triggered by <c-x><c-o>
+    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+    -- Mappings.
+    local opts = { noremap=true, silent=true }
+
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  end
+
+  local lsp_installer = require('nvim-lsp-installer')
+
+  lsp_installer.on_server_ready(function(server)
+      local opts = {on_attach=on_attach}
+      server:setup(opts)
+  end)
+
+  local servers = {'rust_analyzer', 'clangd', 'gopls', 'pyright'}
+
+  for _, s in ipairs(servers) do
+    local ok, server = lsp_installer.get_server(s)
+    if ok then
+      if not server:is_installed() then
+        server:install()
+      end
+    end
+  end
+end
+setupLSPInstaller()
+
+
+-- Black
+---------
+
+map('n', '<F9>', ':Black<CR>', {noremap = true})
+
+
 -- CtrlP
 ---------
 
 vim.g['ctrlp_map'] = '<c-p>'
 vim.g['ctrlp_cmd'] = 'CtrlP'
+
+
+-- Gitsigns
+------------
+
+require('gitsigns').setup()
+
+
+-- Rust
+--------
+
+vim.g['rustfmt_autosave'] = 1
+
+
+-- Treesitter
+--------------
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = {'bash', 'c', 'cpp', 'css', 'go', 'html', 'json', 'lua', 'python', 'rust', 'vim', 'yaml'},
+  ignore_install = {},
+  highlight = {
+    enable = true,
+    disable = {},
+    additional_vim_regex_highlighting = false,
+  },
+}
+
+
+-- Trouble
+-----------
+
+require('trouble').setup()
+map('n', '<leader>xx', '<cmd>Trouble<cr>', {silent = true, noremap = true})
+map('n', '<leader>xw', '<cmd>Trouble workspace_diagnostics<cr>', {silent = true, noremap = true})
+map('n', '<leader>xd', '<cmd>Trouble document_diagnostics<cr>', {silent = true, noremap = true})
+map('n', '<leader>xl', '<cmd>Trouble loclist<cr>', {silent = true, noremap = true})
+map('n', '<leader>xq', '<cmd>Trouble quickfix<cr>', {silent = true, noremap = true})
+map('n', 'gR', '<cmd>Trouble lsp_references<cr>', {silent = true, noremap = true})
+
+
+-- Vista
+---------
+
+vim.g['vista#renderer#enable_icon'] = 0
+vim.g['vista_sidebar_position'] = 'vertical topleft'
+vim.g['vista_sidebar_width'] = 60
+
+
+-- Test
+--------
+
+vim.g['test#strategy'] = 'neovim'
