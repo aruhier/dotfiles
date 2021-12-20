@@ -134,29 +134,29 @@ input type:keyboard {
     bindsym $mod+Control+l exec loginctl lock-session
 
 # Volume Keys
-    bindsym XF86AudioMute exec pamixer -t
-    bindsym $mod+F1 exec pamixer -t
-    bindsym XF86AudioRaiseVolume exec pamixer -i 5
-    bindsym $mod+F3 exec pamixer -i 5
-    bindsym XF86AudioLowerVolume exec pamixer -d 5
-    bindsym $mod+F2 exec pamixer -d 5
-    bindsym XF86AudioRaiseVolume+Shift exec pamixer -i 1
-    bindsym $mod+Shift+F3 exec pamixer -i 1
-    bindsym XF86AudioLowerVolume+Shift exec pamixer -d 1
-    bindsym $mod+Shift+F2 exec pamixer -d 1
+    bindsym --locked XF86AudioMute exec pamixer -t
+    bindsym --locked $mod+F1 exec pamixer -t
+    bindsym --locked XF86AudioRaiseVolume exec pamixer -i 5
+    bindsym --locked $mod+F3 exec pamixer -i 5
+    bindsym --locked XF86AudioLowerVolume exec pamixer -d 5
+    bindsym --locked $mod+F2 exec pamixer -d 5
+    bindsym --locked XF86AudioRaiseVolume+Shift exec pamixer -i 1
+    bindsym --locked $mod+Shift+F3 exec pamixer -i 1
+    bindsym --locked XF86AudioLowerVolume+Shift exec pamixer -d 1
+    bindsym --locked $mod+Shift+F2 exec pamixer -d 1
 
 # Media Keys
-    bindsym XF86AudioPrev exec mpc prev
-    bindsym $mod+F5 exec mpc prev
-    bindsym XF86AudioPlay exec mpc toggle
-    bindsym $mod+F4 exec mpc toggle
-    bindsym XF86AudioNext exec mpc next
-    bindsym $mod+F6 exec mpc next
+    bindsym --locked XF86AudioPrev exec mpc prev
+    bindsym --locked $mod+F5 exec mpc prev
+    bindsym --locked XF86AudioPlay exec mpc toggle
+    bindsym --locked $mod+F4 exec mpc toggle
+    bindsym --locked XF86AudioNext exec mpc next
+    bindsym --locked $mod+F6 exec mpc next
 
-    bindsym XF86MonBrightnessUp exec light -A 10
-    bindsym Shift+XF86MonBrightnessUp exec light -A 1
-    bindsym XF86MonBrightnessDown exec light -U 10
-    bindsym Shift+XF86MonBrightnessDown exec light -U 1
+    bindsym --locked XF86MonBrightnessUp exec light -A 10
+    bindsym --locked Shift+XF86MonBrightnessUp exec light -A 1
+    bindsym --locked XF86MonBrightnessDown exec light -U 10
+    bindsym --locked Shift+XF86MonBrightnessDown exec light -U 1
 #
 # Moving around:
 #
