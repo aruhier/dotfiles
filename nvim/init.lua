@@ -49,7 +49,7 @@ require('packer').startup(function()
   ---- Code diagnostic
   use {'folke/trouble.nvim', requires={'kyazdani42/nvim-web-devicons'}}
   ---- Status line
-  use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons'}}
+  use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons', 'arkav/lualine-lsp-progress'}}
   ---- Unit tests
   use 'janko-m/vim-test'
   use {'alfredodeza/coveragepy.vim', ft = {'python'}}
@@ -197,7 +197,7 @@ local function setupLualine()
           colored=false, icons_enabled=false
         }
       },
-      lualine_c = {'filename'},
+      lualine_c = {'filename', 'lsp_progress'},
       lualine_x = {'encoding', {'fileformat' , icons_enabled=false}, {'filetype', icons_enabled=false}},
       lualine_y = {'progress'},
       lualine_z = {'location'}
