@@ -469,7 +469,7 @@ vim.g['rustfmt_autosave'] = 1
 --------------
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = {'bash', 'c', 'cpp', 'css', 'go', 'html', 'json', 'lua', 'python', 'rust', 'vim', 'yaml'},
+  ensure_installed = "maintained",
   ignore_install = {},
   highlight = {
     enable = true,
