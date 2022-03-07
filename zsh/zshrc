@@ -105,6 +105,7 @@ alias obsolete_pkg='eix-test-obsolete'
 alias clean_obsolete_pkg='portpeek'
 alias private=' unset HISTFILE; _zoxide_hook(){}'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
+alias sshnocheck='ssh -o StrictHostKeyChecking=no '
 alias sshag='_sshag'
 alias sudo='sudo ' # Make aliases work with sudo
 
