@@ -58,6 +58,7 @@ alias mkcd=mkdir_cd $1
 alias mtr='mtr -o "LSR NABWV"'
 alias private=' unset HISTFILE'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
+alias sshnocheck='ssh -o StrictHostKeyChecking=no '
 alias sshag='_sshag'
 alias sudo='sudo ' # Make aliases work with sudo
 
