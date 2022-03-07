@@ -50,6 +50,7 @@ require('packer').startup(function()
   use {'folke/trouble.nvim', requires={'kyazdani42/nvim-web-devicons'}}
   ---- Status line
   use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons', 'arkav/lualine-lsp-progress'}}
+  use {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'}}
   ---- Unit tests
   use 'janko-m/vim-test'
   use {'alfredodeza/coveragepy.vim', ft = {'python'}}
@@ -76,6 +77,7 @@ end)
   ----------------------------------------------------------------
 
 local map = vim.api.nvim_set_keymap
+local opts = { noremap=true, silent=true }
 
 vim.opt.syntax = 'on'
 
@@ -215,6 +217,71 @@ local function setupLualine()
   }
 end
 setupLualine()
+
+
+-- Tabline
+----------
+
+local function setupBarbar()
+  -- Move to previous/next
+  map('n', '<A-,>', ':BufferPrevious<CR>', opts)
+  map('n', '<A-.>', ':BufferNext<CR>', opts)
+  -- Re-order to previous/next
+  map('n', '<A-<>', ':BufferMovePrevious<CR>', opts)
+  map('n', '<A->>', ' :BufferMoveNext<CR>', opts)
+  -- Goto buffer in position...
+  map('n', '<A-1>', ':BufferGoto 1<CR>', opts)
+  map('n', '<A-2>', ':BufferGoto 2<CR>', opts)
+  map('n', '<A-3>', ':BufferGoto 3<CR>', opts)
+  map('n', '<A-4>', ':BufferGoto 4<CR>', opts)
+  map('n', '<A-5>', ':BufferGoto 5<CR>', opts)
+  map('n', '<A-6>', ':BufferGoto 6<CR>', opts)
+  map('n', '<A-7>', ':BufferGoto 7<CR>', opts)
+  map('n', '<A-8>', ':BufferGoto 8<CR>', opts)
+  map('n', '<A-9>', ':BufferGoto 9<CR>', opts)
+  map('n', '<A-0>', ':BufferLast<CR>', opts)
+  -- Close buffer
+  map('n', '<A-c>', ':BufferClose<CR>', opts)
+  -- Wipeout buffer
+  --                 :BufferWipeout<CR>
+  -- Close commands
+  --                 :BufferCloseAllButCurrent<CR>
+  --                 :BufferCloseBuffersLeft<CR>
+  --                 :BufferCloseBuffersRight<CR>
+  -- Magic buffer-picking mode
+  map('n', '<C-p>', ':BufferPick<CR>', opts)
+  -- Sort automatically by...
+  map('n', '<Space>bb', ':BufferOrderByBufferNumber<CR>', opts)
+  map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', opts)
+  map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', opts)
+
+  vim.g.bufferline = {
+    animation = false,
+    auto_hide = true,
+    tabpages = true,
+    closable = true,
+    clickable = true,
+
+    -- Excludes buffers from the tabline
+    exclude_ft = {'javascript'},
+    exclude_name = {'package.json'},
+
+    icons = 'numbers',
+    icon_close_tab = 'X',
+
+    insert_at_end = false,
+    insert_at_start = false,
+
+    maximum_padding = 1,
+    maximum_length = 50,
+
+    semantic_letters = true,
+    letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+
+    no_name_title = nil,
+  }
+end
+setupBarbar()
 
 
 -- nvim-lsp
