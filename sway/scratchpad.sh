@@ -43,13 +43,13 @@ do
   shift
 done
 
-swaymsg $filters scratchpad show
+swaymsg $filters scratchpad show > /dev/null
 if [[ $? > 0 ]]
     then exec $prog&
     counter=0
     while true
     do
-        swaymsg $filters move window to scratchpad
+        swaymsg $filters move window to scratchpad > /dev/null
         if [[ $? == 0 ]]
             then break
         fi
@@ -61,7 +61,7 @@ if [[ $? > 0 ]]
         counter=$((counter+1))
     done
 
-    swaymsg $filters focus
+    swaymsg $filters focus > /dev/null
 fi
-sway $filters resize set width $width height $height
-sway $filters move position $posx $posy
+sway $filters resize set width $width height $height > /dev/null
+sway $filters move position $posx $posy > /dev/null
