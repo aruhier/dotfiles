@@ -3,7 +3,7 @@
     "output": ["DP-3", "HDMI-A-1"],
     "modules-left": ["mpd", "sway/mode", "custom/right-arrow"],
     "modules-center": ["custom/right-arrow", "sway/workspaces", "custom/left-arrow"],
-    "modules-right": ["custom/left-arrow", "custom/swaync", "backlight", "battery", "battery#bat2", "pulseaudio", "clock"],
+    "modules-right": ["custom/left-arrow", "backlight", "battery", "battery#bat2", "pulseaudio", "custom/swaync", "clock"],
     "include": ["~/.config/waybar/config.d/common.json"]
 },{
     "height": 18, // Waybar height (to be removed for auto height)
