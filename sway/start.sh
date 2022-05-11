@@ -1,5 +1,6 @@
 #!/bin/sh
 
+swaync&
 waybar&
 GTK_THEME=Adwaita:dark /usr/lib/xfce4/notifyd/xfce4-notifyd&
 nm-applet --indicator&

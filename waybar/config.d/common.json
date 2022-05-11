@@ -11,6 +11,22 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
+    "custom/swaync": {
+        "tooltip": true,
+        "format": "{icon}",
+        "format-icons": {
+          "notification": "<span foreground='red'>󰂞</span>",
+          "none": "󰂚",
+          "dnd-notification": "<span foreground='red'>󰂛</span>",
+          "dnd-none": "󰂛"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
     "mpd": {
         "format": "<span font='10'>{stateIcon}</span> {artist} - {title}",
         "format-disconnected": "",
