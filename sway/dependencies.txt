@@ -1,0 +1,7 @@
+gammastep
+kdeconnect
+lxqt-policykit
+network-manager
+nextcloud
+swaync
+waybar
