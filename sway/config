@@ -158,6 +158,12 @@ bindsym --locked XF86MonBrightnessUp exec light -A 10
 bindsym --locked Shift+XF86MonBrightnessUp exec light -A 1
 bindsym --locked XF86MonBrightnessDown exec light -U 10
 bindsym --locked Shift+XF86MonBrightnessDown exec light -U 1
+
+# Notifications (swaync)
+
+bindsym $mod+n exec swaync-client -t
+bindsym $mod+Shift+n exec swaync-client -C
+
 #
 # Moving around:
 #

@@ -3,9 +3,9 @@
  */
 
 @define-color border-color rgb(7, 7, 7);
-@define-color bg rgb(58, 58, 58);
-@define-color bg-hover rgb(68, 68, 68);
-@define-color bg-focus rgba(68, 68, 68, 0.6);
+@define-color bg rgb(42, 42, 42);
+@define-color bg-hover rgb(58, 58, 58);
+@define-color bg-focus rgba(58, 58, 58, 0.6);
 @define-color bg-selected rgb(0, 128, 255);
 
 .notification-row {
@@ -159,7 +159,7 @@
 }
 
 .control-center {
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(42, 42, 42, 0.85);
 }
 .control-center-list {
   background: transparent;
