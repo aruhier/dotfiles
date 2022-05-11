@@ -67,190 +67,190 @@ input type:keyboard {
 # Sway bindings:
 #
 
-    # exit sway (logs you out of your Wayland session)
-    bindsym $mod+Control+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+# exit sway (logs you out of your Wayland session)
+bindsym $mod+Control+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
 
-    bindsym alt+z exec firefox
-    bindsym alt+x exec thunderbird
+bindsym alt+z exec firefox
+bindsym alt+x exec thunderbird
 
-    # tabbed mod
-    bindsym $mod+t layout tabbed
+# tabbed mod
+bindsym $mod+t layout tabbed
 
-    # balance
-    # TODO: find an alternative
+# balance
+# TODO: find an alternative
 
-    # float
-    bindsym $mod+Control+f floating toggle
+# float
+bindsym $mod+Control+f floating toggle
 
-    # fullscreen
-    bindsym $mod+Shift+Control+f fullscreen toggle
+# fullscreen
+bindsym $mod+Shift+Control+f fullscreen toggle
 
-    # jump to last in history
-    # TODO: see https://github.com/i3/i3/issues/838
+# jump to last in history
+# TODO: see https://github.com/i3/i3/issues/838
 
-    # swap with last
-    # TODO: figure out an alternative
+# swap with last
+# TODO: figure out an alternative
 
-    # move to split
-    # TODO: figure out how to do that
+# move to split
+# TODO: figure out how to do that
 
-    # swap with biggest
-    # TODO: figure out how to do that
+# swap with biggest
+# TODO: figure out how to do that
 
-    # move around
-    bindsym $mod+$left focus left
-    bindsym $mod+$down focus down
-    bindsym $mod+$up focus up
-    bindsym $mod+$right focus right
+# move around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
 
-    # move in cycle
-    bindsym Alt+Tab focus next
-    bindsym Alt+Shift+Tab focus prev
+# move in cycle
+bindsym Alt+Tab focus next
+bindsym Alt+Shift+Tab focus prev
 
-    # move to screen
-    bindsym $mod+q focus output HDMI-A-1
-    bindsym $mod+Shift+q move output HDMI-A-1
-    bindsym $mod+w focus output DP-2
-    bindsym $mod+Shift+w move output DP-2
-    bindsym $mod+e focus output DP-3
-    bindsym $mod+Shift+e move output DP-3
+# move to screen
+bindsym $mod+q focus output HDMI-A-1
+bindsym $mod+Shift+q move output HDMI-A-1
+bindsym $mod+w focus output DP-2
+bindsym $mod+Shift+w move output DP-2
+bindsym $mod+e focus output DP-3
+bindsym $mod+Shift+e move output DP-3
 
-    # close focused window
-    bindsym $mod+z kill
+# close focused window
+bindsym $mod+z kill
 
-    # Start your launcher
-    bindsym $mod+r exec $menu
-    bindsym $mod+Return exec $term
+# Start your launcher
+bindsym $mod+r exec $menu
+bindsym $mod+Return exec $term
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
 
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
+# Reload the configuration file
+bindsym $mod+Shift+c reload
 
-    bindsym $mod+Control+l exec loginctl lock-session
+bindsym $mod+Control+l exec loginctl lock-session
 
 # Volume Keys
-    bindsym --locked XF86AudioMute exec pulsemixer --toggle-mute
-    bindsym --locked $mod+F1 exec pulsemixer --toggle-mute
-    bindsym --locked XF86AudioRaiseVolume exec pulsemixer --change-volume +5
-    bindsym --locked $mod+F3 exec pulsemixer --change-volume +5
-    bindsym --locked XF86AudioLowerVolume exec pulsemixer --change-volume -5
-    bindsym --locked $mod+F2 exec pulsemixer --change-volume -5
-    bindsym --locked XF86AudioRaiseVolume+Shift exec pulsemixer --change-volume +1
-    bindsym --locked $mod+Shift+F3 exec pulsemixer --change-volume +1
-    bindsym --locked XF86AudioLowerVolume+Shift exec pulsemixer --change-volume -1
-    bindsym --locked $mod+Shift+F2 exec pulsemixer --change-volume -1
+bindsym --locked XF86AudioMute exec pulsemixer --toggle-mute
+bindsym --locked $mod+F1 exec pulsemixer --toggle-mute
+bindsym --locked XF86AudioRaiseVolume exec pulsemixer --change-volume +5
+bindsym --locked $mod+F3 exec pulsemixer --change-volume +5
+bindsym --locked XF86AudioLowerVolume exec pulsemixer --change-volume -5
+bindsym --locked $mod+F2 exec pulsemixer --change-volume -5
+bindsym --locked XF86AudioRaiseVolume+Shift exec pulsemixer --change-volume +1
+bindsym --locked $mod+Shift+F3 exec pulsemixer --change-volume +1
+bindsym --locked XF86AudioLowerVolume+Shift exec pulsemixer --change-volume -1
+bindsym --locked $mod+Shift+F2 exec pulsemixer --change-volume -1
 
 # Media Keys
-    bindsym --locked XF86AudioPrev exec mpc prev
-    bindsym --locked $mod+F5 exec mpc prev
-    bindsym --locked XF86AudioPlay exec mpc toggle
-    bindsym --locked $mod+F4 exec mpc toggle
-    bindsym --locked XF86AudioNext exec mpc next
-    bindsym --locked $mod+F6 exec mpc next
+bindsym --locked XF86AudioPrev exec mpc prev
+bindsym --locked $mod+F5 exec mpc prev
+bindsym --locked XF86AudioPlay exec mpc toggle
+bindsym --locked $mod+F4 exec mpc toggle
+bindsym --locked XF86AudioNext exec mpc next
+bindsym --locked $mod+F6 exec mpc next
 
-    bindsym --locked XF86MonBrightnessUp exec light -A 10
-    bindsym --locked Shift+XF86MonBrightnessUp exec light -A 1
-    bindsym --locked XF86MonBrightnessDown exec light -U 10
-    bindsym --locked Shift+XF86MonBrightnessDown exec light -U 1
+bindsym --locked XF86MonBrightnessUp exec light -A 10
+bindsym --locked Shift+XF86MonBrightnessUp exec light -A 1
+bindsym --locked XF86MonBrightnessDown exec light -U 10
+bindsym --locked Shift+XF86MonBrightnessDown exec light -U 1
 #
 # Moving around:
 #
-    # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # Ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+# Ditto, with arrow keys
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
 #
 # Workspaces:
 #
-    # Switch to workspace
-    set $ws1 "1: a"
-    set $ws2 "2: s"
-    set $ws3 "3: d"
-    set $ws4 "4: f"
-    set $ws5 "5: u"
-    set $ws6 "6: i"
-    set $ws7 "7: o"
-    set $ws8 "8: p"
-    set $ws9 "9: 7"
-    set $ws10 "10: 8"
-    set $ws11 "11: 9"
-    set $ws12 "12: 10"
-    bindsym $mod+a [workspace=$ws1] move workspace to output current; workspace $ws1
-    bindsym $mod+s [workspace=$ws2] move workspace to output current; workspace $ws2
-    bindsym $mod+d [workspace=$ws3] move workspace to output current; workspace $ws3
-    bindsym $mod+f [workspace=$ws4] move workspace to output current; workspace $ws4
-    bindsym $mod+u [workspace=$ws5] move workspace to output current; workspace $ws5
-    bindsym $mod+i [workspace=$ws6] move workspace to output current; workspace $ws6
-    bindsym $mod+o [workspace=$ws7] move workspace to output current; workspace $ws7
-    bindsym $mod+p [workspace=$ws8] move workspace to output current; workspace $ws8
-    bindsym $mod+7 [workspace=$ws9] move workspace to output current; workspace $ws9
-    bindsym $mod+8 [workspace=$ws10] move workspace to output current; workspace $ws10
-    bindsym $mod+9 [workspace=$ws11] move workspace to output current; workspace $ws11
-    bindsym $mod+0 [workspace=$ws12] move workspace to output current; workspace $ws12
+# Switch to workspace
+set $ws1 "1: a"
+set $ws2 "2: s"
+set $ws3 "3: d"
+set $ws4 "4: f"
+set $ws5 "5: u"
+set $ws6 "6: i"
+set $ws7 "7: o"
+set $ws8 "8: p"
+set $ws9 "9: 7"
+set $ws10 "10: 8"
+set $ws11 "11: 9"
+set $ws12 "12: 10"
+bindsym $mod+a [workspace=$ws1] move workspace to output current; workspace $ws1
+bindsym $mod+s [workspace=$ws2] move workspace to output current; workspace $ws2
+bindsym $mod+d [workspace=$ws3] move workspace to output current; workspace $ws3
+bindsym $mod+f [workspace=$ws4] move workspace to output current; workspace $ws4
+bindsym $mod+u [workspace=$ws5] move workspace to output current; workspace $ws5
+bindsym $mod+i [workspace=$ws6] move workspace to output current; workspace $ws6
+bindsym $mod+o [workspace=$ws7] move workspace to output current; workspace $ws7
+bindsym $mod+p [workspace=$ws8] move workspace to output current; workspace $ws8
+bindsym $mod+7 [workspace=$ws9] move workspace to output current; workspace $ws9
+bindsym $mod+8 [workspace=$ws10] move workspace to output current; workspace $ws10
+bindsym $mod+9 [workspace=$ws11] move workspace to output current; workspace $ws11
+bindsym $mod+0 [workspace=$ws12] move workspace to output current; workspace $ws12
 
-    # Move focused container to workspace
-    bindsym $mod+Shift+a move container to workspace $ws1
-    bindsym $mod+Shift+s move container to workspace $ws2
-    bindsym $mod+Shift+d move container to workspace $ws3
-    bindsym $mod+Shift+f move container to workspace $ws4
-    bindsym $mod+Shift+u move container to workspace $ws5
-    bindsym $mod+Shift+i move container to workspace $ws6
-    bindsym $mod+Shift+o move container to workspace $ws7
-    bindsym $mod+Shift+p move container to workspace $ws8
-    bindsym $mod+Shift+7 move container to workspace $ws9
-    bindsym $mod+Shift+8 move container to workspace $ws10
-    bindsym $mod+Shift+9 move container to workspace $ws11
-    bindsym $mod+Shift+0 move container to workspace $ws12
+# Move focused container to workspace
+bindsym $mod+Shift+a move container to workspace $ws1
+bindsym $mod+Shift+s move container to workspace $ws2
+bindsym $mod+Shift+d move container to workspace $ws3
+bindsym $mod+Shift+f move container to workspace $ws4
+bindsym $mod+Shift+u move container to workspace $ws5
+bindsym $mod+Shift+i move container to workspace $ws6
+bindsym $mod+Shift+o move container to workspace $ws7
+bindsym $mod+Shift+p move container to workspace $ws8
+bindsym $mod+Shift+7 move container to workspace $ws9
+bindsym $mod+Shift+8 move container to workspace $ws10
+bindsym $mod+Shift+9 move container to workspace $ws11
+bindsym $mod+Shift+0 move container to workspace $ws12
 #
 # Layout stuff:
 #
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
-    bindsym $mod+control+space split none
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+control+space split none
 
-    # Switch the current container between different layout styles
-    bindsym $mod+comma layout stacking
-    #bindsym $mod+. layout tabbed
-    #bindsym $mod+/ layout toggle split
+# Switch the current container between different layout styles
+bindsym $mod+comma layout stacking
+#bindsym $mod+. layout tabbed
+#bindsym $mod+/ layout toggle split
 
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
 
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
 
-    # Move focus to the parent container
-    bindsym $mod+alt+p focus parent
+# Move focus to the parent container
+bindsym $mod+alt+p focus parent
 #
 # Scratchpad:
 #
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
 
-    bindsym Alt+s exec ~/.config/sway/scratchpad.sh 'flatpak run org.signal.Signal' --filters '[instance="signal"]' --width '86ppt' --height '86ppt' -x '7ppt' -y 0
-    bindsym Alt+d exec ~/.config/sway/scratchpad.sh 'flatpak run org.telegram.desktop' --filters '[app_id="org.telegram.desktop"]' --width '86ppt' --height '86ppt' -x '7ppt' -y 0
+bindsym Alt+s exec ~/.config/sway/scratchpad.sh 'flatpak run org.signal.Signal' --filters '[instance="signal"]' --width '86ppt' --height '86ppt' -x '7ppt' -y 0
+bindsym Alt+d exec ~/.config/sway/scratchpad.sh 'flatpak run org.telegram.desktop' --filters '[app_id="org.telegram.desktop"]' --width '86ppt' --height '86ppt' -x '7ppt' -y 0
 #
 # Resizing containers:
 #
