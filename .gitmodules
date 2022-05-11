@@ -3,4 +3,4 @@
 	url = https://github.com/seebi/dircolors-solarized
 [submodule "fonts/material-design-font"]
 	path = fonts/material-design-font
-	url = git@github.com:Templarian/MaterialDesign-Font.git
+	url = https://github.com/Templarian/MaterialDesign-Font
