@@ -1,5 +1,6 @@
 #!/bin/sh
 
+swaync&
 waybar&
 nm-applet --indicator&
 sleep 1

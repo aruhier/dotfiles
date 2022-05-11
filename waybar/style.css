@@ -76,7 +76,8 @@ window#waybar.solo {
 #tray,
 #mode,
 #idle_inhibitor,
-#mpd {
+#mpd,
+#custom-swaync {
     padding: 0 10px;
     margin: 0 4px;
 }

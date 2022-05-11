@@ -1,15 +1,15 @@
 [{
     "height": 18, // Waybar height (to be removed for auto height)
-	"output": ["DP-3", "HDMI-A-1"],
+    "output": ["DP-3", "HDMI-A-1"],
     "modules-left": ["mpd", "sway/mode", "custom/right-arrow"],
     "modules-center": ["custom/right-arrow", "sway/workspaces", "custom/left-arrow"],
-    "modules-right": ["custom/left-arrow", "backlight", "battery", "battery#bat2", "pulseaudio", "clock"],
+    "modules-right": ["custom/left-arrow", "custom/swaync", "backlight", "battery", "battery#bat2", "pulseaudio", "clock"],
     "include": ["~/.config/waybar/config.d/common.json"]
 },{
     "height": 18, // Waybar height (to be removed for auto height)
     "modules-left": ["mpd", "sway/mode", "custom/right-arrow"],
     "modules-center": ["custom/right-arrow", "sway/workspaces", "custom/left-arrow"],
-    "modules-right": ["custom/left-arrow", "tray", "backlight", "battery", "battery#bat2", "pulseaudio", "clock"],
-	"output": ["DP-2"],
+    "modules-right": ["custom/left-arrow", "tray", "backlight", "battery", "battery#bat2", "pulseaudio", "custom/swaync", "clock"],
+    "output": ["DP-2"],
     "include": ["~/.config/waybar/config.d/common.json"]
 }]
