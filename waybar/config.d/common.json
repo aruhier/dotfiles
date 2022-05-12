@@ -13,12 +13,12 @@
     },
     "custom/swaync": {
         "tooltip": true,
-        "format": "{icon}",
+        "format": "<span rise='2.5pt' font='10'>{icon}</span>",
         "format-icons": {
-          "notification": "<span foreground='red'>󰂞</span>",
+          "notification": "<span foreground='#FF9334'>󰂞</span>",
           "none": "󰂚",
-          "dnd-notification": "<span foreground='red'>󰂛</span>",
-          "dnd-none": "󰂛"
+          "dnd-notification": "<span foreground='#FF9334'>󰂛</span>",
+          "dnd-none": "<span foreground='#9c9ca4'>󰂛</span>"
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -44,19 +44,19 @@
         "title-len": 40
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 15,
         "spacing": 10
     },
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "<span font='10'>󰃭</span> {:%a %d %b  %H:%M}",
+        "format": "<span rise='-1pt' font='11'>󰃭</span> {:%a %d %b  %H:%M}",
         "format-alt": "{:%Y-%m-%d}"
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
+        "format": "{percent}% <span font='11' rise='-1pt'>{icon}</span>",
+        "format-icons": ["󰃞", "󰃠"]
     },
     "battery": {
         "states": {
@@ -64,20 +64,18 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format": "{capacity}% <span allow_breaks='false' line_height='0.9' gravity='west' gravity_hint='strong' baseline_shift='4.9pt' rise='-0.5pt' font='12'>{icon}</span>",
+        "format-charging": "{capacity}%<span font='5'> </span><span font='10' rise='-0.5pt'>󰂄</span>",
+        "format-plugged": "{capacity}% <span allow_breaks='false' line_height='0.9' gravity='west' gravity_hint='strong' baseline_shift='4.5pt' font='12'>󰚥</span>",
+        "format-alt": "{time} <span allow_breaks='false' line_height='0.9' gravity='west' gravity_hint='strong' baseline_shift='4.5pt' font='12'>{icon}</span>",
+        "format-icons": ["󰂎", "󰁼", "󰁿", "󰂁", "󰁹"]
     },
     "battery#bat2": {
         "bat": "BAT2"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "<span font='10'>{icon}</span> {volume}%",
+        "format": "<span font='11' rise='-1pt'>{icon}</span> {volume}%",
         "format-muted": "󰝟",
         "format-source": "",
         "format-source-muted": "",
