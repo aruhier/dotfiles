@@ -1,4 +1,0 @@
-Monitors config for gnome-shell
-===============================
-
-Gnome-Shell sometimes modifies my monitors config after plugin/plugout one.
