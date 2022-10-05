@@ -6,7 +6,7 @@ rofi.fixed-num-lines: true
 rofi.bw: 0
 rofi.location: 0
 rofi.monitor: -1
-rofi.terminal: urxvt
+rofi.terminal: alacritty
 rofi.lines: 10
 rofi.eh: 1
 rofi.color-window: argb:ef263238, argb:aa263238, #2aa198
