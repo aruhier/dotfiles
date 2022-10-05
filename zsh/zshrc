@@ -83,7 +83,7 @@ alias g='git'
 alias l='ls'
 alias mtrg='mtr 8.8.8.8'
 alias mtrg6='mtr 2001:4860:4860::8888'
-alias n='newurxvt'
+alias n='newterm'
 alias o='xdg-open'
 alias p='ping'
 alias pg='ping 8.8.8.8'
@@ -131,8 +131,8 @@ alias g++od='compile_c++_options_debug g++ '
 alias gcco='compile_options gcc '
 alias gccod='compile_options_debug gcc '
 
-# urxvt
-alias newurxvt='urxvt&; disown %urxvt'
+# Alacritty
+alias newterm='alacritty&; disown %alacritty'
 
 
 # XModMap
