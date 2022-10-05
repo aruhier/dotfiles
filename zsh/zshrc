@@ -130,7 +130,7 @@ alias g++od='compile_c++_options_debug g++ '
 alias gcco='compile_options gcc '
 alias gccod='compile_options_debug gcc '
 
-# urxvt
+# Alacritty
 alias newterm='alacritty&; disown %alacritty'
 
 
