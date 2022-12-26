@@ -1,10 +1,9 @@
 #!/bin/sh
 
 swaync&
+lxqt-policykit-agent&
 waybar&
 nm-applet --indicator&
-sleep 1
-lxqt-policykit-agent&
 gammastep-indicator&
 kdeconnect-indicator&
 nextcloud --background&
