@@ -42,7 +42,7 @@ require('packer').startup(function()
     'hrsh7th/cmp-vsnip',
     'hrsh7th/vim-vsnip',
   }}
-  use {'williamboman/nvim-lsp-installer', requires={'neovim/nvim-lspconfig'}}
+  use {'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim', requires={'neovim/nvim-lspconfig'}}
 
   ---- Treesitter
   use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
@@ -380,13 +380,13 @@ local function setupNvimCMP()
   })
 
   -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local capabilities = require('cmp_nvim_lsp').default_capabilities()
 end
 setupNvimCMP()
 
 
--- nvim-lsp-installer
-----------------------
+-- Mason LSP
+------------
 
 local function setupLSPInstaller()
   local on_attach = function(client, bufnr)
@@ -419,23 +419,19 @@ local function setupLSPInstaller()
     buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
   end
 
-  local lsp_installer = require('nvim-lsp-installer')
+  require("mason").setup()
+  require("mason-lspconfig").setup({
+    ensure_installed = {'rust_analyzer', 'clangd', 'gopls', 'pyright'},
+  })
 
-  lsp_installer.on_server_ready(function(server)
-      local opts = {on_attach=on_attach}
-      server:setup(opts)
-  end)
-
-  local servers = {'rust_analyzer', 'clangd', 'gopls', 'pyright'}
-
-  for _, s in ipairs(servers) do
-    local ok, server = lsp_installer.get_server(s)
-    if ok then
-      if not server:is_installed() then
-        server:install()
-      end
-    end
-  end
+  require("mason-lspconfig").setup_handlers {
+    -- The first entry (without a key) will be the default handler
+    -- and will be called for each installed server that doesn't have
+    -- a dedicated handler.
+    function (server_name) -- default handler (optional)
+      require("lspconfig")[server_name].setup {on_attach=on_attach}
+    end,
+  }
 end
 setupLSPInstaller()
 
