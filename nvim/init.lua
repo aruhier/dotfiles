@@ -231,16 +231,18 @@ local function setupLualine()
   }
 
   -- Needed because of that: https://github.com/nvim-lualine/lualine.nvim/discussions/845
-  require("lualine").hide({
-    place = { "tabline" },
-  })
-  vim.api.nvim_create_autocmd({ "TabNew", "TabClosed" }, {
-    group = vim.api.nvim_create_augroup("LualineTab", {}),
+  if #vim.api.nvim_list_tabpages() < 2 then
+    require('lualine').hide({
+      place = { 'tabline' },
+    })
+  end
+  vim.api.nvim_create_autocmd({ 'TabNew', 'TabClosed' }, {
+    group = vim.api.nvim_create_augroup('LualineTab', {}),
     callback = function()
       local show = #vim.api.nvim_list_tabpages() > 1
       vim.o.showtabline = show and 1 or 0
-      require("lualine").hide({
-        place = { "tabline" },
+      require('lualine').hide({
+        place = { 'tabline' },
         unhide = show,
       })
     end,
