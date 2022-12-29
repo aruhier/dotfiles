@@ -46,8 +46,7 @@ mouse_warping none
 output * bg ~/.config/sway/wallpaper fill
 
 exec swayidle -w \
-    timeout 300  '~/.config/sway/lock.sh' \
-    resume 'swaymsg "output * dpms on"' \
+    timeout 300 '~/.config/sway/lock.sh' \
     after-resume 'swaymsg "output * dpms on"' \
     lock '~/.config/sway/lock.sh' \
     before-sleep '~/.config/sway/lock.sh'
