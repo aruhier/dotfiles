@@ -49,8 +49,7 @@ require('packer').startup(function()
   ---- Code diagnostic
   use {'folke/trouble.nvim', requires={'kyazdani42/nvim-web-devicons'}}
   ---- Status line
-  use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons', 'arkav/lualine-lsp-progress'}}
-  use {'romgrk/barbar.nvim', requires = {'kyazdani42/nvim-web-devicons'}}
+  use {'aruhier/lualine.nvim', branch = 'pr_tabs', requires={'kyazdani42/nvim-web-devicons', 'arkav/lualine-lsp-progress'}}
   ---- Unit tests
   use 'janko-m/vim-test'
   use {'alfredodeza/coveragepy.vim', ft = {'python'}}
@@ -199,7 +198,14 @@ local function setupLualine()
           colored=false, icons_enabled=false
         }
       },
-      lualine_c = {'filename', 'lsp_progress'},
+      lualine_c = {
+        {
+          'filename',
+          -- Relative path.
+          path=1,
+        },
+        'lsp_progress'
+      },
       lualine_x = {'encoding', {'fileformat' , icons_enabled=false}, {'filetype', icons_enabled=false}},
       lualine_y = {'progress'},
       lualine_z = {'location'}
@@ -207,81 +213,40 @@ local function setupLualine()
     inactive_sections = {
       lualine_a = {},
       lualine_b = {},
-      lualine_c = {'filename'},
+      lualine_c = {
+        {
+          'filename',
+          -- Relative path.
+          path=1,
+        },
+      },
       lualine_x = {'location'},
       lualine_y = {},
       lualine_z = {}
     },
-    tabline = {},
+    tabline = {
+      lualine_a = {{'tabs', mode = 1, path=1, max_length = vim.o.columns}},
+    },
     extensions = {}
   }
+
+  -- Needed because of that: https://github.com/nvim-lualine/lualine.nvim/discussions/845
+  require("lualine").hide({
+    place = { "tabline" },
+  })
+  vim.api.nvim_create_autocmd({ "TabNew", "TabClosed" }, {
+    group = vim.api.nvim_create_augroup("LualineTab", {}),
+    callback = function()
+      local show = #vim.api.nvim_list_tabpages() > 1
+      vim.o.showtabline = show and 1 or 0
+      require("lualine").hide({
+        place = { "tabline" },
+        unhide = show,
+      })
+    end,
+  })
 end
 setupLualine()
-
-
--- Tabline
-----------
-
-local function setupBarbar()
-  -- Move to previous/next
-  map('n', '<A-,>', ':BufferPrevious<CR>', opts)
-  map('n', '<A-.>', ':BufferNext<CR>', opts)
-  -- Re-order to previous/next
-  map('n', '<A-<>', ':BufferMovePrevious<CR>', opts)
-  map('n', '<A->>', ' :BufferMoveNext<CR>', opts)
-  -- Goto buffer in position...
-  map('n', '<A-1>', ':BufferGoto 1<CR>', opts)
-  map('n', '<A-2>', ':BufferGoto 2<CR>', opts)
-  map('n', '<A-3>', ':BufferGoto 3<CR>', opts)
-  map('n', '<A-4>', ':BufferGoto 4<CR>', opts)
-  map('n', '<A-5>', ':BufferGoto 5<CR>', opts)
-  map('n', '<A-6>', ':BufferGoto 6<CR>', opts)
-  map('n', '<A-7>', ':BufferGoto 7<CR>', opts)
-  map('n', '<A-8>', ':BufferGoto 8<CR>', opts)
-  map('n', '<A-9>', ':BufferGoto 9<CR>', opts)
-  map('n', '<A-0>', ':BufferLast<CR>', opts)
-  -- Close buffer
-  map('n', '<A-c>', ':BufferClose<CR>', opts)
-  -- Wipeout buffer
-  --                 :BufferWipeout<CR>
-  -- Close commands
-  --                 :BufferCloseAllButCurrent<CR>
-  --                 :BufferCloseBuffersLeft<CR>
-  --                 :BufferCloseBuffersRight<CR>
-  -- Magic buffer-picking mode
-  map('n', '<C-p>', ':BufferPick<CR>', opts)
-  -- Sort automatically by...
-  map('n', '<Space>bb', ':BufferOrderByBufferNumber<CR>', opts)
-  map('n', '<Space>bd', ':BufferOrderByDirectory<CR>', opts)
-  map('n', '<Space>bl', ':BufferOrderByLanguage<CR>', opts)
-
-  vim.g.bufferline = {
-    animation = false,
-    auto_hide = true,
-    tabpages = true,
-    closable = true,
-    clickable = true,
-
-    -- Excludes buffers from the tabline
-    exclude_ft = {'javascript'},
-    exclude_name = {'package.json'},
-
-    icons = 'numbers',
-    icon_close_tab = 'X',
-
-    insert_at_end = false,
-    insert_at_start = false,
-
-    maximum_padding = 1,
-    maximum_length = 50,
-
-    semantic_letters = true,
-    letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
-
-    no_name_title = nil,
-  }
-end
-setupBarbar()
 
 
 -- nvim-lsp
