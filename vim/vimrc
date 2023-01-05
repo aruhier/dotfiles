@@ -23,6 +23,9 @@ syntax on
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark
 
 " Uncomment the following to have Vim jump to the last position when
