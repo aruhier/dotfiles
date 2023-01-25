@@ -28,6 +28,7 @@ require('packer').startup(function()
   use 'dhruvasagar/vim-table-mode'
   use 'tpope/vim-sleuth'
   use 'rhysd/vim-grammarous'
+  use 'chentoast/marks.nvim'
 
   -- Multiple cursors, with ctrl+n
   use {'mg979/vim-visual-multi', branch = 'master'}
@@ -420,6 +421,12 @@ vim.g['ctrlp_cmd'] = 'CtrlP'
 ------------
 
 require('gitsigns').setup()
+
+
+-- Marks
+--------
+
+require'marks'.setup()
 
 
 -- Rust
