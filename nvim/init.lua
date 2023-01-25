@@ -25,6 +25,7 @@ require('packer').startup(function()
   use 'sainnhe/everforest'
   use 'chaoren/vim-wordmotion'
   use 'tpope/vim-sleuth'
+  use 'chentoast/marks.nvim'
 
   ---- Status line
   use {'aruhier/lualine.nvim', branch = 'pr_tabs', requires={'kyazdani42/nvim-web-devicons'}}
@@ -217,3 +218,9 @@ setupLualine()
 
 vim.g['ctrlp_map'] = '<c-p>'
 vim.g['ctrlp_cmd'] = 'CtrlP'
+
+
+-- Marks
+--------
+
+require'marks'.setup()
