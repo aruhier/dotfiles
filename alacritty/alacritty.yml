@@ -110,10 +110,10 @@ draw_bold_text_with_bright_colors: true
 # Colors (Everforest dark medium)
 colors:
   primary:
-    background: '#2f383e'
+    background: '#2d353b'
     foreground: '#d3c6aa'
   normal:
-    black:   '#4b565c'
+    black:   '#475258'
     red:     '#e67e80'
     green:   '#a7c080'
     yellow:  '#dbbc7f'
@@ -122,7 +122,7 @@ colors:
     cyan:    '#83c092'
     white:   '#d3c6aa'
   bright:
-    black:   '#4b565c'
+    black:   '#475258'
     red:     '#e67e80'
     green:   '#a7c080'
     yellow:  '#dbbc7f'
