@@ -1,11 +1,9 @@
-profile {
-    output "Dell Inc. DELL U2715H GH85D83V2Q6S" position 0,0
-    output "LG Electronics 27GL850 912NTWG0N049" position 2560,0
-    output "LG Electronics IPS226        SerialNumber" enable position 5120,0
-    # Broken on 31.05.2022, name not recognized
-    # exec swaymsg output "Goldstar Company Ltd 27GL850 912NTWG0N049" adaptive_sync on
-    exec swaymsg output "DP-2" adaptive_sync on
-    exec swaymsg workspace "1: a" output "Goldstar Company Ltd 27GL850 912NTWG0N049"
-    exec swaymsg workspace "2: s" output "Dell Inc. DELL U2715H GH85D83V2Q6S"
-    exec swaymsg workspace "3: d" output "Goldstar Company Ltd IPS226        SerialNumber"
+profile "default" {
+  output eDP-1 mode "1920x1200@59.950Hz" enable
+  exec swaymsg output eDP-1 max_render_time 7
+}
+
+profile "dual_screen home" {
+  output eDP-1 mode 1920x1080 position 350,1440
+  output "Goldstar Company Ltd 27GL850 912NTWG0N049 (HDMI-A-1)" mode 2560x1440 position 0,0
 }
