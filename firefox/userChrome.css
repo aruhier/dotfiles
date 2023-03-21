@@ -18,9 +18,9 @@
 /**********************/
 
 #PersonalToolbar{
-    --uc-bm-height: 23px; /* Might need to adjust if the toolbar has other buttons */
-    --uc-bm-padding: 4px; /* Vertical padding to be applied to bookmarks */
-    --uc-autohide-toolbar-delay: 100ms; /* The toolbar is hidden after 0.1s */
+    --uc-bm-height: 22px; /* Might need to adjust if the toolbar has other buttons */
+    --uc-bm-padding: 5px; /* Vertical padding to be applied to bookmarks */
+    --uc-autohide-toolbar-delay: 75ms; /* The toolbar is hidden after 0.1s */
 
     /* 0deg = "show" ; 90deg = "hide" ;  Set the following to control when bookmarks are shown */
     --uc-autohide-toolbar-focus-rotation: 0deg; /* urlbar is focused */
@@ -34,7 +34,7 @@
     margin-bottom: calc(-1px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
     transform: rotateX(90deg);
     transform-origin: top;
-    transition: transform 135ms linear var(--uc-autohide-toolbar-delay) !important;
+    transition: transform 90ms linear var(--uc-autohide-toolbar-delay) !important;
     z-index: 1;
     /* The following properties should allow the themes with trasparent toolbars to work */
     background-color: transparent !important;
@@ -48,15 +48,17 @@
 #PlacesToolbarItems > .bookmark-item,
 #OtherBookmarks,
 #PersonalToolbar > #import-button{
+    transition-delay: 75ms !important;
     padding-block: var(--uc-bm-padding) !important;
 }
 
 #navigator-toolbox:hover > #PersonalToolbar{
-    transition-delay: 100ms !important;
+    transition-delay: 75ms !important;
     transform: rotateX(var(--uc-autohide-toolbar-hover-rotation,0));
 }
 
 #navigator-toolbox:hover > #nav-bar:focus-within + #PersonalToolbar {
+    transition-delay: 75ms !important;
     transform: rotateX(0);
 }
 
