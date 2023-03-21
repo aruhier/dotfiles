@@ -6,77 +6,54 @@
 /* Hide bookmarks bar */
 /**********************/
 
-:root {
-    --toolbar-offset-height: 40px;
+#PersonalToolbar{
+    --uc-bm-height: 22px; /* Might need to adjust if the toolbar has other buttons */
+    --uc-bm-padding: 5px; /* Vertical padding to be applied to bookmarks */
+    --uc-autohide-toolbar-delay: 75ms; /* The toolbar is hidden after 0.1s */
+
+    /* 0deg = "show" ; 90deg = "hide" ;  Set the following to control when bookmarks are shown */
+    --uc-autohide-toolbar-focus-rotation: 0deg; /* urlbar is focused */
+    --uc-autohide-toolbar-hover-rotation: 0deg; /* cursor is over the toolbar area */
 }
 
-#PersonalToolbar:not([customizing]) {
-    position: fixed !important;
-    margin-top: -60px !important;
-    padding-top: 4px !important;
-    padding-bottom: 5px !important;
-    height: auto !important;
-    width: 100% !important;
+:root[uidensity="touch"] #PersonalToolbar{ --uc-bm-padding: 7px }
 
-    border: none !important;
-    box-shadow: 0 1px 0 0 rgba(0,0,0,0.3);
-
-    transform: scaleY(0.8);
-    transform-origin: center bottom;
-    transition: transform cubic-bezier(.22,.61,.36,1) 0.15s !important;
-    z-index: 2;
+#PersonalToolbar:not([customizing]){
+    position: relative;
+    margin-bottom: calc(-1px - var(--uc-bm-height) - 2 * var(--uc-bm-padding));
+    transform: rotateX(90deg);
+    transform-origin: top;
+    transition: transform 90ms linear var(--uc-autohide-toolbar-delay) !important;
+    z-index: 1;
+    /* The following properties should allow the themes with trasparent toolbars to work */
+    background-color: transparent !important;
+    background-repeat: no-repeat,no-repeat,var(--lwt-background-tiling);
+    --uc-bg-y: calc(-2 * (var(--tab-block-margin) + var(--toolbarbutton-inner-padding) + var(--toolbarbutton-outer-padding)) - var(--tab-min-height) - 16px - var(--bookmark-block-padding));
+    background-position: top left,top left,var(--lwt-background-alignment,top left);
+    background-position-y:top,top,var(--uc-bg-y),var(--uc-bg-y),var(--uc-bg-y);
+    background-image: var(--toolbar-bgimage,linear-gradient(transparent,transparent)), linear-gradient(var(--toolbar-bgcolor),var(--toolbar-bgcolor)),var(--lwt-header-image,var(--lwt-additional-images)) !important;
 }
 
-#PersonalToolbar:not([customizing]) #personal-bookmarks {
-    opacity: 0;
-    transition: opacity 0.15s;
+#PlacesToolbarItems > .bookmark-item,
+#OtherBookmarks,
+#PersonalToolbar > #import-button{
+    transition-delay: 75ms !important;
+    padding-block: var(--uc-bm-padding) !important;
 }
 
-#nav-bar {
-    z-index: 3 !important;
+#navigator-toolbox:hover > #PersonalToolbar{
+    transition-delay: 75ms !important;
+    transform: rotateX(var(--uc-autohide-toolbar-hover-rotation,0));
 }
 
-.tabbrowser-tab[selected="true"] {
-    z-index: 4 !important;
-}
-#navigator-toolbox:hover #nav-bar:not([customizing]) {
-}
-
-#navigator-toolbox:hover > #PersonalToolbar:not([customizing]) {
-    position: fixed !important;
-    transform: translateY(100%) scaleY(1);
-}
-
-#navigator-toolbox:hover > #PersonalToolbar:not([customizing]) #personal-bookmarks {
-    opacity: 1;
+#navigator-toolbox:hover > #nav-bar:focus-within + #PersonalToolbar {
+    transition-delay: 75ms !important;
+    transform: rotateX(0);
 }
 
 /* Hide 1px border-bottom */
 #navigator-toolbox:after {
     display: none !important;
-}
-
-/* compact theme */
-:root[lwtheme="true"] #PersonalToolbar:not([customizing]) {
-    margin-top: -30px;
-    top: var(--toolbar-offset-height) !important;
-}
-
-/* compact + titlebar active */
-:root[lwtheme="true"]:not([tabsintitlebar="true"])
-#nav-bar ~ #PersonalToolbar:not([customizing]) {
-    top: calc(var(--toolbar-offset-height) + 19px) !important;
-}
-
-/* default theme */
-:root:not([lwtheme="true"]) #PersonalToolbar:not([customizing]) {
-    top: calc(var(--toolbar-offset-height) + 17px) !important;
-}
-
-/* default + titlebar active */
-:root:not([lwtheme="true"]):not([tabsintitlebar="true"])
-#nav-bar ~ #PersonalToolbar:not([customizing]) {
-    top: calc(var(--toolbar-offset-height) + 8px) !important;
 }
 
 
