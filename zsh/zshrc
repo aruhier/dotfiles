@@ -53,6 +53,11 @@ function devour {
     xdo show "$id"
 }
 
+function reboot-windows {
+    sudo grub-set-default "`awk -F\' '/menuentry / {print $2}' /boot/grub/grub.cfg  | rg -m 1 Windows`"
+    reboot
+}
+
 function reptyr_authorization {
     ORIG_VALUE=`cat /proc/sys/kernel/yama/ptrace_scope`
     echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null

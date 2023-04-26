@@ -253,7 +253,7 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
-bindsym Alt+s exec SIGNAL_USE_WAYLAND=1 ~/.config/sway/scratchpad.sh 'flatpak run org.signal.Signal' --filters '[app_id="signal"]' --width '86ppt' --height '86ppt' -x '7ppt' -y 0
+bindsym Alt+s exec ~/.config/sway/scratchpad.sh 'flatpak run org.signal.Signal' --filters '[instance="signal"]' --width '86ppt' --height '86ppt' -x '7ppt' -y 0
 bindsym Alt+d exec ~/.config/sway/scratchpad.sh 'flatpak run org.telegram.desktop' --filters '[app_id="org.telegram.desktop"]' --width '86ppt' --height '86ppt' -x '7ppt' -y 0
 #
 # Resizing containers:

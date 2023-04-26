@@ -1,3 +1,4 @@
+copyq
 gammastep
 kdeconnect
 lxqt-policykit

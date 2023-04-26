@@ -73,7 +73,7 @@
     "battery#bat2": {
         "bat": "BAT2"
     },
-    "pulseaudio": {
+    "wireplumber": {
         // "scroll-step": 1, // %, can be a float
         "format": "<span font='11' rise='-1pt'>{icon}</span> {volume}%",
         "format-muted": "󰝟",
