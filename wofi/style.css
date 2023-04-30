@@ -1,5 +1,6 @@
 *{
-    font-family: "Mono";
+    font-family: "Arimo", "Mono";
+    font-size: 101%;
 }
 
 window {
@@ -15,6 +16,8 @@ window {
     border: none;
     color: #b5b8a9;
     background-color: #2f373d;
+    font-family: "Arimo", "Mono";
+    font-size: 130%;
 }
 
 #inner-box {
