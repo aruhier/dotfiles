@@ -44,7 +44,7 @@ window#waybar.solo {
     background-color: #eb4d4b;
 }
 
-#workspaces button.focused {
+#workspaces button.focused, #workspaces button.active {
     background-color: #FFC203;
     color: #BF0905;
 }

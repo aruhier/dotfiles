@@ -1,4 +1,13 @@
 {
+    "wlr/workspaces": {
+        "all-outputs": true,
+        "format": " {name}",
+        "sort-by-name": true,
+        "persistent_workspaces": {
+            "a": [], "s": [], "d": [], "f": [], "u": [], "i": [], "o": [],
+            "p": [],
+        }
+    },
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
