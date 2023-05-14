@@ -245,26 +245,6 @@ bindkey -M viins 'jk' vi-cmd-mode
 # Fix de ^M bug when typing "enter" sometimes
 stty icrnl
 
-# Zoxide
-if hash zoxide 2>/dev/null; then
-    export _ZO_FZF_OPTS="--height 40%"
-    eval "$(zoxide init zsh)"
-
-    zoxide-query-widget () {
-        __zoxide_zi
-        local ret=$?
-        zle reset-prompt
-        return $ret
-    }
-    zle -N zoxide-query-widget
-
-    # Search and jump to dir with zoxide
-    bindkey '^F' zoxide-query-widget
-
-    # Jump to child directory.
-    alias zc='z `pwd`'
-fi
-
 # Source local options if any
 if [ -f ~/.zshrc.local ]
     then source ~/.zshrc.local
@@ -277,10 +257,11 @@ fi
 
 # Zoxide
 if hash zoxide 2>/dev/null; then
+    export _ZO_FZF_OPTS="--height 40%"
     eval "$(zoxide init zsh)"
 
     zoxide-query-widget () {
-        FZF_DEFAULT_OPTS="--height 40%" zi
+        __zoxide_zi
         local ret=$?
         zle reset-prompt
         return $ret
