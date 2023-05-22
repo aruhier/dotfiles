@@ -1,0 +1,8 @@
+{
+    "layer": "top",
+    "height": 18, // Waybar height (to be removed for auto height)
+    "modules-left": ["mpd", "hyprland/submap", "custom/right-arrow"],
+    "modules-center": ["custom/right-arrow", "wlr/workspaces", "custom/left-arrow"],
+    "modules-right": ["custom/left-arrow", "tray", "backlight", "battery", "battery#bat2", "wireplumber", "custom/swaync", "clock"],
+    "include": ["~/.config/waybar/config.d/common.json"]
+}

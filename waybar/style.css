@@ -58,6 +58,11 @@ window#waybar.solo {
     color: #252527;
 }
 
+#submap {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+
 #mode {
     background-color: #64727D;
     border-bottom: 3px solid #ffffff;
@@ -78,6 +83,7 @@ window#waybar.solo {
 #mode,
 #idle_inhibitor,
 #mpd,
+#submap,
 #custom-swaync {
     padding: 0 10px;
     margin: 0 4px;
