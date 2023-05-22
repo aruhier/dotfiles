@@ -8,6 +8,11 @@
             "p": [],
         }
     },
+    "hyprland/submap": {
+        "format": "<span style=\"italic\">{}</span>",
+        "max-length": 30,
+        "tooltip": false
+    },
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,

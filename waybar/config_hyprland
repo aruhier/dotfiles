@@ -1,0 +1,17 @@
+[{
+    "layer": "top",
+    "height": 18, // Waybar height (to be removed for auto height)
+    "output": ["DP-3", "HDMI-A-1"],
+    "modules-left": ["mpd", "hyprland/submap", "custom/right-arrow"],
+    "modules-center": ["custom/right-arrow", "wlr/workspaces", "custom/left-arrow"],
+    "modules-right": ["custom/left-arrow", "backlight", "wireplumber", "custom/swaync", "clock"],
+    "include": ["~/.config/waybar/config.d/common.json"]
+},{
+    "layer": "top",
+    "height": 18, // Waybar height (to be removed for auto height)
+    "modules-left": ["mpd", "hyprland/submap", "custom/right-arrow"],
+    "modules-center": ["custom/right-arrow", "wlr/workspaces", "custom/left-arrow"],
+    "modules-right": ["custom/left-arrow", "tray", "backlight", "wireplumber", "custom/swaync", "clock"],
+    "output": ["DP-2"],
+    "include": ["~/.config/waybar/config.d/common.json"]
+}]
