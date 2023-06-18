@@ -1,9 +1,9 @@
 profile "default" {
-  output eDP-1 mode "1920x1200@59.950Hz" enable
-  exec swaymsg output eDP-1 max_render_time 7
+  output eDP-1 mode "1920x1200@59.950Hz" scale 1.0 enable
+  # exec swaymsg output eDP-1 max_render_time 7
 }
 
 profile "dual_screen home" {
-  output eDP-1 mode 1920x1080 position 350,1440
+  output eDP-1 mode 1920x1080 position 350,1440 scale 1.0
   output "Goldstar Company Ltd 27GL850 912NTWG0N049 (HDMI-A-1)" mode 2560x1440 position 0,0
 }
