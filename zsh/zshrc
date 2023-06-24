@@ -106,7 +106,7 @@ alias maj='systemd-run -t -p CPUWeight=20 -p CPUQuota=3000% --user -- sudo emerg
 alias majsync='sudo emerge --sync; sudo eix-update'
 alias mkcd='mkdir_cd '
 alias mtr='mtr -o "LSR NABWV"'
-alias obsolete_pkg='eix-test-obsolete'
+alias obsolete_pkg='eix-test-obsolete; portpeek -se'
 alias clean_obsolete_pkg='portpeek'
 alias private=' unset HISTFILE; _zoxide_hook(){}'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
