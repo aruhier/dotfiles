@@ -107,7 +107,7 @@ alias majsync='sudo emerge --sync; sudo eix-update'
 alias mkcd='mkdir_cd '
 alias mtr='mtr -o "LSR NABWV"'
 alias obsolete_pkg='eix-test-obsolete; portpeek -se'
-alias clean_obsolete_pkg='portpeek'
+alias clean_obsolete_pkg='portpeek -se'
 alias private=' unset HISTFILE; _zoxide_hook(){}'
 alias reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
 alias sshnocheck='ssh -o StrictHostKeyChecking=no '
