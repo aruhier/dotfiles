@@ -23,7 +23,7 @@ done
 
 hyprctl workspaces | grep special:$name > /dev/null
 if [[ $? > 0 ]]
-    then hyprctl dispatch exec "[workspace special:${name};noanim]" $prog
+    then hyprctl dispatch exec "[workspace special:${name};noanim]" $prog > /dev/null
     counter=0
     while true
     do
@@ -38,7 +38,7 @@ if [[ $? > 0 ]]
         sleep 0.2
         counter=$((counter+1))
     done
-    hyprctl dispatch workspace special:$name
+    hyprctl dispatch workspace special:$name > /dev/null
 else
-    hyprctl dispatch togglespecialworkspace $name
+    hyprctl dispatch togglespecialworkspace $name > /dev/null
 fi

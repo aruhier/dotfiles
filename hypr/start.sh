@@ -5,7 +5,7 @@ lxqt-policykit-agent&
 waybar --config ~/.config/waybar/config_hyprland&
 nm-applet --indicator&
 gammastep-indicator&
-nextcloud --background&
+flatpak run com.nextcloud.desktopclient.nextcloud --background&
 kdeconnectd&
 
 sleep 3;
