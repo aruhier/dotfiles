@@ -29,6 +29,7 @@ require('packer').startup(function()
   use 'tpope/vim-sleuth'
   use 'rhysd/vim-grammarous'
   use 'chentoast/marks.nvim'
+  use 'shellRaining/hlchunk.nvim'
 
   -- Multiple cursors, with ctrl+n
   use {'mg979/vim-visual-multi', branch = 'master'}
@@ -415,6 +416,23 @@ map('n', '<F9>', ':Black<CR>', {noremap = true})
 
 vim.g['ctrlp_map'] = '<c-p>'
 vim.g['ctrlp_cmd'] = 'CtrlP'
+
+
+-- HL Chunk
+-----------------
+
+require('hlchunk').setup({
+  -- Used a color blender between everforest comment color (#859289) and everforest fg_red (#f85552).
+  line_num = {
+    style = "#9A877F",
+  },
+  -- Used a color blender between everforest comment color (#859289) and everforest fg_red (#f85552).
+  chunk = {
+    style = {
+      { fg = "#9A877F" },
+    },
+  },
+})
 
 
 -- Gitsigns
