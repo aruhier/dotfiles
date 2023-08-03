@@ -26,6 +26,7 @@ require('packer').startup(function()
   use 'chaoren/vim-wordmotion'
   use 'tpope/vim-sleuth'
   use 'chentoast/marks.nvim'
+  use 'shellRaining/hlchunk.nvim'
 
   ---- Status line
   use {'aruhier/lualine.nvim', branch = 'pr_tabs', requires={'kyazdani42/nvim-web-devicons'}}
@@ -218,6 +219,23 @@ setupLualine()
 
 vim.g['ctrlp_map'] = '<c-p>'
 vim.g['ctrlp_cmd'] = 'CtrlP'
+
+
+-- HL Chunk
+-----------------
+
+require('hlchunk').setup({
+  -- Used a color blender between everforest comment color (#859289) and everforest fg_red (#f85552).
+  line_num = {
+    style = "#9A877F",
+  },
+  -- Used a color blender between everforest comment color (#859289) and everforest fg_red (#f85552).
+  chunk = {
+    style = {
+      { fg = "#9A877F" },
+    },
+  },
+})
 
 
 -- Marks
