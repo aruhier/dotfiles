@@ -423,8 +423,9 @@ vim.g['ctrlp_cmd'] = 'CtrlP'
 
 require('hlchunk').setup({
   -- Used a color blender between everforest comment color (#859289) and everforest fg_red (#f85552).
+  -- Use a slightly brighter color to make it more readable.
   line_num = {
-    style = "#9A877F",
+    style = "#a49088",
   },
   -- Used a color blender between everforest comment color (#859289) and everforest fg_red (#f85552).
   chunk = {
