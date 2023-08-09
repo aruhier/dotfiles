@@ -41,7 +41,7 @@ require('packer').startup(function()
         ts_update()
       end,
     },
-    {"nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter/nvim-treesitter"},
+    {"nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter/nvim-treesitter", after = "nvim-treesitter"},
   }
   ---- Code diagnostic
   use {'folke/trouble.nvim', requires={'kyazdani42/nvim-web-devicons'}}
@@ -52,6 +52,13 @@ require('packer').startup(function()
   use {'alfredodeza/coveragepy.vim', ft = {'python'}}
   ---- LaTeX
   use {'lervag/vimtex', ft = {'tex'}}
+  ---- Markdown
+  use {'preservim/vim-markdown', ft = {'markdown'}}
+  use {'ellisonleao/glow.nvim', ft = {'markdown'}, config = function()
+      require('glow').setup()
+      vim.api.nvim_set_keymap('n', '<leader>ll', '<cmd>Glow<cr>', {silent = true, noremap = true})
+    end,
+  }
   ---- Python
   use {'psf/black', ft = {'python'}}
   ---- Rust
