@@ -41,7 +41,7 @@ require('packer').startup(function()
         ts_update()
       end,
     },
-    {"nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter/nvim-treesitter"},
+    {"nvim-treesitter/nvim-treesitter-textobjects", requires = "nvim-treesitter/nvim-treesitter", after = "nvim-treesitter"},
   }
   ---- Code diagnostic
   use {'folke/trouble.nvim', requires={'kyazdani42/nvim-web-devicons'}}
