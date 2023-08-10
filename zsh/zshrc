@@ -60,16 +60,27 @@ function reptyr_authorization {
     echo "$ORIG_VALUE" | sudo tee /proc/sys/kernel/yama/ptrace_scope > /dev/null
 }
 
-function search_note {
-    python2 .vim/bundle/vim-notes/misc/notes/search-notes.py \
-        -n ~/.vim/bundle/vim-notes/misc/notes/user/ \
-        -d ~/.vim/bundle/vim-notes/misc/notes/index.pickle \
-        -i $@
-}
-
 function _sshag {
     [[ "$SSH_AGENT_PID" ]] || eval $(ssh-agent -t 3600);
     ssh-add ~/.ssh/id_rsa
+}
+
+# Vim notes.
+function vn {
+    [[ -n "$1" ]] && NOTE=$1 || NOTE="Notepad.md"
+    [[ -d ~/Nextcloud/Notes ]] && NOTES_DIR=~/Nextcloud/Notes || {NOTES_DIR=~/Notes; mkdir -p $NOTES_DIR}
+
+    if hash nvim 2>/dev/null; then
+        nvim + $NOTES_DIR/$NOTE +'silent foldopen!'
+    else
+        vim + $NOTES_DIR/$NOTE +'silent foldopen!'
+    fi
+}
+
+# Completion for function vn.
+function _notes {
+    [[ -d ~/Nextcloud/Notes ]] && NOTES_DIR=~/Nextcloud/Notes || NOTES_DIR=~/Notes
+    _path_files -W $NOTES_DIR
 }
 
 
@@ -109,11 +120,9 @@ alias sudo='sudo ' # Make aliases work with sudo
 
 if hash nvim 2>/dev/null; then
     alias v='nvim '
-    alias vn='nvim note:notepad'
     alias vim='nvim '
 else
     alias v='vim '
-    alias vn='vim note:notepad'
 fi
 
 # Firefox
@@ -201,6 +210,9 @@ HISTFILE=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt hist_ignore_space
+
+# Add completion for custom functions.
+compdef _notes vn
 
 
 # Special keys solution
