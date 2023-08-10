@@ -53,8 +53,19 @@ require('packer').startup(function()
   ---- LaTeX
   use {'lervag/vimtex', ft = {'tex'}}
   ---- Markdown
-  use {'preservim/vim-markdown', ft = {'markdown'}}
-  use {'ellisonleao/glow.nvim', ft = {'markdown'}, config = function()
+  use {'preservim/vim-markdown', ft = {'markdown'},
+    config = function()
+      vim.g['vim_markdown_no_default_key_mappings'] = 1
+    end,
+  }
+  use {'iamcco/markdown-preview.nvim', ft = {'markdown'},
+    run = function() vim.fn["mkdp#util#install"]() end,
+    config = function()
+      vim.api.nvim_set_keymap('n', '<leader>lv', '<cmd>:MarkdownPreview<cr>', {silent = true, noremap = true})
+    end,
+  }
+  use {'ellisonleao/glow.nvim', ft = {'markdown'},
+    config = function()
       require('glow').setup()
       vim.api.nvim_set_keymap('n', '<leader>ll', '<cmd>Glow<cr>', {silent = true, noremap = true})
     end,
@@ -70,9 +81,6 @@ require('packer').startup(function()
   use {'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' }}
   use 'tpope/vim-fugitive'
   use 'rhysd/git-messenger.vim'
-
-  ---- For notes management
-  use {'xolox/vim-notes', requires={'xolox/vim-misc'}}
 end)
 
   ----------------------------------------------------------------
@@ -392,7 +400,7 @@ local function setupLSPInstaller()
 
   require("mason").setup()
   require("mason-lspconfig").setup({
-    ensure_installed = {'rust_analyzer', 'clangd', 'gopls', 'pyright'},
+    ensure_installed = {'rust_analyzer', 'clangd', 'gopls', 'pyright', 'marksman'},
   })
 
   require("mason-lspconfig").setup_handlers {
