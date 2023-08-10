@@ -102,6 +102,8 @@ vim.opt.syntax = 'on'
 
 -- Line numbers.
 vim.opt.nu = true
+-- Disable mouse features.
+vim.opt.mouse = ''
 -- Enable status.
 vim.opt.errorbells = false
 -- Delete whitespace at the endline.
