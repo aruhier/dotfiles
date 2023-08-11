@@ -87,7 +87,7 @@ end)
   -------------------- GENERAL CONFIGURATION ---------------------
   ----------------------------------------------------------------
 
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts = { noremap=true, silent=true }
 
 vim.opt.syntax = 'on'
@@ -551,3 +551,72 @@ vim.g['vista_sidebar_width'] = 60
 --------
 
 vim.g['test#strategy'] = 'neovim'
+
+
+-- Custom functions
+--------------------
+
+-- Feature like bare-display in weechat.
+-- Creates a new tab to get the current buffer in an unformat way, for copy paste. Writes the content of the buffer in
+-- a temp file, read it with `less` at the same current position as nvim.
+local function setupBareDisplay()
+  local opts = {
+    -- Limit the max number of lines copied in the temp file.
+    max_lines = 50000,
+    -- Mapping to toggle the bare display mode.
+    map_toggle = '<M-Z>',
+  }
+
+  local function bareDisplay()
+    local line = vim.api.nvim_win_get_cursor(0)[1]
+    -- Do not use getpos() as it does not support when the window is out-of-focus (for example, when focusing the cmd
+    -- line).
+    local pos = 1 + line - vim.fn.line('w0')
+    local win_height = vim.fn.winheight(0)
+
+    local buffer_nb_lines = vim.api.nvim_buf_line_count(0)
+    local range = {1, buffer_nb_lines}
+    if buffer_nb_lines >= opts.max_lines then
+      local minl = math.floor(pos - opts.max_lines/2)
+      local maxl = math.floor(pos + opts.max_lines/2)
+
+      if minl < 1 then
+        maxl = maxl + (1-minl)
+      end
+      if maxl > opts.max_lines then
+        minl = minl - (maxl - opts.max_lines)
+      end
+      range = {math.max(minl, 1), math.min(maxl, buffer_nb_lines)}
+    end
+
+
+    local perc = 0
+    if pos > 1 then
+      -- Removes 1 line to keep the content aligned with nvim, as `less` UI has an additional command line.
+      perc = 100*pos/(win_height - 1)
+    end
+
+    local tmpfile = vim.fn.tempname()
+    vim.api.nvim_command('silent ' .. string.format('%d,%dw ', unpack(range)) .. tmpfile)
+    -- Jumps to a new tab to maximize the buffer, in a split layout.
+    vim.api.nvim_command('tabnew')
+    vim.api.nvim_command('terminal less ' .. string.format('+%d -j.%d ', line, perc) .. tmpfile)
+
+    -- Gives input to the terminal and hides decorations.
+    vim.api.nvim_command('startinsert')
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    map('t', opts.map_toggle, 'q', {buffer = 0})
+
+    -- Local buffer autocmd to close the buffer when quitting `less`.
+    vim.api.nvim_create_autocmd('TermClose', {callback=function()
+      local buf = vim.api.nvim_get_current_buf()
+      vim.api.nvim_buf_delete(buf,{})
+      vim.fn.delete(tempname)
+    end, buffer=0})
+  end
+
+  vim.api.nvim_create_user_command('BareDisplay', bareDisplay, {})
+  map('n', opts.map_toggle, bareDisplay)
+end
+setupBareDisplay()
