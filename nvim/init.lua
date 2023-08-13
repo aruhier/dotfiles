@@ -402,7 +402,7 @@ local function setupLSPInstaller()
 
   require("mason").setup()
   require("mason-lspconfig").setup({
-    ensure_installed = {'rust_analyzer', 'clangd', 'gopls', 'pyright', 'marksman'},
+    ensure_installed = {'beancount', 'clangd', 'gopls', 'marksman', 'pyright', 'rust_analyzer'},
   })
 
   require("mason-lspconfig").setup_handlers {
@@ -412,6 +412,23 @@ local function setupLSPInstaller()
     function (server_name) -- default handler (optional)
       require("lspconfig")[server_name].setup {on_attach=on_attach}
     end,
+
+    ["beancount"] = function ()
+      local lspconfig = require 'lspconfig'
+      local util = require 'lspconfig.util'
+      local fname = vim.fn.expand('%:p')
+
+      if (fname ~= nil and fname ~=  '') then
+        local root_dir = util.find_git_ancestor(fname) or util.path.dirname(fname)
+        local root_file = root_dir .. "/main.beancount"
+
+        require('lspconfig')['beancount'].setup {
+          init_options = {
+            journal_file = root_file
+          }
+        }
+      end
+    end
   }
 end
 setupLSPInstaller()
