@@ -5,8 +5,23 @@
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
+  use {
+    'nvim-telescope/telescope.nvim',
+    branch = '0.1.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        -- NOTE: If you are having trouble with this installation,
+        --       refer to the README for telescope-fzf-native for more instructions.
+        build = 'make',
+        cond = function()
+          return vim.fn.executable 'make' == 1
+        end,
+      },
+    },
+  }
   use 'liuchengxu/vista.vim'
-  use 'ctrlpvim/ctrlp.vim'
   use 'windwp/nvim-autopairs'
   use 'tpope/vim-surround'
   use 'sainnhe/everforest'
@@ -130,17 +145,17 @@ vim.cmd [[
 ]]
 
 -- Mappings.
-map('n', 'tt', ':tabprevious<CR>', {noremap = true})
-map('n', 'ty', ':tabnext<CR>', {noremap = true})
-map('n', '<F4>', '<cmd>lua vim.opt.hlsearch = !vim.opt.hlsearch<CR>', {noremap = true})
+map('n', 'tt', ':tabprevious<CR>', {noremap = true, desc = 'Previous [T]ab'})
+map('n', 'ty', ':tabnext<CR>', {noremap = true, desc = 'Next [T]ab'})
+map('n', '<F4>', '<cmd>lua vim.opt.hlsearch = !vim.opt.hlsearch<CR>', {noremap = true, desc = 'Toggle highlight search'})
 -- Avoid <Esc>.
 for _, m in ipairs({'i', 'c', 'o'}) do
   map(m, 'jk', '<Esc>', {noremap = true})
 end
 map('v', 'ii', '<Esc>', {noremap = true})
 -- M for Macros.
-map('n', 'Mse', ':set spell spelllang=en<CR>', {noremap = true})
-map('n', 'Msf', ':set spell spelllang=fr<CR>', {noremap = true})
+map('n', 'Mse', ':set spell spelllang=en<CR>', {noremap = true, desc='[S]pell [E]nglish'})
+map('n', 'Msf', ':set spell spelllang=fr<CR>', {noremap = true, desc='[S]pell [F]rench'})
 
 -- Command aliases.
 vim.cmd [[ cnoreabbrev t tabnew ]]
@@ -168,7 +183,7 @@ vim.cmd [[ autocmd FileType {text,tex} set spell spelllang=en ]]
 ---------
 
 vim.opt.termguicolors = true
-map('n', '<F10>', ':let &background = ( &background == "dark"? "light" : "dark" )<CR>', {})
+map('n', '<F10>', ':let &background = ( &background == "dark"? "light" : "dark" )<CR>', {desc = 'Toggle Background (dark/light)'})
 vim.opt.background = 'dark'
 vim.g['everforest_background'] = 'medium'
 vim.g['everforest_ui_contrast'] = 'high'
@@ -402,7 +417,7 @@ local function setupLSPInstaller()
 
   require("mason").setup()
   require("mason-lspconfig").setup({
-    ensure_installed = {'rust_analyzer', 'clangd', 'gopls', 'pyright', 'marksman'},
+    ensure_installed = {'beancount', 'clangd', 'gopls', 'marksman', 'pyright', 'rust_analyzer'},
   })
 
   require("mason-lspconfig").setup_handlers {
@@ -412,6 +427,23 @@ local function setupLSPInstaller()
     function (server_name) -- default handler (optional)
       require("lspconfig")[server_name].setup {on_attach=on_attach}
     end,
+
+    ["beancount"] = function ()
+      local lspconfig = require 'lspconfig'
+      local util = require 'lspconfig.util'
+      local fname = vim.fn.expand('%:p')
+
+      if (fname ~= nil and fname ~=  '') then
+        local root_dir = util.find_git_ancestor(fname) or util.path.dirname(fname)
+        local root_file = root_dir .. "/main.beancount"
+
+        require('lspconfig')['beancount'].setup {
+          init_options = {
+            journal_file = root_file
+          }
+        }
+      end
+    end
   }
 end
 setupLSPInstaller()
@@ -421,13 +453,6 @@ setupLSPInstaller()
 ---------
 
 map('n', '<F9>', ':Black<CR>', {noremap = true})
-
-
--- CtrlP
----------
-
-vim.g['ctrlp_map'] = '<c-p>'
-vim.g['ctrlp_cmd'] = 'CtrlP'
 
 
 -- HL Chunk
@@ -464,6 +489,51 @@ require'marks'.setup()
 --------
 
 vim.g['rustfmt_autosave'] = 1
+
+
+-- Telescope
+-------------
+
+-- [[ Configure Telescope ]]
+-- See `:help telescope` and `:help telescope.setup()`
+require('telescope').setup {
+  defaults = {
+    mappings = {
+      i = {
+        ['<C-u>'] = false,
+        ['<C-d>'] = false,
+      },
+    },
+  },
+}
+
+-- Enable telescope fzf native, if installed
+pcall(require('telescope').load_extension, 'fzf')
+
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer' })
+
+vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sb', require('telescope.builtin').keymaps, { desc = '[S]earch [B]indings' })
+
+
+-- Test
+--------
+
+vim.g['test#strategy'] = 'neovim'
 
 
 -- Treesitter
@@ -547,12 +617,6 @@ vim.g['vista_sidebar_position'] = 'vertical topleft'
 vim.g['vista_sidebar_width'] = 60
 
 
--- Test
---------
-
-vim.g['test#strategy'] = 'neovim'
-
-
 -- Custom functions
 --------------------
 
@@ -606,7 +670,7 @@ local function setupBareDisplay()
     vim.api.nvim_command('startinsert')
     vim.opt_local.number = false
     vim.opt_local.relativenumber = false
-    map('t', opts.map_toggle, 'q', {buffer = 0})
+    map('t', opts.map_toggle, 'q', {buffer = 0, desc = 'Toggle BareDisplay'})
 
     -- Local buffer autocmd to close the buffer when quitting `less`.
     vim.api.nvim_create_autocmd('TermClose', {callback=function()
@@ -617,6 +681,6 @@ local function setupBareDisplay()
   end
 
   vim.api.nvim_create_user_command('BareDisplay', bareDisplay, {})
-  map('n', opts.map_toggle, bareDisplay)
+  map('n', opts.map_toggle, bareDisplay, {desc = 'Toggle BareDisplay'})
 end
 setupBareDisplay()
