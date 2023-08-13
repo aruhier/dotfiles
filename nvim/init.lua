@@ -485,6 +485,12 @@ require('gitsigns').setup()
 require'marks'.setup()
 
 
+-- Rust
+--------
+
+vim.g['rustfmt_autosave'] = 1
+
+
 -- Telescope
 -------------
 
@@ -524,10 +530,10 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').keymaps, { desc = '[S]earch [B]indings' })
 
 
--- Rust
+-- Test
 --------
 
-vim.g['rustfmt_autosave'] = 1
+vim.g['test#strategy'] = 'neovim'
 
 
 -- Treesitter
@@ -609,12 +615,6 @@ map('n', 'gR', '<cmd>Trouble lsp_references<cr>', {silent = true, noremap = true
 vim.g['vista#renderer#enable_icon'] = 0
 vim.g['vista_sidebar_position'] = 'vertical topleft'
 vim.g['vista_sidebar_width'] = 60
-
-
--- Test
---------
-
-vim.g['test#strategy'] = 'neovim'
 
 
 -- Custom functions
