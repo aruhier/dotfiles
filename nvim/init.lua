@@ -8,7 +8,7 @@ require('packer').startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
-    dependencies = {
+    requires = {
       'nvim-lua/plenary.nvim',
       {
         'nvim-telescope/telescope-fzf-native.nvim',
@@ -614,7 +614,10 @@ map('n', 'gR', '<cmd>Trouble lsp_references<cr>', {silent = true, noremap = true
 
 vim.g['vista#renderer#enable_icon'] = 0
 vim.g['vista_sidebar_position'] = 'vertical topleft'
-vim.g['vista_sidebar_width'] = 60
+vim.g['vista_sidebar_width'] = 30
+vim.g['vista_default_executive'] = 'nvim_lsp'
+map('n', '<F3>', '<cmd>Vista<cr>', {noremap = true, desc = 'Toggle Sidebar'})
+map('i', '<F3>', '<cmd>Vista<cr>', {noremap = true, desc = 'Toggle Sidebar'})
 
 
 -- Custom functions
