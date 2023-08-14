@@ -147,6 +147,8 @@ vim.cmd [[
 -- Mappings.
 map('n', 'tt', ':tabprevious<CR>', {noremap = true, desc = 'Previous [T]ab'})
 map('n', 'ty', ':tabnext<CR>', {noremap = true, desc = 'Next [T]ab'})
+map('n', '<leader>o', 'o<Space><BS><Esc>', {noremap = true, desc = 'Same as \'o\' but stays in normal mode'})
+map('n', '<leader>O', 'O<Space><BS><Esc>', {noremap = true, desc = 'Same as \'O\' but stays in normal mode'})
 map('n', '<F4>', '<cmd>lua vim.opt.hlsearch = !vim.opt.hlsearch<CR>', {noremap = true, desc = 'Toggle highlight search'})
 -- Avoid <Esc>.
 for _, m in ipairs({'i', 'c', 'o'}) do
