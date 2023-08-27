@@ -417,7 +417,7 @@ local function setupLSPInstaller()
 
   require("mason").setup()
   require("mason-lspconfig").setup({
-    ensure_installed = {'beancount', 'clangd', 'gopls', 'marksman', 'pyright', 'rust_analyzer'},
+    ensure_installed = {'bashls', 'beancount', 'clangd', 'gopls', 'marksman', 'pyright', 'rust_analyzer'},
   })
 
   require("mason-lspconfig").setup_handlers {
