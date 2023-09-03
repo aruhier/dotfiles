@@ -1,9 +1,11 @@
-profile {
-    output "Dell Inc. DELL U2715H GH85D83V2Q6S" position 0,0
-    output "LG Electronics 27GL850 912NTWG0N049" position 2560,0
+profile default {
+    output "Dell Inc. DELL U2715H GH85D83V2Q6S" enable position 0,0
+    output "LG Electronics 27GL850 912NTWG0N049" enable position 2560,0
     output "LG Electronics IPS226        SerialNumber" enable position 5120,0
-    exec swaymsg output "'LG Electronics 27GL850 912NTWG0N049'" adaptive_sync on
-    exec swaymsg workspace "1: a" output "'LG Electronics 27GL850 912NTWG0N049'"
-    exec swaymsg workspace "2: d" output "'LG Electronics IPS226        SerialNumber'"
-    exec swaymsg workspace "3: s" output "'Dell Inc. DELL U2715H GH85D83V2Q6S'"
+}
+
+profile single-screen {
+    output "LG Electronics 27GL850 912NTWG0N049" enable position 0,0
+    output "LG Electronics IPS226        SerialNumber" disable
+    output "Dell Inc. DELL U2715H GH85D83V2Q6S" disable
 }
