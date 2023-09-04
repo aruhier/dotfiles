@@ -1,4 +1,30 @@
 {
+    "hyprland/workspaces": {
+        "all-outputs": true,
+        "format": " {icon}",
+        "persistent_workspaces": {
+            "a": [], "s": [], "d": [], "f": [], "u": [], "i": [], "o": [],
+            "p": [],
+        },
+        "format-icons": {
+            "1": "a",
+            "2": "s",
+            "3": "d",
+            "4": "f",
+            "5": "u",
+            "6": "i",
+            "7": "o",
+            "8": "p",
+            "9": "7",
+            "10": "8",
+            "11": "9",
+            "12": "10",
+            "urgent": "{name}",
+            "default": "{name}",
+            "persistent": "{name}",
+            "empty": "{name}"
+        },
+    },
     "wlr/workspaces": {
         "all-outputs": true,
         "format": " {name}",
