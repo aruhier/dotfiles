@@ -44,7 +44,8 @@ window#waybar.solo {
     background-color: #eb4d4b;
 }
 
-#workspaces button.focused, #workspaces button.active {
+#workspaces button.focused, #workspaces button.active
+#workspaces button.persistent.focused, #workspaces button.persistent.active {
     background-color: #FFC203;
     color: #BF0905;
 }
@@ -53,7 +54,7 @@ window#waybar.solo {
     box-shadow: inset 0 -1px #BF0905;
 }
 
-#workspaces button.persistent {
+#workspaces button.persistent.empty:not(.focused):not(.active) {
     background-color: #FFF7C6;
     color: #252527;
 }
