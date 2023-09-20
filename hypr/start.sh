@@ -2,7 +2,8 @@
 
 swaync&
 lxqt-policykit-agent&
-waybar --config ~/.config/waybar/config_hyprland&
+# Enable font "boldering" to increase visibility.
+FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0" waybar --config ~/.config/waybar/config_hyprland&
 nm-applet --indicator&
 gammastep-indicator&
 flatpak run com.nextcloud.desktopclient.nextcloud --background&
