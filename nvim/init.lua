@@ -374,9 +374,6 @@ local function setupNvimCMP()
       { name = 'cmdline' }
     })
   })
-
-  -- Setup lspconfig.
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
 end
 setupNvimCMP()
 
@@ -425,7 +422,10 @@ local function setupLSPInstaller()
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function (server_name) -- default handler (optional)
-      require("lspconfig")[server_name].setup {on_attach=on_attach}
+      require("lspconfig")[server_name].setup {
+        on_attach=on_attach,
+        capabilities=require('cmp_nvim_lsp').default_capabilities(),
+      }
     end,
 
     ["beancount"] = function ()
@@ -438,6 +438,8 @@ local function setupLSPInstaller()
         local root_file = root_dir .. "/main.beancount"
 
         require('lspconfig')['beancount'].setup {
+          on_attach=on_attach,
+          capabilities=require('cmp_nvim_lsp').default_capabilities(),
           init_options = {
             journal_file = root_file
           }
@@ -528,6 +530,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sb', require('telescope.builtin').keymaps, { desc = '[S]earch [B]indings' })
+vim.keymap.set('n', '<leader>st', require('telescope.builtin').lsp_document_symbols, { desc = '[S]earch [T]ags' })
 
 
 -- Test
