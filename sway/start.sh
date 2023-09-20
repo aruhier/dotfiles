@@ -2,7 +2,8 @@
 
 swaync&
 lxqt-policykit-agent&
-waybar&
+# Enable font "boldering" to increase visibility.
+FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0" waybar&
 nm-applet --indicator&
 gammastep-indicator&
 kdeconnect-indicator&
