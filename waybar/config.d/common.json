@@ -19,10 +19,6 @@
             "10": "8",
             "11": "9",
             "12": "10",
-            "urgent": "{name}",
-            "default": "{name}",
-            "persistent": "{name}",
-            "empty": "{name}"
         },
     },
     "wlr/workspaces": {
