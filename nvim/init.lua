@@ -30,7 +30,7 @@ require('packer').startup(function()
   use 'shellRaining/hlchunk.nvim'
 
   ---- Status line
-  use {'aruhier/lualine.nvim', branch = 'pr_tabs', requires={'kyazdani42/nvim-web-devicons'}}
+  use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons'}}
 
   -- Multiple cursors, with ctrl+n
   use {'mg979/vim-visual-multi', branch = 'master'}
