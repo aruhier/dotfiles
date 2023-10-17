@@ -61,7 +61,7 @@ require('packer').startup(function()
   ---- Code diagnostic
   use {'folke/trouble.nvim', requires={'kyazdani42/nvim-web-devicons'}}
   ---- Status line
-  use {'aruhier/lualine.nvim', branch = 'pr_tabs', requires={'kyazdani42/nvim-web-devicons', 'arkav/lualine-lsp-progress'}}
+  use {'nvim-lualine/lualine.nvim', requires={'kyazdani42/nvim-web-devicons'}}
   ---- Unit tests
   use 'janko-m/vim-test'
   use {'alfredodeza/coveragepy.vim', ft = {'python'}}
