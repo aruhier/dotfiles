@@ -120,6 +120,28 @@
         },
         "on-click": "pavucontrol"
     },
+    "privacy": {
+    	"icon-spacing": 4,
+    	"icon-size": 12,
+    	"transition-duration": 250,
+    	"modules": [
+    		{
+    			"type": "screenshare",
+    			"tooltip": true,
+    			"tooltip-icon-size": 18
+    		},
+    		{
+    			"type": "audio-out",
+    			"tooltip": true,
+    			"tooltip-icon-size": 18
+    		},
+    		{
+    			"type": "audio-in",
+    			"tooltip": true,
+    			"tooltip-icon-size": 18
+    		}
+    	]
+    },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "<span font='11' rise='-1pt'>{icon}</span> {volume}%",

@@ -85,8 +85,9 @@ window#waybar.solo {
 #idle_inhibitor,
 #mpd,
 #submap,
+#privacy,
 #custom-swaync {
-    padding: 0 10px;
+    padding: 0 6px;
     margin: 0 4px;
 }
 
@@ -101,10 +102,10 @@ window#waybar.solo {
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+to {
+    background-color: #ffffff;
+    color: #000000;
+}
 }
 
 #battery.critical:not(.charging) {
@@ -137,14 +138,21 @@ label:focus {
     padding: 0;
 }
 
+#privacy-item.screenshare {
+    color: #D14005;
+}
+#privacy-item.audio-in {
+    color: #D14005;
+}
+
 #custom-left-arrow, #custom-right-arrow {
-	color: #424242;
-	background: #2d2d2d;
+    color: #424242;
+    background: #2d2d2d;
 }
 
 .modules-center #custom-left-arrow, .modules-center #custom-right-arrow {
-	color: #2d2d2d;
-	background: #FFF7C6;
+    color: #2d2d2d;
+    background: #FFF7C6;
 }
 
 .modules-center #custom-left-arrow {
