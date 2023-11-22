@@ -125,21 +125,16 @@
     	"icon-size": 12,
     	"transition-duration": 250,
     	"modules": [
-    		{
-    			"type": "screenshare",
-    			"tooltip": true,
-    			"tooltip-icon-size": 18
-    		},
-    		{
-    			"type": "audio-out",
-    			"tooltip": true,
-    			"tooltip-icon-size": 18
-    		},
-    		{
-    			"type": "audio-in",
-    			"tooltip": true,
-    			"tooltip-icon-size": 18
-    		}
+    	    {
+    	    	"type": "screenshare",
+    	    	"tooltip": true,
+    	    	"tooltip-icon-size": 18
+    	    },
+    	    {
+    	    	"type": "audio-in",
+    	    	"tooltip": true,
+    	    	"tooltip-icon-size": 18
+    	    }
     	]
     },
     "pulseaudio": {
