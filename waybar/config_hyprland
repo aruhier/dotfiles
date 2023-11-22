@@ -11,7 +11,7 @@
     "height": 18, // Waybar height (to be removed for auto height)
     "modules-left": ["mpd", "hyprland/submap", "custom/right-arrow"],
     "modules-center": ["custom/right-arrow", "hyprland/workspaces", "custom/left-arrow"],
-    "modules-right": ["custom/left-arrow", "tray", "backlight", "pulseaudio", "custom/swaync", "clock"],
+    "modules-right": ["custom/left-arrow", "tray", "backlight", "pulseaudio", "privacy", "custom/swaync", "clock"],
     "output": ["DP-2"],
     "include": ["~/.config/waybar/config.d/common.json"]
 }]
