@@ -38,7 +38,7 @@ getArgs() {
         checkUtils
         ;;
       (*name:*)
-        switch_or_swap "$1"
+        switch_or_swap `workspace_id "$1"`
         ;;
       (*[!0-9]*)
         # contains non-numbers
@@ -65,6 +65,7 @@ switch_workspace() {
     dispatch moveworkspacetomonitor "$target_wrkspc" current\; \
     dispatch workspace "$target_wrkspc"
 }
+
 # first argument: monitor the workspace should go to
 # second argument: monitor the workspace is currently displayed on
 swap_workspace() {
@@ -88,14 +89,12 @@ workspace_id() {
 # first argument: workspace to switch to active monitor
 switch_or_swap() {
   target_wrkspc=$1
-
-  local target_wrkspc_id=$1
-  if [[ "$target_wrkspc" =~ ^name:.*$ ]]; then
-    local target_wrkspc_id=`workspace_id "$target_wrkspc"`
+  if [[ $target_wrkspc == "" ]]; then
+    return
   fi
 
   readarray -t active_items <<< `hyprctl monitors -j | jq -r "(.[] | select(.focused==true) | .name), (.[] | select(.activeWorkspace.id==${target_wrkspc}) | .name)"`
-  target_mon=${active_items[0]}
+  current_mon=${active_items[0]}
   currently_active_on_mon=${active_items[1]}
 
   if [[ $currently_active_on_mon == "" ]]; then
@@ -104,13 +103,9 @@ switch_or_swap() {
     switch_workspace "$target_wrkspc"
   elif [[ $target_mon != $currently_active_on_mon ]]; then
     # workspace is already active on other monitor, swap workspaces between monitor
-    ok "swapping workspaces between $target_mon to monitor $currently_active_on_mon"
-    swap_workspace "$target_mon" "$currently_active_on_mon"
+    ok "swapping workspaces between $current_mon to monitor $currently_active_on_mon"
+    swap_workspace "$current_mon" "$currently_active_on_mon"
   fi
 }
 
-main() {
-  getArgs "$@"
-}
-
-main "$@"
+getArgs "$@"
