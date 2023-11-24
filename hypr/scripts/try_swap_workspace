@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Pascal Jaeger <pascal.jaeger@leimstift.de>
 
@@ -8,50 +8,8 @@ red="\033[0;31m"
 blue="\033[0;34m"
 nocolor="\033[0m"
 
-#util functions
-check() {
-  command -v "$1" 1>/dev/null
-}
-
 ok() {
   echo -e "[$green  $nocolor] $*"
-}
-
-err() {
-  echo -e "[$red  $nocolor] $*"
-}
-optional() {
-  echo -e "[$blue  $nocolor] $*"
-}
-
-notify() {
-  # shellcheck disable=SC2015
-  check notify-send && {
-    notify-send "$@"
-  } || {
-    echo "$@"
-  }
-}
-
-checkUtils() {
-  # shellcheck disable=SC2015
-  check grep && ok "grep" || err "grep"
-  # shellcheck disable=SC2015
-  check grep && ok "cut" || err "cut"
-  # shellcheck disable=SC2015
-  check notify-send && ok "notify-send (Optional)" || optional "notify-send (Optional)"
-  exit
-}
-
-basicChecks() {
-  check hyprctl || {
-    notify "Seriously mate!!" "Start Hyprland before this script"
-      exit 1
-    }
-    pgrep -x Hyprland &>/dev/null || {
-      notify "Make Sure Hyprland Session is running."
-          exit 1
-    }
 }
 
 help() {
@@ -99,33 +57,27 @@ getArgs() {
 }
 
 
-#variables
-mon_wrkspcs=()
-
-get_active_mon() {
-  echo `hyprctl monitors -j | jq -r '.[] | select(.focused==true) | .name'`
-}
-
 # first argument: workspace to switch to
 # second argument: monitor to switch workspace on
 switch_workspace() {
   local target_wrkspc=$1
-  local target_mon=$2
-  hyprctl dispatch moveworkspacetomonitor "$target_wrkspc" "$target_mon"
-  hyprctl dispatch workspace "$target_wrkspc"
+  hyprctl --batch -- \
+    dispatch moveworkspacetomonitor "$target_wrkspc" current\; \
+    dispatch workspace "$target_wrkspc"
 }
 # first argument: monitor the workspace should go to
 # second argument: monitor the workspace is currently displayed on
 swap_workspace() {
   local target_mon=$1
   local source_mon=$2
-  # Focus the workspace on source_mon
-  hyprctl dispatch focusmonitor "$source_mon"
-  # Swap the workspaces. Focus will follow the workspace
-  hyprctl dispatch swapactiveworkspaces "$target_mon" "$source_mon"
-  # Focus target_mon to avoid a buggy behavior where the correct
+  # 1/ Focus the workspace on source_mon
+  # 2/ Swap the workspaces. Focus will follow the workspace
+  # 3/ Focus target_mon to avoid a buggy behavior where the correct
   # window is focused, but the previous workspace is focused.
-  hyprctl dispatch focusmonitor "$target_mon"
+  hyprctl --batch \
+    dispatch focusmonitor "$source_mon"\; \
+    dispatch swapactiveworkspaces "$target_mon" "$source_mon"\; \
+    dispatch focusmonitor "$target_mon"
 }
 
 workspace_id() {
@@ -135,23 +87,21 @@ workspace_id() {
 
 # first argument: workspace to switch to active monitor
 switch_or_swap() {
-  target_mon=$(get_active_mon)
   target_wrkspc=$1
-  local target_wrkspc_id=$1
 
+  local target_wrkspc_id=$1
   if [[ "$target_wrkspc" =~ ^name:.*$ ]]; then
     local target_wrkspc_id=`workspace_id "$target_wrkspc"`
   fi
 
-  local currently_active_on_mon=""
-  if [[ $target_wrkspc_id != "" ]]; then
-    currently_active_on_mon=`hyprctl monitors -j | jq -r ".[] | select(.activeWorkspace.id==${target_wrkspc}) | .name"`
-  fi
+  readarray -t active_items <<< `hyprctl monitors -j | jq -r "(.[] | select(.focused==true) | .name), (.[] | select(.activeWorkspace.id==${target_wrkspc}) | .name)"`
+  target_mon=${active_items[0]}
+  currently_active_on_mon=${active_items[1]}
 
   if [[ $currently_active_on_mon == "" ]]; then
     # workspace is not active on any monitor, do a normal switch
     ok "switching workspace $target_wrkspc to monitor $target_mon"
-    switch_workspace "$target_wrkspc" "$target_mon"
+    switch_workspace "$target_wrkspc"
   elif [[ $target_mon != $currently_active_on_mon ]]; then
     # workspace is already active on other monitor, swap workspaces between monitor
     ok "swapping workspaces between $target_mon to monitor $currently_active_on_mon"
@@ -160,7 +110,6 @@ switch_or_swap() {
 }
 
 main() {
-  basicChecks
   getArgs "$@"
 }
 
