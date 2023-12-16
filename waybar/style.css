@@ -126,6 +126,10 @@ label:focus {
     background-color: #424242;
 }
 
+#tray, #tray menu {
+    font-family: Cantarell;
+}
+
 #tray > .passive {
     -gtk-icon-effect: dim;
 }
