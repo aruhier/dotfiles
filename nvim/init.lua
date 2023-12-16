@@ -53,8 +53,6 @@ vim.opt.syntax = 'on'
 --  endif
 --]]
 
--- Line numbers.
-vim.opt.nu = true
 -- Disable mouse features.
 vim.opt.mouse = ''
 -- Enable status.
@@ -81,6 +79,28 @@ vim.cmd [[
   autocmd FileType python set textwidth=88 colorcolumn=89 fo+=t
   autocmd FileType {go,rust} set textwidth=119 colorcolumn=120 fo+=t
 ]]
+
+-- Line numbers.
+-- Automatic line feature: window with focused will have a relative line number to ease navigation, non focused
+-- windows will have a static line number.
+vim.opt.nu = true
+local numberToggleGroup = vim.api.nvim_create_augroup('NumberToggle', {})
+vim.api.nvim_create_autocmd({'BufEnter', 'FocusGained', 'InsertLeave', 'WinEnter' }, {
+  group=numberToggleGroup,
+  callback = function()
+    if vim.opt.nu and vim.api.nvim_get_mode() ~= 'i' then
+      vim.opt.rnu = true
+    end
+  end,
+})
+vim.api.nvim_create_autocmd({'BufLeave', 'FocusLost', 'InsertEnter', 'WinLeave' }, {
+  group=numberToggleGroup,
+  callback = function()
+    if vim.opt.nu then
+      vim.opt.rnu = false
+    end
+  end,
+})
 
 -- Mappings.
 map('n', 'tt', ':tabprevious<CR>', {noremap = true, desc = 'Previous [T]ab'})
