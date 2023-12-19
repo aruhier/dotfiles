@@ -45,14 +45,14 @@ require('packer').startup(function()
     'hrsh7th/cmp-vsnip',
     'hrsh7th/vim-vsnip',
   }}
-  use {'williamboman/mason.nvim', 'williamboman/mason-lspconfig.nvim', requires={'neovim/nvim-lspconfig'}}
+  use {'williamboman/mason.nvim', 'WhoIsSethDaniel/mason-tool-installer.nvim', 'williamboman/mason-lspconfig.nvim', requires={'neovim/nvim-lspconfig'}}
 
   ---- Treesitter
   use {
     {
       'nvim-treesitter/nvim-treesitter',
       run = function()
-        local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+        local ts_update = require('nvim-treesitter.install').update({ with_sync = false })
         ts_update()
       end,
     },
@@ -433,9 +433,13 @@ local function setupLSPInstaller()
   end
 
   require("mason").setup()
-  require("mason-lspconfig").setup({
+  require('mason-tool-installer').setup {
     ensure_installed = {'bashls', 'beancount', 'clangd', 'gopls', 'marksman', 'pyright', 'rust_analyzer'},
-  })
+    auto_update = false,
+    run_on_start = true,
+    start_delay = 3000,
+    debounce_hours = 24,
+  }
 
   require("mason-lspconfig").setup_handlers {
     -- The first entry (without a key) will be the default handler
@@ -449,8 +453,8 @@ local function setupLSPInstaller()
     end,
 
     ["beancount"] = function ()
-      local lspconfig = require 'lspconfig'
-      local util = require 'lspconfig.util'
+      local lspconfig = require('lspconfig')
+      local util = require('lspconfig.util')
       local fname = vim.fn.expand('%:p')
 
       if (fname ~= nil and fname ~=  '') then

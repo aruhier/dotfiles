@@ -12,5 +12,5 @@ if [ ! -e ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]
 fi
 
 nvim --headless "+PackerSync" "+qall" 2> /dev/null
-# Force to remove all lsp clients to update them.
-nvim --headless "+LspUninstallAll --no-confirm" "+qall" 2> /dev/null
+# Update the LSPs.
+nvim --headless "+MasonToolsUpdate" "+qall" 2> /dev/null
