@@ -11,6 +11,4 @@ if [ ! -e ~/.local/share/nvim/site/pack/packer/start/packer.nvim ]
   echo "!!! WARNING !!! nvim moved to Packer, please remove your vim-plug plugins"
 fi
 
-nvim --headless "+PackerSync" "+qall" 2> /dev/null
-# Force to remove all lsp clients to update them.
-nvim --headless "+LspUninstallAll --no-confirm" "+qall" 2> /dev/null
+nvim --headless -c "autocmd User PackerComplete quitall" -c "PackerSync" 2> /dev/null
