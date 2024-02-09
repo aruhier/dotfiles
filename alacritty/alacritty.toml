@@ -40,17 +40,17 @@ unfocused_hollow = true
 size = 11
 
 [font.bold]
-family = "Hack"
+family = "Hack Nerd Font"
 
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.italic]
-family = "Hack"
+family = "Hack Nerd Font"
 
 [font.normal]
-family = "Hack"
+family = "Hack Nerd Font"
 
 [font.offset]
 x = -1
