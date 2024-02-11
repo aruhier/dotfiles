@@ -3,8 +3,8 @@
  */
 
 @define-color border-color rgb(7, 7, 7);
-@define-color text-color rgb(213, 209, 185);
-@define-color text-color-disabled rgba(213, 209, 185, 0.5);
+@define-color text-color rgb(245, 237, 236);
+@define-color text-color-disabled rgba(245, 237, 236, 0.5);
 @define-color bg rgb(42, 42, 42);
 @define-color bg-global rgba(42, 42, 42, 0.95);
 @define-color bg-hover rgb(58, 58, 58);
