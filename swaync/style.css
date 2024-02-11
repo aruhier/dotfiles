@@ -3,7 +3,10 @@
  */
 
 @define-color border-color rgb(7, 7, 7);
+@define-color text-color rgb(213, 209, 185);
+@define-color text-color-disabled rgba(213, 209, 185, 0.5);
 @define-color bg rgb(42, 42, 42);
+@define-color bg-global rgba(42, 42, 42, 0.95);
 @define-color bg-hover rgb(58, 58, 58);
 @define-color bg-focus rgba(58, 58, 58, 0.6);
 @define-color bg-selected rgb(0, 128, 255);
@@ -45,13 +48,14 @@
 
 .notification-content {
   background: transparent;
+  color: @text-color;
   padding: 6px;
   border-radius: 10px;
 }
 
 .close-button {
   background: black;
-  color: white;
+  color: @text-color;
   text-shadow: none;
   padding: 0 2px;
   box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.3);
@@ -68,12 +72,13 @@
   margin: 0;
   box-shadow: none;
   background: @bg;
-  color: white;
+  color: @text-color;
   border: 1px solid @border-color;
 }
 
 .notification-default-action:hover,
 .notification-action:hover {
+  color: @text-color;
   background: @bg-hover;
 }
 
@@ -112,28 +117,32 @@
 }
 
 .summary {
-  color: white;
+  color: @text-color;
   text-shadow: none;
 }
 
 .time {
-  color: white;
+  color: @text-color;
   text-shadow: none;
 }
 
 .body {
   background: transparent;
-  color: white;
+  color: @text-color;
   text-shadow: none;
 }
 
+.label {
+  color: @text-color;
+}
+
 .top-action-title {
-  color: white;
+  color: @text-color;
   text-shadow: none;
 }
 
 .control-center-clear-all {
-  color: white;
+  color: @text-color;
   text-shadow: none;
   background: @bg;
   border: 1px solid @border-color;
@@ -159,7 +168,8 @@
 }
 
 .control-center {
-  background: rgba(42, 42, 42, 0.85);
+  background: @bg-global;
+  color: @text-color;
 }
 .control-center-list {
   background: transparent;
@@ -167,4 +177,24 @@
 
 .floating-notifications {
   background: transparent;
+}
+
+.widget-title {
+  color: @text-color;
+}
+
+.widget-label>label {
+  color: @text-color;
+}
+
+box > button {
+  color: @text-color;
+}
+
+box > button:hover {
+  color: @bg;
+}
+
+box > button:disabled {
+  color: @text-color-disabled;
 }
