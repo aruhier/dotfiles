@@ -1,7 +1,7 @@
 profile default {
-    output "Dell Inc. DELL U2715H GH85D83V2Q6S" enable position 0,0
-    output "LG Electronics 27GL850 912NTWG0N049" enable position 2560,0
-    output "LG Electronics IPS226        SerialNumber" enable position 5120,0
+    output "LG Electronics 27GL850 912NTWG0N049" enable position 0,0
+    output "Dell Inc. DELL U2715H GH85D83V2Q6S" enable position 5632,0 transform 270
+    output "Microstep MPG321UX OLED " enable mode 3840x2160@240 position 2560,0 scale 1.25
 }
 
 profile single-screen {
