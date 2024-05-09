@@ -5,5 +5,5 @@ profile "default" {
 
 profile "dual_screen home" {
   output eDP-1 mode 1920x1080 position 350,1440 scale 1.0
-  output "Goldstar Company Ltd 27GL850 912NTWG0N049 (HDMI-A-1)" mode 2560x1440 position 0,0
+  output "Microstep MPG321UX OLED " enable mode 3840x2160@240 position 0,0 scale 1.25
 }
