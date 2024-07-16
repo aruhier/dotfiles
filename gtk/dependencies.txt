@@ -1,1 +1,2 @@
+Inter (font)
 numix-icon-theme-git
