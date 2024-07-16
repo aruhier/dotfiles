@@ -244,7 +244,7 @@ local function setupLualine()
             end
             return 'nvim-diagnostic'
           end},
-          colored=false, icons_enabled=false
+          colored=false, icons_enabled=true
         }
       },
       lualine_c = {
@@ -255,7 +255,7 @@ local function setupLualine()
         },
         'lsp_progress'
       },
-      lualine_x = {'encoding', {'fileformat' , icons_enabled=false}, {'filetype', icons_enabled=false}},
+      lualine_x = {'encoding', {'fileformat' , icons_enabled=true}, {'filetype', icons_enabled=true}},
       lualine_y = {'progress'},
       lualine_z = {'location'}
     },

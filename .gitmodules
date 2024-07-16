@@ -1,3 +1,11 @@
 [submodule "dir_colors/dircolors-solarized"]
 	path = dir_colors/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized
+[submodule "fonts/material-design-font"]
+	path = fonts/material-design-font
+	url = https://github.com/Templarian/MaterialDesign-Font
+[submodule "*"]
+	shallow = true
+[submodule "fonts/dotfiles-fonts"]
+	path = fonts/dotfiles-fonts
+	url = https://github.com/aruhier/dotfiles-fonts.git
