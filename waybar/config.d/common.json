@@ -1,7 +1,7 @@
 {
     "hyprland/workspaces": {
         "all-outputs": true,
-        "format": " {icon}",
+        "format": "  {icon}",
         "persistent-workspaces": {
             "*": [1, 2, 3, 4, 5, 6, 7, 8]
         },
@@ -48,7 +48,7 @@
     },
     "custom/swaync": {
         "tooltip": true,
-        "format": "<span rise='2.5pt' font='10'>{icon}</span>",
+        "format": "<span rise='-10pt' font='9.5'>{icon}</span>",
         "format-icons": {
           "notification": "<span foreground='#FF9334'>󰂞</span>",
           "none": "󰂚",
@@ -63,9 +63,9 @@
         "escape": true
     },
     "mpd": {
-        "format": "<span font='10'>{stateIcon}</span> {artist} - {title}",
+        "format": "<span font='8' rise='1pt'>{stateIcon}</span>  {artist} - {title}",
         "format-disconnected": "",
-        "format-stopped": "<span font='11'>󰓛</span>",
+        "format-stopped": "<span font='9'>󰓛</span>",
         "unknown-tag": "N/A",
         "interval": 2,
         "state-icons": {
@@ -85,7 +85,7 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "<span rise='-1pt' font='11'>󰃭</span> {:%a %d %b  %H:%M}",
+        "format": "<span rise='0.7pt' font='10'>󰃭</span>  {:%a %d %b  %H:%M}",
         "format-alt": "{:%Y-%m-%d}"
     },
     "backlight": {
@@ -110,7 +110,7 @@
     },
     "wireplumber": {
         // "scroll-step": 1, // %, can be a float
-        "format": "<span font='11' rise='-1pt'>{icon}</span> {volume}%",
+        "format": "<span font='9' rise='0.5pt'>{icon}</span>  {volume}%",
         "format-muted": "󰝟",
         "format-source": "",
         "format-source-muted": "",
@@ -138,7 +138,7 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "<span font='11' rise='-1pt'>{icon}</span> {volume}%",
+        "format": "<span font='9' rise='0.5pt'>{icon}</span>  {volume}%",
         "format-muted": "󰝟",
         "format-source": "",
         "format-source-muted": "",
@@ -148,11 +148,11 @@
         "on-click": "pavucontrol"
     },
     "custom/right-arrow": {
-        "format": "<span font='11'></span>",
+        "format": "<span font='14'></span>",
         "tooltip": false
     },
     "custom/left-arrow": {
-        "format": "<span font='11'></span>",
+        "format": "<span font='14'></span>",
         "tooltip": false
     }
 }
