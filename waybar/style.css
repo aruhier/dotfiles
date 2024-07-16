@@ -2,7 +2,10 @@
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: Hack, Material Design Icons Desktop;
+    font-family: Symbols Nerd Font Mono, Inter Variable, Material Design Icons Desktop;
+    /* font-family: Hack, Material Design Icons Desktop; */
+    /* To enable alternate font styling (difference in the l, 0, etc.) */
+    /* font-feature-settings: "ss02"; */
     font-size: 12px;
     min-height: 0;
 }
