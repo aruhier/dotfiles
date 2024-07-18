@@ -90,7 +90,7 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% <span font='11' rise='-1pt'>{icon}</span>",
+        "format": "{percent}% <span font='10' rise='0.5pt'>{icon}</span>",
         "format-icons": ["󰃞", "󰃠"]
     },
     "battery": {
@@ -99,10 +99,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% <span allow_breaks='false' line_height='0.9' gravity='west' gravity_hint='strong' baseline_shift='4.9pt' rise='-0.5pt' font='12'>{icon}</span>",
-        "format-charging": "{capacity}%<span font='5'> </span><span font='10' rise='-0.5pt'>󰂄</span>",
-        "format-plugged": "{capacity}% <span allow_breaks='false' line_height='0.9' gravity='west' gravity_hint='strong' baseline_shift='4.5pt' font='12'>󰚥</span>",
-        "format-alt": "{time} <span allow_breaks='false' line_height='0.9' gravity='west' gravity_hint='strong' baseline_shift='4.5pt' font='12'>{icon}</span>",
+        "format": "{capacity}% <span allow_breaks='false' line_height='0.9' gravity='west' gravity_hint='strong' baseline_shift='4.9pt' rise='-0.6pt' font='10'>{icon}</span>",
+        "format-charging": "{capacity}%<span font='5'> </span><span font='10' rise='0.5pt'>󰂄</span>",
+        "format-plugged": "{capacity}% <span allow_breaks='false' line_height='0.9' gravity='west' gravity_hint='strong' baseline_shift='4.5pt' font='10'>󰚥</span>",
+        "format-alt": "{time} <span allow_breaks='false' line_height='0.9' gravity='west' gravity_hint='strong' baseline_shift='4.9pt' rise='-0.6pt' font='10'>{icon}</span>",
         "format-icons": ["󰂎", "󰁼", "󰁿", "󰂁", "󰁹"]
     },
     "battery#bat2": {
