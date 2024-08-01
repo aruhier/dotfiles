@@ -237,6 +237,12 @@ end
 setupLualine()
 
 
+-- nvim-autopairs
+------------------
+
+require("nvim-autopairs").setup {}
+
+
 -- HL Chunk
 -----------------
 
