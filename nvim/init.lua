@@ -340,6 +340,12 @@ end
 vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
 
 
+-- nvim-autopairs
+------------------
+
+require("nvim-autopairs").setup {}
+
+
 -- nvim-cmp
 ------------
 
