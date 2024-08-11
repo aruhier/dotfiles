@@ -1,6 +1,5 @@
 * {
     border: none;
-    border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: Symbols Nerd Font Mono, Inter Variable, Material Design Icons Desktop;
     /* font-family: Hack, Material Design Icons Desktop; */
@@ -36,6 +35,7 @@ window#waybar.solo {
     padding-right: 10px;
     background-color: #FFDA65;
     color: #252527;
+    border-radius: 0;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -64,7 +64,12 @@ window#waybar.solo {
 
 #submap {
     background-color: #64727D;
-    border-bottom: 3px solid #ffffff;
+    border-radius: 20%/100%;
+    border-left: solid #64727D;
+    border-right: solid #64727D;
+    border-width: 0 6px 0;
+    padding: 0 6px;
+    margin: 0 8px 0 4px;
 }
 
 #mode {
@@ -87,7 +92,6 @@ window#waybar.solo {
 #mode,
 #idle_inhibitor,
 #mpd,
-#submap,
 #privacy,
 #custom-swaync {
     padding: 0 6px;
@@ -153,15 +157,23 @@ label:focus {
     background: #2d2d2d;
 }
 
-.modules-center #custom-left-arrow, .modules-center #custom-right-arrow {
-    color: #2d2d2d;
-    background: #FFF7C6;
+.modules-center {
+    border-radius: 6%/100%;
+    border-left: solid #FFF7C6;
+    border-right: solid #FFF7C6;
+    border-width: 0 15px 0;
 }
 
-.modules-center #custom-left-arrow {
-    padding-left: 12px;
+.modules-right {
+    border-top-left-radius: 7% 100%;
+    border-bottom-left-radius: 7% 100%;
+    border-left: solid #424242;
+    border-width: 0 0 0 6px;
 }
 
-.modules-center #custom-right-arrow {
-    padding-right: 12px;
+.modules-left {
+    border-top-right-radius: 7% 100%;
+    border-bottom-right-radius: 7% 100%;
+    border-right: solid #424242;
+    border-width: 0 6px 0 0;
 }
