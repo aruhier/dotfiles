@@ -1,6 +1,7 @@
 [{
     "layer": "top",
-    "height": 18, // Waybar height (to be removed for auto height)
+    "height": 21, // Waybar height (to be removed for auto height)
+    "margin-bottom": 1,
     "output": ["DP-3", "HDMI-A-1"],
     "modules-left": ["mpd", "hyprland/submap"],
     "modules-center": ["hyprland/workspaces"],
@@ -8,7 +9,8 @@
     "include": ["~/.config/waybar/config.d/common.json"]
 },{
     "layer": "top",
-    "height": 18, // Waybar height (to be removed for auto height)
+    "height": 21, // Waybar height (to be removed for auto height)
+    "margin-bottom": 1,
     "modules-left": ["mpd", "hyprland/submap"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["tray", "backlight", "pulseaudio", "privacy", "custom/swaync", "clock"],

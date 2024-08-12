@@ -9,11 +9,16 @@
     min-height: 0;
 }
 
+#waybar > box {
+    border-bottom: 3px solid #6AA099;
+}
+
 window#waybar {
     background-color: #2d2d2d;
     color: #A3A3AB;
     transition-property: background-color;
     transition-duration: .5s;
+    border: none;
 }
 
 window#waybar.hidden {
@@ -29,12 +34,16 @@ window#waybar.solo {
 }
 */
 
+#workspaces {
+    background-color: #8aabab;
+}
+
 #workspaces button {
     padding: 0;
-    padding-left: 5px;
-    padding-right: 10px;
-    background-color: #FFDA65;
-    color: #252527;
+    padding-left: 10px;
+    padding-right: 8px;
+    background-color: #9BBFBA;
+    color: #2d2d2d;
     border-radius: 0;
 }
 
@@ -44,13 +53,14 @@ window#waybar.solo {
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
+    background-color: #F98BA4;
 }
 
 #workspaces button.focused, #workspaces button.active,
 #workspaces button.persistent.focused, #workspaces button.persistent.active {
-    background-color: #FFC203;
-    color: #BF0905;
+    background-color: #6AA099;
+    color: #2d2d2d;
+    font-weight: bold;
 }
 
 #workspaces button.visible.current_output {
@@ -58,18 +68,20 @@ window#waybar.solo {
 }
 
 #workspaces button.persistent.empty:not(.focused):not(.active) {
-    background-color: #FFF7C6;
+    background-color: #E5D4CE;
     color: #252527;
 }
 
 #submap {
-    background-color: #64727D;
+    background-color: #6AA099;
     border-radius: 20%/100%;
-    border-left: solid #64727D;
-    border-right: solid #64727D;
+    border-left: solid #6AA099;
+    border-right: solid #6AA099;
     border-width: 0 6px 0;
     padding: 0 6px;
     margin: 0 8px 0 4px;
+    font-weight: bold;
+    color: #2d2d2d;
 }
 
 #mode {
@@ -96,6 +108,10 @@ window#waybar.solo {
 #custom-swaync {
     padding: 0 6px;
     margin: 0 4px;
+}
+
+#clock {
+    padding-bottom: 1pt;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -129,7 +145,7 @@ label:focus {
 }
 
 .modules-right, .modules-left {
-    color: rgba(255, 250, 219, 0.78);
+    color: #E5D4CE;
     background-color: #424242;
 }
 
@@ -159,8 +175,8 @@ label:focus {
 
 .modules-center {
     border-radius: 6%/100%;
-    border-left: solid #FFF7C6;
-    border-right: solid #FFF7C6;
+    border-left: solid #E5D4CE;
+    border-right: solid #E5D4CE;
     border-width: 0 15px 0;
 }
 

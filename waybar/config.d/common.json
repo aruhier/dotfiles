@@ -1,7 +1,7 @@
 {
     "hyprland/workspaces": {
         "all-outputs": true,
-        "format": "  {icon}",
+        "format": "{icon}",
         "persistent-workspaces": {
             "*": [1, 2, 3, 4, 5, 6, 7, 8]
         },
@@ -48,11 +48,11 @@
     },
     "custom/swaync": {
         "tooltip": true,
-        "format": "<span rise='-10pt' font='9.5'>{icon}</span>",
+        "format": "<span font='10'>{icon}</span>",
         "format-icons": {
-          "notification": "<span foreground='#FF9334'>󰂞</span>",
+          "notification": "<span foreground='#F98AA4'>󰂞</span>",
           "none": "󰂚",
-          "dnd-notification": "<span foreground='#FF9334'>󰂛</span>",
+          "dnd-notification": "<span foreground='#F98AA4'>󰂛</span>",
           "dnd-none": "<span foreground='#9c9ca4'>󰂛</span>"
         },
         "return-type": "json",
@@ -85,7 +85,7 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "<span rise='0.7pt' font='10'>󰃭</span>  {:%a %d %b  %H:%M}",
+        "format": "<span font='10'>󰃭</span><span>  {:%a %d %b  %H:%M}</span>",
         "format-alt": "{:%Y-%m-%d}"
     },
     "backlight": {
