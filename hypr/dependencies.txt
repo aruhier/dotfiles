@@ -1,8 +1,14 @@
 copyq
 gammastep
+hyprshot
+hypridle
+kanshi
 kdeconnect
 lxqt-policykit
 network-manager
 nextcloud
+pulsemixer
+swaybg
+swaylock
 swaync
 waybar
