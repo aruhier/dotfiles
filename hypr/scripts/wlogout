@@ -23,7 +23,7 @@ if awk "BEGIN {exit !($x_resolution > 2100)}"; then
     wlogout -n -p layer-shell -b $BUTTONS -c 50 -r 50 -T $y_margin -B $y_margin -L $x_margin -R $x_margin
 elif awk "BEGIN {exit !($x_resolution > 1900)}"; then
     # Apply a ratio .
-    x_margin=$(awk "BEGIN {printf \"%.0f\", $x_margin * 0.8}")
+    x_margin=$(awk "BEGIN {printf \"%.0f\", $x_margin * 0.6}")
     wlogout -n -p layer-shell -b $BUTTONS -c 50 -r 50 -T $y_margin -B $y_margin -L $x_margin -R $x_margin
 elif awk "BEGIN {exit !($y_resolution > 1920)}"; then
     # Apply a ratio for 2 rows.
