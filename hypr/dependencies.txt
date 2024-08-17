@@ -12,3 +12,4 @@ swaybg
 swaylock
 swaync
 waybar
+wlogout

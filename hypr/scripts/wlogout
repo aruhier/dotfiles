@@ -1,0 +1,25 @@
+#!/bin/env bash
+
+# Margin in screen ratio.
+MARGIN_X=0.075
+MARGIN_Y=0.4
+
+read -r cursor_x cursor_y < <(hyprctl -j cursorpos | jq -r '[ .x, .y] | join(" ")')
+read -r x_resolution y_resolution < <(hyprctl -j monitors | jq -r ".[] |
+    if .transform == 1 or .transform == 3 then
+        select(.x <= $cursor_x and (.x + .height / .scale) > $cursor_x and .y <= $cursor_y and (.y + .width / .scale) > $cursor_y)
+        | [.height / .scale, .width / .scale] | join(\" \")
+    else
+        select(.x <= $cursor_x and (.x + .width / .scale) > $cursor_x and .y <= $cursor_y and (.y + .height / .scale) > $cursor_y)
+        | [.width / .scale, .height / .scale] | join(\" \")
+    end")
+
+# Detect monitor resolution and scaling factor
+x_margin=$(awk "BEGIN {printf \"%.0f\", $x_resolution * $MARGIN_X}")
+y_margin=$(awk "BEGIN {printf \"%.0f\", $y_resolution * $MARGIN_Y}")
+
+if (( $(echo "$x_resolution > 1600" | bc -l) ))
+    then wlogout -n -p layer-shell -b 7  -T $y_margin -B $y_margin -L $x_margin -R $x_margin
+else
+    wlogout -n -b 4 -r 50 -T $y_margin -B $y_margin -L $x_margin -R $x_margin
+fi
