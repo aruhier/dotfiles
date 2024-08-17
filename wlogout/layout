@@ -34,10 +34,3 @@
     "text" : "Reboot (r)",
     "keybind" : "r"
 }
-{
-    "label" : "reboot-windows",
-    "action" : "pkexec bootctl set-oneshot auto-windows; reboot",
-    "text" : "Reboot toWindows (w)",
-    "keybind" : "w",
-    "circular": "true"
-}
