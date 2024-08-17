@@ -1,0 +1,43 @@
+{
+    "label" : "lock",
+    "action" : "loginctl lock-session",
+    "text" : "Lock (l)",
+    "keybind" : "l"
+}
+{
+    "label" : "logout",
+    "action" : "loginctl terminate-user $USER",
+    "text" : "Logout (q)",
+    "keybind" : "q"
+}
+{
+    "label" : "hibernate",
+    "action" : "systemctl hibernate",
+    "text" : "Hibernate (i)",
+    "keybind" : "i"
+}
+{
+    "label" : "shutdown",
+    "action" : "systemctl poweroff",
+    "text" : "Shutdown (h)",
+    "keybind" : "h"
+}
+{
+    "label" : "suspend",
+    "action" : "systemctl suspend; sleep 20s; systemctl suspend",
+    "text" : "Suspend (s)",
+    "keybind" : "s"
+}
+{
+    "label" : "reboot",
+    "action" : "systemctl reboot",
+    "text" : "Reboot (r)",
+    "keybind" : "r"
+}
+{
+    "label" : "reboot-windows",
+    "action" : "pkexec bootctl set-oneshot auto-windows; reboot",
+    "text" : "Reboot toWindows (w)",
+    "keybind" : "w",
+    "circular": "true"
+}
