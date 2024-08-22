@@ -6,3 +6,6 @@
 	url = https://github.com/aruhier/dotfiles-fonts.git
 [submodule "*"]
 	shallow = true
+[submodule "firefox/betterfox"]
+	path = firefox/betterfox
+	url = git@github.com:yokoffing/Betterfox.git
