@@ -8,4 +8,4 @@
 	shallow = true
 [submodule "firefox/betterfox"]
 	path = firefox/betterfox
-	url = git@github.com:yokoffing/Betterfox.git
+	url = https://github.com/yokoffing/Betterfox.git
