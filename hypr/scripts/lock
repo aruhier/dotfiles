@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# Exit if hyprland is already locked.
+[[ `hyprctl locked` = "true" ]] && exit 1
+
 # Times the screen off and puts it to background
 swayidle \
     timeout 5 'hyprctl dispatcher dpms off' \
