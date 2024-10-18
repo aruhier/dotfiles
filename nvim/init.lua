@@ -492,12 +492,27 @@ require('hlchunk').setup({
   -- Used a color blender between everforest comment color (#859289) and everforest fg_red (#f85552).
   -- Use a slightly brighter color to make it more readable.
   line_num = {
+    enable = true,
     style = "#a49088",
   },
   -- Used a color blender between everforest comment color (#859289) and everforest fg_red (#f85552).
   chunk = {
+    enable = true,
     style = {
       { fg = "#9A877F" },
+    },
+    delay = 0,
+  },
+  indent = {
+    enable = true,
+  },
+  blank = {
+    enable = true,
+    chars = {
+      '․',
+    },
+    style = {
+        { vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui"), "" },
     },
   },
 })
