@@ -1,7 +1,7 @@
 #!/bin/bash
 # Times the screen off and puts it to background
 swayidle \
-    timeout 5 'hyprctl dispatcher dpms off' \
+    timeout 10 'hyprctl dispatcher dpms off' \
     resume 'hyprctl dispatcher dpms on' &
 hyprlock
 # Kills last background task so idle timer doesn't keep running
