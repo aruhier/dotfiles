@@ -4,7 +4,7 @@
 [[ `hyprctl locked` = "true" ]] && exit 1
 
 # Times the screen off and puts it to background
-swayidle \
+swayidle -w \
     timeout 15 'hyprctl dispatcher dpms off' \
     resume 'hyprctl dispatcher dpms on' &
 hyprlock
