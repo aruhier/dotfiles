@@ -266,7 +266,7 @@ bindkey -M viins 'jk' vi-cmd-mode
 # Fix de ^M bug when typing "enter" sometimes
 stty icrnl
 
-export PATH=~/.local/bin:$PATH
+export PATH=~/.local/bin:/sbin:$PATH
 
 # Source local options if any
 if [ -f ~/.zshrc.local ]
