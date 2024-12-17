@@ -1,9 +1,9 @@
 profile "default" {
-  output eDP-1 mode "1920x1200@59.950Hz" scale 1.0 enable
+  output eDP-1 mode "2944x1840@90.00Hz" scale 1.6 enable
   # exec swaymsg output eDP-1 max_render_time 7
 }
 
 profile "dual_screen home" {
-  output eDP-1 mode 1920x1080 position 350,1440 scale 1.0
+  output eDP-1 mode "2944x1840@90.00Hz" position 350,1440 scale 1.6 enable
   output "Microstep MPG321UX OLED " enable mode 3840x2160@240 position 0,0 scale 1.25
 }
