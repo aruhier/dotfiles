@@ -1,7 +1,9 @@
 {
-    "height": 18, // Waybar height (to be removed for auto height)
-    "modules-left": ["mpd", "sway/mode", "custom/right-arrow"],
-    "modules-center": ["custom/right-arrow", "sway/workspaces", "custom/left-arrow"],
-    "modules-right": ["custom/left-arrow", "tray", "backlight", "battery", "battery#bat2", "wireplumber", "custom/swaync", "clock"],
+    "layer": "top",
+    "height": 22, // Waybar height (to be removed for auto height)
+    "margin-bottom": 1,
+    "modules-left": ["mpd", "hyprland/submap"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["tray", "backlight", "battery", "battery#bat2", "pulseaudio", "privacy", "custom/swaync", "clock"],
     "include": ["~/.config/waybar/config.d/common.json"]
 }

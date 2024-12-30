@@ -79,13 +79,13 @@
         "title-len": 40
     },
     "tray": {
-        "icon-size": 15,
-        "spacing": 10
+        "icon-size": 14,
+        "spacing": 20
     },
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "<span font='10'>󰃭</span><span>  {:%a %d %b  %H:%M}</span>",
+        "format": "<span font='10'rise='0.5pt'>󰃭</span><span>  {:%a %d %b  %H:%M}</span>",
         "format-alt": "{:%Y-%m-%d}"
     },
     "backlight": {

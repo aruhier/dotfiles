@@ -1,11 +1,18 @@
 [submodule "dir_colors/dircolors-solarized"]
 	path = dir_colors/dircolors-solarized
 	url = https://github.com/seebi/dircolors-solarized
+	shallow = true
 [submodule "fonts/dotfiles-fonts"]
 	path = fonts/dotfiles-fonts
 	url = https://github.com/aruhier/dotfiles-fonts.git
-[submodule "*"]
 	shallow = true
 [submodule "firefox/betterfox"]
 	path = firefox/betterfox
 	url = https://github.com/yokoffing/Betterfox.git
+	shallow = true
+[submodule "icons/papirus"]
+	path = icons/papirus
+	url = git@github.com:PapirusDevelopmentTeam/papirus-icon-theme.git
+	branch = master
+	shallow = true
+	ignore = untracked
