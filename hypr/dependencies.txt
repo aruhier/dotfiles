@@ -4,12 +4,14 @@ hyprshot
 hypridle
 kanshi
 kdeconnect
+hyprlock
 lxqt-policykit
 network-manager
 nextcloud
 pulsemixer
+# Configure Qt options (set the fonts and icon theme)
+qt6ct
 swaybg
-swaylock
 swaync
 waybar
 wlogout
