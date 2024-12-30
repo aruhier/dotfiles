@@ -12,7 +12,7 @@
 	shallow = true
 [submodule "icons/papirus"]
 	path = icons/papirus
-	url = git@github.com:PapirusDevelopmentTeam/papirus-icon-theme.git
+	url = https://github.com/PapirusDevelopmentTeam/papirus-icon-theme.git
 	branch = master
 	shallow = true
 	ignore = untracked
