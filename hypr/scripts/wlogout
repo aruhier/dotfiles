@@ -5,13 +5,12 @@ MARGIN_X=0.15
 MARGIN_Y=0.4
 BUTTONS=6
 
-read -r cursor_x cursor_y < <(hyprctl -j cursorpos | jq -r '[ .x, .y] | join(" ")')
 read -r x_resolution y_resolution < <(hyprctl -j monitors | jq -r ".[] |
     if .transform == 1 or .transform == 3 then
-        select(.x <= $cursor_x and (.x + .height / .scale) > $cursor_x and .y <= $cursor_y and (.y + .width / .scale) > $cursor_y)
+        select(.focused)
         | [.height / .scale, .width / .scale] | join(\" \")
     else
-        select(.x <= $cursor_x and (.x + .width / .scale) > $cursor_x and .y <= $cursor_y and (.y + .height / .scale) > $cursor_y)
+        select(.focused)
         | [.width / .scale, .height / .scale] | join(\" \")
     end")
 
