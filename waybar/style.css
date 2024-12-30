@@ -110,20 +110,6 @@ window#waybar.solo {
     margin: 0 4px;
 }
 
-#clock {
-    padding-bottom: 1pt;
-}
-
-/* If workspaces is the leftmost module, omit left margin */
-.modules-left > widget:first-child > #workspaces {
-    margin-left: 0;
-}
-
-/* If workspaces is the rightmost module, omit right margin */
-.modules-right > widget:last-child > #workspaces {
-    margin-right: 0;
-}
-
 @keyframes blink {
 to {
     background-color: #ffffff;
@@ -150,7 +136,7 @@ label:focus {
 }
 
 #tray, #tray menu {
-    font-family: Cantarell;
+    font-family: Inter Variable;
 }
 
 #tray > .passive {
@@ -174,22 +160,22 @@ label:focus {
 }
 
 .modules-center {
-    border-radius: 6%/100%;
+    border-radius: 20px/100%;
     border-left: solid #E5D4CE;
     border-right: solid #E5D4CE;
     border-width: 0 15px 0;
 }
 
 .modules-right {
-    border-top-left-radius: 7% 100%;
-    border-bottom-left-radius: 7% 100%;
+    border-top-left-radius: 20px 100%;
+    border-bottom-left-radius: 20px 100%;
     border-left: solid #424242;
-    border-width: 0 0 0 6px;
+    border-width: 0 0 0 12px;
 }
 
 .modules-left {
-    border-top-right-radius: 7% 100%;
-    border-bottom-right-radius: 7% 100%;
+    border-top-right-radius: 20px 100%;
+    border-bottom-right-radius: 20px 100%;
     border-right: solid #424242;
-    border-width: 0 6px 0 0;
+    border-width: 0 12px 0 0;
 }

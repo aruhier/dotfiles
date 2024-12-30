@@ -1,15 +1,19 @@
 [{
-    "height": 18, // Waybar height (to be removed for auto height)
+    "layer": "top",
+    "height": 22, // Waybar height (to be removed for auto height)
+    "margin-bottom": 1,
     "output": ["DP-3", "HDMI-A-1"],
-    "modules-left": ["mpd", "sway/mode", "custom/right-arrow"],
-    "modules-center": ["custom/right-arrow", "sway/workspaces", "custom/left-arrow"],
-    "modules-right": ["custom/left-arrow", "backlight", "wireplumber", "custom/swaync", "clock"],
+    "modules-left": ["mpd", "hyprland/submap"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["backlight", "pulseaudio", "custom/swaync", "clock"],
     "include": ["~/.config/waybar/config.d/common.json"]
 },{
-    "height": 18, // Waybar height (to be removed for auto height)
-    "modules-left": ["mpd", "sway/mode", "custom/right-arrow"],
-    "modules-center": ["custom/right-arrow", "sway/workspaces", "custom/left-arrow"],
-    "modules-right": ["custom/left-arrow", "tray", "backlight", "wireplumber", "custom/swaync", "clock"],
+    "layer": "top",
+    "height": 22, // Waybar height (to be removed for auto height)
+    "margin-bottom": 1,
+    "modules-left": ["mpd", "hyprland/submap"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["tray", "backlight", "pulseaudio", "privacy", "custom/swaync", "clock"],
     "output": ["DP-2"],
     "include": ["~/.config/waybar/config.d/common.json"]
 }]
