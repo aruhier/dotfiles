@@ -12,3 +12,4 @@ copyq&
 kdeconnect-indicator&
 nm-applet --indicator&
 flatpak run com.nextcloud.desktopclient.nextcloud --background&
+blueman-applet&
