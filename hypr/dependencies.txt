@@ -13,5 +13,6 @@ pulsemixer
 qt6ct
 swaybg
 swaync
+swayosd
 waybar
 wlogout

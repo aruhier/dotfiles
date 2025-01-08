@@ -18,6 +18,10 @@
   "hide-on-action": false,
   "script-fail-notify": true,
   "notification-visibility": {
+    "blueman": {
+      "app-name": "blueman",
+      "state": "transient"
+    },
     "network-manager": {
       "app-name": "NetworkManager Applet",
       "state": "transient"

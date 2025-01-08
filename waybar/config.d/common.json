@@ -55,6 +55,7 @@
           "dnd-notification": "<span foreground='#F98AA4'>󰂛</span>",
           "dnd-none": "<span foreground='#9c9ca4'>󰂛</span>"
         },
+        "restart-interval": 5,
         "return-type": "json",
         "exec-if": "which swaync-client",
         "exec": "swaync-client -swb",

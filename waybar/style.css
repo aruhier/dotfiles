@@ -34,10 +34,6 @@ window#waybar.solo {
 }
 */
 
-#workspaces {
-    background-color: #8aabab;
-}
-
 #workspaces button {
     padding: 0;
     padding-left: 10px;
@@ -135,8 +131,8 @@ label:focus {
     background-color: #424242;
 }
 
-#tray, #tray menu {
-    font-family: Inter Variable;
+#tray menu * {
+    font-size: 13px;
 }
 
 #tray > .passive {

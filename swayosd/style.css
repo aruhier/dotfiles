@@ -1,0 +1,10 @@
+@define-color theme_bg_color #9BBFBA;
+@define-color theme_fg_color #2d2d2d;
+
+window#osd {
+    background: alpha(@theme_bg_color, 0.985);
+}
+
+window#osd image, window#osd label {
+    font-weight: 600;
+}
