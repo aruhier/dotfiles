@@ -1,0 +1,9 @@
+set folder      = imaps://imap.mailbox.org:993/
+
+set from        = USER@mailbox.org
+set imap_user   = USER@mailbox.org
+set imap_pass   = PASSWORD
+
+set smtp_user   = $imap_user
+set smtp_pass   = $imap_pass
+set smtp_url    = smtps://smtp.mailbox.org:465/
