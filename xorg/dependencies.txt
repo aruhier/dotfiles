@@ -1,6 +1,0 @@
-fcitx
-fcitx-fbterm
-fcitx-gtk2
-fcitx-gtk3
-fcitx-qt4
-fcitx-qt5
