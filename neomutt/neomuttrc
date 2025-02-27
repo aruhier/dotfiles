@@ -8,7 +8,8 @@ bind index z collapse-thread
 bind index Z collapse-all
 #
 
-set my_name = Anthony Ruhier
+set my_name = "Anthony Ruhier"
+set realname = "$my_name"
 source "gpg -dq $HOME/.config/neomutt/mailbox.gpg |"
 set spoolfile = +INBOX
 set postponed = +Drafts
@@ -16,7 +17,7 @@ set record = "+Sent"
 
 set use_threads = reverse
 set collapse_all = yes
-set collapse_unread=yes
+set collapse_unread = yes
 set uncollapse_new = no
 set hide_limited = yes
 # folder-hook . push '<collapse-all>'
@@ -33,4 +34,4 @@ set mail_check = 120
 # See the headers when editing
 set edit_headers = yes
 
-set signature="~/.config/neomutt/signature"
+set signature = "~/.config/neomutt/signature"
