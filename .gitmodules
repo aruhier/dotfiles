@@ -8,7 +8,7 @@
 	shallow = true
 [submodule "firefox/betterfox"]
 	path = firefox/betterfox
-	url = https://github.com/yokoffing/Betterfox.git
+	url = https://github.com/aruhier/Betterfox.git
 	shallow = true
 [submodule "icons/papirus"]
 	path = icons/papirus
