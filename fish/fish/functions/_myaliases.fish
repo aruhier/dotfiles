@@ -21,18 +21,16 @@ function _myaliases
     alias -s ls='ls --color=auto'
     alias -s makepkgless='makepkg --config /etc/makepkg_less.conf'
     # If changed, change also the abbr.
-    alias -s maj='systemd-run -t -p CPUWeight=20 -p CPUQuota=3000% --user -- sudo emerge -uDU --ask --keep-going --newrepo --with-bdeps=y -j 5 --load-average=20 @world && sudo emerge --depclean && sudo eclean-dist --deep
-        echo; echo "Flatpak"; echo "======="; flatpak update; flatpak uninstall --unused'
-    alias -s majsync='sudo emerge --sync; sudo eix-update'
+    alias -s maj='yay'
     alias -s mkcd='mkdir_cd '
     alias -s mtr='mtr -o "LSR NABWV"'
-    alias -s obsolete_pkg='eix-test-obsolete; portpeek -se'
-    alias -s clean_obsolete_pkg='portpeek -se'
     # alias -s private=' unset HISTFILE; _zoxide_hook(){}'
     alias -s reptyr='reptyr_authorization ' # Set the kernel to authorize ptracing
     alias -s sshnocheck='ssh -o StrictHostKeyChecking=no '
     alias -s sudo='sudo ' # Make aliases work with sudo
 
     # Firefox
+    alias -s firefox='firefox-beta '
+    alias -s firefox-aurora='firefox-aurora -p beta -no-remote'
     alias -s firefox-clean='firefox -p clean -no-remote'
 end

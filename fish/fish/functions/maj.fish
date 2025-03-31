@@ -1,5 +1,4 @@
-function maj --wraps=systemd-run\ -t\ -p\ CPUWeight=20\ -p\ CPUQuota=3000\%\ --user\ --\ sudo\ emerge\ -uDU\ --ask\ --keep-going\ --newrepo\ --with-bdeps=y\ -j\ 5\ --load-average=20\ @world\ \&\&\ sudo\ emerge\ --depclean\ \&\&\ sudo\ eclean-dist\ --deep\n\ \ \ \ \ \ \ \ echo\;\ echo\ \"Flatpak\"\;\ echo\ \"=======\"\;\ flatpak\ update\;\ flatpak\ uninstall\ --unused --description alias\ maj=systemd-run\ -t\ -p\ CPUWeight=20\ -p\ CPUQuota=3000\%\ --user\ --\ sudo\ emerge\ -uDU\ --ask\ --keep-going\ --newrepo\ --with-bdeps=y\ -j\ 5\ --load-average=20\ @world\ \&\&\ sudo\ emerge\ --depclean\ \&\&\ sudo\ eclean-dist\ --deep\n\ \ \ \ \ \ \ \ echo\;\ echo\ \"Flatpak\"\;\ echo\ \"=======\"\;\ flatpak\ update\;\ flatpak\ uninstall\ --unused
-  systemd-run -t -p CPUWeight=20 -p CPUQuota=3000% --user -- sudo emerge -uDU --ask --keep-going --newrepo --with-bdeps=y -j 5 --load-average=20 @world && sudo emerge --depclean && sudo eclean-dist --deep
-        echo; echo "Flatpak"; echo "======="; flatpak update; flatpak uninstall --unused $argv
+function maj --wraps=yay --description 'alias maj=yay'
+  yay $argv
         
 end
