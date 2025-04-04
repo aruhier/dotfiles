@@ -19,5 +19,5 @@ if status is-interactive
     end
 
     # A dummy wait of 5ms. Without it, the terminal might get resized and the prompt get printed on multiple time.
-    sleep 0.01
+    sleep 0.05
 end
