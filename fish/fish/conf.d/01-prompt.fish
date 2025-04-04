@@ -89,14 +89,36 @@ function fish_prompt --description 'Write out the prompt'
     echo -n -s $prompt_status" " (prompt_login) (set_color $color_host) $suffix " " (set_color normal)
 end
 
+function _cmd_duration_human -d "Command duration in human format"
+    set -l milliseconds (math -s0 "($CMD_DURATION) % 1000")
+    set -l seconds      (math -s0 "($CMD_DURATION / (1000)) % 60")
+    set -l minutes      (math -s0 "($CMD_DURATION / (1000*60)) % 60")
+    set -l hours        (math -s0 "($CMD_DURATION / (1000*60*60)) % 24")
+
+    if test "$hours" -gt 0
+        printf "%02d:%02d:%02d" $hours $minutes $seconds
+    else if test "$minutes" -gt 0
+        printf "%02d:%02d" $minutes $seconds
+    else if test "$seconds" -gt 0
+        set milliseconds (math -s0 "($milliseconds) / 100")
+        printf "%d.%ds" $seconds $milliseconds
+    else
+        printf "%03dms" $milliseconds
+    end
+end
+
+
 function fish_right_prompt --description 'Write out the right side prompt'
     set -l normal (set_color normal)
     set -l color_cwd $fish_color_cwd
-    set -l empty_char (echo -e \u200B)
-    set -l vcs_char (echo -e \uE0A0)
-    set -l vcs_prompt (echo -e "\e[3m"(fish_vcs_prompt)"  \e[0m")
+    set vcs_prompt (echo -en "\e[3m"(string trim --left (fish_vcs_prompt))"\e[0m")
 
-    echo -n -s (set_color 909090) $vcs_prompt (set_color $color_cwd) (prompt_pwd -d 0)" " (set_color normal)
+    set -l prompt_cmd_duration
+    if test "$CMD_DURATION" -gt 2000
+        set prompt_cmd_duration (echo -en "\e[3m["(_cmd_duration_human)"]\e[0m")
+    end
+
+    echo -n -s " " (set_color $fish_color_cmd_duration)$prompt_cmd_duration"  " (set_color $fish_color_vcs_branch)$vcs_prompt"  " (set_color $color_cwd)(prompt_pwd -d 0)" " (set_color normal)
 end
 
 # Async configuration.

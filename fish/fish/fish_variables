@@ -10,11 +10,13 @@ SETUVAR fish_color_autosuggestion:brblack
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:normal
 SETUVAR fish_color_comment:red
+SETUVAR fish_color_cmd_duration:909090
 SETUVAR fish_color_cwd:green
 SETUVAR fish_color_cwd_root:red
 SETUVAR fish_color_end:green
 SETUVAR fish_color_error:brred
 SETUVAR fish_color_escape:brcyan
+SETUVAR fish_color_vcs_branch:909090
 SETUVAR fish_color_gray:5D6B66
 SETUVAR fish_color_history_current:\x2d\x2dbold
 SETUVAR fish_color_host:green
