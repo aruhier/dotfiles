@@ -76,7 +76,7 @@ def create_symlink(path):
     if os.path.exists(post_install):
         stdout = subprocess.check_output(["bash", post_install])
         if stdout:
-            print(stdout)
+            print(stdout.decode())
 
 
 # Enable the debug mode
