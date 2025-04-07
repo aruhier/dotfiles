@@ -204,7 +204,6 @@ vim.cmd [[ autocmd FileType {text,tex} set spell spelllang=en ]]
 
 vim.opt.termguicolors = true
 map('n', '<F10>', ':let &background = ( &background == "dark"? "light" : "dark" )<CR>', {desc = 'Toggle Background (dark/light)'})
-vim.opt.background = 'dark'
 vim.g['everforest_background'] = 'medium'
 vim.g['everforest_ui_contrast'] = 'high'
 vim.g['everforest_better_performance'] = 1
