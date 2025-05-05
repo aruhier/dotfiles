@@ -2,14 +2,11 @@
 
 FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0" swaync&
 lxqt-policykit-agent&
-FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0" swayosd-server&
 # Enable font "boldering" to increase visibility.
 FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0" waybar&
-kdeconnectd&
 
 sleep 3;
 setsid distrobox-enter -n fedora -- copyq &
-kdeconnect-indicator&
 nm-applet --indicator&
 flatpak run com.nextcloud.desktopclient.nextcloud --background&
 blueman-applet&
