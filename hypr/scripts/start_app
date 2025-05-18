@@ -1,0 +1,12 @@
+#!/bin/bash
+
+nm-online -q
+# Wait slightly that the network is ok.
+sleep 1
+# Wait on DNS resolution.
+resolvectl query google.com > /dev/null
+
+hyprctl -q dispatch exec "[workspace 5 silent]" -- foot fish -i -c "'while true; mosh --family=prefer-inet6 --predict adaptive gate.aruhier.fr tmux a; sleep 3; end'"
+
+~/.config/hypr/scripts/apps/thunderbird
+~/.config/hypr/scripts/apps/firefox

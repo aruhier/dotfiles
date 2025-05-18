@@ -1,0 +1,6 @@
+#!/bin/bash
+
+_WORKSPACE=6
+_THUNDERBIRD_CMD=thunderbird
+
+hyprctl -q dispatch exec "[workspace $_WORKSPACE silent]" -- $_THUNDERBIRD_CMD
