@@ -1,0 +1,20 @@
+def_key "right"
+  next_column
+
+def_key "right"
+  slave_screen
+
+def_key "+"
+  volume_up
+
+def_key "left"
+  previous_column
+
+def_key "left"
+  master_screen
+
+def_key "ctrl-u"
+  run_external_command "listenbrainz-mpd --send-feedback love"
+
+def_key "ctrl-d"
+  run_external_command "listenbrainz-mpd --send-feedback hate"

@@ -31,5 +31,7 @@ alternative_ui_separator_color = "default"
 progressbar_color = "default"
 
 locked_screen_width_part = 40
+startup_screen = playlist
+startup_slave_screen = media_library
 screen_switcher_mode = playlist, media_library
 jump_to_now_playing_song_at_start = yes
