@@ -45,7 +45,7 @@ require('packer').startup(function()
     'hrsh7th/cmp-vsnip',
     'hrsh7th/vim-vsnip',
   }}
-  use {'williamboman/mason.nvim', 'WhoIsSethDaniel/mason-tool-installer.nvim', 'williamboman/mason-lspconfig.nvim', requires={'neovim/nvim-lspconfig'}}
+  use {'mason-org/mason.nvim', 'WhoIsSethDaniel/mason-tool-installer.nvim', 'mason-org/mason-lspconfig.nvim', requires={'neovim/nvim-lspconfig'}}
 
   ---- Treesitter
   use {
@@ -338,6 +338,62 @@ function PrintDiagnostics(opts, bufnr, line_nr, client_id)
 end
 vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
 
+local on_attach = function(client, bufnr)
+  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  -- Enable completion triggered by <c-x><c-o>
+  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  local opts = { noremap=true, silent=true }
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
+  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+end
+
+vim.lsp.config("*", {
+  on_attach=on_attach,
+  capabilities=require('cmp_nvim_lsp').default_capabilities(),
+})
+
+local beancount_journal_file = function ()
+  local lspconfig = require('lspconfig')
+  local util = require('lspconfig.util')
+  local fname = vim.fn.expand('%:p')
+
+  local journal_file = ''
+
+  if (fname ~= nil and fname ~=  '') then
+    local root_dir = util.find_git_ancestor(fname) or util.path.dirname(fname)
+    journal_file = root_dir .. "/main.beancount"
+  end
+
+  return journal_file
+end
+
+vim.lsp.config('beancount', {
+  init_options = {
+    journal_file = beancount_journal_file()
+  }
+})
+
 
 -- nvim-autopairs
 ------------------
@@ -405,74 +461,14 @@ setupNvimCMP()
 ------------
 
 local function setupLSPInstaller()
-  local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-    -- Enable completion triggered by <c-x><c-o>
-    buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-    -- Mappings.
-    local opts = { noremap=true, silent=true }
-
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-    buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-    buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-    buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-    buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-    buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-    buf_set_keymap('n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
-  end
-
   require("mason").setup()
+  require("mason-lspconfig").setup {}
   require('mason-tool-installer').setup {
     ensure_installed = {'bashls', 'beancount', 'clangd', 'gopls', 'marksman', 'pyright', 'rust_analyzer'},
     auto_update = false,
     run_on_start = true,
     start_delay = 3000,
     debounce_hours = 24,
-  }
-
-  require("mason-lspconfig").setup_handlers {
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function (server_name) -- default handler (optional)
-      require("lspconfig")[server_name].setup {
-        on_attach=on_attach,
-        capabilities=require('cmp_nvim_lsp').default_capabilities(),
-      }
-    end,
-
-    ["beancount"] = function ()
-      local lspconfig = require('lspconfig')
-      local util = require('lspconfig.util')
-      local fname = vim.fn.expand('%:p')
-
-      if (fname ~= nil and fname ~=  '') then
-        local root_dir = util.find_git_ancestor(fname) or util.path.dirname(fname)
-        local root_file = root_dir .. "/main.beancount"
-
-        require('lspconfig')['beancount'].setup {
-          on_attach=on_attach,
-          capabilities=require('cmp_nvim_lsp').default_capabilities(),
-          init_options = {
-            journal_file = root_file
-          }
-        }
-      end
-    end
   }
 end
 setupLSPInstaller()
