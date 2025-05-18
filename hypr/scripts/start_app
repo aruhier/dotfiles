@@ -1,0 +1,26 @@
+#!/bin/bash
+
+_MAIN_SCREEN="DP-1"
+
+nm-online -q
+# Wait slightly that the network is ok.
+sleep 1
+# Wait on DNS resolution.
+resolvectl query google.com > /dev/null
+
+# Set cursor in the middle of the main screen.
+read x y width height scale < <(hyprctl monitors -j | jq -r ".[] | select(.name == \"$_MAIN_SCREEN\") | \"\(.x) \(.y) \(.width) \(.height) \(.scale)\"")
+hyprctl dispatch movecursor $(echo "scale=0; $x + $width / (2 * $scale)" | bc) $(echo "scale=0; $y + $height / (2 * $scale)" | bc)
+
+hyprctl -q dispatch exec "[workspace 3 silent]" -- foot fish -i -c "'while true; mosh --family=prefer-inet6 --predict adaptive gate.aruhier.fr tmux a; sleep 3; end'"
+mpd &
+hyprctl -q dispatch exec "[workspace 2 silent]" -- foot fish -i -c "'ncmpcpp'"
+
+wait
+sleep 1
+# WARNING: thunderbird starter changes the focus for 0.5s.
+~/.config/hypr/scripts/apps/thunderbird
+
+~/.config/hypr/scripts/apps/firefox &
+
+wait

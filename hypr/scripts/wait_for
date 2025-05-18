@@ -1,0 +1,74 @@
+#!/bin/bash
+
+TIMEOUT=5  # Seconds
+SOCKET="$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock"
+
+usage() {
+    echo "Usage: $0 [-t|--timeout TIMEOUT] JQ_QUERY"
+    echo ""
+    echo "Options:"
+    echo "  -t, --timeout TIMEOUT   Set the timeout in seconds (default: $TIMEOUT)"
+    echo "  -h, --help              Show this help message"
+}
+
+query_window() {
+    window_id=$(hyprctl clients -j | jq -r -e "[.[] | $JQ_QUERY] | last | .address")
+    _status=$?
+    if [[ $_status -eq 0 ]]; then
+        echo $window_id
+        return 0
+    elif [[ $_status -eq 3 ]]; then
+        echo $window_id >&2
+        exit 2
+    fi
+
+    return 1
+}
+
+# Argument parser
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -t|--timeout)
+            if [[ -n "$2" && "$2" =~ ^[0-9]+$ ]]; then
+                TIMEOUT="$2"
+                shift 2
+            else
+                echo "Error: Missing or invalid argument for $1"
+                usage
+                exit 1
+            fi
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        -*)
+            echo "Unknown option: $1"
+            usage
+            ;;
+        *)
+            JQ_QUERY="$1"
+            shift
+            ;;
+    esac
+done
+
+if [[ -z "$JQ_QUERY" ]]; then
+    echo "Error: JQ_QUERY is required."
+    usage
+    exit 1
+fi
+
+# Check if the window doesn't already exist.
+query_window && exit 0
+
+# Wait on Hyprland notification.
+exec 3< <(timeout -p -s KILL "$TIMEOUT" socat - UNIX-CONNECT:"$SOCKET" 2>/dev/null)
+while read -r line <&3; do
+    if [[ "$line" == "openwindow>>"* ]]; then
+        query_window && exit 0
+    fi
+done
+
+echo "Timeout reached" >&2
+exit 1

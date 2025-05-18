@@ -1,0 +1,38 @@
+#!/bin/bash
+
+hyprctl dispatch exec "[workspace 1 silent]" -- firefox
+~/.config/hypr/scripts/wait_for -t 5 "select(.class | startswith(\"firefox\"))"
+hyprctl dispatch movetoworkspacesilent 1,'class:^firefox.*$'
+
+# Timeout and cseconds are in centiseconds
+_timeout=200
+_cseconds=0
+while true; do
+    _cseconds=$(( _cseconds + 5 ))
+    if (( _cseconds >= _timeout )); then
+        exit
+    fi
+
+    window_id=$(hyprctl clients -j | jq -r -e "[.[] | select((.class | startswith(\"firefox\")) and (.title | startswith(\"[Main]\")))] | last | .address")
+    _status=$?
+    if [[ $_status -eq 0 ]]; then
+        break
+    elif [[ $_status -eq 3 ]]; then
+        echo $window_id >&2
+        exit 2
+    fi
+
+    sleep 0.5
+done
+
+_secondary_addr=$(hyprctl clients -j | jq -r -e "[.[] | select((.class | startswith(\"firefox\")) and (.title | startswith(\"[Secondary]\")))] | last | .address")
+_main_addr=$(hyprctl clients -j | jq -r -e "[.[] | select((.class | startswith(\"firefox\")) and (.title | startswith(\"[Main]\")))] | last | .address")
+
+# Fix a weird bug by toggling twice the floating state
+hyprctl dispatch setfloating address:$_main_addr
+hyprctl dispatch setfloating address:$_secondary_addr
+hyprctl dispatch settiled address:$_main_addr
+hyprctl dispatch settiled address:$_secondary_addr
+
+hyprctl -q dispatch movetoworkspacesilent 10,address:$_secondary_addr
+hyprctl -q dispatch movetoworkspacesilent 1,address:$_main_addr
