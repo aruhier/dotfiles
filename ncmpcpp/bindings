@@ -12,3 +12,9 @@ def_key "left"
 
 def_key "left"
   master_screen
+
+def_key "ctrl-u"
+  run_external_command "listenbrainz-mpd --send-feedback love"
+
+def_key "ctrl-d"
+  run_external_command "listenbrainz-mpd --send-feedback hate"
