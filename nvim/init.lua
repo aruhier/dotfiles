@@ -37,6 +37,7 @@ require('packer').startup(function()
 
   ---- Autocomplete
   use 'neovim/nvim-lspconfig'
+  use 'ray-x/lsp_signature.nvim'
   use {'hrsh7th/nvim-cmp', requires={
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
@@ -339,6 +340,7 @@ end
 vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
 
 local default_lsp_attach = function(client, bufnr)
+  require "lsp_signature".on_attach()
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -397,6 +399,10 @@ vim.lsp.config('beancount', {
   init_options = {
     journal_file = beancount_journal_file()
   }
+})
+
+require "lsp_signature".setup({
+  hint_enable = false
 })
 
 
