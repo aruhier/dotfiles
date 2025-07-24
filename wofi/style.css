@@ -5,7 +5,7 @@
 
 window {
     border-radius: 15px 15px 15px 15px;
-    background-color: #3b4144;
+    background-color: rgba(59, 65, 68, 0.999);
 }
 
 #input {

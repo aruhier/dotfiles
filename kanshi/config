@@ -9,3 +9,7 @@ profile "dual_screen home" {
 
   exec hyprctl keyword monitor eDP-1,2944x1840@90.00Hz,350x1440,1.6,bitdepth,8,cm,edid
 }
+
+profile testing {
+  output "Microstep MPG321UX OLED 0x01010101" enable position 0,0
+}

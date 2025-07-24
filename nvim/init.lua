@@ -317,7 +317,7 @@ function PrintDiagnostics(opts, bufnr, line_nr, client_id)
   bufnr = bufnr or 0
   line_nr = line_nr or (vim.api.nvim_win_get_cursor(0)[1] - 1)
 
-  local line_diagnostics = vim.lsp.diagnostic.get_line_diagnostics(bufnr, line_nr, opts, client_id)
+  local line_diagnostics = vim.diagnostic.get(bufnr, { lnum = line_nr })
   if vim.tbl_isempty(line_diagnostics) then return end
 
   local diagnostic = line_diagnostics[1]
