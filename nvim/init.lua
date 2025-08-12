@@ -50,14 +50,12 @@ require('packer').startup(function()
 
   ---- Treesitter
   use {
-    {
-      'nvim-treesitter/nvim-treesitter',
-      branch = 'main',
-      run = function()
-        local ts_update = require('nvim-treesitter.install').update({ with_sync = false })
-        ts_update()
-      end,
-    },
+    'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = false })
+      ts_update()
+    end,
   }
   ---- Code diagnostic
   use {'folke/trouble.nvim', requires={'kyazdani42/nvim-web-devicons'}}
