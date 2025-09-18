@@ -9,6 +9,7 @@ fi
 if [ -e ~/.local/share/nvim/site/pack ]; then
   echo "!!! WARNING !!! nvim moved to Packer"
   rm -rf ~/.local/share/nvim/site/pack
+  rm -rf ~/.config/nvim/plugin/
 fi
 
 nvim --headless "+Lazy! sync" +qa 2> /dev/null
