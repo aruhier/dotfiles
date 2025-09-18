@@ -1,6 +1,6 @@
-    -------------------------------------------------------------------
-    -------------------------- Configuration --------------------------
-    -------------------------------------------------------------------
+-------------------------------------------------------------------
+-------------------------- Configuration --------------------------
+-------------------------------------------------------------------
 
 local map = vim.keymap.set
 local opts = { noremap=true, silent=true }
@@ -143,7 +143,7 @@ function PluginSetupHLChunk()
         '․',
       },
       style = {
-          { vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui"), "" },
+        { vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID("Whitespace")), "fg", "gui"), "" },
       },
     },
   })
