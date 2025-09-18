@@ -153,7 +153,7 @@ end
 -- Mason LSP
 ------------
 
-local function PluginSetupLSPInstaller()
+function PluginSetupLSPInstaller()
   require("mason").setup()
   require("mason-lspconfig").setup {}
   require('mason-tool-installer').setup {
@@ -277,7 +277,7 @@ end
 -- nvim-cmp
 ------------
 
-local function PluginSetupNvimCMP()
+function PluginSetupNvimCMP()
   vim.opt.updatetime = 300
 
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
