@@ -57,8 +57,8 @@ require('packer').startup(function()
       'hrsh7th/cmp-vsnip',
       'hrsh7th/vim-vsnip',
       -- Not strictly required but ensures that everything linked to the lsp is loaded.
-      'neovim/nvim-lspconfig'
-      'ray-x/lsp_signature.nvim'
+      'neovim/nvim-lspconfig',
+      'ray-x/lsp_signature.nvim',
     },
     config = function() PluginSetupLSP(); PluginSetupNvimCMP() end
   }
