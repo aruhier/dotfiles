@@ -80,9 +80,7 @@ return {
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
-    build = function()
-      require("nvim-treesitter.install").update({ with_sync = false })()
-    end,
+    build = ":TSUpdate",
     config = function() PluginSetupTreesitter() end
   },
   ---- Code diagnostic
