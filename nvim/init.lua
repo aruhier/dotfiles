@@ -2,7 +2,7 @@
   -------------------- GENERAL CONFIGURATION ---------------------
   ----------------------------------------------------------------
 
-require('plugins.list')
+require('config.lua')
 
 local map = vim.keymap.set
 local opts = { noremap=true, silent=true }
