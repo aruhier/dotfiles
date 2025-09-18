@@ -71,17 +71,25 @@ return {
     config = function() PluginSetupLSP(); PluginSetupNvimCMP() end
   },
   {
-    "mason-org/mason.nvim", "WhoIsSethDaniel/mason-tool-installer.nvim", "mason-org/mason-lspconfig.nvim",
-    dependencies = {"neovim/nvim-lspconfig"},
+    "mason-org/mason.nvim",
+    dependencies = {
+      "neovim/nvim-lspconfig",
+      "mason-org/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+    },
     config = function() PluginSetupLSPInstaller() end
   },
 
   ---- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      {"nvim-treesitter/nvim-treesitter-textobjects", branch = "main"},
+    },
     branch = "main",
     build = ":TSUpdate",
-    config = function() PluginSetupTreesitter() end
+    config = function() PluginSetupTreesitter() end,
+    lazy = false,
   },
   ---- Code diagnostic
   {"folke/trouble.nvim", dependencies = {"kyazdani42/nvim-web-devicons"}, config = function() PluginSetupTrouble() end},
