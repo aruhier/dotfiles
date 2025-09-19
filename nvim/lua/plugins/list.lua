@@ -19,20 +19,22 @@ return {
 	end,
       },
     },
+    event = "VeryLazy",
     config = function()
       PluginSetupTelescope()
     end,
   },
-  {"liuchengxu/vista.vim", config = function() PluginSetupVista() end},
   {
-    "windwp/nvim-autopairs",
+    "liuchengxu/vista.vim",
     config = function()
-      require("nvim-autopairs").setup({})
-    end,
+      PluginSetupVista()
+    end
   },
+  { "windwp/nvim-autopairs", config = true },
   { "tpope/vim-surround" },
   {
     "sainnhe/everforest",
+    priority=1000,
     config = function()
       PluginSetupEverforestTheme()
     end,
@@ -43,9 +45,7 @@ return {
   { "rhysd/vim-grammarous" },
   {
     "chentoast/marks.nvim",
-    config = function()
-      require("marks").setup()
-    end,
+    config = true,
   },
   {
     "shellRaining/hlchunk.nvim",
@@ -68,7 +68,11 @@ return {
       "neovim/nvim-lspconfig",
       "ray-x/lsp_signature.nvim",
     },
-    config = function() PluginSetupLSP(); PluginSetupNvimCMP() end
+    event = {"InsertEnter", "CmdlineEnter", "VeryLazy"},
+    config = function()
+      PluginSetupLSP()
+      PluginSetupNvimCMP()
+    end
   },
   {
     "mason-org/mason.nvim",
@@ -77,7 +81,10 @@ return {
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
-    config = function() PluginSetupLSPInstaller() end
+    event = "VeryLazy",
+    config = function()
+      PluginSetupLSPInstaller()
+    end
   },
 
   ---- Treesitter
@@ -94,10 +101,16 @@ return {
   ---- Code diagnostic
   {"folke/trouble.nvim", dependencies = {"kyazdani42/nvim-web-devicons"}, config = function() PluginSetupTrouble() end},
   ---- Unit tests
-  {"janko-m/vim-test", config = function() PluginSetupTest() end},
-  {"alfredodeza/coveragepy.vim", ft = {"python"}},
+  {
+    "vim-test/vim-test",
+    event = "VeryLazy",
+    config = function()
+      PluginSetupTest()
+    end
+  },
+  { "alfredodeza/coveragepy.vim", ft = {"python"} },
   ---- LaTeX
-  {"lervag/vimtex", ft = {"tex"}},
+  { "lervag/vimtex", ft = {"tex"} },
   ---- Markdown
   {
     "preservim/vim-markdown",
@@ -124,17 +137,17 @@ return {
     end,
   },
   ---- Python
-  {"psf/black", ft = {"python"}, config = function() PluginSetupBlack() end},
+  { "psf/black", ft = {"python"}, config = function() PluginSetupBlack() end },
   ---- Rust
-  {"rust-lang/rust.vim", ft = {"rust"}, config = function() PluginSetupRust() end},
+  { "rust-lang/rust.vim", ft = {"rust"}, config = function() PluginSetupRust() end },
   ---- XML
-  {"sukima/xmledit", ft = {"xml"}},
+  { "sukima/xmledit", ft = {"xml"} },
 
   ---- Git support
   {
     "lewis6991/gitsigns.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
-    config = function() require("gitsigns").setup() end
+    config = true
   },
 
   { "tpope/vim-fugitive" },
@@ -150,5 +163,9 @@ return {
   },
 
   -- Multiple cursors, with ctrl+n
-  { "mg979/vim-visual-multi", branch = "master" },
+  {
+    "mg979/vim-visual-multi",
+    branch = "master",
+    event = "VeryLazy",
+  },
 }
