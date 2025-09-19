@@ -30,8 +30,14 @@ return {
       PluginSetupVista()
     end
   },
-  { "windwp/nvim-autopairs", config = true },
-  { "tpope/vim-surround" },
+    "windwp/nvim-autopairs",
+    event = {"InsertEnter", "VeryLazy"},
+    config = true
+  },
+  {
+    "tpope/vim-surround",
+    event = {"InsertEnter", "VeryLazy"}
+  },
   {
     "sainnhe/everforest",
     priority=1000,
@@ -42,7 +48,10 @@ return {
   { "chaoren/vim-wordmotion" },
   { "dhruvasagar/vim-table-mode" },
   { "tpope/vim-sleuth" },
-  { "rhysd/vim-grammarous" },
+  {
+    "rhysd/vim-grammarous",
+    cmd = {"GrammarousCheck", "GrammarousReset"},
+  },
   {
     "chentoast/marks.nvim",
     config = true,
@@ -81,7 +90,7 @@ return {
       "mason-org/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
-    event = "VeryLazy",
+    event = {"InsertEnter", "VeryLazy"},
     config = function()
       PluginSetupLSPInstaller()
     end
@@ -166,6 +175,6 @@ return {
   {
     "mg979/vim-visual-multi",
     branch = "master",
-    event = "VeryLazy",
+    event = {"InsertEnter", "VeryLazy"},
   },
 }
