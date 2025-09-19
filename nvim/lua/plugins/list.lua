@@ -30,6 +30,7 @@ return {
       PluginSetupVista()
     end
   },
+  {
     "windwp/nvim-autopairs",
     event = {"InsertEnter", "VeryLazy"},
     config = true
@@ -176,5 +177,5 @@ return {
     "mg979/vim-visual-multi",
     branch = "master",
     event = {"InsertEnter", "VeryLazy"},
-  },
+  }
 }
