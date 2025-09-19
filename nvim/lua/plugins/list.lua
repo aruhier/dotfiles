@@ -24,8 +24,15 @@ return {
       PluginSetupTelescope()
     end,
   },
-  { "windwp/nvim-autopairs", config = true },
-  { "tpope/vim-surround" },
+  {
+    "windwp/nvim-autopairs",
+    event = {"InsertEnter", "VeryLazy"},
+    config = true
+  },
+  {
+    "tpope/vim-surround",
+    event = {"InsertEnter", "VeryLazy"}
+  },
   {
     "sainnhe/everforest",
     priority=1000,
@@ -56,5 +63,9 @@ return {
   },
 
   -- Multiple cursors, with ctrl+n
-  { "mg979/vim-visual-multi", branch = "master" },
+  {
+    "mg979/vim-visual-multi",
+    branch = "master",
+    event = {"InsertEnter", "VeryLazy"},
+  },
 }
