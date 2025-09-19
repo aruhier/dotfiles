@@ -19,19 +19,16 @@ return {
         end,
       },
     },
+    event = "VeryLazy",
     config = function()
       PluginSetupTelescope()
     end,
   },
-  {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup({})
-    end,
-  },
+  { "windwp/nvim-autopairs", config = true },
   { "tpope/vim-surround" },
   {
     "sainnhe/everforest",
+    priority=1000,
     config = function()
       PluginSetupEverforestTheme()
     end,
@@ -40,9 +37,7 @@ return {
   { "tpope/vim-sleuth" },
   {
     "chentoast/marks.nvim",
-    config = function()
-      require("marks").setup()
-    end,
+    config = true,
   },
   {
     "shellRaining/hlchunk.nvim",
