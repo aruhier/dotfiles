@@ -401,7 +401,8 @@ function PluginSetupTreesitter()
         end
 
         local parser_name = vim.treesitter.language.get_lang(filetype) -- WARNING: might return filetype (not helpful)
-        if not parser_name then
+                -- nvim-treesitter.parsers contains the supported parsers. Do not run treesitter if unsupported.
+        if not parser_name or require("nvim-treesitter.parsers")[parser_name] ==  nil then
           return
         end
 
