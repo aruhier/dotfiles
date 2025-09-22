@@ -66,22 +66,17 @@ return {
 
   ---- Autocomplete
   {
-    "hrsh7th/nvim-cmp",
+    "saghen/blink.cmp",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip",
+      "rafamadriz/friendly-snippets",
       -- Not strictly required but ensures that everything linked to the lsp is loaded.
       "neovim/nvim-lspconfig",
-      "ray-x/lsp_signature.nvim",
     },
+    version = '1.*',
     event = {"InsertEnter", "CmdlineEnter", "VeryLazy"},
     config = function()
       PluginSetupLSP()
-      PluginSetupNvimCMP()
+      PluginSetupBlink()
     end
   },
   {

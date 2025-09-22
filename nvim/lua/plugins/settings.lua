@@ -14,6 +14,69 @@ function PluginSetupBlack()
 end
 
 
+-- Blink
+---------
+
+function PluginSetupBlink()
+  require("blink.cmp").setup({
+    appearance = {
+      nerd_font_variant = "mono"
+    },
+    cmdline = {
+      keymap = { preset = "inherit" },
+      completion = {
+        menu = { auto_show = true },
+        list = { selection = { preselect = false } },
+      },
+    },
+    completion = {
+      accept = {
+        auto_brackets = { enabled = true },
+      },
+      documentation = { auto_show = true },
+      keyword = { range = "full" },
+      list = { selection = { preselect = false } },
+      menu = {
+        auto_show = true,
+        draw = {
+          columns = {
+            { "kind_icon", "label", gap = 2 },
+            { "label_description", gap = 1 },
+            { "kind", gap = 1 },
+          },
+        },
+      },
+      trigger = {
+        show_on_insert = true,
+      }
+    },
+    fuzzy = {
+      sorts = {
+        "exact",
+        "score",
+        "sort_text",
+        "label",
+      },
+    },
+    keymap = {
+      preset = "enter",
+      ["<Tab>"] = {
+        "select_next",
+        "fallback",
+      },
+      ["<S-Tab>"] = { "select_prev", "fallback" },
+
+    },
+    signature = {
+      enabled = true,
+    },
+    sources = {
+      default = { "lsp", "snippets", "buffer", "path", "cmdline" },
+    },
+  })
+end
+
+
 -- Everforest Theme
 --------------------
 
@@ -157,8 +220,8 @@ function PluginSetupLSPInstaller()
   require("mason").setup()
   require("mason-lspconfig").setup {}
   require('mason-tool-installer').setup {
-    ensure_installed = {'bashls', 'beancount', 'clangd', 'gopls', 'marksman', 'pyright', 'rust_analyzer'},
-    auto_update = false,
+    ensure_installed = {'bashls', 'beancount', 'clangd', 'gopls', 'marksman', 'pyrefly', 'rust_analyzer'},
+    auto_update = true,
     run_on_start = true,
     start_delay = 3000,
     debounce_hours = 24,
@@ -207,7 +270,6 @@ function PluginSetupLSP()
   vim.cmd [[ autocmd CursorHold * lua PrintDiagnostics() ]]
 
   local default_lsp_attach = function(client, bufnr)
-    require "lsp_signature".on_attach()
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -238,7 +300,7 @@ function PluginSetupLSP()
   end
 
   vim.lsp.config("*", {
-    capabilities=require('cmp_nvim_lsp').default_capabilities(),
+    capabilities = require('blink.cmp').get_lsp_capabilities(),
   })
 
   vim.api.nvim_create_autocmd('LspAttach', {
@@ -266,65 +328,6 @@ function PluginSetupLSP()
     init_options = {
       journal_file = beancount_journal_file()
     }
-  })
-
-  require "lsp_signature".setup({
-    hint_enable = false
-  })
-end
-
-
--- nvim-cmp
-------------
-
-function PluginSetupNvimCMP()
-  vim.opt.updatetime = 300
-
-  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-  local cmp = require'cmp'
-  cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
-
-  cmp.setup({
-    snippet = {
-      expand = function(args)
-        vim.fn['vsnip#anonymous'](args.body)
-      end,
-    },
-    mapping = cmp.mapping.preset.insert({
-      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.abort(),
-      ['<C-y>'] = cmp.config.disable,
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
-      ['<Tab>'] = cmp.mapping.select_next_item(),
-      ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    }),
-    sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'vsnip' },
-    }, {
-      { name = 'buffer' },
-    })
-  })
-
-  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline('/', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = {
-      { name = 'buffer' }
-    }
-  })
-
-  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-  cmp.setup.cmdline(':', {
-    mapping = cmp.mapping.preset.cmdline(),
-    sources = cmp.config.sources({
-      { name = 'path' }
-    }, {
-      { name = 'cmdline' }
-    }),
-    matching = { disallow_symbol_nonprefix_matching = false }
   })
 end
 
