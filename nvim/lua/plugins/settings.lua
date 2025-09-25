@@ -23,7 +23,10 @@ function PluginSetupBlink()
       nerd_font_variant = "mono"
     },
     cmdline = {
-      keymap = { preset = "inherit" },
+      keymap = {
+        preset = "inherit",
+        ['<CR>'] = false,
+      },
       completion = {
         menu = { auto_show = true },
         list = { selection = { preselect = false } },
