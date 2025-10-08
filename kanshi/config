@@ -5,11 +5,11 @@ profile "default" {
 
 profile "dual_screen home" {
   output eDP-1 mode "2944x1840@90.00Hz" position 350,1440 scale 1.6 enable
-  output "Microstep MPG321UX OLED " enable mode 3840x2160@240 position 0,0 scale 1.25
+  output "Microstep MPG321UX OLED 0x01010101" enable mode 3840x2160@60 position 0,0 scale 1.25
 
   exec hyprctl keyword monitor eDP-1,2944x1840@90.00Hz,350x1440,1.6,bitdepth,8,cm,edid
 }
 
-profile testing {
-  output "Microstep MPG321UX OLED 0x01010101" enable position 0,0
+profile external {
+  output "Microstep MPG321UX OLED 0x01010101" enable mode 3840x2160@60 position 0,0 scale 1.25
 }
