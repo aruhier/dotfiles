@@ -6,7 +6,7 @@ lxqt-policykit-agent&
 FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0" waybar&
 
 sleep 3;
-setsid distrobox-enter -n fedora -- copyq &
+copyq &
 nm-applet --indicator&
 flatpak run com.nextcloud.desktopclient.nextcloud --background&
 blueman-applet&
