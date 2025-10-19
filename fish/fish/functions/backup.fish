@@ -1,4 +1,4 @@
-function backup --wraps='sudo /root/.borg/backup.sh' --description 'alias backup=sudo /root/.borg/backup.sh'
-  sudo /root/.borg/backup.sh $argv
-        
+function backup --wraps='sudo /root/.backups/backup.sh' --description 'alias backup=sudo /root/.backups/backup.sh'
+  sudo /root/.backups/backup.sh $argv
+
 end
