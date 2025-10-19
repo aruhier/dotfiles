@@ -172,5 +172,28 @@ return {
     "mg979/vim-visual-multi",
     branch = "master",
     event = {"InsertEnter", "VeryLazy"},
-  }
+  },
+
+  -- Key helpers
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts_extend = { "spec" },
+    opts = {
+      preset = "modern",
+      triggers = {
+        -- Disable for visual mode.
+        { "<auto>", mode = "nso" },
+      },
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+  },
 }
