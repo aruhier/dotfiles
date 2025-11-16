@@ -6,7 +6,7 @@ _DIR=UP
 _THUNDERBIRD_CMD=thunderbird
 
 # Disable autofocus.
-hyprctl -q keyword windowrulev2 'noinitialfocus, class:.*'
+hyprctl -q keyword windowrulev2 'noinitialfocus'
 
 _current_focus_addr=$(hyprctl -j activewindow | jq -r .address)
 
@@ -28,4 +28,4 @@ hyprctl -q dispatch splitratio exact $_SPLIT_RATIO
 hyprctl -q dispatch focuswindow "address:$_current_focus_addr"
 
 # Reenable autofocus.
-hyprctl -q keyword windowrulev2 'unset, noinitialfocus, class:.*'
+hyprctl -q keyword windowrulev2 'unset, noinitialfocus'
