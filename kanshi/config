@@ -7,8 +7,6 @@ profile default {
     output "LG Electronics 27GL850 912NTWG0N049" enable
     output "Dell Inc. DELL U2715H GH85D83V2Q6S" enable
     output "Microstep MPG321UX OLED 0x01010101" enable
-
-    exec hyprctl keyword monitor desc:LG Electronics 27GL850 912NTWG0N049,2560x1440@144,0x0,1,bitdepth,8,cm,edid
 }
 
 profile default_tv {
@@ -16,8 +14,6 @@ profile default_tv {
     output "Dell Inc. DELL U2715H GH85D83V2Q6S" enable
     output "Microstep MPG321UX OLED 0x01010101" enable
     output "LG Electronics LG TV SSCR2 0x01010101" disable
-
-    exec hyprctl keyword monitor desc:LG Electronics 27GL850 912NTWG0N049,2560x1440@144,0x0,1,bitdepth,8,cm,edid
 }
 
 profile default_optional_output {
@@ -25,14 +21,21 @@ profile default_optional_output {
     output "Dell Inc. DELL U2715H GH85D83V2Q6S" enable position 5632,0 transform 270
     output "Microstep MPG321UX OLED 0x01010101" enable position 2560,0
     output * disable
-
-    exec hyprctl keyword monitor desc:LG Electronics 27GL850 912NTWG0N049,2560x1440@144,0x0,1,bitdepth,8,cm,edid
 }
 
 profile single-screen {
     output "Microstep MPG321UX OLED 0x01010101" enable position 0,0
     output "LG Electronics 27GL850 912NTWG0N049" disable
     output "Dell Inc. DELL U2715H GH85D83V2Q6S" disable
+}
+
+profile single-screen-1 {
+    output "Microstep MPG321UX OLED 0x01010101" enable position 0,0
+}
+
+profile single-screen-2 {
+    output "Microstep MPG321UX OLED 0x01010101" enable position 0,0
+    output "LG Electronics LG TV SSCR2 0x01010101" disable
 }
 
 profile testing {
