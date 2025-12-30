@@ -11,7 +11,7 @@ function _myaliases
     alias -s pg='ping 8.8.8.8'
     alias -s pg6='ping 2001:4860:4860::8888'
 
-    alias -s backup='sudo /root/.borg/backup.sh'
+    alias -s backup='sudo /root/.backups/backup.sh'
     alias -s cp='cp -r --reflink=auto'
     alias -s free='free -h'
     alias -s gitlog='git log --color'
