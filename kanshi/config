@@ -10,9 +10,8 @@ profile default {
 }
 
 profile default_tv {
-    output "LG Electronics 27GL850 912NTWG0N049" enable
-    output "Dell Inc. DELL U2715H GH85D83V2Q6S" enable
-    output "Microstep MPG321UX OLED 0x01010101" enable
+    output "Dell Inc. DELL U2715H GH85D83V2Q6S" enable position 6912,0
+    output "Microstep MPG321UX OLED 0x01010101" enable position 3840,0
     output "LG Electronics LG TV SSCR2 0x01010101" disable
 }
 
