@@ -1,16 +1,6 @@
-/*************/
-/* Hide tabs */
-/*************/
-
-#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
-    opacity: 0;
-    pointer-events: none;
-}
-#main-window:not([tabsintitlebar="true"]) #TabsToolbar {
-    visibility: collapse !important;
-}
-#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar .titlebar-spacer {
-    border-inline-end: none;
+/* Hide horizontal native tabs toolbar */
+#TabsToolbar > * {
+    display: none !important;
 }
 
 /**********************/
@@ -67,27 +57,44 @@
     display: none !important;
 }
 
+/************/
+/* Sidebery */
+/************/
 
-/***********************/
-/* Hide sidebar header */
-/***********************/
-
-/* Minimize sidebar header to a light black stripe (except Bookmarks, History, Sync'd Tabs); appears normally on hover */
-/*
-#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"])
-#sidebar-header:not(:hover) {
-    max-height: 5px !important;
-    min-height: 5px !important;
-    padding: 0 !important;
-    background-color: #000 !important;
-}
-#sidebar-box:not([sidebarcommand="viewBookmarksSidebar"]):not([sidebarcommand="viewHistorySidebar"]):not([sidebarcommand="viewTabsSidebar"])
-#sidebar-header:not(:hover) #sidebar-switcher-target {
-    opacity: 0 !important;
-}
+/**
+* Hide sidebar-panel-header
 */
 
-/* Hide the sidebar head for Tree Style Tab */
+/* sidebar.revamp false */
 #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] #sidebar-header, #sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] > #sidebar-header {
   display: none;
+}
+
+/* sidebar.revamp true */
+#sidebar-panel-header {
+    display: none;
+}
+
+/* Hide sidebar selector */
+#sidebar-main {
+    display: none;
+}
+
+/* Hide vertical space with the web content */
+#sidebar-splitter {
+    display: none !important;
+}
+
+/* Maximize the space, remove the "cards" aspect */
+#sidebar {
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    height: 100% !important;
+}
+
+#sidebar-box {
+    padding-bottom: 0 !important;
 }
