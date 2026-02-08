@@ -5,6 +5,7 @@ plugins:
     info
     inline
     lastgenre
+    musicbrainz
     scrub
 
 directory: /mnt/nas/public/Musique
