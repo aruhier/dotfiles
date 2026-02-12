@@ -23,7 +23,7 @@ function _myaliases
     # If changed, change also the abbr.
     alias -s maj='systemd-run -t -p CPUWeight=20 -p CPUQuota=3000% --user -- sudo emerge -uDU --ask --keep-going --newrepo --with-bdeps=y -j 5 --load-average=20 @world && sudo emerge --depclean && sudo eclean-dist --deep
         echo; echo "Flatpak"; echo "======="; flatpak update; flatpak uninstall --unused'
-    alias -s majsync='sudo emerge --sync; sudo eix-update'
+    alias -s majsync='sudo emerge --sync'
     alias -s mkcd='mkdir_cd '
     alias -s mtr='mtr -o "LSR NABWV"'
     alias -s obsolete_pkg='eix-test-obsolete; portpeek -se'
