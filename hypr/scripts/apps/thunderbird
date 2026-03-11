@@ -18,13 +18,13 @@ else
 fi
 
 hyprctl -q dispatch layoutmsg "preselect u"
-hyprctl -q dispatch splitratio exact $_SPLIT_RATIO
+hyprctl -q dispatch layoutmsg splitratio $_SPLIT_RATIO exact
 
 hyprctl -q dispatch exec $_THUNDERBIRD_CMD
 
 _thunderbird_addr=$(~/.config/hypr/scripts/wait_for -t 5 "select(.class | startswith(\"thunderbird\"))")
 hyprctl -q dispatch focuswindow "address:$_thunderbird_addr"
-hyprctl -q dispatch splitratio exact $_SPLIT_RATIO
+hyprctl -q dispatch layoutmsg splitratio $_SPLIT_RATIO exact
 hyprctl -q dispatch focuswindow "address:$_current_focus_addr"
 
 # Reenable autofocus.
