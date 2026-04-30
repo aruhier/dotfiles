@@ -3,3 +3,5 @@ insensitive=true
 allow_images=true
 term=alacritty
 hide_scroll=true
+width=600
+height=600
