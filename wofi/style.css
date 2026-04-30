@@ -1,59 +1,64 @@
-*{
+* {
     font-family: "Arimo", "Mono";
     font-size: 101%;
 }
 
 window {
-    border-radius: 15px 15px 15px 15px;
-    background-color: #3b4144;
+    /* Increased rounding for a smoother feel */
+    border-radius: 24px;
+    background-color: rgba(58, 64, 68, 0.8);
+    /* Adds a subtle "shine" to the very edge of the glass */
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-#input {
-    margin: 5px;
-    border-radius: 0px;
-    border-bottom: 0px solid black;
-    margin: 5px;
-    border: none;
-    color: #b5b8a9;
-    background-color: #2f373d;
-    font-family: "Arimo", "Mono";
-    font-size: 130%;
+#outer-box {
+    margin: 3px; /* Increase to make the border look tighter */
+    padding: 20px;
+    background-color: rgba(31, 36, 40, 0.8);
+    /* Match the window rounding minus a small offset for symmetry */
+    border-radius: 22px;
 }
 
 #inner-box {
     margin: 5px;
-    background-color: #21272a;
+    background-color: transparent;
 }
 
-#outer-box {
+#input {
     margin: 5px;
-    padding:20px;
-    background-color: #21272a;
-    border-radius: 15px 15px 15px 15px;
-}
-
-#scroll {
-
+    /* Rounded input to match the outer aesthetic */
+    border-radius: 12px;
+    border: none;
+    color: #c2c5b7;
+    caret-color: #c2c5b7;
+    background-color: rgba(60, 70, 75, 0.9);
+    font-family: "Arimo", "Mono";
+    font-size: 130%;
+    padding: 10px;
 }
 
 #entry, #entry list {
     padding-top: 0.5em;
     padding-bottom: 0.5em;
-    background-color: #21272a;
+    background-color: transparent;
 }
 
 #text {
     margin: 5px;
-    color: #b5b8a9;
+    color: #c2c5b7;
 }
 
-#entry:selected, #entry:selected * {
-    background-color: #2f373d;
-    border-radius: 15px 15px 15px 15px;
+#entry:selected {
+    background-color: rgba(60, 70, 75, 0.9);
+    border-radius: 12px;
     outline: none;
 }
 
+/* Prevents the "double layering" of the color */
+#entry:selected * {
+    background-color: transparent;
+}
+
 #text:selected {
-    text-decoration-color: white;
     color: white;
 }
