@@ -18,22 +18,9 @@ hl.bind(C.main_mod .. " + m", hl.dsp.exec_cmd(C.scripts .. "/wlogout"))
 -- Exit Hyprland.
 hl.bind(C.main_mod .. " + CTRL + SHIFT + m", hl.dsp.exit())
 
--- DPMS on secondary screens.
-local function dpms_external_screens(enable)
-    local action = enable and "enable" or "disable"
-
-    for _, monitor in ipairs(C.monitors) do
-        if monitor ~= C.main_monitor then
-            -- Use a timer as the doc recommends triggering dpms this way.
-            hl.timer(
-                function() hl.dispatch(hl.dsp.dpms({ action = action, monitor = monitor })) end,
-                { timeout = 500, type = "oneshot" }
-            )
-        end
-    end
-end
-hl.bind(C.main_mod .. " + SHIFT + F12", function() dpms_external_screens(false) end)
-hl.bind(C.main_mod .. " + F12", function() dpms_external_screens(true) end)
+-- Enable/disable secondary screens.
+hl.bind(C.main_mod .. " + SHIFT + F12", hl.dsp.exec_cmd("kanshictl switch single-screen"))
+hl.bind(C.main_mod .. " + F12", hl.dsp.exec_cmd("kanshictl reload"))
 
 -- Switch inputs on main screen (ddcutil).
 hl.bind(C.main_mod .. " + F9",  hl.dsp.exec_cmd('ddcutil setvcp -l "MPG321UX OLED" 60 0x12')) -- HDMI
