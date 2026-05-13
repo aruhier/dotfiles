@@ -1,29 +1,32 @@
 /*
  * vim: ft=less
  */
-
 @define-color border-color rgb(7, 7, 7);
+@define-color border-notification-color rgb(80, 80, 80);
 @define-color text-color rgb(245, 237, 236);
 @define-color text-color-disabled rgba(245, 237, 236, 0.5);
 @define-color bg rgb(42, 42, 42);
+@define-color bg-floating-notification rgba(42, 42, 42, 0.965);
 @define-color bg-global rgba(42, 42, 42, 0.95);
-@define-color bg-hover rgb(58, 58, 58);
+@define-color bg-hover rgb(75, 75, 75);
 @define-color bg-focus rgba(58, 58, 58, 0.6);
 @define-color bg-selected rgb(0, 128, 255);
 
 .notification-row {
   outline: none;
 }
-.notification-row:focus,
-.notification-row:hover {
-  background: @bg-focus;
-}
 
 .notification {
   border-radius: 10px;
   margin: 6px 12px;
-  box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 1px 12px 1px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(245, 237, 236, 0.1);
   padding: 0;
+  background: @bg;
+}
+
+.floating-notifications .notification {
+  background: @bg-floating-notification;
 }
 
 /* Uncomment to enable specific urgency colors
@@ -32,13 +35,11 @@
   padding: 6px;
   border-radius: 10px;
 }
-
 .normal {
   background: green;
   padding: 6px;
   border-radius: 10px;
 }
-
 .critical {
   background: red;
   padding: 6px;
@@ -50,7 +51,7 @@
   background: transparent;
   color: @text-color;
   padding: 6px;
-  border-radius: 10px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .close-button {
@@ -61,6 +62,7 @@
   box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.3);
   border-radius: 100%;
 }
+
 .close-button:hover {
   background: rgb(30, 30, 30);
   transition: all 0.15s ease-in-out;
@@ -73,38 +75,54 @@
   box-shadow: none;
   background: @bg;
   color: @text-color;
-  border: 1px solid @border-color;
 }
 
-.notification-default-action:hover,
-.notification-action:hover {
+.floating-notifications .notification-default-action,
+.floating-notifications .notification-action {
+  background: transparent;
+}
+
+.notification-default-action > .text-button,
+.notification-action > .text-button {
+  border: 1px solid @border-notification-color;
+  border-radius: 6px;
+}
+
+.notification-default-action:hover > .text-button,
+.notification-action:hover > .text-button {
   color: @text-color;
   background: @bg-hover;
 }
 
-.notification-default-action {
-  border-radius: 10px;
+/* Only action when it's the only child (no alternative actions) */
+.notification-default-action:only-child {
+  border-radius: 0px 0px 10px 10px;
+}
+
+.notification-default-action:only-child:hover {
+  border-radius: 0px 0px 10px 10px;
 }
 
 /* When alternative actions are visible */
 .notification-default-action:not(:only-child) {
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
-}
-
-.notification-action {
   border-radius: 0px;
-  border-top: none;
-  border-right: none;
 }
 
-/* add bottom border radius to eliminate clipping */
 .notification-action:first-child {
   border-bottom-left-radius: 10px;
 }
+
+.notification-action:first-child:hover {
+  border-bottom-left-radius: 10px;
+}
+
 .notification-action:last-child {
   border-bottom-right-radius: 10px;
-  border-right: 1px solid @border-color;
+  border-right: none;
+}
+
+.notification-action:last-child:hover {
+  border-bottom-right-radius: 10px;
 }
 
 .image {
@@ -149,6 +167,7 @@
   box-shadow: none;
   border-radius: 10px;
 }
+
 .control-center-clear-all:hover {
   background: @bg-hover;
 }
@@ -163,6 +182,7 @@
 .control-center-dnd:checked {
   background: @bg-selected;
 }
+
 .control-center-dnd slider {
   background: @bg-hover;
 }
@@ -170,7 +190,11 @@
 .control-center {
   background: @bg-global;
   color: @text-color;
+  border-radius: 12px 0px 0px 12px;
+  border: 1px solid rgba(245, 237, 236, 0.1);
+  box-shadow: 0px 1px 12px 1px rgba(0, 0, 0, 0.4);
 }
+
 .control-center-list {
   background: transparent;
 }
@@ -197,4 +221,8 @@ box > button:hover {
 
 box > button:disabled {
   color: @text-color-disabled;
+}
+
+.notification-background {
+  background: transparent;
 }
