@@ -12,20 +12,19 @@ _current_focus_addr=$(hyprctl -j activewindow | jq -r .address)
 
 _foot_addr=$(~/.config/hypr/scripts/wait_for "select((.class | startswith(\"foot\")) and (.workspace.id == $_WORKSPACE))")
 if [ -n "$_foot_addr" ]; then
-    hyprctl -q dispatch focuswindow "address:$_foot_addr"
+    hyprctl -q dispatch "hl.dsp.focus({ window = 'address:$_foot_addr' })"
 else
-    hyprctl -q dispatch workspace $_WORKSPACE
+    hyprctl -q dispatch "hl.dsp.focus({ workspace = '$_WORKSPACE' })"
 fi
+hyprctl -q dispatch "hl.dsp.layout('preselect u')"
+hyprctl -q dispatch "hl.dsp.layout('splitratio $_SPLIT_RATIO exact')"
 
-hyprctl -q dispatch layoutmsg "preselect u"
-hyprctl -q dispatch layoutmsg splitratio $_SPLIT_RATIO exact
-
-hyprctl -q dispatch exec $_THUNDERBIRD_CMD
+hyprctl -q dispatch "hl.dsp.exec_cmd('$_THUNDERBIRD_CMD')"
 
 _thunderbird_addr=$(~/.config/hypr/scripts/wait_for -t 5 "select(.class | startswith(\"thunderbird\"))")
-hyprctl -q dispatch focuswindow "address:$_thunderbird_addr"
-hyprctl -q dispatch layoutmsg splitratio $_SPLIT_RATIO exact
-hyprctl -q dispatch focuswindow "address:$_current_focus_addr"
+hyprctl -q dispatch "hl.dsp.focus({ window = 'address:$_thunderbird_addr' })"
+hyprctl -q dispatch "hl.dsp.layout('splitratio $_SPLIT_RATIO exact')"
+hyprctl -q dispatch "hl.dsp.focus({ window = 'address:$_current_focus_addr' })"
 
 # Reenable autofocus.
 hyprctl -q keyword windowrulev2 'unset, noinitialfocus'

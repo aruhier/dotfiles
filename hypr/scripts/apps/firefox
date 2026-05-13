@@ -1,38 +1,50 @@
 #!/bin/bash
 
-hyprctl dispatch exec "[workspace 1 silent]" -- firefox
+hyprctl dispatch "hl.dsp.exec_cmd('firefox', { workspace = '1 silent' })"
 ~/.config/hypr/scripts/wait_for -t 5 "select(.class | startswith(\"firefox\"))"
-hyprctl dispatch movetoworkspacesilent 1,'class:^firefox.*$'
+hyprctl dispatch "hl.dsp.window.move({ workspace = '1', window = 'class:^firefox.*$', follow = false })"
 
-# Timeout and cseconds are in centiseconds
-_timeout=200
-_cseconds=0
-while true; do
-    _cseconds=$(( _cseconds + 5 ))
-    if (( _cseconds >= _timeout )); then
-        exit
-    fi
+hyprctl eval '
+    local function find_firefox(title_prefix)
+        for _, w in ipairs(hl.get_windows()) do
+            if w.class and w.title
+                and w.class:sub(1, 7) == "firefox"
+                and w.title:sub(1, #title_prefix) == title_prefix then
+                return w
+            end
+        end
+        return nil
+    end
 
-    window_id=$(hyprctl clients -j | jq -r -e "[.[] | select((.class | startswith(\"firefox\")) and (.title | startswith(\"[Main]\")))] | last | .address")
-    _status=$?
-    if [[ $_status -eq 0 ]]; then
-        break
-    elif [[ $_status -eq 3 ]]; then
-        echo $window_id >&2
-        exit 2
-    fi
+    local elapsed = 0
+    local timeout = 2000
+    local interval = 50
 
-    sleep 0.5
-done
+    local timer
+    timer = hl.timer(function()
+        elapsed = elapsed + interval
+        if elapsed >= timeout then
+            timer:set_enabled(false)
+            return
+        end
 
-_secondary_addr=$(hyprctl clients -j | jq -r -e "[.[] | select((.class | startswith(\"firefox\")) and (.title | startswith(\"[Secondary]\")))] | last | .address")
-_main_addr=$(hyprctl clients -j | jq -r -e "[.[] | select((.class | startswith(\"firefox\")) and (.title | startswith(\"[Main]\")))] | last | .address")
+        local main      = find_firefox("[Main]")
+        local secondary = find_firefox("[Secondary]")
 
-# Fix a weird bug by toggling twice the floating state
-hyprctl dispatch setfloating address:$_main_addr
-hyprctl dispatch setfloating address:$_secondary_addr
-hyprctl dispatch settiled address:$_main_addr
-hyprctl dispatch settiled address:$_secondary_addr
+        if main == nil then return end
 
-hyprctl -q dispatch movetoworkspacesilent 10,address:$_secondary_addr
-hyprctl -q dispatch movetoworkspacesilent 1,address:$_main_addr
+        timer:set_enabled(false)
+
+        -- Fix a weird bug by toggling twice the floating state
+        if main ~= nil then
+            hl.dispatch(hl.dsp.window.float({ action = "set",   window = main }))
+            hl.dispatch(hl.dsp.window.float({ action = "unset", window = main }))
+            hl.dispatch(hl.dsp.window.move({ workspace = "1",  window = main,      follow = false }))
+        end
+        if secondary ~= nil then
+            hl.dispatch(hl.dsp.window.float({ action = "set",   window = secondary }))
+            hl.dispatch(hl.dsp.window.float({ action = "unset", window = secondary }))
+            hl.dispatch(hl.dsp.window.move({ workspace = "10", window = secondary, follow = false }))
+        end
+    end, { timeout = interval, type = "repeat" })
+'

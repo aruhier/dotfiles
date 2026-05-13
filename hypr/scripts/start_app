@@ -10,11 +10,11 @@ resolvectl query google.com > /dev/null
 
 # Set cursor in the middle of the main screen.
 read x y width height scale < <(hyprctl monitors -j | jq -r ".[] | select(.name == \"$_MAIN_SCREEN\") | \"\(.x) \(.y) \(.width) \(.height) \(.scale)\"")
-hyprctl dispatch movecursor $(echo "scale=0; $x + $width / (2 * $scale)" | bc) $(echo "scale=0; $y + $height / (2 * $scale)" | bc)
+hyprctl dispatch 'hl.dsp.cursor.move({ x = '"$(echo "scale=0; $x + $width / (2 * $scale)" | bc)"', y = '"$(echo "scale=0; $y + $height / (2 * $scale)" | bc)"' })'
 
-hyprctl -q dispatch exec "[workspace 3 silent]" -- foot fish -i -c "'while true; mosh --family=prefer-inet6 --predict adaptive gate.aruhier.fr tmux a; sleep 3; end'"
+hyprctl dispatch -q 'hl.dsp.exec_cmd("foot fish -i -c '\''while true; mosh --family=prefer-inet6 --predict adaptive gate.aruhier.fr tmux a; sleep 3; end'\''", { workspace = "3 silent"})'
 mpd &
-hyprctl -q dispatch exec "[workspace 2 silent]" -- foot fish -i -c "'ncmpcpp'"
+hyprctl -q dispatch 'hl.dsp.exec_cmd("foot fish -i -c '\''ncmpcpp'\''",  { workspace = "2 silent" })'
 
 wait
 sleep 1
