@@ -3,4 +3,4 @@
 _WORKSPACE=6
 _THUNDERBIRD_CMD=thunderbird
 
-hyprctl -q dispatch exec "[workspace $_WORKSPACE silent]" -- $_THUNDERBIRD_CMD
+hyprctl -q dispatch "hl.dsp.exec_cmd('$_THUNDERBIRD_CMD', { workspace = '$_WORKSPACE silent' })"

@@ -6,7 +6,7 @@ sleep 1
 # Wait on DNS resolution.
 resolvectl query google.com > /dev/null
 
-hyprctl -q dispatch exec "[workspace 5 silent]" -- foot fish -i -c "'while true; mosh --family=prefer-inet6 --predict adaptive gate.aruhier.fr tmux a; sleep 3; end'"
+hyprctl dispatch -q 'hl.dsp.exec_cmd("foot fish -i -c '\''while true; mosh --family=prefer-inet6 --predict adaptive gate.aruhier.fr tmux a; sleep 3; end'\''", { workspace = "5 silent"})'
 
 ~/.config/hypr/scripts/apps/thunderbird
 ~/.config/hypr/scripts/apps/firefox
