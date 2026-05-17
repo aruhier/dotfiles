@@ -148,9 +148,24 @@ for _, r in ipairs(split_ratios) do
     end)
 end
 
--- Split preselection.
+-- Split preselection (dwindle)/ fit tobeg-toend (scrolling).
+local function presel_or_fit(dir)
+    return function()
+        local layout = hl.get_active_workspace().tiled_layout
+        if layout == "scrolling" then
+            if dir == "l" then
+                return hl.dispatch(hl.dsp.layout("fit tobeg"))
+            elseif dir == "r" then
+                hl.notification.create({text="foo", timeout=3000})
+                return hl.dispatch(hl.dsp.layout("fit toend"))
+            end
+        elseif layout == "dwindle" then
+            return hl.dispatch(hl.dsp.layout("preselect " .. dir))
+        end
+    end
+end
 for key, dir in pairs(directions_binds) do
-    hl.bind(C.main_mod .. " + CTRL + " .. key, hl.dsp.layout("preselect " .. dir))
+    hl.bind(C.main_mod .. " + CTRL + " .. key, presel_or_fit(dir))
 end
 hl.bind(C.main_mod .. " + CTRL + Space", hl.dsp.layout("preselect ''"))
 
@@ -162,6 +177,74 @@ hl.bind(C.main_mod .. " + b", function()
     elseif layout == "scrolling" then
         hl.dispatch(U.wrap_slide_bounce_anim(hl.dsp.layout("consume_or_expel next")))
     end
+end)
+
+-- Center the column (scrolling).
+hl.bind(C.main_mod .. "+ c", function()
+    if hl.get_active_workspace().tiled_layout ~= "scrolling" then
+        return
+    end
+
+    local prev = hl.get_config("scrolling.focus_fit_method")
+    hl.config({ ["scrolling.focus_fit_method"] = 0 })
+    hl.dispatch(hl.dsp.focus({ window = hl.get_active_window() }))
+    hl.config({ ["scrolling.focus_fit_method"] = prev })
+end)
+
+-- Fit the visible columns (scrolling)
+hl.bind(C.main_mod .. "+ code:21", function()
+    if hl.get_active_workspace().tiled_layout ~= "scrolling" then
+        return
+    end
+
+    hl.dispatch(U.wrap_slide_bounce_anim(hl.dsp.layout("fit visible")))
+end)
+
+-- Split half half with neighbor (scrolling)
+hl.bind(C.main_mod .. "+ CTRL + code:21", function()
+    if hl.get_active_workspace().tiled_layout ~= "scrolling" then
+        return
+    end
+
+    local a = hl.get_active_window()
+    local col_index = a.layout.column.index
+    local mon_width = a.monitor.size.width/a.monitor.scale
+
+    local left_neigh = nil
+    local right_neigh = nil
+    for _, w in ipairs(a.workspace:get_windows()) do
+        if w.layout.column.index == col_index - 1 then
+            left_neigh = w
+        elseif w.layout.column.index == col_index + 1 then
+            right_neigh = w
+        end
+
+        if right_neigh ~= nil and left_neigh ~= nil then
+            break
+        end
+    end
+
+    local neigh = nil
+    if a.at.x + a.size.x >= (mon_width / 2) and left_neigh ~= nil then
+        if left_neigh ~= nil then
+            neigh = left_neigh
+        else
+            neigh = right_neigh
+        end
+    else
+        if right_neigh ~= nil then
+            neigh = right_neigh
+        else
+            neigh = left_neigh
+        end
+    end
+    if neigh == nil then
+        return
+    end
+
+    hl.dispatch(U.wrap_slide_bounce_anim(hl.dsp.window.resize({x=mon_width / 2, y=neigh.size.y, window=neigh})))
+    hl.dispatch(U.wrap_slide_bounce_anim(hl.dsp.window.resize({x=mon_width / 2, y=a.size.y, window=a})))
+    hl.dispatch(U.wrap_slide_bounce_anim(hl.dsp.layout("fit visible")))
 end)
 
 -- Resize.

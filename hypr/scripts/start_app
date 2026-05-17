@@ -8,7 +8,7 @@ sleep 1
 # Wait on DNS resolution.
 resolvectl query google.com > /dev/null
 
-# Set cursor in the middle of the main screen.
+# Set cursor in the middle of the main screen and focus it.
 read x y width height scale < <(hyprctl monitors -j | jq -r ".[] | select(.name == \"$_MAIN_SCREEN\") | \"\(.x) \(.y) \(.width) \(.height) \(.scale)\"")
 hyprctl dispatch 'hl.dsp.cursor.move({ x = '"$(echo "scale=0; $x + $width / (2 * $scale)" | bc)"', y = '"$(echo "scale=0; $y + $height / (2 * $scale)" | bc)"' })'
 
@@ -17,10 +17,10 @@ mpd &
 hyprctl -q dispatch 'hl.dsp.exec_cmd("foot fish -i -c '\''ncmpcpp'\''",  { workspace = "2 silent" })'
 
 wait
-sleep 1
 # WARNING: thunderbird starter changes the focus for 0.5s.
 ~/.config/hypr/scripts/apps/thunderbird
 
 ~/.config/hypr/scripts/apps/firefox &
 
 wait
+hyprctl dispatch 'hl.dsp.focus({ monitor = "'$_MAIN_SCREEN'" })'

@@ -1,8 +1,11 @@
 local C = require("conf.constants")
 
-hl.workspace_rule({ workspace = "1",  monitor = C.main_monitor,  default = true })
-hl.workspace_rule({ workspace = "2",  monitor = C.monitors.dell_27, default = true })
-hl.workspace_rule({ workspace = "3",  monitor = C.monitors.lg_27,   default = true })
+-- Firefox main.
+hl.workspace_rule({ workspace = "1", monitor = C.main_monitor, default = true, layout = "scrolling" })
+hl.workspace_rule({ workspace = "2", monitor = C.monitors.dell_27, default = true })
+hl.workspace_rule({ workspace = "3", monitor = C.monitors.lg_27, default = true })
+-- Firefox secondary.
+hl.workspace_rule({ workspace = "10", layout = "scrolling" })
 hl.workspace_rule({ workspace = "12", layout = "scrolling" })
 
 local workspace_keys = {
