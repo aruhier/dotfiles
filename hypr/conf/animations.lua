@@ -36,22 +36,23 @@ hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 
 -- Spring curves.
 -- binds.lua dynamically applies the 2 following animations. Sync both changes.
-hl.curve("springSnappy", { type = "spring", mass = 0.6, stiffness = 80, dampening = 20 })
-hl.curve("springSnappyDebounce", { type = "spring", mass = 3, stiffness = 110, dampening = 28 })
-hl.curve("springBouncy", { type = "spring", mass = 1, stiffness = 100, dampening = 18 })
-hl.curve("springSlide", { type = "spring", mass = 0.6, stiffness = 103, dampening = 26 })
+hl.curve("springSnappy", { type = "spring", mass = 0.8, stiffness = 440, dampening = 39 })
+hl.curve("springSnappyBouncy", { type = "spring", mass = 1.2, stiffness = 425, dampening = 33.8 })
+hl.curve("springPopin", { type = "spring", mass = 0.8, stiffness = 550, dampening = 38 })
+hl.curve("springSlide", { type = "spring", mass = 0.6, stiffness = 460, dampening = 35 })
 -- Slightly less debounce than springSlide
-hl.curve("springSlideSpecialWorkspace", { type = "spring", mass = 0.6, stiffness = 95, dampening = 22 })
-hl.curve("springOut", { type = "spring", mass = 1, stiffness = 50, dampening = 25 })
-hl.curve("springLayerOut", { type = "spring", mass = 0.6, stiffness = 27, dampening = 100 })
+hl.curve("springSlideSpecialWorkspace", { type = "spring", mass = 0.6, stiffness = 380, dampening = 29 })
+hl.curve("springOut", { type = "spring", mass = 1, stiffness = 300, dampening = 27 })
+hl.curve("springLayerIn", { type = "spring", mass = 0.75, stiffness = 410, dampening = 41 })
+hl.curve("springLayerOut", { type = "spring", mass = 0.75, stiffness = 50, dampening = 70 })
 
 hl.animation({ leaf = "global", enabled = true, speed = 3, bezier = "default" })
 hl.animation({ leaf = "border", enabled = true, speed = 3, bezier = "easeOutQuint" })
 
 -- Windows: spring for open/close/move
 hl.animation({ leaf = "windows", enabled = true, speed = 2, spring = "springSnappy" })
-hl.animation({ leaf = "windowsIn", enabled = true, speed = 2, spring = "springBouncy", style = "popin 75%" })
-hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, spring = "springOut", style = "popin 80%" })
+hl.animation({ leaf = "windowsIn", enabled = true, speed = 2, spring = "springPopin", style = "popin 75%" })
+hl.animation({ leaf = "windowsOut", enabled = true, speed = 3, spring = "springOut", style = "popin 85%" })
 -- binds.lua dynamically applies this animation. Sync both changes.
 hl.animation({ leaf = "windowsMove", enabled = true, speed = 1, spring = "springSnappy", style = "slide" })
 
@@ -62,10 +63,10 @@ hl.animation({ leaf = "fadeOut", enabled = true, speed = 3, bezier = "almostLine
 
 -- Layers: spring for open, bezier for close
 hl.animation({ leaf = "layers", enabled = true, speed = 2, bezier = "almostLinear" })
-hl.animation({ leaf = "layersIn", enabled = true, speed = 2, spring = "springSnappy", style = "popin 90%" })
-hl.animation({ leaf = "layersOut", enabled = true, speed = 2, spring = "springLayerOut", style = "popin 70%" })
+hl.animation({ leaf = "layersIn", enabled = true, speed = 2, spring = "springLayerIn", style = "popin 94%" })
+hl.animation({ leaf = "layersOut", enabled = true, speed = 2, spring = "springLayerOut", style = "popin 80%" })
 hl.animation({ leaf = "fadeLayersIn", enabled = true, speed = 2, bezier = "almostLinear" })
-hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 2.75, bezier = "easeOutSmooth" })
+hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 2, bezier = "almostLinear" })
 
 -- Workspaces: spring for sliding
 hl.animation({ leaf = "workspaces", enabled = true, speed = 3, spring = "springSlide", style = "slide" })
