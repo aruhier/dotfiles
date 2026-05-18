@@ -6,7 +6,7 @@
 }
 {
     "label" : "logout",
-    "action" : "loginctl terminate-user $USER",
+    "action" : "hyprshutdown",
     "text" : "Logout (q)",
     "keybind" : "q"
 }
@@ -18,7 +18,7 @@
 }
 {
     "label" : "shutdown",
-    "action" : "systemctl poweroff",
+    "action" : "hyprshutdown --post-cmd 'systemctl poweroff'",
     "text" : "Shutdown (h)",
     "keybind" : "h"
 }
@@ -30,7 +30,7 @@
 }
 {
     "label" : "reboot",
-    "action" : "systemctl reboot",
+    "action" : "hyprshutdown --post-cmd 'systemctl reboot'",
     "text" : "Reboot (r)",
     "keybind" : "r"
 }
