@@ -24,7 +24,7 @@ function M.wrap_slide_bounce_anim(dsp)
             restore_anim_timer = nil
         end
 
-        hl.animation({ leaf = "windowsMove", enabled = true, speed = 1, spring = "springSnappyDebounce", style = "slide" })
+        hl.animation({ leaf = "windowsMove", enabled = true, speed = 1, spring = "springSnappyBouncy", style = "slide" })
 
         local a = M.copy(C.animations.windows_move)
         a["enabled"]  = true

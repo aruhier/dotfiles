@@ -1,6 +1,9 @@
 local C = require("conf.constants")
 
+-- Firefox main.
 hl.workspace_rule({ workspace = "1", monitor = C.main_monitor, default = true })
+-- Firefox secondary.
+hl.workspace_rule({ workspace = "10", layout = "scrolling" })
 hl.workspace_rule({ workspace = "12", layout = "scrolling" })
 
 local workspace_keys = {
