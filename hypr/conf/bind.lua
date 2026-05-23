@@ -121,7 +121,7 @@ local monitors_binds = {
 }
 for key, monitor in pairs(monitors_binds) do
     hl.bind(C.main_mod .. " + " .. key, hl.dsp.focus({ monitor = monitor }))
-    hl.bind(C.main_mod .. " + SHIFT + " .. key, hl.dsp.window.move({ monitor = monitor }))
+    hl.bind(C.main_mod .. " + SHIFT + " .. key, U.wrap_slide_bounce_anim(hl.dsp.window.move({ monitor = monitor })))
 end
 
 -- Split ratio.
