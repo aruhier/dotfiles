@@ -91,7 +91,16 @@ hl.bind(C.main_mod .. " + CTRL + t", hl.dsp.window.fullscreen({ mode = "maximize
 -- Fullscreen.
 hl.bind(C.main_mod .. " + SHIFT + CTRL + f", hl.dsp.window.fullscreen())
 -- Fake fullscreen.
-hl.bind(C.main_mod .. " + ALT + f", hl.dsp.window.fullscreen_state({ internal = -1, client = 2 }))
+hl.bind(C.main_mod .. " + ALT + f", function()
+    local win = hl.get_active_window()
+    if win == nil then return end
+
+    if win.fullscreen_client == 2 then
+        hl.dispatch(hl.dsp.window.fullscreen_state({ internal = 0, client = 0 }))
+    else
+        hl.dispatch(hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }))
+    end
+end)
 
 -- Move around, move windows around.
 for key, dir in pairs(directions_binds) do
