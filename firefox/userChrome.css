@@ -76,7 +76,7 @@
 }
 
 /* Hide sidebar selector */
-/* #sidebar-main is deprecated, should be removed for Firefox 153.0+. sidebar-main is the new element to use.
+/* #sidebar-main is deprecated, should be removed for Firefox 153.0+. sidebar-main is the new element to use. */
 #sidebar-main, sidebar-main {
     display: none !important;
 }
