@@ -25,6 +25,7 @@ hl.monitor({
     output = C.monitors.dell_27,
     mode = "2560x1440@59.95100Hz",
     position = "auto",
+    transform = 3,
 })
 
 local time_config_reload = os.time()
