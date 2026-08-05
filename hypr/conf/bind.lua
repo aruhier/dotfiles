@@ -66,10 +66,10 @@ end
 local brightness_up_bind = "XF86MonBrightnessUp"
 local brightness_down_bind = "XF86MonBrightnessDown"
 
-hl.bind(brightness_up_bind, hl.dsp.exec_cmd("brightnessctl s '+10%'"), { locked = true })
-hl.bind("SHIFT + " .. brightness_up_bind, hl.dsp.exec_cmd("brightnessctl s '+1%'"), { locked = true })
-hl.bind(brightness_up_bind, hl.dsp.exec_cmd("brightnessctl s '10%-'"), { locked = true })
-hl.bind("SHIFT + " .. brightness_down_bind, hl.dsp.exec_cmd("brightnessctl s '1%-'"), { locked = true })
+hl.bind(brightness_up_bind, hl.dsp.exec_cmd("brightnessctl -e s '+10%'"), { locked = true })
+hl.bind("SHIFT + " .. brightness_up_bind, hl.dsp.exec_cmd("brightnessctl -e s '+1%'"), { locked = true })
+hl.bind(brightness_down_bind, hl.dsp.exec_cmd("brightnessctl -e s '10%-'"), { locked = true })
+hl.bind("SHIFT + " .. brightness_down_bind, hl.dsp.exec_cmd("brightnessctl -e s '1%-'"), { locked = true })
 
 -- Theme.
 hl.bind(C.main_mod .. " + CTRL + F5", hl.dsp.exec_cmd(C.scripts .. "/theme everforest-dark"),  { locked = true })
