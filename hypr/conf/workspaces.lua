@@ -21,6 +21,13 @@ local workspace_keys = {
     [12] = "0",
 }
 
+for i = 1, 8 do
+    hl.workspace_rule({ workspace = i, default_name = workspace_keys[i], persistent = true })
+end
+for i = 9, #workspace_keys do
+    hl.workspace_rule({ workspace = i, default_name = workspace_keys[i], persistent = false })
+end
+
 for ws, key in pairs(workspace_keys) do
     hl.bind(C.main_mod .. " + " .. key,         hl.dsp.focus({ workspace = ws, on_current_monitor = true }))
     hl.bind(C.main_mod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = ws, follow = false }))
