@@ -2,7 +2,6 @@
 
 hyprctl dispatch "hl.dsp.exec_cmd('firefox', { workspace = '1 silent' })"
 ~/.config/hypr/scripts/wait_for -t 5 "select(.class | startswith(\"firefox\"))"
-hyprctl dispatch "hl.dsp.window.move({ workspace = '1', window = 'class:^firefox.*$', follow = false })"
 
 hyprctl eval '
     local function find_firefox(title_prefix)
