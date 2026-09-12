@@ -291,9 +291,21 @@ hl.bind(C.main_mod .. " + t", function()
     end
 end)
 
+-- Wofi
+
+hl.bind(C.main_mod .. " + r", hl.dsp.exec_cmd("wofi -S drun --allow-images"))
+hl.bind(C.main_mod .. " + SHIFT + r", hl.dsp.submap("wofi"))
+hl.define_submap("wofi", function()
+    hl.bind(C.main_mod .. " + SHIFT + s", function()
+        hl.dispatch(hl.dsp.exec_cmd(C.scripts .. "/wofi-audio"))
+        hl.dispatch(hl.dsp.submap("reset"))
+    end)
+    hl.bind("Return", hl.dsp.submap("reset"))
+    hl.bind("Escape", hl.dsp.submap("reset"))
+end)
+
 -- Apps
 
 hl.bind(C.main_mod .. " + Return", hl.dsp.exec_cmd("foot"))
-hl.bind(C.main_mod .. " + r", hl.dsp.exec_cmd("wofi -S drun --allow-images"))
 hl.bind("ALT + z", hl.dsp.exec_cmd(C.scripts .. "/apps/firefox"))
 hl.bind("ALT + x", hl.dsp.exec_cmd(C.scripts .. "/apps/thunderbird"))
