@@ -1,29 +1,29 @@
 [user]
-    email = aruhier@mailbox.org
-    name = Anthony Ruhier
-    signingkey = F4A378DD8D494AE48EBA554CB00FBC7D08D231D9
+	email = aruhier@mailbox.org
+	name = Anthony Ruhier
+	signingkey = F4A378DD8D494AE48EBA554CB00FBC7D08D231D9
 [push]
-    default = simple
+	default = simple
 [pull]
-    rebase = false
+	rebase = false
 [core]
-    editor = vim
+	editor = vim
 [alias]
-    b = branch
-    c = commit
-    co = checkout
-    # a "long story short" mode for git log, with one commit per line
-    loglst = log \
-        --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' \
-        --abbrev-commit \
-        --no-merges
-    r = rebase
-    st = status
-    pl = pull --rebase
-    ps = push
+	b = branch
+	c = commit
+	co = checkout
+	# a "long story short" mode for git log, with one commit per line
+	loglst = log \
+		--pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' \
+		--abbrev-commit \
+		--no-merges
+	r = rebase
+	st = status
+	pl = pull --rebase
+	ps = push
 [rerere]
-    enabled = 1
+	enabled = 1
 [http]
-    sslVerify = true
+	sslVerify = true
 [commit]
-    gpgsign = true
+	gpgsign = true
