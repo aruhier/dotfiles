@@ -1,6 +1,10 @@
 local C = require("conf.constants")
 local U = require("conf.utils")
 
+local function qs_ipc(args)
+    return hl.dsp.exec_cmd("qs -p " .. C.quickshell .. " ipc call " .. args)
+end
+
 -- Direction binding, as multiple bindings use it.
 local directions_binds = {
     h = "l",
@@ -40,15 +44,15 @@ hl.bind(C.main_mod .. " + SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region"))
 
 -- Volume.
 for _, mute_bind in ipairs({ "XF86AudioMute", C.main_mod .. " + F1" }) do
-    hl.bind(mute_bind, hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"), { locked = true })
+    hl.bind(mute_bind, qs_ipc("osd mute"), { locked = true })
 end
 for _, down_bind in ipairs({ "XF86AudioLowerVolume", C.main_mod .. " + F2" }) do
-    hl.bind(down_bind, hl.dsp.exec_cmd("swayosd-client --output-volume -5"), { locked = true })
-    hl.bind("SHIFT + " .. down_bind, hl.dsp.exec_cmd("swayosd-client --output-volume -1"), { locked = true })
+    hl.bind(down_bind, qs_ipc("osd volume -5"), { locked = true })
+    hl.bind("SHIFT + " .. down_bind, qs_ipc("osd volume -1"), { locked = true })
 end
 for _, up_bind in ipairs({ "XF86AudioRaiseVolume", C.main_mod .. " + F3" }) do
-    hl.bind(up_bind, hl.dsp.exec_cmd("swayosd-client --output-volume +5"), { locked = true })
-    hl.bind("SHIFT + " .. up_bind, hl.dsp.exec_cmd("swayosd-client --output-volume +1"), { locked = true })
+    hl.bind(up_bind, qs_ipc("osd volume +5"), { locked = true })
+    hl.bind("SHIFT + " .. up_bind, qs_ipc("osd volume +1"), { locked = true })
 end
 
 -- Media keys.
@@ -66,18 +70,27 @@ end
 local brightness_up_bind = "XF86MonBrightnessUp"
 local brightness_down_bind = "XF86MonBrightnessDown"
 
-hl.bind(brightness_up_bind, hl.dsp.exec_cmd("brightnessctl -e s '+10%'"), { locked = true })
-hl.bind("SHIFT + " .. brightness_up_bind, hl.dsp.exec_cmd("brightnessctl -e s '+1%'"), { locked = true })
-hl.bind(brightness_down_bind, hl.dsp.exec_cmd("brightnessctl -e s '10%-'"), { locked = true })
-hl.bind("SHIFT + " .. brightness_down_bind, hl.dsp.exec_cmd("brightnessctl -e s '1%-'"), { locked = true })
+hl.bind(brightness_up_bind, qs_ipc("osd brightness +10"), { locked = true })
+hl.bind("SHIFT + " .. brightness_up_bind, qs_ipc("osd brightness +1"), { locked = true })
+hl.bind(brightness_down_bind, qs_ipc("osd brightness -10"), { locked = true })
+hl.bind("SHIFT + " .. brightness_down_bind, qs_ipc("osd brightness -1"), { locked = true })
+
+-- Lock keys: triggers osd display only, quickshell reads the state from sysfs.
+for _, lock in ipairs({
+    { "Caps_Lock",   "capslock"   },
+    { "Num_Lock",    "numlock"    },
+    { "Scroll_Lock", "scrolllock" },
+}) do
+    hl.bind(lock[1], qs_ipc("osd lock " .. lock[2]), { locked = true, non_consuming = true })
+end
 
 -- Theme.
 hl.bind(C.main_mod .. " + CTRL + F5", hl.dsp.exec_cmd(C.scripts .. "/theme everforest-dark"),  { locked = true })
 hl.bind(C.main_mod .. " + CTRL + F6", hl.dsp.exec_cmd(C.scripts .. "/theme everforest-light"), { locked = true })
 
--- Notifications (swaync).
-hl.bind(C.main_mod .. " + n", hl.dsp.exec_cmd("swaync-client -t"))
-hl.bind(C.main_mod .. " + SHIFT + n", hl.dsp.exec_cmd("swaync-client -C"))
+-- Notifications.
+hl.bind(C.main_mod .. " + n", qs_ipc("notifications toggle"))
+hl.bind(C.main_mod .. " + SHIFT + n", qs_ipc("notifications clear"))
 
 -- Close window.
 hl.bind(C.main_mod .. " + z", hl.dsp.window.close())
