@@ -56,6 +56,8 @@ def create_symlink(path):
     with open(install_conf_path, "r") as install_conf:
         read_data = install_conf.readlines()
     for line in read_data:
+        if not line.strip():
+            continue
         src, dest = clean_conf_line(line)
         src_path = os.path.abspath(os.path.join(path, src))
         logging.debug("src: %s", src_path)
