@@ -76,4 +76,5 @@ hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 2, spring =
 hl.window_rule({ match = { workspace = "s[true]" }, animation = "slide top" })
 
 hl.layer_rule({ match = { namespace = "logout_dialog" }, animation = "fade" })
-hl.layer_rule({ match = { namespace = "swaync-control-center" }, animation = "slide right" })
+hl.layer_rule({ match = { namespace = "quickshell-notification-center" }, no_anim = true })
+hl.layer_rule({ match = { namespace = "quickshell-osd" }, no_anim = true })

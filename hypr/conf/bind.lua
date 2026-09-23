@@ -1,6 +1,10 @@
 local C = require("conf.constants")
 local U = require("conf.utils")
 
+local function qs_ipc(args)
+    return hl.dsp.exec_cmd("qs ipc call " .. args)
+end
+
 -- Direction binding, as multiple bindings use it.
 local directions_binds = {
     h = "l",
@@ -18,15 +22,6 @@ hl.bind(C.main_mod .. " + m", hl.dsp.exec_cmd(C.scripts .. "/wlogout"))
 -- Exit Hyprland.
 hl.bind(C.main_mod .. " + CTRL + SHIFT + m", hl.dsp.exit())
 
--- Enable/disable secondary screens.
-hl.bind(C.main_mod .. " + SHIFT + F12", hl.dsp.exec_cmd("kanshictl switch single-screen"))
-hl.bind(C.main_mod .. " + F12", hl.dsp.exec_cmd("kanshictl reload"))
-
--- Switch inputs on main screen (ddcutil).
-hl.bind(C.main_mod .. " + F9",  hl.dsp.exec_cmd('ddcutil setvcp -l "MPG321UX OLED" 60 0x12')) -- HDMI
-hl.bind(C.main_mod .. " + F10", hl.dsp.exec_cmd('ddcutil setvcp -l "MPG321UX OLED" 60 0x10')) -- USB-C
-hl.bind(C.main_mod .. " + F11", hl.dsp.exec_cmd('ddcutil setvcp -l "MPG321UX OLED" 60 0x0f')) -- DisplayPort
-
 --Ignore bindings submap.
 hl.bind(C.main_mod .. " + CTRL + i", hl.dsp.submap("ignore"))
 hl.define_submap("ignore", function()
@@ -40,15 +35,15 @@ hl.bind(C.main_mod .. " + SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region"))
 
 -- Volume.
 for _, mute_bind in ipairs({ "XF86AudioMute", C.main_mod .. " + F1" }) do
-    hl.bind(mute_bind, hl.dsp.exec_cmd("pulsemixer --toggle-mute"), { locked = true })
+    hl.bind(mute_bind, qs_ipc("osd mute"), { locked = true })
 end
 for _, down_bind in ipairs({ "XF86AudioLowerVolume", C.main_mod .. " + F2" }) do
-    hl.bind(down_bind, hl.dsp.exec_cmd("pulsemixer --change-volume -5"), { locked = true })
-    hl.bind("SHIFT + " .. down_bind, hl.dsp.exec_cmd("pulsemixer --change-volume -1"), { locked = true })
+    hl.bind(down_bind, qs_ipc("osd volume -5"), { locked = true })
+    hl.bind("SHIFT + " .. down_bind, qs_ipc("osd volume -1"), { locked = true })
 end
 for _, up_bind in ipairs({ "XF86AudioRaiseVolume", C.main_mod .. " + F3" }) do
-    hl.bind(up_bind, hl.dsp.exec_cmd("pulsemixer --change-volume +5"), { locked = true })
-    hl.bind("SHIFT + " .. up_bind, hl.dsp.exec_cmd("pulsemixer --change-volume +1"), { locked = true })
+    hl.bind(up_bind, qs_ipc("osd volume +5"), { locked = true })
+    hl.bind("SHIFT + " .. up_bind, qs_ipc("osd volume +1"), { locked = true })
 end
 
 -- Media keys.
@@ -66,18 +61,27 @@ end
 local brightness_up_bind = "XF86MonBrightnessUp"
 local brightness_down_bind = "XF86MonBrightnessDown"
 
-hl.bind(brightness_up_bind, hl.dsp.exec_cmd("brightnessctl -e s '+10%'"), { locked = true })
-hl.bind("SHIFT + " .. brightness_up_bind, hl.dsp.exec_cmd("brightnessctl -e s '+1%'"), { locked = true })
-hl.bind(brightness_down_bind, hl.dsp.exec_cmd("brightnessctl -e s '10%-'"), { locked = true })
-hl.bind("SHIFT + " .. brightness_down_bind, hl.dsp.exec_cmd("brightnessctl -e s '1%-'"), { locked = true })
+hl.bind(brightness_up_bind, qs_ipc("osd brightness +10"), { locked = true })
+hl.bind("SHIFT + " .. brightness_up_bind, qs_ipc("osd brightness +1"), { locked = true })
+hl.bind(brightness_down_bind, qs_ipc("osd brightness -10"), { locked = true })
+hl.bind("SHIFT + " .. brightness_down_bind, qs_ipc("osd brightness -1"), { locked = true })
+
+-- Lock keys: triggers osd display only, quickshell reads the state from sysfs.
+for _, lock in ipairs({
+    { "Caps_Lock",   "capslock"   },
+    { "Num_Lock",    "numlock"    },
+    { "Scroll_Lock", "scrolllock" },
+}) do
+    hl.bind(lock[1], qs_ipc("osd lock " .. lock[2]), { locked = true, non_consuming = true })
+end
 
 -- Theme.
 hl.bind(C.main_mod .. " + CTRL + F5", hl.dsp.exec_cmd(C.scripts .. "/theme everforest-dark"),  { locked = true })
 hl.bind(C.main_mod .. " + CTRL + F6", hl.dsp.exec_cmd(C.scripts .. "/theme everforest-light"), { locked = true })
 
--- Notifications (swaync).
-hl.bind(C.main_mod .. " + n", hl.dsp.exec_cmd("swaync-client -t"))
-hl.bind(C.main_mod .. " + SHIFT + n", hl.dsp.exec_cmd("swaync-client -C"))
+-- Notifications.
+hl.bind(C.main_mod .. " + n", qs_ipc("notifications toggle"))
+hl.bind(C.main_mod .. " + SHIFT + n", qs_ipc("notifications clear"))
 
 -- Close window.
 hl.bind(C.main_mod .. " + z", hl.dsp.window.close())
@@ -280,9 +284,21 @@ hl.bind(C.main_mod .. " + t", function()
     end
 end)
 
+-- Wofi
+
+hl.bind(C.main_mod .. " + r", hl.dsp.exec_cmd(C.scripts .. "/wofi"))
+hl.bind(C.main_mod .. " + SHIFT + r", hl.dsp.submap("wofi"))
+hl.define_submap("wofi", function()
+    hl.bind(C.main_mod .. " + SHIFT + s", function()
+        hl.dispatch(hl.dsp.exec_cmd(C.scripts .. "/wofi-audio"))
+        hl.dispatch(hl.dsp.submap("reset"))
+    end)
+    hl.bind("Return", hl.dsp.submap("reset"))
+    hl.bind("Escape", hl.dsp.submap("reset"))
+end)
+
 -- Apps
 
-hl.bind(C.main_mod .. " + Return", hl.dsp.exec_cmd("foot"))
-hl.bind(C.main_mod .. " + r", hl.dsp.exec_cmd("wofi -S drun --allow-images"))
+hl.bind(C.main_mod .. " + Return", hl.dsp.exec_cmd("uwsm-app foot"))
 hl.bind("ALT + z", hl.dsp.exec_cmd(C.scripts .. "/apps/firefox"))
 hl.bind("ALT + x", hl.dsp.exec_cmd(C.scripts .. "/apps/thunderbird"))

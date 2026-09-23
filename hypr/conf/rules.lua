@@ -29,5 +29,6 @@ end
 -- Layer rules.
 hl.layer_rule({ match = { namespace = "logout_dialog" }, blur = true })
 hl.layer_rule({ match = { namespace = "wofi" }, blur = true, ignore_alpha = 0.5 })
-hl.layer_rule({ match = { namespace = "swaync-control-center" }, blur = true, ignore_alpha = 0.9 })
-hl.layer_rule({ match = { namespace = "swaync-notification-window" }, blur = true, ignore_alpha = 0.9 })
+hl.layer_rule({ match = { namespace = "quickshell-notification-center" }, blur = true, ignore_alpha = 0.9 })
+hl.layer_rule({ match = { namespace = "quickshell-notifications" }, blur = true, ignore_alpha = 0.8 })
+hl.layer_rule({ match = { namespace = "quickshell-osd" }, blur = true, ignore_alpha = 0.8 })

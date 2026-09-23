@@ -1,6 +1,6 @@
 #!/bin/bash
 
 _WORKSPACE=6
-_THUNDERBIRD_CMD=thunderbird
+_THUNDERBIRD_CMD="uwsm-app thunderbird"
 
 hyprctl -q dispatch "hl.dsp.exec_cmd('$_THUNDERBIRD_CMD', { workspace = '$_WORKSPACE silent' })"

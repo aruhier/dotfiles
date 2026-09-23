@@ -7,16 +7,22 @@
 
 import logging
 import os
-import re
 import shutil
 import subprocess
+from pathlib import Path
+
+EXCLUDED_DIRS = {".git"}
+
+
+def run(*cmd):
+    stdout = subprocess.run(cmd, check=True, capture_output=True, text=True).stdout
+    if stdout:
+        print(stdout)
 
 
 def update_git_submodule():
     for opt in ("init", "sync", "update"):
-        stdout = subprocess.check_output(["git", "submodule", opt])
-        if stdout:
-            print(stdout.decode())
+        run("git", "submodule", opt)
 
 
 def clean_conf_line(line):
@@ -28,71 +34,69 @@ def clean_conf_line(line):
                           new symlink path
     :rtype: tuple
     """
-    map_path = line.strip().split(":")
-    # Remove space or '' or "" around the path
-    for i, item in enumerate(map_path):
-        map_path[i] = re.sub(r"(^\s*[\"'])|([\"']\s*$)", "", item)
-    return map_path
+    src, dest = line.split(":", 1)
+    return src.strip(" \t\"'"), dest.strip(" \t\n\"'")
 
 
-def move_existing_dest(dest):
+def move_existing_dest(dest: Path):
     """
     If file already exists, move it as dest.old
     """
     logging.debug("File already exists, renaming as .old")
-    dest_old = dest + ".old"
-    if os.path.isdir(dest_old) and not os.path.islink(dest_old):
+    dest_old = dest.with_name(dest.name + ".old")
+    if dest_old.is_symlink():
+        dest_old.unlink()
+    elif dest_old.is_dir():
         shutil.rmtree(dest_old)
-    elif os.path.islink(dest_old):
-        os.remove(dest_old)
-    shutil.move(dest, dest + ".old")
+    dest.rename(dest_old)
 
 
-def create_symlink(path):
-    install_conf_path = os.path.join(path, "install.conf")
-    if not os.path.isfile(install_conf_path):
+def create_symlink(path: Path):
+    install_conf_path = path / "install.conf"
+    if not install_conf_path.is_file():
         logging.debug("No install.conf for %s", path)
         return
-    with open(install_conf_path, "r") as install_conf:
-        read_data = install_conf.readlines()
-    for line in read_data:
+    for line in install_conf_path.read_text().splitlines():
         if not line.strip():
             continue
         src, dest = clean_conf_line(line)
-        src_path = os.path.abspath(os.path.join(path, src))
+        src_path = (path / src).absolute()
         logging.debug("src: %s", src_path)
         logging.debug("dest: %s", dest)
 
-        dest = os.path.expanduser(os.path.expandvars(dest))
-        if os.path.abspath(dest) == src_path:
+        dest = Path(os.path.expandvars(dest)).expanduser().absolute()
+        if dest == src_path or (dest.is_symlink() and dest.readlink() == src_path):
             continue
-        if os.path.lexists(dest):
+        if dest.is_symlink() or dest.exists():
             move_existing_dest(dest)
 
-        if not os.path.isdir(os.path.dirname(dest)):
-            os.makedirs(os.path.dirname(dest))
-        os.symlink(src_path, dest)
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.symlink_to(src_path)
 
     # launch post_install.sh if any
-    post_install = os.path.join(path, "post_install.sh")
-    if os.path.exists(post_install):
-        stdout = subprocess.check_output(["bash", post_install])
-        if stdout:
-            print(stdout.decode())
+    post_install = path / "post_install.sh"
+    if post_install.exists():
+        run("bash", post_install)
 
 
-# Enable the debug mode
-# logging.basicConfig(level=logging.DEBUG)
-os.chdir(os.path.dirname(os.path.realpath(__file__)))
-update_git_submodule()
-dirs = [child for child in os.listdir() if os.path.isdir(child)]
-excluded_dirs = (".git",)
-for path in dirs:
-    try:
-        if path in excluded_dirs:
+def main():
+    # Enable the debug mode
+    logging.basicConfig(level=logging.DEBUG)
+    os.chdir(Path(__file__).resolve().parent)
+    update_git_submodule()
+    for path in Path().iterdir():
+        if not path.is_dir():
+            continue
+        if path.name in EXCLUDED_DIRS:
             logging.debug("%s is in excluded_dirs. Ignoring it...", path)
             continue
-        create_symlink(path)
-    except Exception as e:
-        logging.error("Error during the dotfiles copy in the directory: %s", path)
-        logging.exception(e)
+        try:
+            create_symlink(path)
+        except Exception:
+            logging.exception(
+                "Error during the dotfiles copy in the directory: %s", path
+            )
+
+
+if __name__ == "__main__":
+    main()

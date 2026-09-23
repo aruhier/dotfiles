@@ -6,7 +6,7 @@
 }
 {
     "label" : "logout",
-    "action" : "hyprshutdown",
+    "action" : "hyprshutdown --post-cmd 'uwsm stop'",
     "text" : "Logout (q)",
     "keybind" : "q"
 }

@@ -12,8 +12,5 @@ pulsemixer
 # Configure Qt options (set the fonts and icon theme)
 qt6ct
 swaybg
-swayidle
-swaync
-swayosd
-waybar
+quickshell
 wlogout

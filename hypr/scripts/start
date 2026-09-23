@@ -1,12 +1,7 @@
 #!/bin/sh
 
-# sudo uclamp_hyprland&
-FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0" swaync&
-/usr/libexec/lxqt-policykit-agent&
-
-sleep 3;
-nm-applet --indicator&
-gammastep-indicator&
-copyq &
-flatpak run com.nextcloud.desktopclient.nextcloud --background&
-blueman-applet&
+uwsm-app -s b -- gammastep-indicator&
+uwsm-app -s b -- copyq&
+uwsm-app -s b -- nm-applet --indicator&
+uwsm-app -s b -- flatpak run com.nextcloud.desktopclient.nextcloud --background&
+uwsm-app -s b -- blueman-applet&

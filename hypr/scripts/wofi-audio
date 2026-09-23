@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+# wofi-audio-sink.sh — pick a default audio output (sink) via wofi + wpctl
+# Requires: wireplumber (wpctl), wofi
+
+set -euo pipefail
+
+readonly NOTIFY_TIMEOUT_MS=3000
+
+get_sinks_block() {
+    wpctl status | awk '
+        /^Audio$/{f=1}
+        f && /Sinks:/{s=1; next}
+        s && /^ *$/{exit}
+        s && /Sources:|Streams:|Filters:/{exit}
+        s
+    '
+}
+
+parse_sink_lines() {
+    # Reads a sinks block on stdin, emits "id\tname\tdefault_marker" lines.
+    local sinks_block="$1"
+    grep -E '^\s*[│ ]*\s*\*?\s*[0-9]+\.' <<<"$sinks_block" | while IFS= read -r line; do
+        local default_marker="" stripped id name
+        [[ "$line" == *'*'* ]] && default_marker="*"
+        # Strip the trailing [vol: ...] bracket first, so its digits don't
+        # get mistaken for the id.
+        stripped="$(sed -E 's/\s*\[vol:[^]]*\]\s*$//' <<<"$line")"
+        id="$(grep -oE '[0-9]+' <<<"$stripped" | head -1)"
+        name="$(sed -E 's/^[^0-9]*[0-9]+\.\s*//' <<<"$stripped" | sed -E 's/\s+$//')"
+        printf '%s\t%s\t%s\n' "$id" "$name" "$default_marker"
+    done
+}
+
+build_menu() {
+    # Gets the sinks block, parses it, and fills id_by_label/menu (both
+    # namerefs) — no command substitution around the fill loop, since that
+    # would fork a subshell and lose writes to id_by_label.
+    # Returns 1 if no sinks were found.
+    local -n _id_by_label=$1
+    local -n _menu=$2
+    local status_block entry id name marker label
+    local -a sink_lines
+
+    status_block="$(get_sinks_block)"
+    [[ -z "$status_block" ]] && return 1
+
+    mapfile -t sink_lines < <(parse_sink_lines "$status_block")
+
+    _menu=""
+    for entry in "${sink_lines[@]}"; do
+        id="$(cut -f1 <<<"$entry")"
+        name="$(cut -f2 <<<"$entry")"
+        marker="$(cut -f3 <<<"$entry")"
+        label="$name"
+        [[ "$marker" == "*" ]] && label="$label  (current)"
+        _id_by_label["$label"]="$id"
+        _menu+="$label"$'\n'
+    done
+}
+
+notify() {
+    notify-send -e -t "$NOTIFY_TIMEOUT_MS" "Audio switcher" "$1" 2>/dev/null || true
+}
+
+declare -A id_by_label
+declare menu
+
+if ! build_menu id_by_label menu; then
+    notify "No sinks found in wpctl status"
+    exit 1
+fi
+
+choice="$(printf '%s' "$menu" | wofi --dmenu -H 500 --prompt "Audio output" --cache-file /dev/null)"
+[[ -z "$choice" ]] && exit 0
+
+selected_id="${id_by_label[$choice]:-}"
+if [[ -z "$selected_id" ]]; then
+    notify "Could not resolve selection: $choice"
+    exit 1
+fi
+
+wpctl set-default "$selected_id"
+notify "Default output set to: ${choice%  (current)}"

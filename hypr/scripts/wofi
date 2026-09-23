@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+D=$(wofi -S drun --allow-images --define=drun-print_desktop_file=true)
+
+if [ -n "$D" ]; then
+    case "$D" in
+        *'.desktop '*)
+            DESKTOP_FILE="${D%.desktop *}.desktop"
+            APP_ARGS="${D#*.desktop }"
+            uwsm-app -- "$DESKTOP_FILE" $APP_ARGS
+            ;;
+        *)
+            uwsm-app -- $D
+            ;;
+    esac
+fi
