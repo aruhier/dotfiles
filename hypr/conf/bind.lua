@@ -2,7 +2,7 @@ local C = require("conf.constants")
 local U = require("conf.utils")
 
 local function qs_ipc(args)
-    return hl.dsp.exec_cmd("qs -p " .. C.quickshell .. " ipc call " .. args)
+    return hl.dsp.exec_cmd("qs ipc call " .. args)
 end
 
 -- Direction binding, as multiple bindings use it.
@@ -306,7 +306,7 @@ end)
 
 -- Wofi
 
-hl.bind(C.main_mod .. " + r", hl.dsp.exec_cmd("wofi -S drun --allow-images"))
+hl.bind(C.main_mod .. " + r", hl.dsp.exec_cmd(C.scripts .. "/wofi"))
 hl.bind(C.main_mod .. " + SHIFT + r", hl.dsp.submap("wofi"))
 hl.define_submap("wofi", function()
     hl.bind(C.main_mod .. " + SHIFT + s", function()
@@ -319,6 +319,6 @@ end)
 
 -- Apps
 
-hl.bind(C.main_mod .. " + Return", hl.dsp.exec_cmd("foot"))
+hl.bind(C.main_mod .. " + Return", hl.dsp.exec_cmd("uwsm-app foot"))
 hl.bind("ALT + z", hl.dsp.exec_cmd(C.scripts .. "/apps/firefox"))
 hl.bind("ALT + x", hl.dsp.exec_cmd(C.scripts .. "/apps/thunderbird"))

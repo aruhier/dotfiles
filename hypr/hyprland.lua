@@ -3,7 +3,6 @@
 
 local C = require("conf.constants")
 
-require("conf.env")
 require("conf.permissions")
 require("conf.global")
 require("conf.monitors")

@@ -2,7 +2,6 @@ local M = {}
 
 M.main_mod = "SUPER"
 M.scripts = os.getenv("HOME") .. "/.config/hypr/scripts"
-M.quickshell = os.getenv("HOME") .. "/git/local/quickshell"
 M.monitors = {
     msi_32 = "desc:Microstep MPG321UX OLED 0x01010101",
     lg_27 = "desc:LG Electronics 27GL850 912NTWG0N049",

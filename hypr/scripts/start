@@ -1,13 +1,12 @@
 #!/bin/sh
 
-lxqt-policykit-agent&
 # Enable font "boldering" to increase visibility.
-kdeconnectd&
+uwsm-app -s b -- kdeconnectd&
 
 sleep 3;
-gammastep-indicator&
-copyq&
-kdeconnect-indicator&
-nm-applet --indicator&
-flatpak run com.nextcloud.desktopclient.nextcloud --background&
-blueman-applet&
+uwsm-app -s b -- gammastep-indicator&
+uwsm-app -s b -- copyq&
+uwsm-app -s b -- kdeconnect-indicator&
+uwsm-app -s b -- nm-applet --indicator&
+uwsm-app -s b -- flatpak run com.nextcloud.desktopclient.nextcloud --background&
+uwsm-app -s b -- blueman-applet&

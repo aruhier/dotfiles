@@ -3,7 +3,7 @@
 _WORKSPACE=2
 _SPLIT_RATIO=1.6
 _DIR=UP
-_THUNDERBIRD_CMD=thunderbird
+_THUNDERBIRD_CMD="uwsm-app thunderbird"
 
 # Disable autofocus.
 hyprctl -q keyword windowrulev2 'noinitialfocus'

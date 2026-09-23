@@ -1,7 +1,7 @@
 local signal = "ALT + s"
 hl.workspace_rule({
     workspace = "special:signal",
-    on_created_empty = "flatpak run org.signal.Signal --enable-features=UseOzonePlatform --ozone-platform=wayland",
+    on_created_empty = "uwsm-app -s b -- flatpak run org.signal.Signal --enable-features=UseOzonePlatform --ozone-platform=wayland",
 })
 hl.bind(signal, hl.dsp.workspace.toggle_special("signal"))
 hl.bind("SHIFT + " .. signal, hl.dsp.window.move({ workspace = "special:signal" }))
@@ -9,7 +9,7 @@ hl.bind("SHIFT + " .. signal, hl.dsp.window.move({ workspace = "special:signal" 
 local telegram = "ALT + f"
 hl.workspace_rule({
     workspace = "special:telegram",
-    on_created_empty = "flatpak run org.telegram.desktop --enable-features=UseOzonePlatform --ozone-platform=wayland",
+    on_created_empty = "uwsm-app -s b -- flatpak run org.telegram.desktop --enable-features=UseOzonePlatform --ozone-platform=wayland",
 })
 hl.bind(telegram, hl.dsp.workspace.toggle_special("telegram"))
 hl.bind("SHIFT + " .. telegram, hl.dsp.window.move({ workspace = "special:telegram" }))
@@ -23,11 +23,11 @@ end)
 
 hl.workspace_rule({
     workspace = "special:keepassxc",
-    on_created_empty = "flatpak run org.keepassxc.KeePassXC",
+    on_created_empty = "uwsm-app -s b -- flatpak run org.keepassxc.KeePassXC",
 })
 hl.workspace_rule({
     workspace = "special:spotify",
-    on_created_empty = "flatpak run com.spotify.Client",
+    on_created_empty = "uwsm-app -s b -- flatpak run com.spotify.Client",
 })
 
 hl.define_submap("scratchpad", function()
