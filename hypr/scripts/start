@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# Enable font "boldering" to increase visibility.
-uwsm-app -s b -- kdeconnectd&
-
-sleep 3;
 uwsm-app -s b -- gammastep-indicator&
 uwsm-app -s b -- copyq&
 uwsm-app -s b -- kdeconnect-indicator&

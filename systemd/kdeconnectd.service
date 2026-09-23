@@ -1,0 +1,14 @@
+[Unit]
+Description=KDE Connect Daemon
+# order startup after WM
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=exec
+ExecStart=kdeconnectd
+Restart=on-failure
+Slice=background-graphical.slice
+
+[Install]
+WantedBy=graphical-session.target
