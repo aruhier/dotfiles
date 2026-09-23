@@ -16,3 +16,6 @@
 	branch = master
 	shallow = true
 	ignore = untracked
+[submodule "quickshell/quickshell"]
+	path = quickshell/quickshell
+	url = git@github.com:aruhier/dotfiles-quickshell.git
