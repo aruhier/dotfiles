@@ -1,9 +1,16 @@
 local C = require("conf.constants")
 
+local home_monitor = {
+    [1] = C.main_monitor,
+    [2] = C.monitors.dell_27,
+    [3] = C.monitors.lg_27,
+}
+for ws, monitor in ipairs(home_monitor) do
+    hl.workspace_rule({ workspace = tostring(ws), monitor = monitor, default = true })
+end
+
 -- Firefox main.
-hl.workspace_rule({ workspace = "1", monitor = C.main_monitor, default = true, layout = "scrolling" })
-hl.workspace_rule({ workspace = "2", monitor = C.monitors.dell_27, default = true })
-hl.workspace_rule({ workspace = "3", monitor = C.monitors.lg_27, default = true })
+hl.workspace_rule({ workspace = "1", layout = "scrolling" })
 -- Firefox secondary.
 hl.workspace_rule({ workspace = "10", layout = "scrolling" })
 hl.workspace_rule({ workspace = "12", layout = "scrolling" })
@@ -23,10 +30,10 @@ local workspace_keys = {
     [12] = "0",
 }
 
-for i = 1, 8 do
+for i = C.persistent_workspaces_range[1], C.persistent_workspaces_range[2] do
     hl.workspace_rule({ workspace = i, default_name = workspace_keys[i], persistent = true })
 end
-for i = 9, #workspace_keys do
+for i = C.persistent_workspaces_range[2] + 1, #workspace_keys do
     hl.workspace_rule({ workspace = i, default_name = workspace_keys[i], persistent = false })
 end
 
