@@ -10,5 +10,6 @@ M.main_monitor = M.monitors.internal
 M.animations = {
     windows_move = { speed = 1, spring = "springSnappy", style = "slide" },
 }
+M.persistent_workspaces_range = {1, 8}
 
 return M

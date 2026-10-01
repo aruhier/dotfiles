@@ -9,6 +9,7 @@ require("conf.monitors")
 
 require("conf.animations")
 require("conf.bind")
+require("conf.quickshell")
 require("conf.rules")
 require("conf.scratchpad")
 require("conf.workspaces")

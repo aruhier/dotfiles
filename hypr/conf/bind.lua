@@ -66,15 +66,6 @@ hl.bind("SHIFT + " .. brightness_up_bind, qs_ipc("osd brightness +1"), { locked 
 hl.bind(brightness_down_bind, qs_ipc("osd brightness -10"), { locked = true })
 hl.bind("SHIFT + " .. brightness_down_bind, qs_ipc("osd brightness -1"), { locked = true })
 
--- Lock keys: triggers osd display only, quickshell reads the state from sysfs.
-for _, lock in ipairs({
-    { "Caps_Lock",   "capslock"   },
-    { "Num_Lock",    "numlock"    },
-    { "Scroll_Lock", "scrolllock" },
-}) do
-    hl.bind(lock[1], qs_ipc("osd lock " .. lock[2]), { locked = true, non_consuming = true })
-end
-
 -- Theme.
 hl.bind(C.main_mod .. " + CTRL + F5", hl.dsp.exec_cmd(C.scripts .. "/theme everforest-dark"),  { locked = true })
 hl.bind(C.main_mod .. " + CTRL + F6", hl.dsp.exec_cmd(C.scripts .. "/theme everforest-light"), { locked = true })
@@ -99,10 +90,10 @@ hl.bind(C.main_mod .. " + ALT + f", function()
     local win = hl.get_active_window()
     if win == nil then return end
 
-    if win.fullscreen_client == 2 then
+    if win.fullscreen == 2 then
         hl.dispatch(hl.dsp.window.fullscreen_state({ internal = 0, client = 0 }))
     else
-        hl.dispatch(hl.dsp.window.fullscreen_state({ internal = 0, client = 2 }))
+        hl.dispatch(hl.dsp.window.fullscreen_state({ internal = 2, client = 0 }))
     end
 end)
 
@@ -283,6 +274,25 @@ hl.bind(C.main_mod .. " + t", function()
         hl.notification.create({ text = w.title, duration = 5000 })
     end
 end)
+
+-- Quickshell
+
+-- Autohide the bar.
+-- Show the bar for 3 seconds.
+hl.bind(C.main_mod .. " + period", qs_ipc("bar peek 3 ACTIVE"))
+-- Prev button on mouse.
+hl.bind(C.main_mod .. " + mouse:275", qs_ipc("bar peek 3 ACTIVE"))
+hl.bind(C.main_mod .. " + slash", qs_ipc("bar visibility_workspace toggle ACTIVE"))
+
+
+-- Lock keys: triggers osd display only, quickshell reads the state from sysfs.
+for _, lock in ipairs({
+    { "Caps_Lock",   "capslock"   },
+    { "Num_Lock",    "numlock"    },
+    { "Scroll_Lock", "scrolllock" },
+}) do
+    hl.bind(lock[1], qs_ipc("osd lock " .. lock[2]), { locked = true, non_consuming = true })
+end
 
 -- Wofi
 
