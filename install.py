@@ -81,7 +81,7 @@ def create_symlink(path: Path):
 
 def main():
     # Enable the debug mode
-    logging.basicConfig(level=logging.DEBUG)
+    # logging.basicConfig(level=logging.DEBUG)
     os.chdir(Path(__file__).resolve().parent)
     update_git_submodule()
     for path in Path().iterdir():
