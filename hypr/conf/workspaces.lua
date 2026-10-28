@@ -1,4 +1,5 @@
 local C = require("conf.constants")
+local U = require("conf.utils")
 
 local home_monitor = {
     [1] = C.main_monitor,
@@ -14,6 +15,9 @@ hl.workspace_rule({ workspace = "1", layout = "scrolling" })
 -- Firefox secondary.
 hl.workspace_rule({ workspace = "10", layout = "scrolling" })
 hl.workspace_rule({ workspace = "12", layout = "scrolling" })
+
+-- Special workspace windows use 86% of the monitor (was dwindle.special_scale_factor).
+U.set_special_area_ratio(0.86)
 
 local workspace_keys = {
     [1]  = "a",

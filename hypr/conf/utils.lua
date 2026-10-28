@@ -38,4 +38,47 @@ function M.wrap_slide_bounce_anim(dsp)
     end
 end
 
+-- Simulate the old dwindle.special_scale_factor.
+-- Increase the gap in special workspaces to center the window, sized as a ratio of
+-- each monitor (e.g. 0.86 = 86% of its width and height), through gaps_out.
+-- Monitor name -> { rule, key }, so a rule is only replaced when its gaps change.
+local special_area_rules = {}
+local special_area_ratio = nil
+
+local function apply_special_area()
+    for _, m in ipairs(hl.get_monitors()) do
+        local width, height = m.width / m.scale, m.height / m.scale
+        -- Odd transforms rotate the monitor by 90°.
+        if m.transform % 2 == 1 then
+            width, height = height, width
+        end
+        local x = math.floor(width * (1 - special_area_ratio) / 2)
+        local y = math.floor(height * (1 - special_area_ratio) / 2)
+        local key = x .. "x" .. y
+
+        local current = special_area_rules[m.name]
+        if not current or current.key ~= key then
+            if current then
+                current.rule:set_enabled(false)
+            end
+            special_area_rules[m.name] = {
+                key = key,
+                rule = hl.workspace_rule({
+                    workspace = "s[true] m[" .. m.name .. "]",
+                    gaps_out = { top = y, right = x, bottom = y, left = x },
+                }),
+            }
+        end
+    end
+end
+
+function M.set_special_area_ratio(ratio)
+    local first_call = special_area_ratio == nil
+    special_area_ratio = ratio
+    apply_special_area()
+    if first_call then
+        hl.on("monitor.added", apply_special_area)
+    end
+end
+
 return M
