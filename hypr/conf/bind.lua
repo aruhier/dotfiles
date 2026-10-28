@@ -62,7 +62,7 @@ end
 for _, mpc_play in ipairs({ "XF86AudioPlay", C.main_mod .. " + F6" }) do
     hl.bind(mpc_play, hl.dsp.exec_cmd("mpc toggle"),   { locked = true })
 end
-for _, mpc_next in ipairs({ "XF86AudioNext", C.main_mod .. " + F6" }) do
+for _, mpc_next in ipairs({ "XF86AudioNext", C.main_mod .. " + F7" }) do
     hl.bind(mpc_next, hl.dsp.exec_cmd("mpc next"),   { locked = true })
 end
 
@@ -169,7 +169,6 @@ local function presel_or_fit(dir)
             if dir == "l" then
                 return hl.dispatch(hl.dsp.layout("fit tobeg"))
             elseif dir == "r" then
-                hl.notification.create({text="foo", timeout=3000})
                 return hl.dispatch(hl.dsp.layout("fit toend"))
             end
         elseif layout == "dwindle" then
@@ -291,7 +290,7 @@ hl.bind(C.main_mod .. " + mouse:273", U.wrap_slide_bounce_anim(hl.dsp.window.res
 hl.bind(C.main_mod .. " + t", function()
     local w = hl.get_active_window()
     if w ~= nil then
-        hl.notification.create({ text = w.title, duration = 5000 })
+        hl.notification.create({ text = w.title, timeout = 5000 })
     end
 end)
 
