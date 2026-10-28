@@ -43,10 +43,6 @@ hl.config({
         },
     },
 
-    debug = {
-        invalidate_fp16 = 1,
-    },
-
     input = {
         kb_layout = "us",
         kb_options = "compose:ralt",
