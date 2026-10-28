@@ -1,16 +1,19 @@
+-- Launch apps when their special workspace is created empty.
+local scratchpad_apps = {}
+hl.on("workspace.created", function(ws)
+    local cmd = scratchpad_apps[ws.name]
+    if cmd and ws.is_empty then
+        hl.exec_cmd(cmd, { workspace = ws.name })
+    end
+end)
+
 local signal = "ALT + s"
-hl.workspace_rule({
-    workspace = "special:signal",
-    on_created_empty = "uwsm-app -s b -- flatpak run org.signal.Signal --enable-features=UseOzonePlatform --ozone-platform=wayland",
-})
+scratchpad_apps["special:signal"] = "uwsm-app -s b -- flatpak run org.signal.Signal --enable-features=UseOzonePlatform --ozone-platform=wayland"
 hl.bind(signal, hl.dsp.workspace.toggle_special("signal"))
 hl.bind("SHIFT + " .. signal, hl.dsp.window.move({ workspace = "special:signal" }))
 
 local telegram = "ALT + f"
-hl.workspace_rule({
-    workspace = "special:telegram",
-    on_created_empty = "uwsm-app -s b -- flatpak run org.telegram.desktop --enable-features=UseOzonePlatform --ozone-platform=wayland",
-})
+scratchpad_apps["special:telegram"] = "uwsm-app -s b -- flatpak run org.telegram.desktop --enable-features=UseOzonePlatform --ozone-platform=wayland"
 hl.bind(telegram, hl.dsp.workspace.toggle_special("telegram"))
 hl.bind("SHIFT + " .. telegram, hl.dsp.window.move({ workspace = "special:telegram" }))
 
@@ -21,14 +24,8 @@ hl.bind("SHIFT + " .. temp, function()
     hl.dispatch(hl.dsp.focus({ workspace = "special:temp" }))
 end)
 
-hl.workspace_rule({
-    workspace = "special:keepassxc",
-    on_created_empty = "uwsm-app -s b -- flatpak run org.keepassxc.KeePassXC",
-})
-hl.workspace_rule({
-    workspace = "special:spotify",
-    on_created_empty = "uwsm-app -s b -- flatpak run com.spotify.Client",
-})
+scratchpad_apps["special:keepassxc"] = "uwsm-app -s b -- flatpak run org.keepassxc.KeePassXC"
+scratchpad_apps["special:spotify"] = "uwsm-app -s b -- flatpak run com.spotify.Client"
 
 hl.define_submap("scratchpad", function()
     local keepassxc = "ALT + k"
