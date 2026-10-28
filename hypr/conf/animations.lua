@@ -72,7 +72,7 @@ hl.animation({ leaf = "fadeLayersOut", enabled = true, speed = 2, bezier = "almo
 hl.animation({ leaf = "workspaces", enabled = true, speed = 3, spring = "springSlide", style = "slide" })
 hl.animation({ leaf = "specialWorkspaceIn", enabled = true, speed = 2, spring = "springSlideSpecialWorkspace", style = "slide top" })
 hl.animation({ leaf = "specialWorkspaceOut", enabled = true, speed = 2, spring = "springSlideSpecialWorkspace", style = "slide bottom" })
--- So that create_on_empty animation is consistent with the specialworkspace animation.
+-- So that windows opened in an empty special workspace (scratchpad apps) slide in like the special workspace.
 hl.window_rule({ match = { workspace = "s[true]" }, animation = "slide top" })
 
 hl.layer_rule({ match = { namespace = "logout_dialog" }, animation = "fade" })

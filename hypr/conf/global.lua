@@ -26,7 +26,6 @@ hl.config({
     dwindle = {
         force_split = 2,
         preserve_split = true,
-        special_scale_factor = 0.86,
     },
 
     decoration = {
@@ -41,10 +40,6 @@ hl.config({
         shadow = {
             range = 8,
         },
-    },
-
-    debug = {
-        invalidate_fp16 = 1,
     },
 
     input = {
@@ -71,6 +66,7 @@ hl.config({
         disable_hyprland_logo = true,
         disable_splash_rendering = true,
         mouse_move_focuses_monitor = false,
+        bell_sound = "none",
     },
 
     xwayland = {
