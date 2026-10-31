@@ -13,7 +13,8 @@ local edge_rules = {}
 -- dynamically the workspace rules.
 local function keep_on_current_monitor()
     for _, ws in ipairs(hl.get_workspaces()) do
-        if ws.id >= C.persistent_workspaces_range[1] and ws.id <= C.persistent_workspaces_range[2] and ws.monitor then
+        -- Special workspaces have a nil id; comparing it throws and skips the rest.
+        if ws.id and ws.id >= C.persistent_workspaces_range[1] and ws.id <= C.persistent_workspaces_range[2] and ws.monitor then
             hl.workspace_rule({ workspace = tostring(ws.id), monitor = ws.monitor.name })
         end
     end
@@ -80,6 +81,11 @@ hl.on("layer.closed", function(layer)
     end
     quickshell.bar_autohide(output, nil)
 end)
+
+-- Re-pin on every move, or the pins go stale until the next autohide call and a
+-- refresh not from us (e.g. fullscreen on a scrolling workspace) sends the moved
+-- workspace back to its stale monitor.
+hl.on("workspace.move_to_monitor", keep_on_current_monitor)
 
 -- An unplugged output's bar is destroyed without telling quickshell, and layer.closed
 -- can't say which output it was on once the monitor is gone. Disable the autohide to
