@@ -1,11 +1,13 @@
 local C = require("conf.constants")
+local U = require("conf.utils")
 
 -- Output name -> workspace where its bar is hidden, e.g. { ["DP-2"] = "a" }.
 local bar_hidden_on = {}
 
--- Workspace name -> its edge-to-edge rule, created on first use and then only toggled.
--- A config reload clears the rules and resets this table together.
-local edge_rules = {}
+-- Workspace name -> id, for each workspace currently edge to edge. Kept so the revert
+-- doesn't depend on the workspace still existing. A config reload clears the rules and
+-- resets this table together.
+local flush_ids = {}
 
 -- Changing a workspace rule makes Hyprland move all persistent workspaces to their
 -- rule's monitor. This is a workaround to pin them to the current monitor on change.
@@ -13,28 +15,39 @@ local edge_rules = {}
 -- dynamically the workspace rules.
 local function keep_on_current_monitor()
     for _, ws in ipairs(hl.get_workspaces()) do
-        if ws.id >= C.persistent_workspaces_range[1] and ws.id <= C.persistent_workspaces_range[2] and ws.monitor then
+        -- Special workspaces have a nil id; comparing it throws and skips the rest.
+        if ws.id and ws.id >= C.persistent_workspaces_range[1] and ws.id <= C.persistent_workspaces_range[2] and ws.monitor then
             hl.workspace_rule({ workspace = tostring(ws.id), monitor = ws.monitor.name })
         end
     end
 end
 
+local function css_gap(option)
+    local g = hl.get_config(option)
+    return { top = g.top, right = g.right, bottom = g.bottom, left = g.left }
+end
+
+-- Writes the edge fields into the workspace's id rule, the one from the config, and
+-- writes the global values back to revert: a rule field can't be unset, and a separate
+-- rule toggled on and off depended on Hyprland not merging it into this one.
 local function set_edges(name, flush)
-    local rule = edge_rules[name]
-    if not rule and not flush then
+    local id = flush_ids[name]
+    if flush == (id ~= nil) then
         return
     end
-    keep_on_current_monitor()
-    if rule then
-        rule:set_enabled(flush)
-    else
-        edge_rules[name] = hl.workspace_rule({
-            workspace = "name:" .. name,
-            gaps_out = 0,
-            no_border = true,
-            no_rounding = true,
-        })
+    id = id or U.workspace_id(name)
+    if not id then
+        return
     end
+    flush_ids[name] = flush and id or nil
+    keep_on_current_monitor()
+    hl.workspace_rule({
+        workspace = tostring(id),
+        gaps_out = flush and 0 or css_gap("general.gaps_out"),
+        gaps_in = flush and 0 or css_gap("general.gaps_in"),
+        no_border = flush,
+        no_rounding = flush,
+    })
 end
 
 -- Checks if another output's bar is also hidden on this workspace.
@@ -80,6 +93,11 @@ hl.on("layer.closed", function(layer)
     end
     quickshell.bar_autohide(output, nil)
 end)
+
+-- Re-pin on every move, or the pins go stale until the next autohide call and a
+-- refresh not from us (e.g. fullscreen on a scrolling workspace) sends the moved
+-- workspace back to its stale monitor.
+hl.on("workspace.move_to_monitor", keep_on_current_monitor)
 
 -- An unplugged output's bar is destroyed without telling quickshell, and layer.closed
 -- can't say which output it was on once the monitor is gone. Disable the autohide to

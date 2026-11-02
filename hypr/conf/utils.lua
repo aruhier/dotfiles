@@ -10,6 +10,16 @@ function M.copy(o)
     return c
 end
 
+-- Since 0.57 neither `name:` selectors nor hl.get_workspace() match a numbered workspace by its display name
+-- ("a" is 1, "8" is 10). Search for the workspace ID manually.
+function M.workspace_id(name)
+    for _, ws in ipairs(hl.get_workspaces()) do
+        if ws.name == name and ws.id and ws.id > 0 then
+            return ws.id
+        end
+    end
+end
+
 -- Allow to selectively have debounce animations when moving windows.
 -- It allows to not have these when swapping workspaces between 2 monitors, or when navigating through scrolling
 -- columns.
