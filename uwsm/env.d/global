@@ -1,0 +1,13 @@
+export XCURSOR_SIZE=24
+export XCURSOR_THEME=Adwaita
+export QT_QPA_PLATFORMTHEME=qt6ct
+
+export QT_QPA_PLATFORM="wayland;xcb"
+export SDL_VIDEODRIVER="wayland,x11"
+export _JAVA_AWT_WM_NONREPARENTING=1
+
+export MOZ_ENABLE_WAYLAND=1
+export ELECTRON_OZONE_PLATFORM_HINT=auto
+
+# Toolkit-specific scale
+export GDK_SCALE=1.25

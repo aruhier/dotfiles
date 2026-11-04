@@ -10,10 +10,13 @@ bind index Z collapse-all
 
 set my_name = "Anthony Ruhier"
 set realname = "$my_name"
+# Avoids showing my full hostname on linux ML.
+set message_id_format = "<%z@aruhier.mailbox.org>"
 source "gpg -dq $HOME/.config/neomutt/mailbox.gpg |"
 set spoolfile = +INBOX
 set postponed = +Drafts
 set record = "+Sent"
+
 
 set use_threads = reverse
 set collapse_all = yes
