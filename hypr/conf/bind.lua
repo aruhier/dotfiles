@@ -310,7 +310,9 @@ for _, lock in ipairs({
     { "Num_Lock",    "numlock"    },
     { "Scroll_Lock", "scrolllock" },
 }) do
-    hl.bind(lock[1], qs_ipc("osd lock " .. lock[2]), { locked = true, non_consuming = true })
+    hl.bind(lock[1], qs_ipc("osd lock " .. lock[2]), {
+        locked = true, non_consuming = true, ignore_mods = true
+    })
 end
 
 -- Wofi
