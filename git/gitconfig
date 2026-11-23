@@ -27,3 +27,5 @@
 	sslVerify = true
 [commit]
 	gpgsign = true
+[patatt]
+	selector = 2026

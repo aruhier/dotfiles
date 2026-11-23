@@ -1,0 +1,35 @@
+# sunsetr configuration
+# Documentation: https://psi4j.github.io/sunsetr/configuration/
+
+#[Backend]
+backend = "auto"
+transition_mode = "geo"
+
+#[Smoothing]
+smoothing = true
+startup_duration = 0.5
+shutdown_duration = 0.5
+adaptive_interval = 1
+
+#[Time-based config]
+# See https://psi4j.github.io/sunsetr/configuration/temperature-gamma.html
+night_temp = 3500
+day_temp = 6500
+night_gamma = 100
+day_gamma = 100
+update_interval = "auto"
+
+#[Static config]
+static_temp = 6500
+static_gamma = 100
+
+#[Manual transitions]
+# See https://psi4j.github.io/sunsetr/configuration/transition-modes.html#manual-transitions
+sunset = "19:00:00"
+sunrise = "06:00:00"
+transition_duration = 45
+
+#[Geolocation]
+# See https://psi4j.github.io/sunsetr/configuration/geographic.html
+latitude = 48.853410
+longitude = 2.348800

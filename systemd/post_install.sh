@@ -4,6 +4,7 @@ enable_user_services() {
     systemctl --user enable --now hypridle
     systemctl --user enable --now lxqt-policykit-agent
     systemctl --user enable --now quickshell
+    systemctl --user enable --now sunsetr
 }
 
 # Cleanup broken links.

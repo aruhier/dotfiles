@@ -1,6 +1,5 @@
 #!/bin/sh
 
-uwsm-app -s b -- gammastep-indicator&
 uwsm-app -s b -- copyq&
 uwsm-app -s b -- nm-applet --indicator&
 uwsm-app -s b -- flatpak run com.nextcloud.desktopclient.nextcloud --background&

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# wofi-audio-sink.sh — pick a default audio output (sink) via wofi + wpctl
+# wofi-audio: pick a default audio output (sink) via wofi + wpctl
 # Requires: wireplumber (wpctl), wofi
 
 set -euo pipefail
@@ -79,5 +79,5 @@ if [[ -z "$selected_id" ]]; then
     exit 1
 fi
 
+# Quickshell's OSD announces the new default; errors above stay notifications.
 wpctl set-default "$selected_id"
-notify "Default output set to: ${choice%  (current)}"
