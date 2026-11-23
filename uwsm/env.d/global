@@ -11,3 +11,6 @@ export ELECTRON_OZONE_PLATFORM_HINT=auto
 
 # Toolkit-specific scale
 export GDK_SCALE=1.25
+
+# Synced with fish
+export PATH="$HOME/.local/bin:$PATH"
